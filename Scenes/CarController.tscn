@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuv7l1yid82qf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dhfjy"]
+size = Vector3(3.5, 2.5, 2)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="ModelRoot" type="Node3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12254, 0)
+shape = SubResource("BoxShape3D_dhfjy")
+
+[node name="Wheels" type="Node3D" parent="."]
+
+[node name="WheelFL" type="Node3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32233, 0.051295, -1.04107)
+
+[node name="WheelFR" type="Node3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32233, 0.051295, 0.280155)
+
+[node name="WheelRL" type="Node3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38478, 0, -0.938485)
+
+[node name="WheelRR" type="Node3D" parent="Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23867, 0, 0.586121)
+
+[node name="Exhaust" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9571, 0, -0.359212)
+
+[node name="ExhaustPoint" type="Marker3D" parent="Exhaust"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0406511, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.67464, 4.02961, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
