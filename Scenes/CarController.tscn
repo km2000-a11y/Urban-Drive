@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuv7l1yid82qf"]
+[gd_scene load_steps=6 format=3 uid="uid://cuv7l1yid82qf"]
 
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://Urban Drive/SFX/rev.mp3" id="1_4kgim"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://Urban Drive/SFX/skid.mp3" id="2_43xdy"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://Urban Drive/SFX/crash.mp3" id="3_ftymm"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://Urban Drive/SFX/brake.mp3" id="4_43xdy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dhfjy"]
 size = Vector3(3.5, 2.5, 2)
@@ -47,3 +48,6 @@ stream = ExtResource("2_43xdy")
 
 [node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ftymm")
+
+[node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_43xdy")
