@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CarStats" load_steps=2 format=3 uid="uid://cv5y8mr1dj7xg"]
+
+[ext_resource type="Script" uid="uid://c2gd5uxk8aawd" path="res://Car Stats/CarStats.gd" id="1_icod3"]
+
+[resource]
+script = ExtResource("1_icod3")
+car_name = "Briton Dart S"
+engine = "1.6L I4 Supercharged"
+drivetrain = "FWD"
+horsepower = 172
+top_speed = 215.0
+zero_to_hundred = 7.2
+weight = 1180.0
+max_speed = 59.72
+acceleration = 14.5
+handling = 0.84
+traction = 0.84
+brake_strength = 0.78
+metadata/_custom_type_script = "uid://c2gd5uxk8aawd"

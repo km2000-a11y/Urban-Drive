@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CarStats" load_steps=2 format=3 uid="uid://cynssawxumdps"]
 
-[ext_resource type="Script" uid="uid://c2gd5uxk8aawd" path="res://Urban Drive/Car Stats/CarStats.gd" id="1_gttij"]
+[ext_resource type="Script" uid="uid://c2gd5uxk8aawd" path="res://Car Stats/CarStats.gd" id="1_gttij"]
 
 [resource]
 script = ExtResource("1_gttij")
@@ -11,7 +11,7 @@ horsepower = 148
 top_speed = 195.0
 zero_to_hundred = 7.8
 weight = 1050.0
-max_speed = 195.0
+max_speed = 54.16
 acceleration = 14.8
 handling = 0.78
 traction = 0.86

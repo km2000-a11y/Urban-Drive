@@ -412,3 +412,13 @@ mesh = SubResource("CylinderMesh_kf83v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D11/StaticBody3D"]
 shape = SubResource("CylinderShape3D_3sbj1")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.581981, 0.44237, -0.920647)
+material_override = SubResource("StandardMaterial3D_cmsgm")
+mesh = SubResource("CylinderMesh_kf83v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D15"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D15/StaticBody3D"]
+shape = SubResource("CylinderShape3D_3sbj1")
