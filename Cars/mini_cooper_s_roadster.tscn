@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1quyl8mdgctj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4gpp"]
+albedo_color = Color(0.745098, 0.117647, 0.176471, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3031"]
+size = Vector3(0.9, 0.4, 0.2)
+
+[node name="MiniCooperSRoadster" type="Node3D"]
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.135574, 0.318994, 0.00992912)
+material_override = SubResource("StandardMaterial3D_t4gpp")
+mesh = SubResource("BoxMesh_w3031")
+skeleton = NodePath("../..")
