@@ -16,4 +16,7 @@ acceleration = 14.8
 handling = 0.78
 traction = 0.86
 brake_strength = 0.72
+nos_power = 10.0
+nos_usage = 0.4
+nos_regen = 0.25
 metadata/_custom_type_script = "uid://c2gd5uxk8aawd"

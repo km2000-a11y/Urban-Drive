@@ -1,27 +1,61 @@
 extends CharacterBody3D
 
 @export var stats: CarStats
+@export var model_scene: PackedScene
 
-# Nodes
 @onready var model_root = $ModelRoot
-@onready var wheel_fl = $Wheels/FL
-@onready var wheel_fr = $Wheels/FR
-@onready var wheel_rl = $Wheels/RL
-@onready var wheel_rr = $Wheels/RR
+@onready var wheels = {
+	"fl": $Wheels/WheelFL,
+	"fr": $Wheels/WheelFR,
+	"rl": $Wheels/WheelRL,
+	"rr": $Wheels/WheelRR
+}
 
-@onready var s_engine = $Audio/Engine
-@onready var s_skid = $Audio/Skid
-@onready var s_brake = $Audio/Brake
-@onready var s_crash = $Audio/Crash
+@onready var nos_particles = $Exhaust/ExhaustPoint/GPUParticles3D
+@onready var rev_player = $RevPlayer
 
-# Physics
 var speed := 0.0
 var steer_angle := 0.0
 var velocity_vec := Vector3.ZERO
 
-# NOS
 var nos_amount := 1.0
 var nos_active := false
+
+var max_speed := 0.0
+var acceleration := 0.0
+var handling := 0.0
+var traction := 0.0
+var brake_strength := 0.0
+var weight := 0.0
+var nos_power := 0.0
+var nos_usage := 0.0
+var nos_regen := 0.0
+
+func _ready():
+	_load_stats()
+	_load_model()
+	nos_particles.emitting = false   # invisible by default
+
+func _load_stats():
+	max_speed = stats.max_speed
+	acceleration = stats.acceleration
+	handling = stats.handling
+	traction = stats.traction
+	brake_strength = stats.brake_strength
+	weight = stats.weight
+
+	nos_power = stats.nos_power
+	nos_usage = stats.nos_usage
+	nos_regen = stats.nos_regen
+
+func free_children(node: Node):
+	for child in node.get_children():
+		child.queue_free()
+
+func _load_model():
+	free_children(model_root)
+	var model=model_scene.instantiate()
+	model_root.add_child(model)
 
 func _physics_process(delta):
 	_handle_input(delta)
@@ -29,99 +63,69 @@ func _physics_process(delta):
 	_apply_steering(delta)
 	_apply_friction(delta)
 	_apply_nos(delta)
-	_update_audio()
 	_update_wheels(delta)
+	_update_audio(delta)
 
 	velocity = velocity_vec
 	move_and_slide()
 
-	if get_slide_collision_count() > 0:
-		s_crash.play()
-
-# ---------------------------------------------------------
-# INPUT
-# ---------------------------------------------------------
 func _handle_input(delta):
 	var throttle = Input.get_action_strength("accelerate")
 	var brake = Input.get_action_strength("brake")
 	var steer = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	# Acceleration
 	if throttle > 0:
-		speed += stats.acceleration * throttle * delta
+		speed += acceleration * throttle * delta
 	elif brake > 0:
-		speed -= stats.brake_force * brake * delta
+		speed -= brake_strength * brake * delta
 	else:
-		speed = lerp(speed, 0.0, stats.coast_drag * delta)
+		speed = lerp(speed, 0.0, 1.5 * delta)
 
-	speed = clamp(speed, -stats.reverse_speed, stats.max_speed)
+	speed = clamp(speed, -max_speed * 0.4, max_speed)
 
-	# Steering
-	steer_angle = steer * stats.steer_angle
+	steer_angle = steer * handling
 
-	# NOS
-	nos_active = Input.is_action_pressed("nitrous") and nos_amount > 0
+	nos_active = Input.is_action_pressed("nitrous") and nos_amount > 0.0
 
-# ---------------------------------------------------------
-# ENGINE + MOVEMENT
-# ---------------------------------------------------------
 func _apply_engine(delta):
 	var forward = -transform.basis.z
 	velocity_vec = forward * speed
 
-# ---------------------------------------------------------
-# STEERING
-# ---------------------------------------------------------
 func _apply_steering(delta):
 	if abs(speed) > 1.0:
-		rotate_y(deg_to_rad(steer_angle * delta * stats.steer_speed))
+		rotate_y(deg_to_rad(steer_angle * delta * 3.0))
 
-# ---------------------------------------------------------
-# FRICTION + DRIFT
-# ---------------------------------------------------------
 func _apply_friction(delta):
 	var lateral = transform.basis.x.dot(velocity_vec)
 	var forward = transform.basis.z.dot(velocity_vec)
 
-	# Drift factor
-	var drift_factor = stats.drift_grip if Input.is_action_pressed("drift") else stats.normal_grip
-
-	var new_lateral = lerp(lateral, 0.0, drift_factor * delta)
+	var new_lateral = lerp(lateral, 0.0, traction * delta)
 	velocity_vec = transform.basis.x * new_lateral + transform.basis.z * forward
 
-	# Skid sound
-	if abs(new_lateral) > stats.skid_threshold:
-		if not s_skid.playing:
-			s_skid.play()
-	else:
-		s_skid.stop()
-
-# ---------------------------------------------------------
-# NOS BOOST
-# ---------------------------------------------------------
 func _apply_nos(delta):
 	if nos_active:
-		speed += stats.nos_power * delta
-		nos_amount -= stats.nos_usage * delta
+		speed += nos_power * delta
+		nos_amount -= nos_usage * delta
+		nos_particles.emitting = true
 	else:
-		nos_amount = min(nos_amount + stats.nos_regen * delta, 1.0)
+		nos_amount = min(nos_amount + nos_regen * delta, 1.0)
+		nos_particles.emitting = false
 
-# ---------------------------------------------------------
-# AUDIO
-# ---------------------------------------------------------
-func _update_audio():
-	s_engine.pitch_scale = 1.0 + (speed / stats.max_speed) * 1.2
+func _update_audio(delta):
+	var target_pitch = 1.0 + (speed / max_speed) * 1.2
 
-# ---------------------------------------------------------
-# WHEEL VISUALS
-# ---------------------------------------------------------
+	if nos_active:
+		target_pitch = 190.0 / 120.0   # 190 BPM boost (assuming 120 BPM base)
+
+	rev_player.pitch_scale = lerp(rev_player.pitch_scale, target_pitch, delta * 5.0)
+
 func _update_wheels(delta):
 	var rot_speed = speed * 0.1
 
-	wheel_fl.rotate_x(rot_speed * delta)
-	wheel_fr.rotate_x(rot_speed * delta)
-	wheel_rl.rotate_x(rot_speed * delta)
-	wheel_rr.rotate_x(rot_speed * delta)
+	wheels["fl"].rotate_x(rot_speed * delta)
+	wheels["fr"].rotate_x(rot_speed * delta)
+	wheels["rl"].rotate_x(rot_speed * delta)
+	wheels["rr"].rotate_x(rot_speed * delta)
 
-	wheel_fl.rotation.y = deg_to_rad(steer_angle)
-	wheel_fr.rotation.y = deg_to_rad(steer_angle)
+	wheels["fl"].rotation.y = deg_to_rad(steer_angle)
+	wheels["fr"].rotation.y = deg_to_rad(steer_angle)

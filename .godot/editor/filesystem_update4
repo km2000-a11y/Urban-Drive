@@ -1,3 +1,8 @@
 res://Tracks/track.tscn
 res://Car Stats/CarStats.gd
 res://Scripts/car_controller.gd
+res://Car Stats/abarth_500.tres
+res://main.tscn
+res://Cars/abarth_500.tscn
+res://Scenes/CarController.tscn
+res://Cars/mini_cooper_s_roadster.tscn
