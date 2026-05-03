@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://dsveyhry4h2rd"]
+[gd_scene load_steps=2 format=3 uid="uid://dsveyhry4h2rd"]
+
+[ext_resource type="Script" uid="uid://c1ugmg5dpnt4c" path="res://Scripts/car_controller.gd" id="1_xsmmc"]
 
 [node name="CarController" type="VehicleBody3D"]
+script = ExtResource("1_xsmmc")
