@@ -14,3 +14,7 @@ class_name CarStats
 @export var handling: float
 @export var traction: float
 @export var brake_strength: float
+
+@export var nos_power: float = 40.0
+@export var nos_usage: float = 0.4
+@export var nos_regen: float = 0.25
