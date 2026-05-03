@@ -8,9 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_43xdy"]
 [ext_resource type="PackedScene" uid="uid://csi25er1ljht3" path="res://Cars/abarth_500.tscn" id="5_ftymm"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dhfjy"]
-size = Vector3(2.5, 1.5, 2)
-
 [sub_resource type="Gradient" id="Gradient_pwc5r"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 1, 0)
 
@@ -35,19 +32,19 @@ vertex_color_is_srgb = true
 material = SubResource("StandardMaterial3D_jt1cj")
 size = Vector2(0.3, 0.3)
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jve45"]
+
+[node name="VehicleBody3D" type="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299958, 0)
 script = ExtResource("1_jve45")
 stats = ExtResource("2_n3gk5")
 model_scene = ExtResource("5_ftymm")
 
 [node name="ModelRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.281732, -0.0778762, 0.587981)
 
 [node name="Abarth 500" parent="ModelRoot" instance=ExtResource("5_ftymm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.113031, -0.111092, -0.221142)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0121441, 0.756901, 0.0240117)
-shape = SubResource("BoxShape3D_dhfjy")
 
 [node name="Wheels" type="Node3D" parent="."]
 
@@ -64,20 +61,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38478, 0, -0.938485)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23867, 0, 0.586121)
 
 [node name="Exhaust" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.374175, 0, 1.1832)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.374175, 0, 2.15745)
 
 [node name="ExhaustPoint" type="Marker3D" parent="Exhaust"]
-transform = Transform3D(0.99139, 0.130941, 0, -0.130941, 0.99139, 0, 0, 0, 1, 3.87775, -0.0576935, -0.112484)
+transform = Transform3D(0.99139, 0.130941, 0, -0.130941, 0.99139, 0, 0, 0, 1, 3.6913, -0.0576935, -0.112484)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Exhaust/ExhaustPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01607, 0.0467008, 0.609338)
+transform = Transform3D(1, 0, 1.06581e-14, 0, 1, -1.33227e-15, -1.06581e-14, -1.33227e-15, 1, -0.98969, -0.153031, 0.730233)
 lifetime = 0.3
 trail_lifetime = 0.1
 process_material = SubResource("ParticleProcessMaterial_34m2r")
 draw_pass_1 = SubResource("QuadMesh_lbv4r")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.581673, 0.916715, -4.3193)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.581673, 0.916715, -4.3193)
+current = true
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.606965, 0, 0)
@@ -91,3 +89,7 @@ stream = ExtResource("3_ftymm")
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_43xdy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465487, 0.211875, 0)
+shape = SubResource("BoxShape3D_jve45")

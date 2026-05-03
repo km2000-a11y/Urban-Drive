@@ -21,6 +21,7 @@ var velocity_vec := Vector3.ZERO
 var nos_amount := 1.0
 var nos_active := false
 
+# Stats
 var max_speed := 0.0
 var acceleration := 0.0
 var handling := 0.0
@@ -31,10 +32,16 @@ var nos_power := 0.0
 var nos_usage := 0.0
 var nos_regen := 0.0
 
+# Constants
+const GRAVITY := 30.0
+const DOWNFORCE := 20.0
+const FLOOR_SNAP := 0.4
+
 func _ready():
 	_load_stats()
 	_load_model()
-	nos_particles.emitting = false   # invisible by default
+	nos_particles.emitting = false
+	floor_snap_length = FLOOR_SNAP
 
 func _load_stats():
 	max_speed = stats.max_speed
@@ -54,8 +61,11 @@ func free_children(node: Node):
 
 func _load_model():
 	free_children(model_root)
-	var model=model_scene.instantiate()
+	var model = model_scene.instantiate()
 	model_root.add_child(model)
+
+	# IMPORTANT: model rotates, root does NOT
+	model_root.rotation = Vector3.ZERO
 
 func _physics_process(delta):
 	_handle_input(delta)
@@ -66,6 +76,14 @@ func _physics_process(delta):
 	_update_wheels(delta)
 	_update_audio(delta)
 
+	# Gravity
+	if not is_on_floor():
+		velocity_vec.y -= GRAVITY * delta
+	else:
+		velocity_vec.y = -DOWNFORCE * delta
+
+	# Final movement
+	set_up_direction(Vector3.UP)
 	velocity = velocity_vec
 	move_and_slide()
 
@@ -82,25 +100,26 @@ func _handle_input(delta):
 		speed = lerp(speed, 0.0, 1.5 * delta)
 
 	speed = clamp(speed, -max_speed * 0.4, max_speed)
-
 	steer_angle = steer * handling
 
 	nos_active = Input.is_action_pressed("nitrous") and nos_amount > 0.0
 
 func _apply_engine(delta):
-	var forward = -transform.basis.z
-	velocity_vec = forward * speed
+	var forward = -global_transform.basis.z
+	velocity_vec.x = forward.x * speed
+	velocity_vec.z = forward.z * speed
 
 func _apply_steering(delta):
 	if abs(speed) > 1.0:
-		rotate_y(deg_to_rad(steer_angle * delta * 3.0))
+		model_root.rotate_y(deg_to_rad(steer_angle * delta * 3.0))
 
 func _apply_friction(delta):
 	var lateral = transform.basis.x.dot(velocity_vec)
 	var forward = transform.basis.z.dot(velocity_vec)
 
 	var new_lateral = lerp(lateral, 0.0, traction * delta)
-	velocity_vec = transform.basis.x * new_lateral + transform.basis.z * forward
+	velocity_vec.x = transform.basis.x.x * new_lateral + transform.basis.z.x * forward
+	velocity_vec.z = transform.basis.x.z * new_lateral + transform.basis.z.z * forward
 
 func _apply_nos(delta):
 	if nos_active:
@@ -113,19 +132,14 @@ func _apply_nos(delta):
 
 func _update_audio(delta):
 	var target_pitch = 1.0 + (speed / max_speed) * 1.2
-
 	if nos_active:
-		target_pitch = 190.0 / 120.0   # 190 BPM boost (assuming 120 BPM base)
-
+		target_pitch = 190.0 / 120.0
 	rev_player.pitch_scale = lerp(rev_player.pitch_scale, target_pitch, delta * 5.0)
 
 func _update_wheels(delta):
 	var rot_speed = speed * 0.1
-
-	wheels["fl"].rotate_x(rot_speed * delta)
-	wheels["fr"].rotate_x(rot_speed * delta)
-	wheels["rl"].rotate_x(rot_speed * delta)
-	wheels["rr"].rotate_x(rot_speed * delta)
+	for w in wheels.values():
+		w.rotate_x(rot_speed * delta)
 
 	wheels["fl"].rotation.y = deg_to_rad(steer_angle)
 	wheels["fr"].rotation.y = deg_to_rad(steer_angle)
