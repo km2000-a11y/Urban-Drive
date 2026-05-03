@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuv7l1yid82qf"]
+[gd_scene load_steps=13 format=3 uid="uid://cuv7l1yid82qf"]
 
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="1_4kgim"]
 [ext_resource type="Script" uid="uid://c1ugmg5dpnt4c" path="res://Scripts/car_controller.gd" id="1_jve45"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="2_43xdy"]
-[ext_resource type="Resource" uid="uid://cynssawxumdps" path="res://Car Stats/abarth_500.tres" id="2_n3gk5"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="3_ftymm"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_43xdy"]
 [ext_resource type="PackedScene" uid="uid://csi25er1ljht3" path="res://Cars/abarth_500.tscn" id="5_ftymm"]
@@ -37,8 +36,6 @@ size = Vector2(0.3, 0.3)
 [node name="VehicleBody3D" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299958, 0)
 script = ExtResource("1_jve45")
-stats = ExtResource("2_n3gk5")
-model_scene = ExtResource("5_ftymm")
 
 [node name="ModelRoot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.281732, -0.0778762, 0.587981)
