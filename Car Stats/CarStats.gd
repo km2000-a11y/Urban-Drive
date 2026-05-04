@@ -18,3 +18,5 @@ class_name CarStats
 @export var nos_power: float = 40.0
 @export var nos_usage: float = 0.4
 @export var nos_regen: float = 0.25
+
+@export var country_of_origin: String = ""

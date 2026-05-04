@@ -1,0 +1,6 @@
+res://main.tscn
+res://Car Stats/abarth_500.tres
+res://Car Stats/mini_cooper_s_cabrio.tres
+res://Car Stats/vw_new_beetle.tres
+res://Car Stats/CarStats.gd
+res://Scenes/CarController.tscn
