@@ -48,14 +48,6 @@ albedo_color = Color(0, 0, 0, 1)
 left_to_right = 0.0
 size = Vector3(0.1, 0.2, 0.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6i7n3"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_gtkls"]
-top_radius = 0.15
-bottom_radius = 0.15
-height = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kf83v"]
 albedo_color = Color(1, 0.976471, 0.0901961, 1)
 
@@ -78,6 +70,14 @@ albedo_color = Color(0.862745, 0.0784314, 0.235294, 0.235294)
 top_radius = 0.05
 bottom_radius = 0.08
 height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6i7n3"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gtkls"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.2
 
 [node name="Abarth 500" type="Node3D"]
 
@@ -178,26 +178,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6092
 material_override = SubResource("StandardMaterial3D_25w8g")
 mesh = SubResource("PrismMesh_ije87")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0, 0.154265, 0.00270845)
-material_override = SubResource("StandardMaterial3D_6i7n3")
-mesh = SubResource("CylinderMesh_gtkls")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0, 0.154265, -0.785901)
-material_override = SubResource("StandardMaterial3D_6i7n3")
-mesh = SubResource("CylinderMesh_gtkls")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0.635179, 0.154265, -0.785901)
-material_override = SubResource("StandardMaterial3D_6i7n3")
-mesh = SubResource("CylinderMesh_gtkls")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0.635181, 0.151828, 0.00870532)
-material_override = SubResource("StandardMaterial3D_6i7n3")
-mesh = SubResource("CylinderMesh_gtkls")
-
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.352263, 0.306383)
 material_override = SubResource("StandardMaterial3D_kf83v")
@@ -227,3 +207,29 @@ mesh = SubResource("CylinderMesh_kf83v")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.581981, 0.44237, -0.920647)
 material_override = SubResource("StandardMaterial3D_cmsgm")
 mesh = SubResource("CylinderMesh_kf83v")
+
+[node name="Wheels" type="Node3D" parent="."]
+
+[node name="WheelFR" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0, 0.154265, 0.00270845)
+material_override = SubResource("StandardMaterial3D_6i7n3")
+mesh = SubResource("CylinderMesh_gtkls")
+skeleton = NodePath("../..")
+
+[node name="WheelRR" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0, 0.154265, -0.785901)
+material_override = SubResource("StandardMaterial3D_6i7n3")
+mesh = SubResource("CylinderMesh_gtkls")
+skeleton = NodePath("../..")
+
+[node name="WheelRL" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0.635179, 0.154265, -0.785901)
+material_override = SubResource("StandardMaterial3D_6i7n3")
+mesh = SubResource("CylinderMesh_gtkls")
+skeleton = NodePath("../..")
+
+[node name="WheelFL" type="MeshInstance3D" parent="Wheels"]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0.635181, 0.151828, 0.00870532)
+material_override = SubResource("StandardMaterial3D_6i7n3")
+mesh = SubResource("CylinderMesh_gtkls")
+skeleton = NodePath("../..")

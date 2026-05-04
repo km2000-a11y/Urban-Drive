@@ -1,6 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsveyhry4h2rd"]
+[gd_scene load_steps=5 format=3 uid="uid://dsveyhry4h2rd"]
 
 [ext_resource type="Script" uid="uid://c1ugmg5dpnt4c" path="res://Scripts/car_controller.gd" id="1_xsmmc"]
+[ext_resource type="PackedScene" uid="uid://csi25er1ljht3" path="res://Cars/abarth_500.tscn" id="2_vfpjy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mph3u"]
+size = Vector3(2, 2.5, 3)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vfpjy"]
 
 [node name="CarController" type="VehicleBody3D"]
 script = ExtResource("1_xsmmc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.627751, 0)
+shape = SubResource("BoxShape3D_mph3u")
+
+[node name="ModelRoot" type="Node3D" parent="."]
+
+[node name="Abarth 500" parent="ModelRoot" instance=ExtResource("2_vfpjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0853881, -0.244497, 1.11781)
+
+[node name="WheelRR" type="VehicleWheel3D" parent="."]
+
+[node name="WheelRL" type="VehicleWheel3D" parent="."]
+
+[node name="WheelFR" type="VehicleWheel3D" parent="."]
+
+[node name="WheelFL" type="VehicleWheel3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.287974, 0.823399, -1.38045)
+
+[node name="Exhaust" type="Node3D" parent="."]
+
+[node name="ExhaustPoint" type="Marker3D" parent="Exhaust"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Exhaust/ExhaustPoint"]
+mesh = SubResource("QuadMesh_vfpjy")
