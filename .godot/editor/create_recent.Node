@@ -1,3 +1,5 @@
+AudioStreamPlayer3D
+GPUParticles3D
 MeshInstance3D
 Marker3D
 Node3D
@@ -8,4 +10,3 @@ CollisionShape3D
 StaticBody3D
 DirectionalLight3D
 Node
-GPUParticles3D
