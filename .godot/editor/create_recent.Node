@@ -1,8 +1,8 @@
-VehicleBody3D
 CollisionShape3D
+Node3D
+VehicleBody3D
 StaticBody3D
 MeshInstance3D
 DirectionalLight3D
 Node
 GPUParticles3D
-Node3D

@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1777814048
+::res://::1777895715
 main.tscn::PackedScene/PackedScene::6405392885157970654::1777808959::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://cuv7l1yid82qf::::res://Scenes/CarController.tscn
 ::res://Car Stats/::1777789619
 abarth_500.tres::Resource/CarStats::6485335610719755164::1777789619::0::1::::<><><>0<>0<><>::uid://c2gd5uxk8aawd::::res://Car Stats/CarStats.gd
@@ -9,10 +9,10 @@ vw_new_beetle.tres::Resource/CarStats::3974507440316264075::1777737175::0::1::::
 ::res://Cars/::1777808959
 abarth_500.tscn::PackedScene/PackedScene::6054448745076563510::1777808959::0::1::::<><><>0<>0<><>::
 mini_cooper_s_roadster.tscn::PackedScene/PackedScene::9018459857927018551::1777808959::0::1::::<><><>0<>0<><>::
-::res://Scenes/::1777814006
-CarController.tscn::PackedScene::8466299291478561657::1777814006::0::1::::<><><>0<>0<><>::
-::res://Scripts/::1777808959
-car_controller.gd::GDScript/GDScript::6639424950180815712::1777808959::0::1::::<>VehicleBody3D<><>0<>0<><>::
+::res://Scenes/::1777814074
+CarController.tscn::PackedScene::8466299291478561657::1777814074::0::1::::<><><>0<>0<><>::uid://c1ugmg5dpnt4c::::res://Scripts/car_controller.gd
+::res://Scripts/::1777814072
+car_controller.gd::GDScript::6639424950180815712::1777814072::0::1::::<>RefCounted<><>0<>0<><>::
 ::res://SFX/::1777735652
 brake.mp3::AudioStreamMP3/AudioStreamMP3::4893041847237595360::1777636221::1777735652::1::::<><><>0<>0<>f2044457b5df4b73dd0aa5c8732c6c12<>res://.godot/imported/brake.mp3-6d8323d6d2462c513f7c18b4cd048a4d.mp3str::
 crash.mp3::AudioStreamMP3/AudioStreamMP3::5855399304817107656::1777570214::1777735652::1::::<><><>0<>0<>6f035230c9539ed522e664609e54eafc<>res://.godot/imported/crash.mp3-e02bf8cc97fc1a06c4617716f5019b7a.mp3str::
