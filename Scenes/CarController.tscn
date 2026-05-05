@@ -14,7 +14,7 @@ size = Vector3(2, 2.5, 3)
 script = ExtResource("1_xsmmc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.627751, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.627751, 0.33077)
 shape = SubResource("BoxShape3D_mph3u")
 
 [node name="ModelRoot" type="Node3D" parent="."]
@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0853881, -0.244497, 1.1178
 [node name="WheelFL" type="VehicleWheel3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.287974, 0.823399, -1.38045)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.185026, 0.580271, -2.18298)
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_acjjc")

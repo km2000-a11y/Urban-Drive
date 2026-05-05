@@ -233,3 +233,16 @@ transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37
 material_override = SubResource("StandardMaterial3D_6i7n3")
 mesh = SubResource("CylinderMesh_gtkls")
 skeleton = NodePath("../..")
+
+[node name="WheelPos" type="Node3D" parent="."]
+
+[node name="WheelFL_Pos" type="Node3D" parent="WheelPos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63769, 0, 0.130716)
+
+[node name="WheelFR_Pos" type="Node3D" parent="WheelPos"]
+
+[node name="WheelRR_Pos" type="Node3D" parent="WheelPos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.829945)
+
+[node name="WheelRL_Pos" type="Node3D" parent="WheelPos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.608657, 0, -0.7233)
