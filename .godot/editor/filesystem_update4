@@ -1,6 +1,0 @@
-res://Cars/abarth_500.tscn
-res://Cars/mini_cooper_s_cabrio.tscn
-res://Tracks/track.tscn
-res://main.tscn
-res://Scenes/CarController.tscn
-res://Scripts/car_controller.gd
