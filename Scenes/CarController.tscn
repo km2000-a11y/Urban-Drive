@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_mph3u"]
 size = Vector3(0.6, 0.35, 0.6)
 
-[node name="CarController" type="VehicleBody3D"]
+[node name="CarController" type="RigidBody3D"]
 script = ExtResource("1_xsmmc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -22,16 +22,9 @@ shape = SubResource("BoxShape3D_mph3u")
 [node name="Abarth 500" parent="ModelRoot" instance=ExtResource("2_vfpjy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0853881, -0.0324969, 1.11781)
 
-[node name="WheelRR" type="VehicleWheel3D" parent="."]
-
-[node name="WheelRL" type="VehicleWheel3D" parent="."]
-
-[node name="WheelFR" type="VehicleWheel3D" parent="."]
-
-[node name="WheelFL" type="VehicleWheel3D" parent="."]
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.185026, 0.580271, -2.18298)
+current = true
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_acjjc")

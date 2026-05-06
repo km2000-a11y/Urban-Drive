@@ -12,4 +12,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060845, 0, 2.1076)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [node name="CarController" parent="." instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359223, 0.668369, 0.554495)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.359223, 0.498851, 0.554495)

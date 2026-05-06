@@ -1,4 +1,4 @@
-extends VehicleBody3D
+extends RigidBody3D
 
 @export var stats: CarStats
 @export var car_model_scene: PackedScene
@@ -6,8 +6,7 @@ extends VehicleBody3D
 var car_model: Node3D
 
 # ---------------------------------------------------------
-#  RUNTIME CAR DATABASES (EXPLICITLY LOADED)
-#  → KEYS MATCH FILE NAMES
+#  RUNTIME CAR DATABASES
 # ---------------------------------------------------------
 var car_models := {
 	"abarth_500": preload("res://Cars/abarth_500.tscn"),
@@ -18,45 +17,16 @@ var car_stats := {
 }
 
 var car_list := [
-	"abarth_500",
-	"golf",
-	"mini",
-	"beetle",
-	"tt",
-	"350z",
-	"slk",
-	"rs5",
-	"charger",
-	"mustang",
-	"1967_shelby",
-	"cls",
-	"v8_vantage",
-	"granturismo",
-	"db9",
-	"hummer",
-	"expedition",
-	"elise",
-	"corvette",
-	"gallardo",
-	"diablo",
-	"murcielago",
-	"zonda",
-	"f1",
-	"ccxr"
+	"abarth_500","golf","mini","beetle","tt","350z","slk","rs5",
+	"charger","mustang","1967_shelby","cls","v8_vantage","granturismo",
+	"db9","hummer","expedition","elise","corvette","gallardo","diablo",
+	"murcielago","zonda","f1","ccxr"
 ]
 
 # ---------------------------------------------------------
-#  WHEEL REFERENCES (PHYSICS WHEELS)
+#  INTERNAL STATE
 # ---------------------------------------------------------
-@onready var w_fl = $WheelFL
-@onready var w_fr = $WheelFR
-@onready var w_rl = $WheelRL
-@onready var w_rr = $WheelRR
-
-@onready var rev = $RevPlayer
-@onready var skid = $SkidPlayer
-@onready var crash = $CrashPlayer
-@onready var braker = $BrakePlayer
+var current_steer := 0.0
 
 # ---------------------------------------------------------
 #  READY
@@ -74,21 +44,13 @@ func load_car_model():
 	car_model = car_model_scene.instantiate()
 	$ModelRoot.add_child(car_model)
 
-	align_wheels_to_model() # physics wheels move ONCE
-
 # ---------------------------------------------------------
 #  APPLY CAR STATS
 # ---------------------------------------------------------
 func apply_stats():
 	if stats == null:
 		return
-
 	mass = stats.weight
-
-	w_fl.wheel_friction_slip = stats.traction
-	w_fr.wheel_friction_slip = stats.traction
-	w_rl.wheel_friction_slip = stats.traction
-	w_rr.wheel_friction_slip = stats.traction
 
 # ---------------------------------------------------------
 #  PHYSICS LOOP
@@ -98,7 +60,7 @@ func _physics_process(delta):
 	update_visual_wheels()
 
 # ---------------------------------------------------------
-#  INPUT HANDLING
+#  INPUT HANDLING (RIGIDBODY ARCADE PHYSICS)
 # ---------------------------------------------------------
 func handle_input(delta):
 	if stats == null:
@@ -108,56 +70,33 @@ func handle_input(delta):
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	var steer_angle := deg_to_rad(stats.handling * 2.5)
-	w_fl.steering = steer * steer_angle
-	w_fr.steering = steer * steer_angle
+	# Steering torque
+	var max_steer := deg_to_rad(stats.handling * 2.5)
+	current_steer = lerp(current_steer, steer * max_steer, delta * 6.0)
+	var steer_torque := Vector3.UP * current_steer * linear_velocity.length() * 0.015
+	apply_torque_impulse(steer_torque)
 
+	# Forward force
 	var speed := linear_velocity.length()
-	if speed > stats.max_speed:
-		throttle = 0.0
+	if speed < stats.max_speed:
+		var force := throttle * stats.acceleration * 18000.0
+		apply_central_force(global_transform.basis.z * -force)
 
-	var accel_force := throttle * stats.acceleration * 1800.0
+	# Braking
+	if brake > 0.1:
+		var brake_vec := -linear_velocity.normalized() * stats.brake_strength * 20000.0
+		apply_central_force(brake_vec)
 
-	match stats.drivetrain:
-		"FWD":
-			w_fl.engine_force = accel_force
-			w_fr.engine_force = accel_force
-			w_rl.engine_force = 0
-			w_rr.engine_force = 0
-		"RWD":
-			w_fl.engine_force = 0
-			w_fr.engine_force = 0
-			w_rl.engine_force = accel_force
-			w_rr.engine_force = accel_force
-		"AWD":
-			var f := accel_force * 0.5
-			w_fl.engine_force = f
-			w_fr.engine_force = f
-			w_rl.engine_force = f
-			w_rr.engine_force = f
-
-	var brake_force := brake * stats.brake_strength * 2000.0
-	w_fl.brake = brake_force
-	w_fr.brake = brake_force
-	w_rl.brake = brake_force
-	w_rr.brake = brake_force
+	# Drift control
+	var lv := linear_velocity
+	var sideways := global_transform.basis.x.dot(lv)
+	var forward := global_transform.basis.z.dot(lv)
+	sideways *= 0.92
+	lv = global_transform.basis.x * sideways + global_transform.basis.z * forward
+	linear_velocity = lv * stats.traction
 
 # ---------------------------------------------------------
-#  WHEEL ALIGNMENT (MODEL → PHYSICS) — RUNS ONCE
-# ---------------------------------------------------------
-func align_wheels_to_model():
-	if not car_model:
-		return
-
-	var m := car_model
-
-	w_fl.global_transform.origin = m.get_node("WheelPos/WheelFL_Pos").global_transform.origin
-	w_fr.global_transform.origin = m.get_node("WheelPos/WheelFR_Pos").global_transform.origin
-	w_rl.global_transform.origin = m.get_node("WheelPos/WheelRL_Pos").global_transform.origin
-	w_rr.global_transform.origin = m.get_node("WheelPos/WheelRR_Pos").global_transform.origin
-
-# ---------------------------------------------------------
-#  VISUAL WHEEL SYNC (PHYSICS → MODEL)
+#  VISUAL WHEEL SYNC (MODEL → MODEL)
 # ---------------------------------------------------------
 func update_visual_wheels():
 	if not car_model:
@@ -165,10 +104,12 @@ func update_visual_wheels():
 
 	var m := car_model
 
-	m.get_node("Wheels/WheelFL_Mesh").global_transform = w_fl.global_transform
-	m.get_node("Wheels/WheelFR_Mesh").global_transform = w_fr.global_transform
-	m.get_node("Wheels/WheelRL_Mesh").global_transform = w_rl.global_transform
-	m.get_node("Wheels/WheelRR_Mesh").global_transform = w_rr.global_transform
+	# Rotate wheels visually based on speed
+	var rot_speed := linear_velocity.length() * 0.05
+
+	for wheel_name in ["WheelFL_Mesh","WheelFR_Mesh","WheelRL_Mesh","WheelRR_Mesh"]:
+		var w = m.get_node("Wheels/" + wheel_name)
+		w.rotate_x(rot_speed)
 
 # ---------------------------------------------------------
 #  SWITCH CAR BY ID
