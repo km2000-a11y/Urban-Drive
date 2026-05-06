@@ -104,51 +104,51 @@ func _physics_process(delta):
 
 # ---------------------------------------------------------
 #  INPUT HANDLING
-# ---------------------------------------------------------
 func handle_input(delta):
-	var throttle = Input.get_action_strength("accelerate")
-	var brake = Input.get_action_strength("brake")
-	var steer = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	var throttle:=Input.get_action_strength("accelerate")
+	var brake:=Input.get_action_strength("brake")
+	var steer:=Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	
+	var steer_angle:=deg_to_rad(stats.handling*2.5)
+	w_fl.steering=steer*steer_angle
+	w_fr.steering=steer*steer_angle
+	
+	var speed=linear_velocity.length()
+	if speed>stats.max_speed:
+		throttle=0.0
+	
+	var accel_force:=throttle*stats.acceleration*1800.0
+	
+	print("FORCE:", accel_force)
 
-	# Steering
-	var steer_angle = deg_to_rad(stats.handling)
-	w_fl.steering = steer * steer_angle
-	w_fr.steering = steer * steer_angle
-
-	# Max speed limiter
-	if linear_velocity.length() > stats.max_speed:
-		throttle = 0.0
-
-	# Acceleration force
-	var accel_force = throttle * stats.acceleration * 120.0
-
-	# Drivetrain distribution
 	match stats.drivetrain:
 		"FWD":
-			w_fl.engine_force = accel_force
-			w_fr.engine_force = accel_force
-			w_rl.engine_force = 0
-			w_rr.engine_force = 0
-
+			w_fl.engine_force=accel_force
+			w_fr.engine_force=accel_force
+			w_rl.engine_force=0
+			w_rl.engine_force=0
 		"RWD":
-			w_fl.engine_force = 0
-			w_fr.engine_force = 0
-			w_rl.engine_force = accel_force
-			w_rr.engine_force = accel_force
-
+			w_fl.engine_force=0
+			w_fr.engine_force=0
+			w_rl.engine_force=accel_force
+			w_rl.engine_force=accel_force
 		"AWD":
-			w_fl.engine_force = accel_force * 0.5
-			w_fr.engine_force = accel_force * 0.5
-			w_rl.engine_force = accel_force * 0.5
-			w_rr.engine_force = accel_force * 0.5
+			var f:=accel_force*0.5
+			w_fl.engine_force=f
+			w_fr.engine_force=f
+			w_rl.engine_force=f
+			w_rr.engine_force=f
+		
+	var brake_force:=brake*stats.brake_strength*2000.0
+	w_fl.brake=brake_force
+	w_fr.brake=brake_force
+	w_rl.brake=brake_force
+	w_rr.brake=brake_force
+	
+	print("ACC:", stats.acceleration, "  HAND:", stats.handling, "  BRAKE:", stats.brake_strength, "  DRIV:", stats.drivetrain)
 
-	# Braking
-	var brake_force = brake * stats.brake_strength * 100.0
-	w_fl.brake = brake_force
-	w_fr.brake = brake_force
-	w_rl.brake = brake_force
-	w_rr.brake = brake_force
-
+	
+	
 # ---------------------------------------------------------
 #  WHEEL ALIGNMENT (MODEL → PHYSICS)
 # ---------------------------------------------------------
@@ -157,6 +157,8 @@ func align_wheels_to_model():
 		return
 
 	var m = car_model
+	
+	print("ALIGN: ", m.has_node("WheelPos/WheelFL_Pos"))
 
 	w_fl.global_transform = m.get_node("WheelPos/WheelFL_Pos").global_transform
 	w_fr.global_transform = m.get_node("WheelPos/WheelFR_Pos").global_transform
