@@ -46,7 +46,10 @@ func load_car_model():
 # ---------------------------------------------------------
 func apply_stats():
 	if stats == null:
+		push_error("Stats is NULL in apply_stats()")
 		return
+		
+	print("Accel: ", stats.acceleration)
 
 # ---------------------------------------------------------
 #  PHYSICS LOOP
