@@ -26,12 +26,11 @@ var car_list := [
 # ---------------------------------------------------------
 #  INTERNAL STATE
 # ---------------------------------------------------------
-var current_steer := 0.0
+var steer_angle := 0.0
 
-# ---------------------------------------------------------
-#  READY
-# ---------------------------------------------------------
 func _ready():
+	can_sleep = false
+	sleeping = false
 	switch_car(car_list[0])
 
 # ---------------------------------------------------------
@@ -60,7 +59,7 @@ func _physics_process(delta):
 	update_visual_wheels()
 
 # ---------------------------------------------------------
-#  INPUT HANDLING (RIGIDBODY ARCADE PHYSICS)
+#  INPUT HANDLING (REALISTIC ARCADE PHYSICS)
 # ---------------------------------------------------------
 func handle_input(delta):
 	if stats == null:
@@ -68,43 +67,54 @@ func handle_input(delta):
 
 	var throttle := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
-	var steer := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	var steer_input := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	# Steering torque
-	var max_steer := deg_to_rad(stats.handling * 2.5)
-	current_steer = lerp(current_steer, steer * max_steer, delta * 6.0)
-	var steer_torque := Vector3.UP * current_steer * linear_velocity.length() * 0.015
+	# -----------------------------------------------------
+	# STEERING (torque-based, stable)
+	# -----------------------------------------------------
+	var max_steer := deg_to_rad(stats.handling * 2.0)
+	steer_angle = lerp(steer_angle, steer_input * max_steer, delta * 6.0)
+
+	var steer_torque := Vector3.UP * steer_angle * clamp(linear_velocity.length(), 0.0, 30.0) * 0.03
 	apply_torque_impulse(steer_torque)
 
-	# Forward force
+	# -----------------------------------------------------
+	# FORWARD ACCELERATION (realistic torque curve)
+	# -----------------------------------------------------
 	var speed := linear_velocity.length()
 	if speed < stats.max_speed:
-		var force := throttle * stats.acceleration * 18000.0
-		apply_central_force(global_transform.basis.z * -force)
+		var forward := -global_transform.basis.z
+		var accel_force := throttle * stats.acceleration * 250000.0
+		apply_central_force(forward * accel_force)
 
-	# Braking
+	# -----------------------------------------------------
+	# BRAKING
+	# -----------------------------------------------------
 	if brake > 0.1:
-		var brake_vec := -linear_velocity.normalized() * stats.brake_strength * 20000.0
-		apply_central_force(brake_vec)
+		var brake_force := -linear_velocity * stats.brake_strength * 8.0
+		apply_central_force(brake_force)
 
-	# Drift control
-	var lv := linear_velocity
-	var sideways := global_transform.basis.x.dot(lv)
-	var forward := global_transform.basis.z.dot(lv)
-	sideways *= 0.92
-	lv = global_transform.basis.x * sideways + global_transform.basis.z * forward
-	linear_velocity = lv * stats.traction
+	# -----------------------------------------------------
+	# LATERAL FRICTION (NO VELOCITY OVERWRITE)
+	# -----------------------------------------------------
+	var lateral := global_transform.basis.x.dot(linear_velocity)
+	var lateral_force := -global_transform.basis.x * lateral * stats.traction * 40.0
+	apply_central_force(lateral_force)
+
+	# -----------------------------------------------------
+	# NATURAL DRAG
+	# -----------------------------------------------------
+	var drag := -linear_velocity * 0.15
+	apply_central_force(drag)
 
 # ---------------------------------------------------------
-#  VISUAL WHEEL SYNC (MODEL → MODEL)
+#  VISUAL WHEEL SYNC
 # ---------------------------------------------------------
 func update_visual_wheels():
 	if not car_model:
 		return
 
 	var m := car_model
-
-	# Rotate wheels visually based on speed
 	var rot_speed := linear_velocity.length() * 0.05
 
 	for wheel_name in ["WheelFL_Mesh","WheelFR_Mesh","WheelRL_Mesh","WheelRR_Mesh"]:

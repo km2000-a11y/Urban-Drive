@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsveyhry4h2rd"]
+[gd_scene load_steps=9 format=3 uid="uid://dsveyhry4h2rd"]
 
 [ext_resource type="Script" uid="uid://c1ugmg5dpnt4c" path="res://Scripts/car_controller.gd" id="1_xsmmc"]
 [ext_resource type="PackedScene" uid="uid://csi25er1ljht3" path="res://Cars/abarth_500.tscn" id="2_vfpjy"]
@@ -7,14 +7,18 @@
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="5_n3gk5"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="6_pwc5r"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_acjjc"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mph3u"]
-size = Vector3(0.6, 0.35, 0.6)
+size = Vector3(0.7, 0.5, 0.7)
 
 [node name="CarController" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_acjjc")
+can_sleep = false
 script = ExtResource("1_xsmmc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304777, 0.380695, 0.691771)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11282, 0.517762, 0.899076)
 shape = SubResource("BoxShape3D_mph3u")
 
 [node name="ModelRoot" type="Node3D" parent="."]
