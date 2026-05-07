@@ -1,9 +1,10 @@
-extends RigidBody3D
+extends CharacterBody3D
 
 @export var stats: CarStats
 @export var car_model_scene: PackedScene
 
 var car_model: Node3D
+var steer_angle := 0.0
 
 # ---------------------------------------------------------
 #  RUNTIME CAR DATABASES
@@ -24,14 +25,11 @@ var car_list := [
 ]
 
 # ---------------------------------------------------------
-#  INTERNAL STATE
+#  READY
 # ---------------------------------------------------------
-var steer_angle := 0.0
-
 func _ready():
-	can_sleep = false
-	sleeping = false
 	switch_car(car_list[0])
+	velocity = Vector3.ZERO
 
 # ---------------------------------------------------------
 #  LOAD CAR MODEL
@@ -49,7 +47,6 @@ func load_car_model():
 func apply_stats():
 	if stats == null:
 		return
-	mass = stats.weight
 
 # ---------------------------------------------------------
 #  PHYSICS LOOP
@@ -57,12 +54,17 @@ func apply_stats():
 func _physics_process(delta):
 	handle_input(delta)
 	update_visual_wheels()
+	move_and_slide()
+	
+	print("Body basis:", transform.basis)
+	print("Throttle:", Input.get_action_strength("accelerate"))
+	print("Velocity:", velocity)
 
 # ---------------------------------------------------------
-#  INPUT HANDLING (REALISTIC ARCADE PHYSICS)
+#  INPUT HANDLING
 # ---------------------------------------------------------
 func handle_input(delta):
-	if stats == null:
+	if stats == null or car_model == null:
 		return
 
 	var throttle := Input.get_action_strength("accelerate")
@@ -70,42 +72,54 @@ func handle_input(delta):
 	var steer_input := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
 	# -----------------------------------------------------
-	# STEERING (torque-based, stable)
+	# STEERING
 	# -----------------------------------------------------
-	var max_steer := deg_to_rad(stats.handling * 2.0)
-	steer_angle = lerp(steer_angle, steer_input * max_steer, delta * 6.0)
+	var max_steer := deg_to_rad(stats.handling * 55.0)
+	steer_angle = lerp(steer_angle, steer_input * max_steer, delta * 10.0)
 
-	var steer_torque := Vector3.UP * steer_angle * clamp(linear_velocity.length(), 0.0, 30.0) * 0.03
-	apply_torque_impulse(steer_torque)
+	if velocity.length() > 0.5:
+		var turn: float = steer_angle * delta * 1.5
+		rotate_y(turn)
+		velocity = velocity.rotated(Vector3.UP, turn)
 
 	# -----------------------------------------------------
-	# FORWARD ACCELERATION (realistic torque curve)
+	# FORWARD FROM CAR MODEL (CRITICAL)
 	# -----------------------------------------------------
-	var speed := linear_velocity.length()
-	if speed < stats.max_speed:
-		var forward := -global_transform.basis.z
-		var accel_force := throttle * stats.acceleration * 250000.0
-		apply_central_force(forward * accel_force)
+	var forward := -car_model.global_transform.basis.z
+
+	# -----------------------------------------------------
+	# ACCELERATION
+	# -----------------------------------------------------
+	if throttle > 0.01:
+		velocity += forward * throttle * stats.acceleration * 20.0 * delta
+	else:
+		velocity = velocity.move_toward(Vector3.ZERO, stats.traction * 6.0 * delta)
 
 	# -----------------------------------------------------
 	# BRAKING
 	# -----------------------------------------------------
-	if brake > 0.1:
-		var brake_force := -linear_velocity * stats.brake_strength * 8.0
-		apply_central_force(brake_force)
+	if brake > 0.01:
+		velocity = velocity.move_toward(Vector3.ZERO, stats.brake_strength * 25.0 * delta)
 
 	# -----------------------------------------------------
-	# LATERAL FRICTION (NO VELOCITY OVERWRITE)
+	# WALL SLIDE FIX
 	# -----------------------------------------------------
-	var lateral := global_transform.basis.x.dot(linear_velocity)
-	var lateral_force := -global_transform.basis.x * lateral * stats.traction * 40.0
-	apply_central_force(lateral_force)
+	if is_on_wall():
+		velocity = velocity.slide(get_wall_normal())
 
 	# -----------------------------------------------------
-	# NATURAL DRAG
+	# AUTO-STABILIZE
 	# -----------------------------------------------------
-	var drag := -linear_velocity * 0.15
-	apply_central_force(drag)
+	velocity = velocity.lerp(forward * velocity.length(), delta * 1.2)
+
+	# -----------------------------------------------------
+	# SPEED LIMIT
+	# -----------------------------------------------------
+	if velocity.length() > stats.max_speed:
+		velocity = velocity.normalized() * stats.max_speed
+		
+	print("Forward:", forward)
+
 
 # ---------------------------------------------------------
 #  VISUAL WHEEL SYNC
@@ -114,12 +128,13 @@ func update_visual_wheels():
 	if not car_model:
 		return
 
-	var m := car_model
-	var rot_speed := linear_velocity.length() * 0.05
+	var rot_speed := velocity.length() * 0.05
+	var wheels := car_model.get_node("Wheels")
 
 	for wheel_name in ["WheelFL_Mesh","WheelFR_Mesh","WheelRL_Mesh","WheelRR_Mesh"]:
-		var w = m.get_node("Wheels/" + wheel_name)
-		w.rotate_x(rot_speed)
+		if wheels.has_node(wheel_name):
+			var w = wheels.get_node(wheel_name)
+			w.rotate_x(rot_speed)
 
 # ---------------------------------------------------------
 #  SWITCH CAR BY ID
