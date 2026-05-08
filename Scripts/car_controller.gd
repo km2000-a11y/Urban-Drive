@@ -94,7 +94,7 @@ func handle_input(delta):
 
 	# --- STEERING (ROTATE CAR + VELOCITY) ---
 	if speed > 0.1:
-		var turn_amount: float = steer * stats.turn_rate * delta
+		var turn_amount: float = steer * stats.handling * delta
 		rotate_y(turn_amount)
 		velocity = velocity.rotated(Vector3.UP, turn_amount)
 
