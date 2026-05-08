@@ -62,6 +62,10 @@ func _physics_process(delta):
 	print("Body basis:", transform.basis)
 	print("Throttle:", Input.get_action_strength("accelerate"))
 	print("Velocity:", velocity)
+	print("Body rot:", rotation_degrees)
+	print("ModelRoot rot:", $ModelRoot.rotation_degrees)
+	print("Model rot:", car_model.rotation_degrees)
+
 
 # ---------------------------------------------------------
 #  INPUT HANDLING
@@ -74,54 +78,27 @@ func handle_input(delta):
 	var brake := Input.get_action_strength("brake")
 	var steer_input := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	# -----------------------------------------------------
-	# STEERING
-	# -----------------------------------------------------
 	var max_steer := deg_to_rad(stats.handling * 55.0)
 	steer_angle = lerp(steer_angle, steer_input * max_steer, delta * 10.0)
 
 	if velocity.length() > 0.5:
 		var turn: float = steer_angle * delta * 1.5
 		rotate_y(turn)
-		velocity = velocity.rotated(Vector3.UP, turn)
 
-	# -----------------------------------------------------
-	# FORWARD FROM CAR MODEL (CRITICAL)
-	# -----------------------------------------------------
-	var forward := -car_model.global_transform.basis.z
+	var forward := -global_transform.basis.z
 
-	# -----------------------------------------------------
-	# ACCELERATION
-	# -----------------------------------------------------
 	if throttle > 0.01:
 		velocity += forward * throttle * stats.acceleration * 20.0 * delta
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, stats.traction * 6.0 * delta)
 
-	# -----------------------------------------------------
-	# BRAKING
-	# -----------------------------------------------------
 	if brake > 0.01:
 		velocity = velocity.move_toward(Vector3.ZERO, stats.brake_strength * 25.0 * delta)
 
-	# -----------------------------------------------------
-	# WALL SLIDE FIX
-	# -----------------------------------------------------
-	if is_on_wall():
-		velocity = velocity.slide(get_wall_normal())
-
-	# -----------------------------------------------------
-	# AUTO-STABILIZE
-	# -----------------------------------------------------
 	velocity = velocity.lerp(forward * velocity.length(), delta * 1.2)
 
-	# -----------------------------------------------------
-	# SPEED LIMIT
-	# -----------------------------------------------------
 	if velocity.length() > stats.max_speed:
 		velocity = velocity.normalized() * stats.max_speed
-		
-	print("Forward:", forward)
 
 
 # ---------------------------------------------------------
