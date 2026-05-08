@@ -18,10 +18,7 @@ var car_stats := {
 }
 
 var car_list := [
-	"abarth_500","golf","mini","beetle","tt","350z","slk","rs5",
-	"charger","mustang","1967_shelby","cls","v8_vantage","granturismo",
-	"db9","hummer","expedition","elise","corvette","gallardo","diablo",
-	"murcielago","zonda","f1","ccxr"
+	"abarth_500"
 ]
 
 # ---------------------------------------------------------
@@ -71,34 +68,35 @@ func _physics_process(delta):
 #  INPUT HANDLING
 # ---------------------------------------------------------
 func handle_input(delta):
-	if stats == null or car_model == null:
-		return
-
+	# --- INPUT ---
 	var throttle := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
-	var steer_input := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	var steer := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	var max_steer := deg_to_rad(stats.handling * 55.0)
-	steer_angle = lerp(steer_angle, steer_input * max_steer, delta * 10.0)
+	# --- CAR FORWARD VECTOR ---
+	var forward: Vector3 = -global_transform.basis.z
 
-	if velocity.length() > 0.5:
-		var turn: float = steer_angle * delta * 1.5
-		rotate_y(turn)
-
-	var forward := -basis.z
-
+	# --- ACCELERATION ---
 	if throttle > 0.01:
-		velocity += forward * throttle * stats.acceleration * 20.0 * delta
+		velocity += forward * throttle * stats.acceleration * delta
 	else:
-		velocity = velocity.move_toward(Vector3.ZERO, stats.traction * 6.0 * delta)
+		# natural slowdown
+		velocity = velocity.move_toward(Vector3.ZERO, stats.traction * delta)
 
+	# --- BRAKING ---
 	if brake > 0.01:
-		velocity = velocity.move_toward(Vector3.ZERO, stats.brake_strength * 25.0 * delta)
+		velocity = velocity.move_toward(Vector3.ZERO, stats.brake_strength * delta)
 
-	velocity = velocity.lerp(forward * velocity.length(), delta * 1.2)
-
-	if velocity.length() > stats.max_speed:
+	# --- SPEED LIMIT ---
+	var speed := velocity.length()
+	if speed > stats.max_speed:
 		velocity = velocity.normalized() * stats.max_speed
+
+	# --- STEERING (ROTATE CAR + VELOCITY) ---
+	if speed > 0.1:
+		var turn_amount: float = steer * stats.turn_rate * delta
+		rotate_y(turn_amount)
+		velocity = velocity.rotated(Vector3.UP, turn_amount)
 
 
 # ---------------------------------------------------------
