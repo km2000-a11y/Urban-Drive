@@ -85,7 +85,7 @@ func handle_input(delta):
 		var turn: float = steer_angle * delta * 1.5
 		rotate_y(turn)
 
-	var forward := -global_transform.basis.z
+	var forward := -basis.z
 
 	if throttle > 0.01:
 		velocity += forward * throttle * stats.acceleration * 20.0 * delta
