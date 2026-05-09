@@ -3,3 +3,4 @@ res://Cars/abarth_500.tscn
 res://Cars/mini.tscn
 res://Tracks/track.tscn
 res://main.tscn
+res://Scripts/car_controller.gd

@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="6_pwc5r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_acjjc"]
-size = Vector3(3, 1.2, 2)
+size = Vector3(1.5, 1.2, 1.5)
 
 [node name="CarController" type="CharacterBody3D"]
 floor_snap_length = 0.0
@@ -36,7 +36,7 @@ stream = ExtResource("5_n3gk5")
 stream = ExtResource("6_pwc5r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.780075, 0.778859, 0.33208)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320553, 1.38244, -0.08364)
 shape = SubResource("BoxShape3D_acjjc")
 
 [editable path="ModelRoot/Abarth 500"]
