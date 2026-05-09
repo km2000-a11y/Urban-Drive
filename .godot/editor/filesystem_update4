@@ -1,3 +1,1 @@
-res://Scenes/abarth_500.tscn
-res://Scripts/car_controller.gd
-res://Cars/abarth.tscn
+res://Scripts/CarStats.gd

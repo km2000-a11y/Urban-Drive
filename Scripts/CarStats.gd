@@ -17,3 +17,4 @@ extends Node3D
 @export var country_of_origin: String = ""
 
 @export var turn_rate: float = 2.5   # NEW
+@export var downforce: float = 1.0
