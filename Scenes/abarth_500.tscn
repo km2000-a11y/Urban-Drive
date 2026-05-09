@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7w7oidnfk26h"]
+
+[ext_resource type="PackedScene" uid="uid://cgswfchowvxnm" path="res://Cars/abarth.tscn" id="1_sv1ge"]
+
+[sub_resource type="GDScript" id="GDScript_sv1ge"]
+script/source = "extends VehicleBody3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nok3y"]
+size = Vector3(0.9, 1, 1.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nok3y"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ydy85"]
+top_radius = 0.14
+bottom_radius = 0.14
+height = 0.1
+
+[node name="Abarth-500" type="VehicleBody3D"]
+script = SubResource("GDScript_sv1ge")
+
+[node name="ModelRoot" type="Node3D" parent="."]
+
+[node name="Abarth 500" parent="ModelRoot" instance=ExtResource("1_sv1ge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0311884, -0.0993652, 0.993463)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0471504, 0.433874, 0.813009)
+shape = SubResource("BoxShape3D_nok3y")
+
+[node name="WheelFR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0311884, -0.0993652, 0.993463)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelFR"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.108982, 0)
+material_override = SubResource("StandardMaterial3D_nok3y")
+mesh = SubResource("CylinderMesh_ydy85")
+
+[node name="WheelFL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.671876, -0.0723489, 0.993463)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelFL"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.108982, 0)
+material_override = SubResource("StandardMaterial3D_nok3y")
+mesh = SubResource("CylinderMesh_ydy85")
+
+[node name="WheelRL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.671876, -0.0723489, 0.158801)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelRL"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.108982, 0)
+material_override = SubResource("StandardMaterial3D_nok3y")
+mesh = SubResource("CylinderMesh_ydy85")
+
+[node name="WheelRR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0124204, -0.0723489, 0.158801)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelRR"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.108982, 0)
+material_override = SubResource("StandardMaterial3D_nok3y")
+mesh = SubResource("CylinderMesh_ydy85")

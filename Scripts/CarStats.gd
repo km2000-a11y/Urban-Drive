@@ -1,5 +1,4 @@
-extends Resource
-class_name CarStats
+extends Node3D
 
 @export var car_name: String
 @export var engine: String
