@@ -50,24 +50,37 @@ func apply_stats():
 
 # ---------------------------------------------------------
 #  PHYSICS LOOP
+# --------------------------------------------------------
+
+
 # ---------------------------------------------------------
-func _physics_process(delta):
+#  INPUT HANDLING
+# ---------------------------------------------------------
+func _physics_process(delta: float) -> void:
+	# --- GRAVITY ---
+	velocity.y -= 30.0 * delta  # tune this
+
+	# --- INPUT / CAR LOGIC ---
 	handle_input(delta)
 	update_visual_wheels()
+
+	# --- DEBUG BEFORE MOVE ---
+	print("Velocity BEFORE move_and_slide:", velocity)
+
+	# --- MOVE ---
 	move_and_slide()
-	
+
+	# --- DEBUG AFTER MOVE ---
 	print("Body basis:", transform.basis)
 	print("Throttle:", Input.get_action_strength("accelerate"))
 	print("Velocity:", velocity)
 	print("Body rot:", rotation_degrees)
 	print("ModelRoot rot:", $ModelRoot.rotation_degrees)
 	print("Model rot:", car_model.rotation_degrees)
+	print("On floor:", is_on_floor())
+	print("Up:", up_direction)
 
-
-# ---------------------------------------------------------
-#  INPUT HANDLING
-# ---------------------------------------------------------
-func handle_input(delta):
+func handle_input(delta: float) -> void:
 	# --- INPUT ---
 	var throttle := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
@@ -80,7 +93,6 @@ func handle_input(delta):
 	if throttle > 0.01:
 		velocity += forward * throttle * stats.acceleration * delta
 	else:
-		# natural slowdown
 		velocity = velocity.move_toward(Vector3.ZERO, stats.traction * delta)
 
 	# --- BRAKING ---
@@ -94,7 +106,7 @@ func handle_input(delta):
 
 	# --- STEERING (ROTATE CAR + VELOCITY) ---
 	if speed > 0.1:
-		var turn_amount: float = steer * stats.handling * delta
+		var turn_amount: float = steer * stats.turn_rate * delta
 		rotate_y(turn_amount)
 		velocity = velocity.rotated(Vector3.UP, turn_amount)
 

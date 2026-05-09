@@ -16,3 +16,5 @@ class_name CarStats
 @export var brake_strength: float
 
 @export var country_of_origin: String = ""
+
+@export var turn_rate: float = 2.5   # NEW

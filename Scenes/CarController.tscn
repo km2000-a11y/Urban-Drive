@@ -8,13 +8,13 @@
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="6_pwc5r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mph3u"]
-size = Vector3(0.3, 0.2, 0.3)
+size = Vector3(2, 1.5, 2)
 
 [node name="CarController" type="CharacterBody3D"]
 script = ExtResource("1_xsmmc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.237849, 0.46959, 0.694767)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, 0.805806, 0.298237)
 shape = SubResource("BoxShape3D_mph3u")
 
 [node name="ModelRoot" type="Node3D" parent="."]
