@@ -7,23 +7,19 @@
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="5_n3gk5"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="6_pwc5r"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mph3u"]
-size = Vector3(2, 1.5, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_acjjc"]
+size = Vector3(3, 1.2, 2)
 
 [node name="CarController" type="CharacterBody3D"]
 script = ExtResource("1_xsmmc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, 0.805806, 0.298237)
-shape = SubResource("BoxShape3D_mph3u")
-
 [node name="ModelRoot" type="Node3D" parent="."]
 
 [node name="Abarth 500" parent="ModelRoot" instance=ExtResource("2_vfpjy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0853881, -0.0324969, 1.11781)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13477, -0.0324969, 0.60072)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.185026, 0.580271, -2.18298)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.401929, 0.580271, -2.18298)
 current = true
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
@@ -37,5 +33,8 @@ stream = ExtResource("5_n3gk5")
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_pwc5r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_acjjc")
 
 [editable path="ModelRoot/Abarth 500"]
