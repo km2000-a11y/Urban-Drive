@@ -1,13 +1,13 @@
-extends CharacterBody3D
+extends Node3D
 
 @export var stats: CarStats
 @export var car_model_scene: PackedScene
 
 var car_model: Node3D
-var steer_angle := 0.0
+var velocity: Vector3 = Vector3.ZERO
 
 # ---------------------------------------------------------
-#  RUNTIME CAR DATABASES
+#  CAR DATABASES (KEEP THESE)
 # ---------------------------------------------------------
 var car_models := {
 	"abarth_500": preload("res://Cars/abarth_500.tscn"),
@@ -38,6 +38,12 @@ func load_car_model():
 	car_model = car_model_scene.instantiate()
 	$ModelRoot.add_child(car_model)
 
+	# --- POSITION RAYCASTS TO MATCH WHEEL POS ---
+	$Wheels/WheelFL.global_position = car_model.get_node("WheelPos/WheelFL_Pos").global_position
+	$Wheels/WheelFR.global_position = car_model.get_node("WheelPos/WheelFR_Pos").global_position
+	$Wheels/WheelRL.global_position = car_model.get_node("WheelPos/WheelRL_Pos").global_position
+	$Wheels/WheelRR.global_position = car_model.get_node("WheelPos/WheelRR_Pos").global_position
+
 # ---------------------------------------------------------
 #  APPLY CAR STATS
 # ---------------------------------------------------------
@@ -45,89 +51,85 @@ func apply_stats():
 	if stats == null:
 		push_error("Stats is NULL in apply_stats()")
 		return
-		
-	print("Accel: ", stats.acceleration)
+	print("Accel:", stats.acceleration)
 
 # ---------------------------------------------------------
 #  PHYSICS LOOP
-# --------------------------------------------------------
+# ---------------------------------------------------------
+func _physics_process(delta: float) -> void:
+	velocity.y -= 30.0 * delta
 
+	handle_input(delta)
+	update_visual_wheels(delta)
+
+	global_position += velocity * delta
 
 # ---------------------------------------------------------
 #  INPUT HANDLING
 # ---------------------------------------------------------
-func _physics_process(delta: float) -> void:
-	# --- GRAVITY ---
-	velocity.y -= 30.0 * delta  # tune this
-
-	# --- INPUT / CAR LOGIC ---
-	handle_input(delta)
-	update_visual_wheels()
-
-	# --- DEBUG BEFORE MOVE ---
-	print("Velocity BEFORE move_and_slide:", velocity)
-
-	# --- MOVE ---
-	move_and_slide()
-
-	# --- DEBUG AFTER MOVE ---
-	print("Body basis:", transform.basis)
-	print("Throttle:", Input.get_action_strength("accelerate"))
-	print("Velocity:", velocity)
-	print("Body rot:", rotation_degrees)
-	print("ModelRoot rot:", $ModelRoot.rotation_degrees)
-	print("Model rot:", car_model.rotation_degrees)
-	print("On floor:", is_on_floor())
-	print("Up:", up_direction)
-
 func handle_input(delta: float) -> void:
-	# --- INPUT ---
 	var throttle := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	# --- CAR FORWARD VECTOR ---
-	var forward: Vector3 = -global_transform.basis.z
+	var forward := -global_transform.basis.z
 
-	# --- ACCELERATION ---
+	# ACCELERATION
 	if throttle > 0.01:
 		velocity += forward * throttle * stats.acceleration * delta
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, stats.traction * delta)
 
-	# --- BRAKING ---
+	# BRAKING
 	if brake > 0.01:
 		velocity = velocity.move_toward(Vector3.ZERO, stats.brake_strength * delta)
 
-	# --- SPEED LIMIT ---
+	# SPEED LIMIT
 	var speed := velocity.length()
 	if speed > stats.max_speed:
 		velocity = velocity.normalized() * stats.max_speed
 
-	# --- STEERING (ROTATE CAR + VELOCITY) ---
+	# STEERING
 	if speed > 0.1:
-		var turn_amount: float = steer * stats.turn_rate * delta
+		var turn_amount := steer * stats.turn_rate * delta
 		rotate_y(turn_amount)
 		velocity = velocity.rotated(Vector3.UP, turn_amount)
 
-
 # ---------------------------------------------------------
-#  VISUAL WHEEL SYNC
+#  VISUAL WHEEL SYNC (NO DICTS, JUST DIRECT PATHS)
 # ---------------------------------------------------------
-func update_visual_wheels():
-	if not car_model:
+func update_visual_wheels(delta: float):
+	if car_model == null:
 		return
 
 	var rot_speed := velocity.length() * 0.05
-	var wheels := car_model.get_node("Wheels")
 
-	for wheel_name in ["WheelFL_Mesh","WheelFR_Mesh","WheelRL_Mesh","WheelRR_Mesh"]:
-		if wheels.has_node(wheel_name):
-			var w = wheels.get_node(wheel_name)
-			w.rotate_x(rot_speed)
+	# Raycasts
+	var FL_ray = $Wheels/WheelFL
+	var FR_ray = $Wheels/WheelFR
+	var RL_ray = $Wheels/WheelRL
+	var RR_ray = $Wheels/WheelRR
+
+	# Meshes
+	var FL_mesh = car_model.get_node("WheelMesh/WheelFL_Mesh")
+	var FR_mesh = car_model.get_node("WheelMesh/WheelFR_Mesh")
+	var RL_mesh = car_model.get_node("WheelMesh/WheelRL_Mesh")
+	var RR_mesh = car_model.get_node("WheelMesh/WheelRR_Mesh")
+
+	# Sync positions
+	FL_mesh.global_position = FL_ray.global_position
+	FR_mesh.global_position = FR_ray.global_position
+	RL_mesh.global_position = RL_ray.global_position
+	RR_mesh.global_position = RR_ray.global_position
+
+	# Rotate visuals
+	FL_mesh.rotate_x(rot_speed)
+	FR_mesh.rotate_x(rot_speed)
+	RL_mesh.rotate_x(rot_speed)
+	RR_mesh.rotate_x(rot_speed)
 
 # ---------------------------------------------------------
-#  SWITCH CAR BY ID
+#  SWITCH CAR
 # ---------------------------------------------------------
 func switch_car(car_id: String):
 	if not car_models.has(car_id) or not car_stats.has(car_id):

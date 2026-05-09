@@ -1,3 +1,4 @@
+StaticBody3D
 AudioStreamPlayer3D
 Camera3D
 RayCast3D
@@ -11,4 +12,3 @@ MeshInstance3D
 Marker3D
 VehicleWheel3D
 VehicleBody3D
-StaticBody3D
