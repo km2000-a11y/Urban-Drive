@@ -16,10 +16,10 @@ script = ExtResource("1_xsmmc")
 [node name="ModelRoot" type="Node3D" parent="."]
 
 [node name="Abarth 500" parent="ModelRoot" instance=ExtResource("2_vfpjy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13477, -0.0324969, 0.60072)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.401929, 0.580271, -2.18298)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.448389, 1.52264, -2.18298)
 current = true
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
@@ -35,6 +35,7 @@ stream = ExtResource("5_n3gk5")
 stream = ExtResource("6_pwc5r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.780075, 0.778859, 0.33208)
 shape = SubResource("BoxShape3D_acjjc")
 
 [editable path="ModelRoot/Abarth 500"]
