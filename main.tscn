@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxi25dbhhlmu5"]
+[gd_scene load_steps=2 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="PackedScene" uid="uid://b0rspyplkxvyp" path="res://Tracks/track.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://dsveyhry4h2rd" path="res://Scenes/CarController.tscn" id="2_h2yge"]
 
 [node name="Node" type="Node"]
 
@@ -9,6 +8,3 @@
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
-
-[node name="CarController" parent="." instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50696, 0)
