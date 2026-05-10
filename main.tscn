@@ -11,4 +11,18 @@
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
 [node name="Abarth 500" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189533, 0.541729, -0.56513)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150529, 0.685234, -3.03625)
+continuous_cd = true
+car_name = ""
+engine = ""
+drivetrain = ""
+horsepower = 0
+top_speed = 0.0
+zero_to_hundred = 0.0
+weight = 0.0
+max_speed = 0.0
+acceleration = 0.0
+handling = 0.0
+traction = 0.0
+brake_strength = 0.0
+country_of_origin = ""

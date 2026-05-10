@@ -15,17 +15,20 @@ extends VehicleBody3D
 @export var brake_strength: float
 
 @export var country_of_origin: String = ""
-
 @export var downforce: float = 1.0
 
-const MAX_STEER=0.8
+# Steering parameters
+@export var max_steer_angle: float = 0.8
+@export var steering_speed: float = 2.5
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-func _process(delta):
-	steering=move_toward(steering,Input.get_axis("turn_right", "turn_left")*MAX_STEER, delta*2.5)
-	var throttle=Input.get_axis("accelerate", "brake")
-	var accel_force=throttle*acceleration*1800.0
-	if Input.is_action_just_pressed("pause_menu"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+var steer_target := 0.0
+
+func _physics_process(delta):
+	var throttle := Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
+	var steer_input := Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
+
+	engine_force = throttle * acceleration * 1800.0
+	brake = brake_strength if throttle < 0 else 0.0
+
+	steer_target = steer_input * max_steer_angle
+	steering = lerp(steering, steer_target, steering_speed * delta)

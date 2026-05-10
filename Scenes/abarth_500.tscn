@@ -1035,8 +1035,11 @@ bottom_radius = 0.2
 height = 0.2
 
 [node name="Abarth 500" type="VehicleBody3D"]
+mass = 130.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.3, 0)
+linear_damp = 0.05
+angular_damp = 0.1
 script = ExtResource("1_sv1ge")
 car_name = "Veltor A1-T"
 engine = "1.4L I4 Turbo"
@@ -1049,7 +1052,7 @@ max_speed = 54.17
 acceleration = 14.8
 handling = 0.78
 traction = 0.86
-brake_strength = 0.72
+brake_strength = 0.78
 country_of_origin = "Italy"
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
@@ -1278,64 +1281,75 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.0245742, 0.542588, -0.7204
 shape = SubResource("ConvexPolygonShape3D_yx8ok")
 
 [node name="FL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.690291, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69, 0.0310779, 0)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.02
-wheel_friction_slip = 2.1
-suspension_stiffness = 29.0
+wheel_radius = 0.2
+wheel_friction_slip = 2.2
+suspension_travel = 0.28
+suspension_stiffness = 22.0
+suspension_max_force = 11000.0
+damping_compression = 2.2
+damping_relaxation = 2.0
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="FL"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.0319736, 0.0383035, -0.0042982)
+material_override = SubResource("StandardMaterial3D_sv1ge")
+mesh = SubResource("CylinderMesh_nok3y")
 
 [node name="RL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.872)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.894, 0.188555, -0.8204)
+use_as_traction = true
 wheel_roll_influence = 0.02
-wheel_friction_slip = 1.9
-suspension_stiffness = 23.0
+wheel_radius = 0.2
+wheel_friction_slip = 1.8
+suspension_travel = 0.32
+suspension_stiffness = 18.0
+suspension_max_force = 9000.0
+damping_compression = 1.8
+damping_relaxation = 1.6
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="RL"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.281619, -0.0914161, 0.0133445)
+material_override = SubResource("StandardMaterial3D_sv1ge")
+mesh = SubResource("CylinderMesh_nok3y")
+skeleton = NodePath("../../FL")
 
 [node name="RR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.932861)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104627, -0.786)
+use_as_traction = true
 wheel_roll_influence = 0.02
-wheel_friction_slip = 1.9
-suspension_stiffness = 23.0
+wheel_radius = 0.2
+wheel_friction_slip = 1.8
+suspension_travel = 0.32
+suspension_stiffness = 18.0
+suspension_max_force = 9000.0
+damping_compression = 1.8
+damping_relaxation = 1.6
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="RR"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.048081, 0.00755274, -0.020569)
+material_override = SubResource("StandardMaterial3D_sv1ge")
+mesh = SubResource("CylinderMesh_nok3y")
+skeleton = NodePath("../../FL")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, -7.6194e-09, 8.70901e-08, 0, 0.996195, 0.0871557, -8.74228e-08, 0.0871557, -0.996195, 0.251251, 0.817713, -2.28991)
 
 [node name="FR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197686, 0, -0.246388)
-suspension_stiffness = 29.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198, -0.0171123, 0.00904166)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.2
+wheel_friction_slip = 2.2
+suspension_stiffness = 22.0
+suspension_max_force = 11000.0
+damping_compression = 2.2
+damping_relaxation = 2.0
 
-[node name="WheelHolder" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.7231, -0.13264, -1.2266)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 8.35187e-23, 0, 8.35187e-23, 1, -0.419544, 0.110719, 0.0674458)
-material_override = SubResource("StandardMaterial3D_sv1ge")
-mesh = SubResource("CylinderMesh_nok3y")
-skeleton = NodePath("../../FL")
-
-[node name="WheelHolder2" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.158801, 0, -0.407296)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder2"]
-transform = Transform3D(1, 0, 0, 0, 1, 8.35187e-23, 0, 8.35187e-23, 1, -0.419544, 0.110719, 0.0674458)
-material_override = SubResource("StandardMaterial3D_sv1ge")
-mesh = SubResource("CylinderMesh_nok3y")
-skeleton = NodePath("../../FL")
-
-[node name="WheelHolder3" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.1588, 0, -1.22611)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder3"]
-transform = Transform3D(1, 0, 0, 0, 1, 8.35187e-23, 0, 8.35187e-23, 1, -0.419544, 0.110719, 0.0674458)
-material_override = SubResource("StandardMaterial3D_sv1ge")
-mesh = SubResource("CylinderMesh_nok3y")
-skeleton = NodePath("../../FL")
-
-[node name="WheelHolder4" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.690291, 0, -0.446237)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder4"]
-transform = Transform3D(1, 0, 0, 0, 1, 8.35187e-23, 0, 8.35187e-23, 1, -0.42, 0, 0.067)
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="FR"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.149918, 0.0875457, 0.00320635)
 material_override = SubResource("StandardMaterial3D_sv1ge")
 mesh = SubResource("CylinderMesh_nok3y")
 skeleton = NodePath("../../FL")
