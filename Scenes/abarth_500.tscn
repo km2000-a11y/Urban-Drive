@@ -1294,7 +1294,7 @@ damping_compression = 2.2
 damping_relaxation = 2.0
 
 [node name="MeshInstance3D19" type="MeshInstance3D" parent="FL"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.0319736, 0.0383035, -0.0042982)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.0319736, 0.0405088, -0.0042982)
 material_override = SubResource("StandardMaterial3D_sv1ge")
 mesh = SubResource("CylinderMesh_nok3y")
 
@@ -1311,7 +1311,7 @@ damping_compression = 1.8
 damping_relaxation = 1.6
 
 [node name="MeshInstance3D20" type="MeshInstance3D" parent="RL"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.281619, -0.0914161, 0.0133445)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.281619, -0.0610668, 0.0133445)
 material_override = SubResource("StandardMaterial3D_sv1ge")
 mesh = SubResource("CylinderMesh_nok3y")
 skeleton = NodePath("../../FL")
@@ -1329,7 +1329,7 @@ damping_compression = 1.8
 damping_relaxation = 1.6
 
 [node name="MeshInstance3D21" type="MeshInstance3D" parent="RR"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.048081, 0.00755274, -0.020569)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.048081, 0.0633742, -0.020569)
 material_override = SubResource("StandardMaterial3D_sv1ge")
 mesh = SubResource("CylinderMesh_nok3y")
 skeleton = NodePath("../../FL")
@@ -1349,7 +1349,7 @@ damping_compression = 2.2
 damping_relaxation = 2.0
 
 [node name="MeshInstance3D22" type="MeshInstance3D" parent="FR"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.149918, 0.0875457, 0.00320635)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.149918, 0.18814, 0.00320635)
 material_override = SubResource("StandardMaterial3D_sv1ge")
 mesh = SubResource("CylinderMesh_nok3y")
 skeleton = NodePath("../../FL")
