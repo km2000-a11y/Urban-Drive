@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxi25dbhhlmu5"]
+[gd_scene load_steps=3 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="PackedScene" uid="uid://b0rspyplkxvyp" path="res://Tracks/track.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cheb8gigcqn45" path="res://Scenes/abarth_500.tscn" id="2_0xm2m"]
 
 [node name="Node" type="Node"]
 
@@ -8,3 +9,6 @@
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
+
+[node name="Abarth 500" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189533, 0.541729, -0.56513)
