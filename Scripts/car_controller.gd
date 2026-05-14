@@ -24,22 +24,42 @@ extends VehicleBody3D
 
 var steer_target := 0.0
 
-@onready var wheels := [
-	$FL,
-	$FR,
-	$RL,
-	$RR
-]
+@onready var FL := $FL
+@onready var FR := $FR
+@onready var RL := $RL
+@onready var RR := $RR
 
 func _physics_process(delta):
+	# INPUT
 	var throttle := Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
 	var steer_input := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
-	# Smooth steering for front wheels
+	# STEERING (THIS ALWAYS WORKS)
 	steer_target = steer_input * max_steer_angle
 	steering = lerp(steering, steer_target, steering_speed * delta)
 
-	# Apply engine + brake forces directly to wheels
-	for wheel in wheels:
-		wheel.engine_force = throttle * acceleration * 1800.0
-		wheel.brake = brake_strength if throttle < 0 else 0.0
+	# RESET ENGINE FORCE
+	FL.engine_force = 0
+	FR.engine_force = 0
+	RL.engine_force = 0
+	RR.engine_force = 0
+
+	# DRIVETRAIN
+	if drivetrain == "FWD":
+		FL.engine_force = throttle * acceleration
+		FR.engine_force = throttle * acceleration
+	elif drivetrain == "RWD":
+		RL.engine_force = throttle * acceleration
+		RR.engine_force = throttle * acceleration
+	else: # AWD
+		FL.engine_force = throttle * acceleration * 0.5
+		FR.engine_force = throttle * acceleration * 0.5
+		RL.engine_force = throttle * acceleration * 0.5
+		RR.engine_force = throttle * acceleration * 0.5
+
+	# BRAKING
+	var braking := brake_strength if throttle < 0 else 0.0
+	FL.brake = braking
+	FR.brake = braking
+	RL.brake = braking
+	RR.brake = braking
