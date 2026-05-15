@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=4 uid="uid://cheb8gigcqn45"]
+[gd_scene load_steps=110 format=4 uid="uid://cheb8gigcqn45"]
 
 [ext_resource type="Script" uid="uid://c1ugmg5dpnt4c" path="res://Scripts/car_controller.gd" id="1_sv1ge"]
 
@@ -162,6 +162,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ydy85"]
 points = PackedVector3Array(0.01, 0.15, 0.075, -0.01, 0.15, 0.075, 0.01, -0.15, 0.075, 0.01, 0.15, -0.075, -0.01, 0.15, -0.075, -0.01, -0.15, 0.075, 0.01, -0.15, -0.075, -0.01, -0.15, -0.075)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf3ck"]
+albedo_color = Color(0.8, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0oom"]
 resource_name = "material_2"
 
@@ -204,7 +207,7 @@ metadata/extras = {
 points = PackedVector3Array(0.3, 0.05, 0.349932, 0.3, -0.05, 0.349932, 0.3, 0.05, -0.35, -0.3, 0.05, 0.349932, -0.3, -0.05, 0.349932, 0.3, -0.05, -0.35, -0.3, 0.05, -0.35, -0.3, -0.05, -0.35)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nok3y"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ekbk"]
 resource_name = "material_3"
@@ -540,7 +543,7 @@ metadata/extras = {
 points = PackedVector3Array(-0.05, -0.1, -0.05, -0.05, -0.1, 0.05, -0.05, 0.1, -0.05, 0.05, -0.1, -0.05, 0.05, -0.1, 0.05, -0.05, 0.1, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydy85"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjpxi"]
 resource_name = "material_4"
@@ -584,7 +587,7 @@ metadata/extras = {
 points = PackedVector3Array(-0.35, -0.05, -0.15, -0.35, 0.05, -0.15, 0.349932, -0.05, -0.15, -0.35, -0.05, 0.15, -0.35, 0.05, 0.15, 0.349932, 0.05, -0.15, 0.349932, -0.05, 0.15, 0.349932, 0.05, 0.15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5pbf"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sluqe"]
 resource_name = "material_13"
@@ -670,7 +673,7 @@ metadata/extras = {
 points = PackedVector3Array(0.349932, 0.15, 0.05, 0.349932, 0.15, -0.05, -0.35, 0.15, 0.05, 0.349932, -0.15, 0.05, 0.349932, -0.15, -0.05, -0.35, 0.15, -0.05, -0.35, -0.15, 0.05, -0.35, -0.15, -0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tg5by"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wskgo"]
 resource_name = "material_6"
@@ -714,7 +717,7 @@ metadata/extras = {
 points = PackedVector3Array(-0.05, -0.2, -0.25, 0.05, -0.2, -0.25, -0.05, -0.2, 0.25, -0.05, 0.2, -0.25, 0.05, 0.2, -0.25, 0.05, -0.2, 0.25, -0.05, 0.2, 0.25, 0.05, 0.2, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6daax"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu5tm"]
 resource_name = "material_7"
@@ -757,6 +760,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pu6sn"]
 points = PackedVector3Array(-0.05, -0.2, -0.25, 0.05, -0.2, -0.25, -0.05, -0.2, 0.25, -0.05, 0.2, -0.25, 0.05, 0.2, -0.25, 0.05, -0.2, 0.25, -0.05, 0.2, 0.25, 0.05, 0.2, 0.25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggqnv"]
+albedo_color = Color(0.8, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7axvb"]
 resource_name = "material_8"
 
@@ -797,6 +803,9 @@ metadata/extras = {
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ax5pr"]
 points = PackedVector3Array(0.01, 0.15, 0.015, -0.01, 0.15, 0.015, 0.01, -0.15, 0.015, 0.01, 0.15, -0.015, -0.01, 0.15, -0.015, -0.01, -0.15, 0.015, 0.01, -0.15, -0.015, -0.01, -0.15, -0.015)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xg4av"]
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3d1a6"]
 resource_name = "material_9"
@@ -839,6 +848,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_itw23"]
 points = PackedVector3Array(0.01, 0.15, 0.015, -0.01, 0.15, 0.015, 0.01, -0.15, 0.015, 0.01, 0.15, -0.015, -0.01, 0.15, -0.015, -0.01, -0.15, 0.015, 0.01, -0.15, -0.015, -0.01, -0.15, -0.015)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxhib"]
+albedo_color = Color(0.8, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta3qv"]
 resource_name = "material_10"
 
@@ -880,6 +892,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b2k58"]
 points = PackedVector3Array(0.01, 0.15, 0.015, -0.01, 0.15, 0.015, 0.01, -0.15, 0.015, 0.01, 0.15, -0.015, -0.01, 0.15, -0.015, -0.01, -0.15, 0.015, 0.01, -0.15, -0.015, -0.01, -0.15, -0.015)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i03cv"]
+albedo_color = Color(0.8, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7dhi"]
 resource_name = "material_11"
 
@@ -920,6 +935,9 @@ metadata/extras = {
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_87sc6"]
 points = PackedVector3Array(0.01, 0.15, 0.015, -0.01, 0.15, 0.015, 0.01, -0.15, 0.015, 0.01, 0.15, -0.015, -0.01, 0.15, -0.015, -0.01, -0.15, 0.015, 0.01, -0.15, -0.015, -0.01, -0.15, -0.015)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulxc0"]
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0or1"]
 resource_name = "material_12"
@@ -963,7 +981,7 @@ metadata/extras = {
 points = PackedVector3Array(0.3, 0.05, 0.349932, 0.3, -0.05, 0.349932, 0.3, 0.05, -0.35, -0.3, 0.05, 0.349932, -0.3, -0.05, 0.349932, 0.3, -0.05, -0.35, -0.3, 0.05, -0.35, -0.3, -0.05, -0.35)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mcsem"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.8, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8wjy"]
 resource_name = "material_14"
@@ -1071,11 +1089,13 @@ top_speed = 195.0
 zero_to_hundred = 7.8
 weight = 1050.0
 max_speed = 54.17
-acceleration = 14.8
+acceleration = 2960.0
 handling = 0.78
 traction = 0.86
 brake_strength = 0.78
 country_of_origin = "Italy"
+max_steer_angle = 0.624
+steering_speed = 1.95
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.618446, 0.581056, -0.307301)
@@ -1115,6 +1135,7 @@ shape = SubResource("ConvexPolygonShape3D_ydy85")
 
 [node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308699, 0.275917, -0.364783)
+material_override = SubResource("StandardMaterial3D_jf3ck")
 mesh = SubResource("ArrayMesh_xapva")
 skeleton = NodePath("")
 
@@ -1246,6 +1267,7 @@ shape = SubResource("ConvexPolygonShape3D_pu6sn")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.602131, 0.569814, -0.129754)
+material_override = SubResource("StandardMaterial3D_ggqnv")
 mesh = SubResource("ArrayMesh_6qd44")
 skeleton = NodePath("")
 
@@ -1255,6 +1277,7 @@ shape = SubResource("ConvexPolygonShape3D_ax5pr")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.603677, 0.536231, -0.473166)
+material_override = SubResource("StandardMaterial3D_xg4av")
 mesh = SubResource("ArrayMesh_4dech")
 skeleton = NodePath("")
 
@@ -1264,6 +1287,7 @@ shape = SubResource("ConvexPolygonShape3D_itw23")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0433639, 0.536231, -0.496672)
+material_override = SubResource("StandardMaterial3D_nxhib")
 mesh = SubResource("ArrayMesh_uaj4j")
 skeleton = NodePath("")
 
@@ -1273,6 +1297,7 @@ shape = SubResource("ConvexPolygonShape3D_b2k58")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0433639, 0.536231, -0.181823)
+material_override = SubResource("StandardMaterial3D_i03cv")
 mesh = SubResource("ArrayMesh_88r02")
 skeleton = NodePath("")
 
@@ -1281,7 +1306,8 @@ transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 
 shape = SubResource("ConvexPolygonShape3D_87sc6")
 
 [node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308699, 0.714903, -0.364783)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308699, 0.692984, -0.364783)
+material_override = SubResource("StandardMaterial3D_ulxc0")
 mesh = SubResource("ArrayMesh_btkb1")
 skeleton = NodePath("")
 
@@ -1308,32 +1334,8 @@ skeleton = NodePath("")
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.0245742, 0.542588, -0.720424)
 shape = SubResource("ConvexPolygonShape3D_yx8ok")
 
-[node name="FL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69, 0.122205, -0.0113879)
-engine_force = 3700.0
-brake = 8100.0
-steering = 0.349066
-use_as_traction = true
-use_as_steering = true
-wheel_roll_influence = 0.02
-wheel_radius = 0.2
-wheel_friction_slip = 2.2
-suspension_stiffness = 25.0
-suspension_max_force = 11000.0
-damping_compression = 0.35
-damping_relaxation = 0.5
-
-[node name="WheelHolder" type="Node3D" parent="FL"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.104267, -0.101865, -3.72529e-09)
-
-[node name="MeshInstance3D19" type="MeshInstance3D" parent="FL/WheelHolder"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0271529, -0.0425955, 0.0727434)
-material_override = SubResource("StandardMaterial3D_sv1ge")
-mesh = SubResource("CylinderMesh_nok3y")
-skeleton = NodePath("../..")
-
 [node name="RL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085233, 0.041, -0.748206)
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0.137409, 0.133891, -0.740625)
 engine_force = 3700.0
 brake = 8100.0
 use_as_traction = true
@@ -1356,7 +1358,7 @@ mesh = SubResource("CylinderMesh_nok3y")
 skeleton = NodePath("../../../FL")
 
 [node name="RR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 0.041, -0.758641)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.568335, 0.119, -0.859237)
 engine_force = 3700.0
 brake = 8100.0
 use_as_traction = true
@@ -1382,7 +1384,7 @@ skeleton = NodePath("../../../FL")
 transform = Transform3D(-1, -7.6194e-09, 8.70901e-08, 0, 0.996195, 0.0871557, -8.74228e-08, 0.0871557, -0.996195, 0.251251, 0.817713, -2.28991)
 
 [node name="FR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198, 0.031, -0.0498489)
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, -0.202661, 0.23259, 0.148251)
 engine_force = 3700.0
 brake = 8100.0
 steering = 0.349066
@@ -1403,3 +1405,27 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.164
 material_override = SubResource("StandardMaterial3D_sv1ge")
 mesh = SubResource("CylinderMesh_nok3y")
 skeleton = NodePath("../../../FL")
+
+[node name="FL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0.514375, 0.199902, 0.045947)
+engine_force = 3700.0
+brake = 8100.0
+steering = 0.349066
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 0.02
+wheel_radius = 0.2
+wheel_friction_slip = 2.2
+suspension_stiffness = 25.0
+suspension_max_force = 11000.0
+damping_compression = 0.35
+damping_relaxation = 0.5
+
+[node name="WheelHolder" type="Node3D" parent="FL"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.104267, -0.101865, -3.72529e-09)
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="FL/WheelHolder"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0271529, -0.0425955, 0.0727434)
+material_override = SubResource("StandardMaterial3D_sv1ge")
+mesh = SubResource("CylinderMesh_nok3y")
+skeleton = NodePath("../..")

@@ -24,41 +24,46 @@ extends VehicleBody3D
 
 var steer_target := 0.0
 
-@onready var FL := $FL
-@onready var FR := $FR
-@onready var RL := $RL
-@onready var RR := $RR
+
+@onready var FL: VehicleWheel3D = $FL
+@onready var FR: VehicleWheel3D = $FR
+@onready var RL: VehicleWheel3D = $RL
+@onready var RR: VehicleWheel3D = $RR
 
 func _physics_process(delta):
 	# INPUT
 	var throttle := Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
 	var steer_input := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
-	# STEERING (THIS ALWAYS WORKS)
+	# STEERING
 	steer_target = steer_input * max_steer_angle
 	steering = lerp(steering, steer_target, steering_speed * delta)
 
 	# RESET ENGINE FORCE
-	FL.engine_force = 0
-	FR.engine_force = 0
-	RL.engine_force = 0
-	RR.engine_force = 0
+	FL.engine_force = 0.0
+	FR.engine_force = 0.0
+	RL.engine_force = 0.0
+	RR.engine_force = 0.0
 
-	# DRIVETRAIN
-	if drivetrain == "FWD":
-		FL.engine_force = throttle * acceleration
-		FR.engine_force = throttle * acceleration
-	elif drivetrain == "RWD":
-		RL.engine_force = throttle * acceleration
-		RR.engine_force = throttle * acceleration
-	else: # AWD
-		FL.engine_force = throttle * acceleration * 0.5
-		FR.engine_force = throttle * acceleration * 0.5
-		RL.engine_force = throttle * acceleration * 0.5
-		RR.engine_force = throttle * acceleration * 0.5
+	# DRIVETRAIN LOGIC
+	match drivetrain:
+		"FWD":
+			FL.engine_force = throttle * acceleration
+			FR.engine_force = throttle * acceleration
+
+		"RWD":
+			RL.engine_force = throttle * acceleration
+			RR.engine_force = throttle * acceleration
+
+		"AWD":
+			var f := throttle * acceleration * 0.5
+			FL.engine_force = f
+			FR.engine_force = f
+			RL.engine_force = f
+			RR.engine_force = f
 
 	# BRAKING
-	var braking := brake_strength if throttle < 0 else 0.0
+	var braking := brake_strength if throttle < 0.0 else 0.0
 	FL.brake = braking
 	FR.brake = braking
 	RL.brake = braking
