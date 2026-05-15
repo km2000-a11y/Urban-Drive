@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=4 uid="uid://cheb8gigcqn45"]
+[gd_scene load_steps=104 format=4 uid="uid://cheb8gigcqn45"]
 
 [ext_resource type="Script" uid="uid://c1ugmg5dpnt4c" path="res://Scripts/car_controller.gd" id="1_sv1ge"]
 
@@ -202,6 +202,9 @@ metadata/extras = {
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d5pbf"]
 points = PackedVector3Array(0.3, 0.05, 0.349932, 0.3, -0.05, 0.349932, 0.3, 0.05, -0.35, -0.3, 0.05, 0.349932, -0.3, -0.05, 0.349932, 0.3, -0.05, -0.35, -0.3, 0.05, -0.35, -0.3, -0.05, -0.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nok3y"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ekbk"]
 resource_name = "material_3"
@@ -536,6 +539,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i03cv"]
 points = PackedVector3Array(-0.05, -0.1, -0.05, -0.05, -0.1, 0.05, -0.05, 0.1, -0.05, 0.05, -0.1, -0.05, 0.05, -0.1, 0.05, -0.05, 0.1, 0.05)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydy85"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjpxi"]
 resource_name = "material_4"
 
@@ -576,6 +582,9 @@ metadata/extras = {
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jf3ck"]
 points = PackedVector3Array(-0.35, -0.05, -0.15, -0.35, 0.05, -0.15, 0.349932, -0.05, -0.15, -0.35, -0.05, 0.15, -0.35, 0.05, 0.15, 0.349932, 0.05, -0.15, 0.349932, -0.05, 0.15, 0.349932, 0.05, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5pbf"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sluqe"]
 resource_name = "material_13"
@@ -660,6 +669,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k3n7t"]
 points = PackedVector3Array(0.349932, 0.15, 0.05, 0.349932, 0.15, -0.05, -0.35, 0.15, 0.05, 0.349932, -0.15, 0.05, 0.349932, -0.15, -0.05, -0.35, 0.15, -0.05, -0.35, -0.15, 0.05, -0.35, -0.15, -0.05)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tg5by"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wskgo"]
 resource_name = "material_6"
 
@@ -700,6 +712,9 @@ metadata/extras = {
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hop8h"]
 points = PackedVector3Array(-0.05, -0.2, -0.25, 0.05, -0.2, -0.25, -0.05, -0.2, 0.25, -0.05, 0.2, -0.25, 0.05, 0.2, -0.25, 0.05, -0.2, 0.25, -0.05, 0.2, 0.25, 0.05, 0.2, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6daax"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu5tm"]
 resource_name = "material_7"
@@ -947,6 +962,9 @@ metadata/extras = {
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wura7"]
 points = PackedVector3Array(0.3, 0.05, 0.349932, 0.3, -0.05, 0.349932, 0.3, 0.05, -0.35, -0.3, 0.05, 0.349932, -0.3, -0.05, 0.349932, 0.3, -0.05, -0.35, -0.3, 0.05, -0.35, -0.3, -0.05, -0.35)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mcsem"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8wjy"]
 resource_name = "material_14"
 
@@ -1106,6 +1124,7 @@ shape = SubResource("ConvexPolygonShape3D_d5pbf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.298322, 0.268182, 0.234504)
+material_override = SubResource("StandardMaterial3D_nok3y")
 mesh = SubResource("ArrayMesh_wm8uq")
 skeleton = NodePath("")
 
@@ -1178,6 +1197,7 @@ shape = SubResource("ConvexPolygonShape3D_i03cv")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28744, 0.370372, 0.0208608)
+material_override = SubResource("StandardMaterial3D_ydy85")
 mesh = SubResource("ArrayMesh_7leos")
 skeleton = NodePath("")
 
@@ -1187,6 +1207,7 @@ shape = SubResource("ConvexPolygonShape3D_jf3ck")
 
 [node name="MeshInstance3D82" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330305, 0.389546, -0.785733)
+material_override = SubResource("StandardMaterial3D_d5pbf")
 mesh = SubResource("ArrayMesh_lbqek")
 skeleton = NodePath("")
 
@@ -1205,6 +1226,7 @@ shape = SubResource("ConvexPolygonShape3D_k3n7t")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.648397, 0.234638, -0.379971)
+material_override = SubResource("StandardMaterial3D_tg5by")
 mesh = SubResource("ArrayMesh_mmq4u")
 skeleton = NodePath("")
 
@@ -1214,6 +1236,7 @@ shape = SubResource("ConvexPolygonShape3D_hop8h")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0254239, 0.256697, -0.402003)
+material_override = SubResource("StandardMaterial3D_6daax")
 mesh = SubResource("ArrayMesh_7yog1")
 skeleton = NodePath("")
 
@@ -1268,6 +1291,7 @@ shape = SubResource("ConvexPolygonShape3D_wura7")
 
 [node name="MeshInstance3D16" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.32764, 0.411978, -0.858838)
+material_override = SubResource("StandardMaterial3D_mcsem")
 mesh = SubResource("ArrayMesh_1eg7m")
 skeleton = NodePath("")
 
