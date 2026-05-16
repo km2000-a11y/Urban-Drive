@@ -32,8 +32,12 @@ var steer_target := 0.0
 
 func _physics_process(delta):
 	# INPUT
+	print("FL type =", typeof(FL))
+
 	var throttle := Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
 	var steer_input := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
+
+	print("Throttle:", throttle)
 
 	# STEERING
 	steer_target = steer_input * max_steer_angle
@@ -68,3 +72,10 @@ func _physics_process(delta):
 	FR.brake = braking
 	RL.brake = braking
 	RR.brake = braking
+	
+	print(
+	"FL:", FL.is_in_contact(),
+	" FR:", FR.is_in_contact(),
+	" RL:", RL.is_in_contact(),
+	" RR:", RR.is_in_contact()
+)

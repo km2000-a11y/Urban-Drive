@@ -6,9 +6,10 @@
 [node name="Node" type="Node"]
 
 [node name="Node3D" parent="." instance=ExtResource("1_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.477171, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
 [node name="Abarth 500" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.328722, 1.16243, -4.93209)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.328722, -0.0803572, -4.93209)
