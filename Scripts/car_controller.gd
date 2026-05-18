@@ -79,3 +79,6 @@ func _physics_process(delta):
 	" RL:", RL.is_in_contact(),
 	" RR:", RR.is_in_contact()
 )
+	print("Rotation degrees: ", rotation_degrees)
+	print("Basis: ", global_transform.basis)
+	print("Physics forward: ", global_transform.basis.x)
