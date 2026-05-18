@@ -1,1 +1,4 @@
 res://Scripts/car_controller.gd
+res://Scenes/abarth_500.tscn
+res://main.tscn
+res://Scenes/car_controller.gd
