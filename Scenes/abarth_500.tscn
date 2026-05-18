@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://li4t2fxskvqc"]
+
+[ext_resource type="PackedScene" uid="uid://dwqocxcrekkb6" path="res://Cars/abarth_500.glb" id="1_sv1ge"]
+
+[node name="Abarth 500" instance=ExtResource("1_sv1ge")]
