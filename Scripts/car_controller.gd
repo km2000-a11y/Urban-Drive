@@ -17,3 +17,10 @@ extends VehicleBody3D
 @export var brake_strength:float
 @export var turn_rate: float
 @export var downforce: float
+
+func _physics_process(delta):
+	var forward = -global_transform.basis.z
+	print("FORWARD = ", forward)
+	engine_force=horsepower*10*Input.get_action_strength("accelerate")
+	brake=brake_strength*Input.get_action_strength("brake")
+	var steer_target=turn_rate*(Input.get_action_strength("turn_right")-Input.get_action_strength("turn_left"))

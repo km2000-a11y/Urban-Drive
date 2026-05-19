@@ -1,6 +1,6 @@
 [gd_scene load_steps=113 format=4 uid="uid://li4t2fxskvqc"]
 
-[ext_resource type="Script" uid="uid://0vb80lj7vvle" path="res://Scenes/car_controller.gd" id="1_sv1ge"]
+[ext_resource type="Script" uid="uid://0vb80lj7vvle" path="res://Scripts/car_controller.gd" id="1_sv1ge"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qngyl"]
 resource_name = "material_0"
@@ -1218,7 +1218,7 @@ horsepower = 148
 zero_to_hundred = 7.8
 weight = 1030
 max_speed = 54.17
-acceleration = 11840
+acceleration = 62
 handling = 0.78
 traction = 0.86
 brake_strength = 0.72
@@ -1470,11 +1470,15 @@ shape = SubResource("ConvexPolygonShape3D_wura7")
 
 [node name="FL" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.664903, 0.15101, 0.0367382)
+use_as_traction = true
+use_as_steering = true
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="FR" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.070117, 0.15101, 0.0367382)
+use_as_traction = true
+use_as_steering = true
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
