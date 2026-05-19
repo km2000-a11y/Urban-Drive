@@ -19,8 +19,22 @@ extends VehicleBody3D
 @export var downforce: float
 
 func _physics_process(delta):
-	var forward = -global_transform.basis.z
-	print("FORWARD = ", forward)
-	engine_force=horsepower*10*Input.get_action_strength("accelerate")
-	brake=brake_strength*Input.get_action_strength("brake")
-	var steer_target=turn_rate*(Input.get_action_strength("turn_right")-Input.get_action_strength("turn_left"))
+	# Ignore the model's internal rotation.
+	# Use world -Z as the car's forward direction.
+	var forward := Vector3(0, 0, -1)
+
+	# INPUT
+	var throttle := Input.get_action_strength("accelerate")
+	var braking := Input.get_action_strength("brake")
+	var steer_input := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+
+	# ENGINE FORCE
+	engine_force = horsepower * 10.0 * throttle
+
+	# BRAKE
+	brake = brake_strength * braking
+
+	# STEERING
+	steering = steer_input * turn_rate
+	
+	print("STEERING:", steering)

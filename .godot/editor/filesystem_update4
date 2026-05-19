@@ -1,5 +1,4 @@
-res://Scenes/abarth_500.tscn
-res://Scenes/car_controller.gd
 res://Tracks/track.tscn
 res://main.tscn
+res://Scenes/abarth_500.tscn
 res://Scripts/car_controller.gd
