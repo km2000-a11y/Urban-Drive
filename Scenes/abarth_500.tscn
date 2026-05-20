@@ -1203,6 +1203,7 @@ metadata/extras = {
 }
 
 [node name="VehicleBody3D" type="VehicleBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 mass = 120.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.3, 0)
@@ -1310,26 +1311,26 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.609296, 0.542588, -0.72042
 shape = SubResource("ConvexPolygonShape3D_wura7")
 
 [node name="FL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.664903, 0.15101, 0.0367382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.743904, 0.15101, 0.0367382)
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="FR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.070117, 0.15101, 0.0367382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.203126, 0.15101, 0.0367382)
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="RR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.070117, 0.15101, -0.750149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.167651, 0.15101, -0.750149)
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="RL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.672857, 0.15101, -0.750149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.785008, 0.15101, -0.812147)
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
@@ -1482,7 +1483,7 @@ mesh = SubResource("ArrayMesh_lbqek")
 skeleton = NodePath("")
 
 [node name="MeshInstance3D92" type="MeshInstance3D" parent="ModelRoot/Abarth 500"]
-transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.335467, 0.414168, -0.878221)
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.335467, 0.414168, -0.845584)
 material_override = SubResource("StandardMaterial3D_nxhib")
 mesh = SubResource("ArrayMesh_1eg7m")
 skeleton = NodePath("")

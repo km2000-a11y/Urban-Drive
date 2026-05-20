@@ -38,3 +38,4 @@ func _physics_process(delta):
 	steering = steer_input * turn_rate
 	
 	print("STEERING:", steering)
+	print(global_transform.basis)
