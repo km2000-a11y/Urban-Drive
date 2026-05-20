@@ -1203,7 +1203,7 @@ metadata/extras = {
 }
 
 [node name="VehicleBody3D" type="VehicleBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 mass = 120.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.3, 0)
@@ -1299,7 +1299,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330305, 0.389546, -0.785733
 shape = SubResource("ConvexPolygonShape3D_itw23")
 
 [node name="CollisionShape3D11" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.336259, 0.411978, -0.87824)
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.394243, 0.411978, -0.87824)
+shape = SubResource("ConvexPolygonShape3D_b2k58")
+
+[node name="CollisionShape3D22" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.394243, 0.411978, -0.87824)
 shape = SubResource("ConvexPolygonShape3D_b2k58")
 
 [node name="CollisionShape3D13" type="CollisionShape3D" parent="."]
@@ -1311,26 +1315,26 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.609296, 0.542588, -0.72042
 shape = SubResource("ConvexPolygonShape3D_wura7")
 
 [node name="FL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.743904, 0.15101, 0.0367382)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.743904, 0.15101, 0.0367382)
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="FR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.203126, 0.15101, 0.0367382)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.203126, 0.15101, 0.0367382)
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="RR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.167651, 0.15101, -0.750149)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -0.167651, 0.15101, -0.750149)
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
 [node name="RL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.785008, 0.15101, -0.812147)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.785008, 0.15101, -0.812147)
 wheel_radius = 0.2
 wheel_rest_length = 0.08
 
@@ -1338,6 +1342,7 @@ wheel_rest_length = 0.08
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.390309, 0.750308, -1.99917)
 
 [node name="ModelRoot" type="Node3D" parent="."]
+transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 0, 0, 0)
 
 [node name="Abarth 500" type="Node3D" parent="ModelRoot"]
 
