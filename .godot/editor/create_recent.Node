@@ -1,14 +1,14 @@
-VehicleBody3D
-CollisionShape3D
 Node3D
 Camera3D
+CollisionShape3D
+CharacterBody3D
 VehicleWheel3D
+VehicleBody3D
 MeshInstance3D
 RayCast3D
 StaticBody3D
 AudioStreamPlayer3D
 Area3D
-CharacterBody3D
 RigidBody3D
 GPUParticles3D
 Marker3D
