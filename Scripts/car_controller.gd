@@ -22,34 +22,40 @@ var gravity_force:=12.0
 @export var drivetrain_type: String
 
 func _physics_process(delta: float) -> void:
-	velocity.y-=gravity_force*delta
-	
-	var input_forward:=Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
-	var input_turm:=Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
-	if input_forward>0.0:
-		velocity+=-transform.basis.z*acceleration*delta
-	elif input_forward<0.0:
-		velocity+=transform.basis.z*brake_force*delta
-		
-	print("VEC AFTER ACCEL: ",velocity)
-	print(is_on_floor())
+	# GRAVITY
+	velocity.y -= gravity_force * delta
 
-	
-	var horizontal_vel:=Vector3(velocity.x,0.0,velocity.z)
-	
-	if horizontal_vel.z>0:
-		horizontal_vel.z=0
-	if horizontal_vel.length()>max_speed:
-		horizontal_vel=horizontal_vel.normalized()*max_speed
-		velocity.x=horizontal_vel.x
-		velocity.z=horizontal_vel.z
-		
-	var speed_ratio:=horizontal_vel.move_toward(Vector3.ZERO, grip*delta)
-	velocity.x=horizontal_vel.x
-	velocity.z=horizontal_vel.z
-	
-	print("VELOCITY BEFORE MOVE: ", velocity)
+	# INPUT
+	var input_forward := Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
+	var input_turn := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+
+	# ACCELERATION / BRAKING
+	if input_forward > 0.0:
+		velocity += -transform.basis.z * acceleration * delta
+	elif input_forward < 0.0:
+		velocity += transform.basis.z * brake_force * delta
+
+	# EXTRACT HORIZONTAL VELOCITY
+	var horizontal_vel := Vector3(velocity.x, 0.0, velocity.z)
+
+	# PREVENT REVERSE IF YOU DON'T WANT IT
+	if horizontal_vel.z > 0.0:
+		horizontal_vel.z = 0.0
+
+	# MAX SPEED LIMIT
+	if horizontal_vel.length() > max_speed:
+		horizontal_vel = horizontal_vel.normalized() * max_speed
+
+	# FRICTION / GRIP
+	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, grip * delta)
+
+	# WRITE BACK TO VELOCITY
+	velocity.x = horizontal_vel.x
+	velocity.z = horizontal_vel.z
+
+	# DEBUG
+	print("ON FLOOR: ", is_on_floor())
+	print("VEL BEFORE MOVE: ", velocity)
+
+	# MOVE
 	move_and_slide()
-	
-	print("FORWARD DIR: ",-transform.basis.z)
-	print("ACCEL INPUT: ", Input.get_action_strength("accelerate"))
