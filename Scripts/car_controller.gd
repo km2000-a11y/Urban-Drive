@@ -56,6 +56,9 @@ func _physics_process(delta: float) -> void:
 	# DEBUG
 	print("ON FLOOR: ", is_on_floor())
 	print("VEL BEFORE MOVE: ", velocity)
+	print("FLOOR NORMAL: ", get_floor_normal())
+
 
 	# MOVE
+	rotation.y += input_turn * turn_speed * delta
 	move_and_slide()
