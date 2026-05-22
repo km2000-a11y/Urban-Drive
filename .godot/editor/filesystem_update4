@@ -1,1 +1,6 @@
 res://Scenes/mini_cooper_s.tscn
+res://Car Stats/CarStats.gd
+res://Scripts/car_controller.gd
+res://Tracks/track.tscn
+res://main.tscn
+res://Car Stats/mini_cooper_s_cabrio_05.tres

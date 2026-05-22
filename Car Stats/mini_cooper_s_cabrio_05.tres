@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CarStats" load_steps=2 format=3 uid="uid://c8mennktgw2xn"]
+
+[ext_resource type="Script" uid="uid://b3w4qa1gk0oen" path="res://Car Stats/CarStats.gd" id="1_a8y8f"]
+
+[resource]
+script = ExtResource("1_a8y8f")
+car_name = "Arctura Spryte"
+country = "UK"
+horsepower = 168
+transmission = "FWD"
+zero_to_hundred = 7.2
+top_speed = 220.0
+engine = "1.6L Supercharged I4"
+weight = 1290.0
+metadata/_custom_type_script = "uid://b3w4qa1gk0oen"
