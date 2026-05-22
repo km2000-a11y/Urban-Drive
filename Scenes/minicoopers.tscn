@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://djpmbpjlc5w7k"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
