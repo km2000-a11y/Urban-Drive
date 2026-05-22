@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dwqocxcrekkb6"
-path="res://.godot/imported/abarth_500.glb-da86b40d23fa8216f21b8438c354758b.scn"
+path="res://.godot/imported/mini_cooper_s.glb-2e913baa3b150571f05e2cbde7a0d1b2.scn"
 
 [deps]
 
-source_file="res://Cars/abarth_500.glb"
-dest_files=["res://.godot/imported/abarth_500.glb-da86b40d23fa8216f21b8438c354758b.scn"]
+source_file="res://Cars/mini_cooper_s.glb"
+dest_files=["res://.godot/imported/mini_cooper_s.glb-2e913baa3b150571f05e2cbde7a0d1b2.scn"]
 
 [params]
 

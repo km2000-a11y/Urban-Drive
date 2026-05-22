@@ -21,44 +21,55 @@ var gravity_force:=12.0
 @export var weight: float
 @export var drivetrain_type: String
 
-func _physics_process(delta: float) -> void:
-	# GRAVITY
+func _physics_process(delta):
+	# --- GRAVITY ---
 	velocity.y -= gravity_force * delta
 
-	# INPUT
-	var input_forward := Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
-	var input_turn := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	# --- INPUT ---
+	var throttle := Input.get_action_strength("accelerate")
+	var brake := Input.get_action_strength("brake")
+	var steer := Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 
-	# ACCELERATION / BRAKING
-	if input_forward > 0.0:
-		velocity += -transform.basis.z * acceleration * delta
-	elif input_forward < 0.0:
-		velocity += transform.basis.z * brake_force * delta
+	# --- FORWARD DIRECTION ---
+	var forward := -transform.basis.z   # Godot forward = -Z
 
-	# EXTRACT HORIZONTAL VELOCITY
-	var horizontal_vel := Vector3(velocity.x, 0.0, velocity.z)
+	# --- ACCELERATION ---
+	if throttle > 0:
+		velocity += forward * acceleration * delta
 
-	# PREVENT REVERSE IF YOU DON'T WANT IT
-	if horizontal_vel.z > 0.0:
-		horizontal_vel.z = 0.0
+	# --- REVERSE ---
+	if brake > 0:
+		velocity -= forward * brake_force * delta   # reverse = +Z direction
 
-	# MAX SPEED LIMIT
-	if horizontal_vel.length() > max_speed:
-		horizontal_vel = horizontal_vel.normalized() * max_speed
+	# --- HORIZONTAL VELOCITY ---
+	var horizontal := Vector3(velocity.x, 0, velocity.z)
 
-	# FRICTION / GRIP
-	horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, grip * delta)
+	# --- SPEED LIMIT ---
+	if horizontal.length() > max_speed:
+		horizontal = horizontal.normalized() * max_speed
 
-	# WRITE BACK TO VELOCITY
-	velocity.x = horizontal_vel.x
-	velocity.z = horizontal_vel.z
+	# --- FRICTION ---
+	if throttle == 0 and brake == 0:
+		horizontal = horizontal.move_toward(Vector3.ZERO, grip * delta)
 
-	# DEBUG
-	print("ON FLOOR: ", is_on_floor())
-	print("VEL BEFORE MOVE: ", velocity)
-	print("FLOOR NORMAL: ", get_floor_normal())
+	# Write back horizontal velocity
+	velocity.x = horizontal.x
+	velocity.z = horizontal.z
+
+	# --- STEERING ---
+		# --- STEERING ---
+	if horizontal.length() > 0.5:
+		rotation.y += steer * turn_speed * delta
+
+	# --- APPLY MOVEMENT USING YOUR HORIZONTAL VELOCITY ---
+	var move_vec :Vector3= horizontal * delta
+	translate(move_vec)
 
 
-	# MOVE
-	rotation.y += input_turn * turn_speed * delta
+	# --- MOVE ---
+	print("VEL BEFORE:", velocity)
 	move_and_slide()
+	print("FORWARD:", forward)
+
+	
+	
