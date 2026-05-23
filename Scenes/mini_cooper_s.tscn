@@ -1,6 +1,6 @@
 [gd_scene load_steps=101 format=4 uid="uid://c5ahljm16fen7"]
 
-[ext_resource type="Script" uid="uid://bcatbthl3vdpb" path="res://Scripts/car_controller.gd" id="1_08euy"]
+[ext_resource type="Script" uid="uid://bcatbthl3vdpb" path="res://Scripts/mini.gd" id="1_08euy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tap36"]
 resource_name = "material_0"
@@ -1146,13 +1146,6 @@ continuous_cd = true
 linear_damp = 0.2
 angular_damp = 0.4
 script = ExtResource("1_08euy")
-max_speed = 64.17
-accel_force = 3000.0
-brake_force = 2800.0
-turn_rate = 3.6
-traction = 0.83
-handling = 0.8
-downforce = 1.0
 
 [node name="Mini Cooper S" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.395574, 0, 0)
@@ -1303,7 +1296,7 @@ mesh = SubResource("ArrayMesh_6f8au")
 skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.679797, 1.00708, -2.67634)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.180896, 0.930789, -2.67634)
 
 [node name="Node3D" type="Node3D" parent="."]
 
@@ -1402,3 +1395,5 @@ shape = SubResource("ConvexPolygonShape3D_m503n")
 [node name="CollisionShape3D24" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.186407, 0.44237, -0.920647)
 shape = SubResource("ConvexPolygonShape3D_i8ug3")
+
+[node name="ForwardRef" type="Node3D" parent="."]

@@ -8,4 +8,4 @@ class_name CarStats
 @export var zero_to_hundred: float
 @export var top_speed: float
 @export var engine: String
-@export var weight: float
+@export var weight: int
