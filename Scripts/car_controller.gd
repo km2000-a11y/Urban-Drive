@@ -11,6 +11,9 @@ var steer_input := 0.0
 var accel_input := 0.0
 var brake_input := 0.0
 
+func _ready():
+	rotation_degrees = Vector3(0, 0, 0)
+
 func _physics_process(delta):
 	_get_input()
 	_apply_downforce()

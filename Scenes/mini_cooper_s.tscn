@@ -1068,10 +1068,7 @@ metadata/extras = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_nfu50"]
 size = Vector3(1, 1, 1.5)
 
-[node name="Node3D" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999986, -0.00523596, 0, 0.00523596, 0.999986, 0, 0, 0)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D"]
 mass = 160.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.3, 0)
@@ -1081,164 +1078,166 @@ linear_damp = 0.2
 angular_damp = 0.4
 script = ExtResource("1_08euy")
 max_speed = 64.17
-accel_force = 1200.0
-brake_force = 900.0
-turn_rate = 1.2
+accel_force = 3000.0
+brake_force = 2800.0
+turn_rate = 3.6
 traction = 0.83
 handling = 0.8
 downforce = 1.0
 
-[node name="Mini Cooper S" type="Node3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.999986, -0.00523596, 0, 0.00523596, 0.999986, -0.395574, 0, 0)
+[node name="Mini Cooper S" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.395574, 0, 0)
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.618446, 0.581056, -0.308529)
 mesh = SubResource("ArrayMesh_86pjt")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0184051, 0.593595, -0.351161)
 mesh = SubResource("ArrayMesh_o8qt1")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0317983, 0.58327, -0.593019)
 mesh = SubResource("ArrayMesh_vryow")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D13" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.643572, 0.52673, -0.599385)
 mesh = SubResource("ArrayMesh_wy47x")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D14" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308699, 0.275917, -0.364783)
 mesh = SubResource("ArrayMesh_jm88w")
 skeleton = NodePath("")
 
-[node name="Body" type="Node3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="Body" type="Node3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14454, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.298322, 0.412722, 0.234504)
 mesh = SubResource("ArrayMesh_2lyy3")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28744, 0.514912, 0.0208608)
 mesh = SubResource("ArrayMesh_87was")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.261007, 0.720695, -0.106969)
 mesh = SubResource("ArrayMesh_3didb")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.648397, 0.379178, -0.404016)
 mesh = SubResource("ArrayMesh_euabw")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0254239, 0.401237, -0.402003)
 mesh = SubResource("ArrayMesh_hvm8s")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.602131, 0.714354, -0.129754)
 mesh = SubResource("ArrayMesh_2qo7c")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.603677, 0.680771, -0.473166)
 mesh = SubResource("ArrayMesh_t3ct6")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0433639, 0.680771, -0.496672)
 mesh = SubResource("ArrayMesh_pyjki")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0433639, 0.680771, -0.181823)
 mesh = SubResource("ArrayMesh_kgs3s")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D82" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D82" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330305, 0.534086, -0.785733)
 mesh = SubResource("ArrayMesh_nfvlm")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D92" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D92" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0.336259, 0.556518, -0.87824)
 mesh = SubResource("ArrayMesh_y0r1f")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D122" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D122" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.0245742, 0.687128, -0.720424)
 mesh = SubResource("ArrayMesh_p4pa6")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D132" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/Body"]
+[node name="MeshInstance3D132" type="MeshInstance3D" parent="Mini Cooper S/Body"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.609296, 0.687128, -0.720424)
 mesh = SubResource("ArrayMesh_3gisy")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D52" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D52" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.352263, 0.306383)
 mesh = SubResource("ArrayMesh_rmnsg")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D62" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D62" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.598723, 0.337239, 0.282732)
 mesh = SubResource("ArrayMesh_f7ws1")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D72" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D72" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29437, 0.239749, 0.292196)
 mesh = SubResource("ArrayMesh_1d2tl")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D102" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D102" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.0737444, 0.44237, -0.920647)
 mesh = SubResource("ArrayMesh_b7fow")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D112" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D112" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.0737444, 0.44237, -0.920647)
 mesh = SubResource("ArrayMesh_mhrli")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D152" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="MeshInstance3D152" type="MeshInstance3D" parent="Mini Cooper S"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.581981, 0.44237, -0.920647)
 mesh = SubResource("ArrayMesh_4tntc")
 skeleton = NodePath("")
 
-[node name="WheelMesh" type="Node3D" parent="RigidBody3D/Mini Cooper S"]
+[node name="WheelMesh" type="Node3D" parent="Mini Cooper S"]
 
-[node name="WheelFR_Mesh" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/WheelMesh"]
+[node name="WheelFR_Mesh" type="MeshInstance3D" parent="Mini Cooper S/WheelMesh"]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0.154265, 0.00270845)
 mesh = SubResource("ArrayMesh_vjma0")
 skeleton = NodePath("")
 
-[node name="WheelRR_Mesh" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/WheelMesh"]
+[node name="WheelRR_Mesh" type="MeshInstance3D" parent="Mini Cooper S/WheelMesh"]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0.154265, -0.785901)
 mesh = SubResource("ArrayMesh_lslv2")
 skeleton = NodePath("")
 
-[node name="WheelRL_Mesh" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/WheelMesh"]
+[node name="WheelRL_Mesh" type="MeshInstance3D" parent="Mini Cooper S/WheelMesh"]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.635179, 0.154265, -0.785901)
 mesh = SubResource("ArrayMesh_ptt41")
 skeleton = NodePath("")
 
-[node name="WheelFL_Mesh" type="MeshInstance3D" parent="RigidBody3D/Mini Cooper S/WheelMesh"]
+[node name="WheelFL_Mesh" type="MeshInstance3D" parent="Mini Cooper S/WheelMesh"]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.635181, 0.151828, 0.00870532)
 mesh = SubResource("ArrayMesh_6f8au")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, -0.395)
 shape = SubResource("BoxShape3D_nfu50")
 
-[node name="Camera3D" type="Camera3D" parent="RigidBody3D"]
+[node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.679797, 1.00708, -2.67634)
+
+[node name="Node3D" type="Node3D" parent="."]
