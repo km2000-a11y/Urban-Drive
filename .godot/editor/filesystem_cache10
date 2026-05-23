@@ -1,19 +1,19 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1779515802
-main.tscn::PackedScene::6405392885157970654::1779472849::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://c5ahljm16fen7::::res://Scenes/mini_cooper_s.tscn
+::res://::1779525640
+main.tscn::PackedScene/PackedScene::6405392885157970654::1779520610::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://c5ahljm16fen7::::res://Scenes/mini_cooper_s.tscn
 ::res://Car Stats/::1779472701
-CarStats.gd::GDScript::4398914022091918325::1779472701::0::1::::CarStats<>Resource<><>0<>0<><>::
+CarStats.gd::GDScript/GDScript::4398914022091918325::1779472701::0::1::::CarStats<>Resource<><>0<>0<><>::
 mini_cooper_s_cabrio_05.tres::Resource/CarStats::7114112522905601399::1779472701::0::1::::<><><>0<>0<><>::uid://b3w4qa1gk0oen::::res://Car Stats/CarStats.gd
 ::res://Cars/::1779453898
 mini_cooper_s.glb::PackedScene/PackedScene::8737301476572326681::1778341086::1779453898::1::::<><><>0<>0<>16ebc5a104e86e556d41f782df321705<>res://.godot/imported/mini_cooper_s.glb-2e913baa3b150571f05e2cbde7a0d1b2.scn::
-::res://Scenes/::1779472849
-mini_cooper_s.tscn::PackedScene::6878951831680246082::1779472849::0::1::::<><><>0<>0<><>::uid://bcatbthl3vdpb::::res://Scripts/car_controller.gd
-::res://Scripts/::1779472701
-car_controller.gd::GDScript::2527954788920953619::1779472701::0::1::::<>RigidBody3D<><>0<>0<><>::
+::res://Scenes/::1779520643
+mini_cooper_s.tscn::PackedScene/PackedScene::6878951831680246082::1779520643::0::1::::<><><>0<>0<><>::uid://bcatbthl3vdpb::::res://Scripts/car_controller.gd
+::res://Scripts/::1779519934
+car_controller.gd::GDScript/GDScript::2527954788920953619::1779519934::0::1::::<>RigidBody3D<><>0<>0<><>::
 ::res://SFX/::1777735652
 brake.mp3::AudioStreamMP3/AudioStreamMP3::4893041847237595360::1777636221::1777735652::1::::<><><>0<>0<>f2044457b5df4b73dd0aa5c8732c6c12<>res://.godot/imported/brake.mp3-6d8323d6d2462c513f7c18b4cd048a4d.mp3str::
 crash.mp3::AudioStreamMP3/AudioStreamMP3::5855399304817107656::1777570214::1777735652::1::::<><><>0<>0<>6f035230c9539ed522e664609e54eafc<>res://.godot/imported/crash.mp3-e02bf8cc97fc1a06c4617716f5019b7a.mp3str::
 rev.mp3::AudioStreamMP3/AudioStreamMP3::6252064369620662412::1777570106::1777735652::1::::<><><>0<>0<>f446bcf02fb347cd837ce91f085e0d6c<>res://.godot/imported/rev.mp3-ecb7c29767564301e0294a04ed220ac6.mp3str::
 skid.mp3::AudioStreamMP3/AudioStreamMP3::7895215211737247329::1777570083::1777735652::1::::<><><>0<>0<>3ec0fbe6784b5d60e112e6aa2bed12de<>res://.godot/imported/skid.mp3-08baa1bcda1c3b735ef6bfc3c4a25c17.mp3str::
-::res://Tracks/::1779472849
-track.tscn::PackedScene::4177357173487848459::1779472849::0::1::::<><><>0<>0<><>::
+::res://Tracks/::1779520610
+track.tscn::PackedScene/PackedScene::4177357173487848459::1779520610::0::1::::<><><>0<>0<><>::

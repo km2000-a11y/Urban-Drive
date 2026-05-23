@@ -68,8 +68,8 @@ func _apply_stabilizer():
 
 func _apply_downforce():
 	var force = Vector3.DOWN * downforce
-	apply_force(force, Vector3(0, 0, -1))  # push rear down
- 
+	apply_central_force(Vector3.DOWN * downforce)
+
 func _limit_speed():
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed

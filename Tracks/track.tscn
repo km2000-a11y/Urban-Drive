@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b0rspyplkxvyp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6emg8"]
-size = Vector3(1, 3, 2000)
+size = Vector3(1, 3, 5000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7ieu"]
 size = Vector3(1, 3, 2000)
@@ -13,10 +13,10 @@ size = Vector3(9, 3, 1)
 size = Vector3(9, 3, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2erra"]
-size = Vector3(10, 1, 2000)
+size = Vector3(10, 1, 5000)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u3p3e"]
-size = Vector3(10, 1, 2000)
+size = Vector3(10, 1, 5000)
 
 [node name="Node3D" type="Node3D"]
 
@@ -39,7 +39,7 @@ mesh = SubResource("BoxMesh_6emg8")
 shape = SubResource("BoxShape3D_g7ieu")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211052, 1.60726, -999.369)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211, 1.607, -2496)
 mesh = SubResource("BoxMesh_2erra")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4"]
@@ -48,7 +48,7 @@ mesh = SubResource("BoxMesh_2erra")
 shape = SubResource("BoxShape3D_u3p3e")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211, 1.607, 1000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.242, -3.568, 2496)
 mesh = SubResource("BoxMesh_2erra")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
