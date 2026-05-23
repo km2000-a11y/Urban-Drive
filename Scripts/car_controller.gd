@@ -7,7 +7,6 @@ extends RigidBody3D
 @export var traction: float
 @export var handling: float
 @export var downforce: float
-
 var steer_input := 0.0
 var accel_input := 0.0
 var brake_input := 0.0
@@ -20,8 +19,6 @@ func _physics_process(delta):
 	_apply_steering()
 	_apply_grip()
 	_limit_speed()
-	print("Forward:", -transform.basis.z)
-
 
 func _get_input():
 	steer_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
@@ -31,7 +28,8 @@ func _get_input():
 func _apply_acceleration():
 	if accel_input > 0.0:
 		var force = -transform.basis.z * accel_force * accel_input
-		apply_central_force(force)
+		apply_force(force, Vector3(0.8, 0, 1))   # front right
+		apply_force(force, Vector3(-0.8, 0, 1))  # front left
 
 func _apply_braking():
 	if brake_input > 0.0:
@@ -39,18 +37,19 @@ func _apply_braking():
 		apply_central_force(force)
 
 func _apply_steering():
-	if linear_velocity.length() > 1.0:
-		angular_velocity.y = steer_input * turn_rate * handling
-	else:
-		angular_velocity.y = 0.0
+	var speed = linear_velocity.length()
+	var speed_factor = clamp(speed / 20.0, 0.0, 1.0)
+	angular_velocity.y = steer_input * turn_rate * handling * speed_factor
 
 func _apply_grip():
-	linear_velocity.x *= traction
-	linear_velocity.z *= 1.0  # forward grip untouched
+	var lv = transform.basis.inverse() * linear_velocity
+	lv.x *= traction
+	linear_velocity = transform.basis * lv
 
 func _apply_downforce():
-	apply_central_force(Vector3.DOWN * downforce)
-
+	var force = Vector3.DOWN * downforce
+	apply_force(force, Vector3(0, 0, -1))  # push rear down
+ 
 func _limit_speed():
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed

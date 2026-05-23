@@ -11,4 +11,5 @@
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
 [node name="RigidBody3D" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40507, 0.64454, 0.558241)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40507, 1.0887, 0.558241)
+downforce = 50.0

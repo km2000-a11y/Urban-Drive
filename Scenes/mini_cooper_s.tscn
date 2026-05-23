@@ -1069,18 +1069,18 @@ metadata/extras = {
 size = Vector3(1, 1, 1.5)
 
 [node name="RigidBody3D" type="RigidBody3D"]
-mass = 120.0
+mass = 160.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.3, 0)
 can_sleep = false
 continuous_cd = true
-linear_damp = 0.05
-angular_damp = 0.1
+linear_damp = 0.2
+angular_damp = 0.4
 script = ExtResource("1_08euy")
 max_speed = 64.17
-accel_force = 13.4
-brake_force = 9.0
-turn_rate = 2.6
+accel_force = 1200.0
+brake_force = 900.0
+turn_rate = 1.2
 traction = 0.83
 handling = 0.8
 downforce = 1.0
@@ -1233,7 +1233,7 @@ mesh = SubResource("ArrayMesh_6f8au")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343832, 0.533949, -0.395197)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343832, 0.636066, -0.395197)
 shape = SubResource("BoxShape3D_nfu50")
 
 [node name="Camera3D" type="Camera3D" parent="."]
