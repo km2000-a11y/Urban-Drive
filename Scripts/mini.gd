@@ -1,26 +1,44 @@
 extends RigidBody3D
 
-const ACCEL := 15000.0
-const TURN := 2.5
-const MAX_SPEED := 40.0
+const ENGINE_FORCE := 3300.0
+const TURN_RATE := 2.5
+const MAX_SPEED := 61.0
 
 func _physics_process(delta):
-	var forward = -transform.basis.z.normalized()
+	var forward := -global_transform.basis.z
+	var right := global_transform.basis.x
 
-	# Accelerate
+	# -------------------------
+	# ACCELERATION
+	# -------------------------
 	if Input.is_action_pressed("accelerate"):
-		apply_central_force(forward * ACCEL)
+		apply_central_force(forward * ENGINE_FORCE)
 
-	# Brake / reverse
 	if Input.is_action_pressed("brake"):
-		apply_central_force(-forward * ACCEL)
+		apply_central_force(-forward * ENGINE_FORCE)
 
-	# Steering
+	# -------------------------
+	# STEERING
+	# -------------------------
 	if Input.is_action_pressed("turn_left"):
-		rotation.y += TURN * delta
+		rotation.y += TURN_RATE * delta
 	if Input.is_action_pressed("turn_right"):
-		rotation.y -= TURN * delta
+		rotation.y -= TURN_RATE * delta
 
-	# Speed limit
+	# -------------------------
+	# SPEED LIMIT
+	# -------------------------
 	if linear_velocity.length() > MAX_SPEED:
 		linear_velocity = linear_velocity.normalized() * MAX_SPEED
+
+	# -------------------------
+	# ⭐ REAL SIDEWAYS FRICTION (LOCAL SPACE)
+	# -------------------------
+	# Convert velocity to local space
+	var lv := global_transform.basis.inverse() * linear_velocity
+
+	# Kill sideways component
+	lv.x = 0
+
+	# Convert back to world space
+	linear_velocity = global_transform.basis * lv
