@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="PackedScene" uid="uid://b0rspyplkxvyp" path="res://Tracks/track.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://c5ahljm16fen7" path="res://Scenes/mini_cooper_s.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dq5h6hmf1n7rf" path="res://Scenes/mini_cooper_s.tscn" id="2_0xm2m"]
 
 [node name="Node" type="Node"]
 
@@ -10,5 +10,7 @@
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
-[node name="RigidBody3D" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 0.999986, -0.00523596, 0, 0.00523596, 0.999986, 2.40507, 1.50705, 0.558241)
+[node name="Mini Cooper S" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54368, 0.970918, -0.327129)
+engine_force = 3300.0
+brake = 2750.0

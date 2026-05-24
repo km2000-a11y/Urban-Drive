@@ -1,6 +1,6 @@
-[gd_scene load_steps=79 format=4 uid="uid://c5ahljm16fen7"]
+[gd_scene load_steps=79 format=4 uid="uid://dq5h6hmf1n7rf"]
 
-[ext_resource type="Script" uid="uid://bcatbthl3vdpb" path="res://Scripts/mini.gd" id="1_08euy"]
+[ext_resource type="Script" uid="uid://bcatbthl3vdpb" path="res://Scripts/mini.gd" id="1_jcwjn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_08euy"]
 
@@ -1070,7 +1070,7 @@ metadata/extras = {
 "targetNames": []
 }
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[node name="VehicleBody" type="VehicleBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 160.0
@@ -1079,10 +1079,12 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.3, 0)
 can_sleep = false
 freeze_mode = 1
-script = ExtResource("1_08euy")
+engine_force = 3300.0
+brake = 1800.0
+script = ExtResource("1_jcwjn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104949, 0.286026, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104949, 0.170316, 0)
 shape = SubResource("BoxShape3D_08euy")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -1242,3 +1244,29 @@ skeleton = NodePath("")
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.635181, 0.151828, 0.00870532)
 mesh = SubResource("ArrayMesh_6f8au")
 skeleton = NodePath("")
+
+[node name="FL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389142, -0.124846, 0.332109)
+engine_force = 3300.0
+brake = 1800.0
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.2
+
+[node name="FR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.583358, -0.124846, 0.332109)
+engine_force = 3300.0
+brake = 1800.0
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.2
+
+[node name="RR" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.583358, -0.124846, -0.407619)
+brake = 1800.0
+wheel_radius = 0.2
+
+[node name="RL" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.401483, -0.124846, -0.407619)
+brake = 1800.0
+wheel_radius = 0.2
