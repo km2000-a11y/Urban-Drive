@@ -24,7 +24,7 @@ func _physics_process(delta):
 	steering = lerp(steering, steer_input * turn_amount, turn_speed * delta)
 
 	# Torque
-	var torque:float= (horsepower * 5252.0) / max(RPM, 1)
+	var torque:float= (horsepower * 5252.0) / max(RPM, 1)*20
 
 	# ENGINE FORCE (the magic line)
 	engine_force = torque * throttle

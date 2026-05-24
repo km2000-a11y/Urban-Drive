@@ -1252,6 +1252,7 @@ brake = 1800.0
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.2
+suspension_stiffness = 20.0
 
 [node name="FR" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.583358, -0.124846, 0.332109)
@@ -1263,10 +1264,12 @@ wheel_radius = 0.2
 
 [node name="RR" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.583358, -0.124846, -0.407619)
+engine_force = 3300.0
 brake = 1800.0
 wheel_radius = 0.2
 
 [node name="RL" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.401483, -0.124846, -0.407619)
+engine_force = 3300.0
 brake = 1800.0
 wheel_radius = 0.2
