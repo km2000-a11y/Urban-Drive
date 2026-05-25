@@ -11,4 +11,4 @@
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
 [node name="VehicleBody" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31034, 0.970918, -0.231531)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.585096, 0.834013, 2.2936)
