@@ -1,38 +1,81 @@
-extends VehicleBody3D
+extends CharacterBody3D
 
-var horsepower := 168
-var RPM := 6000
-var max_speed := 61.0
+# CAR PHYSICS
+const MASS := 1150.0
+const ZERO_TO_HUNDRED := 7.2
+const TOP_SPEED := 61.1
+const ACCELERATION := 27.78 / ZERO_TO_HUNDRED
+const TURN_SPEED := 2.5
+const GRAVITY := 30.0
+const BRAKE_STRENGTH := 20.0
+const LATERAL_FRICTION := 2.0
 
-var turn_speed := 3.0
-var turn_amount := 0.3
-
-var accel_input := 0.0
-var brake_input := 0.0
+var steering := 0.0
+@onready var car_model := $ModelRoot
 
 func _physics_process(delta):
 
 	# INPUT
-	var accel_raw := Input.get_action_strength("accelerate")
-	var brake_raw := Input.get_action_strength("brake")
-	var steer_raw := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
+	var accel := Input.get_action_strength("accelerate")
+	var brake := Input.get_action_strength("brake")
+	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
-	# SMOOTH INPUT
-	accel_input = lerp(accel_input, accel_raw, delta * 5.0)
-	brake_input = lerp(brake_input, brake_raw, delta * 10.0)
+	# STEERING
+	steering = lerp(steering, steer, delta * 6.0)
+	rotation.y += steering * TURN_SPEED * delta
 
-	# STEERING (local, always correct)
-	steering = lerp(steering, steer_raw * turn_amount, turn_speed * delta)
+	# VISUAL LEAN
+	var tilt := -steering * 10.0
+	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, tilt, delta * 8.0)
 
-	# TORQUE
-	var torque = ((horsepower * 5252.0) / max(RPM, 1)) * 20.0
+	# DIRECTIONS
+	var forward := -global_transform.basis.z
+	var right := global_transform.basis.x
 
-	# ENGINE FORCE (always forward relative to car)
-	engine_force = torque * accel_input
+	# ACCELERATION
+	if accel > 0.0:
+		velocity += forward * ACCELERATION * accel * delta
 
-	# BRAKE
-	brake = brake_input * 80.0
+	# BRAKING
+	if brake > 0.0:
+		velocity = velocity.move_toward(Vector3.ZERO, BRAKE_STRENGTH * delta)
+
+	# LATERAL FRICTION
+	var lateral := right.dot(velocity)
+	velocity -= right * lateral * LATERAL_FRICTION * delta
 
 	# SPEED LIMIT
-	if linear_velocity.length() > max_speed:
-		linear_velocity = linear_velocity.normalized() * max_speed
+	var flat := Vector3(velocity.x, 0, velocity.z)
+	if flat.length() > TOP_SPEED:
+		flat = flat.normalized() * TOP_SPEED
+		velocity.x = flat.x
+		velocity.z = flat.z
+
+	# GRAVITY
+	if not is_on_floor():
+		velocity.y -= GRAVITY * delta
+	else:
+		velocity.y = 0.0
+
+	# SAVE VELOCITY BEFORE COLLISION
+	var old_velocity := velocity
+
+	# MOVE
+	move_and_slide()
+
+	# COLLISION COUNT
+	var collision_count := get_slide_collision_count()
+
+	# MOMENTUM COLLISION RESPONSE
+	if collision_count > 0:
+		for i in range(collision_count):
+			var col := get_slide_collision(i)
+			var normal := col.get_normal()
+
+			var p_before := MASS * old_velocity
+			var v_reflect := old_velocity.bounce(normal)
+			var p_after := MASS * v_reflect
+
+			var impulse := p_after - p_before
+
+			velocity = v_reflect
