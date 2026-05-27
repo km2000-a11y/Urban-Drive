@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-# CAR PHYSICS
+# CAR CONSTANTS
 const MASS := 1150.0
 const ZERO_TO_HUNDRED := 7.2
 const TOP_SPEED := 61.1
@@ -8,10 +8,12 @@ const ACCELERATION := 27.78 / ZERO_TO_HUNDRED
 const TURN_SPEED := 2.5
 const GRAVITY := 30.0
 const BRAKE_STRENGTH := 20.0
-const LATERAL_FRICTION := 2.0
+const LATERAL_FRICTION := 1.2   # LOWERED so it doesn't cancel forward motion
 
 var steering := 0.0
+
 @onready var car_model := $ModelRoot
+@onready var forward_ref := $ForwardRef
 
 func _physics_process(delta):
 
@@ -29,8 +31,11 @@ func _physics_process(delta):
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, tilt, delta * 8.0)
 
 	# DIRECTIONS
-	var forward := -global_transform.basis.z
-	var right := global_transform.basis.x
+	var forward: Vector3 = (-forward_ref.global_transform.basis.z).normalized()
+	var right: Vector3 = forward_ref.global_transform.basis.x.normalized()
+
+	# DEBUG
+	# print("FORWARD:", forward, "VEL:", velocity)
 
 	# ACCELERATION
 	if accel > 0.0:
@@ -40,9 +45,12 @@ func _physics_process(delta):
 	if brake > 0.0:
 		velocity = velocity.move_toward(Vector3.ZERO, BRAKE_STRENGTH * delta)
 
-	# LATERAL FRICTION
+	# LATERAL FRICTION (FIXED)
 	var lateral := right.dot(velocity)
-	velocity -= right * lateral * LATERAL_FRICTION * delta
+
+	# Only apply friction if lateral movement is significant
+	if abs(lateral) > 0.05:
+		velocity -= right * lateral * LATERAL_FRICTION * delta
 
 	# SPEED LIMIT
 	var flat := Vector3(velocity.x, 0, velocity.z)
@@ -63,10 +71,8 @@ func _physics_process(delta):
 	# MOVE
 	move_and_slide()
 
-	# COLLISION COUNT
+	# COLLISION RESPONSE
 	var collision_count := get_slide_collision_count()
-
-	# MOMENTUM COLLISION RESPONSE
 	if collision_count > 0:
 		for i in range(collision_count):
 			var col := get_slide_collision(i)
@@ -75,7 +81,5 @@ func _physics_process(delta):
 			var p_before := MASS * old_velocity
 			var v_reflect := old_velocity.bounce(normal)
 			var p_after := MASS * v_reflect
-
-			var impulse := p_after - p_before
 
 			velocity = v_reflect

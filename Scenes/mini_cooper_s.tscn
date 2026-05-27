@@ -1,77 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://dq5h6hmf1n7rf"]
 
-[sub_resource type="GDScript" id="GDScript_f884w"]
-script/source = "extends CharacterBody3D
-
-# MINI COOPER S STATS
-const WEIGHT := 1150.0
-const ZERO_TO_HUNDRED := 7.2 # seconds
-const TOP_SPEED := 61.1 # m/s (220 km/h)
-
-# HANDLING
-const TURN_SPEED := 2.5
-const GRAVITY := 30.0
-const BRAKE_STRENGTH := 40.0
-const LATERAL_FRICTION := 6.0
-
-# CALCULATED REAL ACCELERATION
-# 0–100 km/h = 27.78 m/s
-const TARGET_ACCEL := 27.78 / ZERO_TO_HUNDRED # ≈ 3.86 m/s²
-const ENGINE_FORCE := WEIGHT * TARGET_ACCEL   # ≈ 4430 N
-
-var steering := 0.0
-@onready var car_model = $ModelRoot
-
-func _physics_process(delta):
-
-	# INPUT
-	var accel := Input.get_action_strength(\"accelerate\")
-	var brake := Input.get_action_strength(\"brake\")
-	var steer := Input.get_action_strength(\"turn_left\") - Input.get_action_strength(\"turn_right\")
-
-	# STEERING
-	steering = lerp(steering, steer, delta * 6.0)
-	rotation.y += steering * TURN_SPEED * delta
-	car_model.rotation.y = steering * 0.25
-
-	# DIRECTIONS
-	var forward := -transform.basis.z
-	var right := transform.basis.x
-
-	# ACCELERATION (REAL MINI COOPER S)
-	if accel > 0.0:
-		velocity += forward * ENGINE_FORCE * accel * delta
-
-	# BRAKING
-	if brake > 0.0:
-		velocity = velocity.move_toward(Vector3.ZERO, BRAKE_STRENGTH * brake * delta)
-
-	# LATERAL FRICTION (REMOVE SIDEWAYS SLIDE)
-	var lateral := right.dot(velocity)
-	velocity -= right * lateral * LATERAL_FRICTION * delta
-
-	# SPEED LIMIT
-	var horizontal := Vector3(velocity.x, 0, velocity.z)
-	if horizontal.length() > TOP_SPEED:
-		horizontal = horizontal.normalized() * TOP_SPEED
-		velocity.x = horizontal.x
-		velocity.z = horizontal.z
-
-	# GRAVITY
-	if not is_on_floor():
-		velocity.y -= GRAVITY * delta
-	else:
-		velocity.y = 0.0
-
-	print(\"BEFORE: \", velocity)
-	move_and_slide()
-	print(\"AFTER: \", velocity)
-
-	
-	print(velocity)
-	print(accel)
-	print(global_transform.origin)
-"
+[ext_resource type="Script" uid="uid://bby5bhb8r2r1u" path="res://Scenes/mini_cooper_s.gd" id="1_08euy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfu50"]
 albedo_color = Color(1, 1, 0, 1)
@@ -143,8 +72,6 @@ top_radius = 0.08
 bottom_radius = 0.03
 height = 0.05
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_08euy"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
 
@@ -153,16 +80,19 @@ top_radius = 0.15
 bottom_radius = 0.15
 height = 0.2
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_08euy"]
+
 [node name="Mini Cooper S" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = SubResource("GDScript_f884w")
+script = ExtResource("1_08euy")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.179463, 0.906059, -2.36223)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179463, 0.906059, 1.98745)
 current = true
 
 [node name="ModelRoot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204396, -0.0636058, 0.750352)
@@ -234,7 +164,7 @@ material_override = SubResource("StandardMaterial3D_pcoea")
 mesh = SubResource("CylinderMesh_bfuam")
 
 [node name="MeshInstance3D15" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264559, 0.0281737, 0.866685)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.233259, 0.0281737, 0.866685)
 material_override = SubResource("StandardMaterial3D_ntlxt")
 mesh = SubResource("BoxMesh_qgi3c")
 
@@ -248,38 +178,41 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.312
 material_override = SubResource("StandardMaterial3D_t45qk")
 mesh = SubResource("CylinderMesh_h4jud")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397587, 0)
-shape = SubResource("CapsuleShape3D_08euy")
+[node name="WheelHolder" type="Node3D" parent="ModelRoot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.203167, -0.15023, 0.711363)
 
-[node name="WheelHolder" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.536203, -0.164235, 0.406281)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/WheelHolder"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.0148076, 0.0497101, 0.148379)
 material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
 
-[node name="WheelHolder2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.214818, -0.231154, -0.307814)
+[node name="WheelHolder2" type="Node3D" parent="ModelRoot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.319449, -0.31166, 0.718523)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/WheelHolder2"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.163586, 0.172267, 0.160184)
 material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
 
-[node name="WheelHolder3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56718, -0.192986, -0.185477)
+[node name="WheelHolder3" type="Node3D" parent="ModelRoot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.489292, -0.192986, 0.295571)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder3"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.163586, 0.0497101, -0.0302324)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/WheelHolder3"]
+transform = Transform3D(0.0153757, 0.999882, 4.37062e-08, 0, -4.37114e-08, 1, 0.999882, -0.0153757, -6.72093e-10, 0.238301, 0.0497101, 0.42058)
 material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
 
-[node name="WheelHolder4" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0635127, -0.19201, 0.56494)
+[node name="WheelHolder4" type="Node3D" parent="ModelRoot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.132687, -0.269031, -0.173557)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WheelHolder4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/WheelHolder4"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.293306, 0.115741, -0.00769967)
 material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.128871, 0.397587, -0.194484)
+shape = SubResource("CapsuleShape3D_08euy")
+
+[node name="ForwardRef" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00341237, 0.00285846, -0.00810623)
