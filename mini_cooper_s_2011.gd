@@ -20,4 +20,5 @@ func _ready():
 	lateral_friction = 1.12
 	transmission = "Front-wheel drive"
 
-	super._ready()
+	# IMPORTANT: Recalculate torque + accel AFTER overrides
+	apply_stats()
