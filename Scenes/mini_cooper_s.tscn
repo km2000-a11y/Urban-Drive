@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://dq5h6hmf1n7rf"]
 
-[ext_resource type="Script" uid="uid://bby5bhb8r2r1u" path="res://Scenes/mini_cooper_s.gd" id="1_08euy"]
+[ext_resource type="Script" uid="uid://bby5bhb8r2r1u" path="res://Scenes/base_car.gd" id="1_08euy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfu50"]
 albedo_color = Color(1, 1, 0, 1)
