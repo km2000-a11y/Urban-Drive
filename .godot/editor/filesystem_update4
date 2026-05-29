@@ -1,0 +1,5 @@
+res://main.tscn
+res://Tracks/track.tscn
+res://Scenes/mini_cooper_s.tscn
+res://Scenes/base_car.gd
+res://Scripts/base_car.gd

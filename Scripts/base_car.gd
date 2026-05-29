@@ -5,8 +5,8 @@ extends CharacterBody3D
 #  CONSTANTS
 # ============================================================
 const GRAVITY := 30.0
-const ENGINE_BRAKE := 1.5
-const DRAG := 0.25   # smoother acceleration
+const ENGINE_BRAKE := 0.5
+const DRAG := 0.1   # smoother acceleration
 
 # ============================================================
 #  CAR STATS (Overridden by child scripts)
@@ -91,15 +91,16 @@ func _physics_process(delta):
 	rotation.y += steering * turn_speed * delta
 
 	var delta_rot := rotation.y - old_rotation_y
-	if abs(delta_rot) > 0.0001 and velocity.length() > 0.1:
+	if velocity.length() > 0.1 and abs(delta_rot) > 0.0005:
 		velocity = velocity.rotated(Vector3.UP, delta_rot)
+
 
 	# VISUAL LEAN
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
 
-	# DIRECTIONS
-	var forward :Vector3= (-forward_ref.global_transform.basis.z).normalized()
-	var right :Vector3= forward_ref.global_transform.basis.x.normalized()
+	# DIRECTIONS  **(CHANGED: use body transform, not forward_ref)**
+	var forward: Vector3 = -global_transform.basis.z.normalized()
+	var right: Vector3 = global_transform.basis.x.normalized()
 
 	# ============================================================
 	# RPM + GEARS
@@ -113,7 +114,6 @@ func _physics_process(delta):
 
 	# Correct RPM scaling
 	rpm = clamp(speed_kmh * gear_ratios[current_gear - 1] * 35.0, idle_rpm, max_rpm)
-
 
 	update_gears(speed_kmh)
 
@@ -199,6 +199,12 @@ func _physics_process(delta):
 
 	# DEBUG
 	_debug_stats(delta, flat.length())
+	
+	print("ACCEL:", accel, "  BRAKE:", brake)
+	print("Body forward:", -global_transform.basis.z.normalized())
+	print("Ref  forward:", (-forward_ref.global_transform.basis.z).normalized())
+
+
 
 # ============================================================
 #  DEBUG

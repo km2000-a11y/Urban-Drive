@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://dq5h6hmf1n7rf"]
 
-[ext_resource type="Script" uid="uid://dympqogqfcqkr" path="res://mini_cooper_s_2011.gd" id="1_08euy"]
+[ext_resource type="Script" uid="uid://dympqogqfcqkr" path="res://Scripts/mini_cooper_s_2012.gd" id="1_08euy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfu50"]
 albedo_color = Color(1, 1, 0, 1)
@@ -92,7 +92,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179463, 0.906059, 1.98745)
 current = true
 
 [node name="ModelRoot" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204396, -0.0636058, 0.750352)
