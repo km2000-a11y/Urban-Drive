@@ -6,14 +6,15 @@ extends CharacterBody3D
 # ============================================================
 const GRAVITY := 30.0
 const ENGINE_BRAKE := 1.5
-const DRAG := 0.4
+const DRAG := 0.25   # smoother acceleration
 
 # ============================================================
 #  CAR STATS (Overridden by child scripts)
 # ============================================================
 var mass := 1200.0
 var zero_to_hundred := 7.0
-var top_speed := 60.0
+var top_speed_kmh := 200.0     # <-- FIXED (parent now knows this exists)
+var top_speed := 60.0          # m/s (auto-calculated)
 var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
@@ -25,6 +26,13 @@ var max_rpm := 6500.0
 var idle_rpm := 900.0
 var rpm := 900.0
 var torque := 0.0
+
+# GEARS (override per car)
+var gear_count := 6
+var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]  # realistic defaults
+var current_gear := 1
+var shift_up_rpm := 6200
+var shift_down_rpm := 2000
 
 # ============================================================
 #  INTERNAL
@@ -39,109 +47,120 @@ var debug_timer := 0.0
 @onready var car_model := $ModelRoot
 @onready var forward_ref := $ForwardRef
 
-
 # ============================================================
-#  APPLY STATS (called by child AFTER overriding)
+#  APPLY STATS
 # ============================================================
 func apply_stats():
 	acceleration_calc = 27.78 / zero_to_hundred
 	torque = (horsepower * 5252.0) / max_rpm
-
+	top_speed = top_speed_kmh / 3.6   # <-- NOW WORKS
 
 # ============================================================
 #  READY
 # ============================================================
 func _ready():
-	print("CarController READY loaded")
 	apply_stats()
 
+# ============================================================
+#  GEAR LOGIC
+# ============================================================
+func update_gears(speed_kmh):
+	if rpm > shift_up_rpm and current_gear < gear_count:
+		current_gear += 1
+		rpm *= 0.6
+
+	if rpm < shift_down_rpm and current_gear > 1:
+		current_gear -= 1
+		rpm *= 1.3
+
+	current_gear = clamp(current_gear, 1, gear_count)
 
 # ============================================================
 #  PHYSICS
 # ============================================================
 func _physics_process(delta):
 
-	# ------------------------------------------------------------
 	# INPUT
-	# ------------------------------------------------------------
 	var accel := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
-	# ------------------------------------------------------------
 	# STEERING
-	# ------------------------------------------------------------
 	old_rotation_y = rotation.y
 	steering = lerp(steering, steer, delta * 6.0)
 	rotation.y += steering * turn_speed * delta
 
-	# Rotate velocity with car
 	var delta_rot := rotation.y - old_rotation_y
 	if abs(delta_rot) > 0.0001 and velocity.length() > 0.1:
 		velocity = velocity.rotated(Vector3.UP, delta_rot)
 
+	# VISUAL LEAN
+	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
 
-	# Visual lean
-	var tilt := -steering * 10.0
-	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, tilt, delta * 8.0)
-
-	# ------------------------------------------------------------
 	# DIRECTIONS
-	# ------------------------------------------------------------
 	var forward :Vector3= (-forward_ref.global_transform.basis.z).normalized()
 	var right :Vector3= forward_ref.global_transform.basis.x.normalized()
 
-	# ------------------------------------------------------------
-	# RPM SIMULATION
-	# ------------------------------------------------------------
+	# ============================================================
+	# RPM + GEARS
+	# ============================================================
+	var speed_kmh := forward.dot(velocity) * 3.6
+
+	# Base RPM behavior
 	rpm += accel * 3000.0 * delta
 	rpm -= (rpm - idle_rpm) * 0.5 * delta
 	rpm = clamp(rpm, idle_rpm, max_rpm)
 
+	# Correct RPM scaling
+	rpm = clamp(speed_kmh * gear_ratios[current_gear - 1] * 35.0, idle_rpm, max_rpm)
+
+
+	update_gears(speed_kmh)
+
 	var torque_factor := rpm / max_rpm
 
-	# ------------------------------------------------------------
+	# ============================================================
 	# DRIVETRAIN TRACTION
-	# ------------------------------------------------------------
+	# ============================================================
 	var traction_factor := 1.0
 	match transmission:
 		"Front-wheel drive": traction_factor = 0.85
 		"Rear-wheel drive": traction_factor = 1.0
 		"Four-wheel drive": traction_factor = 1.15
 
-	# ------------------------------------------------------------
+	# ============================================================
 	# ACCELERATION
-	# ------------------------------------------------------------
+	# ============================================================
 	if accel > 0.0:
-		var accel_force := acceleration_calc * torque_factor * traction_factor
+
+		var launch_boost := 1.0
+		if current_gear == 1:
+			launch_boost = 1.4   # smoother but strong
+
+		var accel_force := acceleration_calc * torque_factor * traction_factor * launch_boost
 		velocity += forward * accel_force * delta
+
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, ENGINE_BRAKE * delta)
 
-	# ------------------------------------------------------------
-	# BRAKING
-	# ------------------------------------------------------------
+	# ============================================================
+	# BRAKING (weight-based)
+	# ============================================================
 	if brake > 0.0:
-		velocity = velocity.move_toward(Vector3.ZERO, brake_strength * delta)
+		var brake_force := brake_strength * (mass / 1200.0) * 1.4
+		velocity = velocity.move_toward(Vector3.ZERO, brake_force * delta)
 
-	# ------------------------------------------------------------
 	# DRAG
-	# ------------------------------------------------------------
-	var forward_speed = forward.dot(velocity)
-	var new_forward_speed = move_toward(forward_speed, 0.0, DRAG * delta)
+	var forward_speed := forward.dot(velocity)
+	var new_forward_speed := move_toward(forward_speed, 0.0, DRAG * delta)
 	velocity += forward * (new_forward_speed - forward_speed)
 
-
-	# ------------------------------------------------------------
 	# LATERAL FRICTION
-	# ------------------------------------------------------------
 	var lateral := right.dot(velocity)
 	if abs(lateral) > 0.05:
 		velocity -= right * lateral * lateral_friction * delta
 
-	# ------------------------------------------------------------
 	# DRIVETRAIN PERSONALITY
-	# ------------------------------------------------------------
 	match transmission:
 		"Front-wheel drive":
 			if accel > 0.7 and abs(steering) > 0.01:
@@ -151,32 +170,23 @@ func _physics_process(delta):
 			velocity -= right * lateral * 0.15 * delta
 
 		"Four-wheel drive":
-			# Reduce lateral slip (more stability)
 			velocity -= right * lateral * 0.1 * delta
-
-			# Slight traction boost
 			velocity += forward * 0.2 * delta
 
-	# ------------------------------------------------------------
 	# SPEED LIMIT
-	# ------------------------------------------------------------
 	var flat := Vector3(velocity.x, 0, velocity.z)
 	if flat.length() > top_speed:
 		flat = flat.normalized() * top_speed
 		velocity.x = flat.x
 		velocity.z = flat.z
 
-	# ------------------------------------------------------------
 	# GRAVITY
-	# ------------------------------------------------------------
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
 		velocity.y = 0.0
 
-	# ------------------------------------------------------------
-	# COLLISION HANDLING
-	# ------------------------------------------------------------
+	# COLLISIONS
 	var old_velocity := velocity
 	move_and_slide()
 
@@ -187,14 +197,12 @@ func _physics_process(delta):
 			combined_reflect += old_velocity.bounce(get_slide_collision(i).get_normal())
 		velocity = combined_reflect / collision_count
 
-	# ------------------------------------------------------------
 	# DEBUG
-	# ------------------------------------------------------------
 	_debug_stats(delta, flat.length())
 
-
 # ============================================================
-#  DEBUG FUNCTION
+#  DEBUG
+# ============================================================
 func _debug_stats(delta, speed):
 	if not debug_enabled:
 		return
@@ -204,16 +212,10 @@ func _debug_stats(delta, speed):
 		return
 	debug_timer = 0.0
 
-	var speed_kmh = speed * 3.6
+	var speed_kmh :int= speed * 3.6
 
 	print("\n===== CAR DEBUG =====")
-	print("HP:", horsepower, "  Torque:", torque)
-	print("RPM:", rpm, "/", max_rpm)
-	print("0–100:", zero_to_hundred)
-	print("Top Speed:", top_speed)
-	print("Turn Speed:", turn_speed)
-	print("Brake Strength:", brake_strength)
-	print("Lateral Friction:", lateral_friction)
-	print("Transmission:", transmission)
+	print("Gear:", current_gear, "/", gear_count)
+	print("RPM:", rpm)
 	print("Speed:", speed_kmh, "km/h")
 	print("=====================\n")
