@@ -22,3 +22,4 @@ func _ready():
 
 	# IMPORTANT: Recalculate torque + accel AFTER overrides
 	apply_stats()
+	print("Child READY loaded:", car_name)

@@ -52,7 +52,7 @@ func apply_stats():
 #  READY
 # ============================================================
 func _ready():
-	# Parent ready runs first, but child will override stats and call apply_stats()
+	print("CarController READY loaded")
 	apply_stats()
 
 
@@ -77,8 +77,9 @@ func _physics_process(delta):
 
 	# Rotate velocity with car
 	var delta_rot := rotation.y - old_rotation_y
-	if delta_rot != 0.0:
+	if abs(delta_rot) > 0.0001 and velocity.length() > 0.1:
 		velocity = velocity.rotated(Vector3.UP, delta_rot)
+
 
 	# Visual lean
 	var tilt := -steering * 10.0
@@ -126,7 +127,10 @@ func _physics_process(delta):
 	# ------------------------------------------------------------
 	# DRAG
 	# ------------------------------------------------------------
-	velocity = velocity.move_toward(Vector3.ZERO, DRAG * delta)
+	var forward_speed = forward.dot(velocity)
+	var new_forward_speed = move_toward(forward_speed, 0.0, DRAG * delta)
+	velocity += forward * (new_forward_speed - forward_speed)
+
 
 	# ------------------------------------------------------------
 	# LATERAL FRICTION
@@ -140,14 +144,18 @@ func _physics_process(delta):
 	# ------------------------------------------------------------
 	match transmission:
 		"Front-wheel drive":
-			if accel > 0.7:
+			if accel > 0.7 and abs(steering) > 0.01:
 				rotation.y += steering * 0.1 * delta
 
 		"Rear-wheel drive":
 			velocity -= right * lateral * 0.15 * delta
 
 		"Four-wheel drive":
-			velocity = velocity.move_toward(Vector3.ZERO, -0.25 * delta)
+			# Reduce lateral slip (more stability)
+			velocity -= right * lateral * 0.1 * delta
+
+			# Slight traction boost
+			velocity += forward * 0.2 * delta
 
 	# ------------------------------------------------------------
 	# SPEED LIMIT
@@ -187,7 +195,6 @@ func _physics_process(delta):
 
 # ============================================================
 #  DEBUG FUNCTION
-# ============================================================
 func _debug_stats(delta, speed):
 	if not debug_enabled:
 		return
@@ -196,6 +203,8 @@ func _debug_stats(delta, speed):
 	if debug_timer < 1.0:
 		return
 	debug_timer = 0.0
+
+	var speed_kmh = speed * 3.6
 
 	print("\n===== CAR DEBUG =====")
 	print("HP:", horsepower, "  Torque:", torque)
@@ -206,5 +215,5 @@ func _debug_stats(delta, speed):
 	print("Brake Strength:", brake_strength)
 	print("Lateral Friction:", lateral_friction)
 	print("Transmission:", transmission)
-	print("Speed:", speed)
+	print("Speed:", speed_kmh, "km/h")
 	print("=====================\n")
