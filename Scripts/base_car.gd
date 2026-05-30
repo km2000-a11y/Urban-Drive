@@ -202,12 +202,12 @@ func _physics_process(delta):
 	var old_velocity := velocity
 	move_and_slide()
 
-	var collision_count := get_slide_collision_count()
-	if collision_count > 0:
-		var combined_reflect := Vector3.ZERO
-		for i in range(collision_count):
-			combined_reflect += old_velocity.bounce(get_slide_collision(i).get_normal())
-		velocity = combined_reflect / collision_count
+	#var collision_count := get_slide_collision_count()
+	#if collision_count > 0:
+		#var combined_reflect := Vector3.ZERO
+		#for i in range(collision_count):
+			#combined_reflect += old_velocity.bounce(get_slide_collision(i).get_normal())
+		#velocity = combined_reflect / collision_count#
 
 	# DEBUG
 	_debug_stats(delta, flat.length())
