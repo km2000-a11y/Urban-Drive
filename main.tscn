@@ -13,3 +13,8 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Mini Cooper S" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0527905, 0.372584, 1.68485)
+
+[node name="CollisionShape3D" parent="Mini Cooper S" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.158899, -0.259409)
+
+[editable path="Mini Cooper S"]

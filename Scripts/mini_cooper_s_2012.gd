@@ -20,10 +20,6 @@ func _ready():
 	transmission = "Front-wheel drive"
 
 	# ARCADE GEAR RATIOS (Mini but fun)
-	gear_count = 6
-	gear_ratios = [3.20, 2.00, 1.40, 1.10, 0.90, 0.78]
-	shift_up_rpm = 6450
-	shift_down_rpm = 2000
-
+	
 	apply_stats()
 	print("Child READY loaded:", car_name)

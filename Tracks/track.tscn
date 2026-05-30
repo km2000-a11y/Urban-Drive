@@ -4,7 +4,7 @@
 size = Vector3(1, 3, 5000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7ieu"]
-size = Vector3(1, 3, 2000)
+size = Vector3(1, 3, 5000)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2erra"]
 size = Vector3(9, 3, 1)

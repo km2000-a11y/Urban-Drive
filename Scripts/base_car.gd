@@ -142,8 +142,16 @@ func _physics_process(delta):
 		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost
 		velocity += forward * accel_force * delta
 	else:
-		velocity = velocity.move_toward(Vector3.ZERO, ENGINE_BRAKE * delta)
+	# Slow down forward motion, but NEVER go backwards
+		var flat := Vector3(velocity.x, 0, velocity.z)
 
+		if flat.dot(forward) > 0.0:
+			flat = flat.move_toward(Vector3.ZERO, ENGINE_BRAKE * delta)
+		else:
+			flat = Vector3.ZERO
+
+		velocity.x = flat.x
+		velocity.z = flat.z
 	# ============================================================
 	# BRAKING
 	# ============================================================
@@ -191,10 +199,12 @@ func _physics_process(delta):
 	# ============================================================
 	# GRAVITY
 	# ============================================================
+	# Proper CharacterBody3D gravity handling
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
-		velocity.y = 0.0
+		velocity.y = -0.01   # keeps the body grounded without killing forward motion
+
 
 	# ============================================================
 	# COLLISIONS
@@ -202,15 +212,28 @@ func _physics_process(delta):
 	var old_velocity := velocity
 	move_and_slide()
 
-	#var collision_count := get_slide_collision_count()
-	#if collision_count > 0:
-		#var combined_reflect := Vector3.ZERO
-		#for i in range(collision_count):
-			#combined_reflect += old_velocity.bounce(get_slide_collision(i).get_normal())
-		#velocity = combined_reflect / collision_count#
+	# ============================================================
+# MOMENTUM-BASED COLLISION RESPONSE (p = m * v)
+# ============================================================
+	for i in range(get_slide_collision_count()):
+		var col := get_slide_collision(i)
+		var other := col.get_collider()
+
+		if other is CarController:
+			var my_p := mass * velocity
+			var their_p :Vector3= other.mass * other.velocity
+
+			# Momentum exchange
+			var impulse := (my_p - their_p) * 0.5
+
+			# Apply impulses
+			velocity += impulse / mass
+			other.velocity -= impulse / other.mass
 
 	# DEBUG
 	_debug_stats(delta, flat.length())
+	print("VEL:", velocity, " FLOOR NORMAL:", get_floor_normal())
+
 
 # ============================================================
 #  DEBUG
