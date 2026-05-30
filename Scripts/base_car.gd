@@ -6,15 +6,15 @@ extends CharacterBody3D
 # ============================================================
 const GRAVITY := 30.0
 const ENGINE_BRAKE := 0.5
-const DRAG := 0.1   # smoother acceleration
+const DRAG := 0.1
 
 # ============================================================
-#  CAR STATS (Overridden by child scripts)
+#  CAR STATS
 # ============================================================
 var mass := 1200.0
 var zero_to_hundred := 7.0
-var top_speed_kmh := 200.0     # <-- FIXED (parent now knows this exists)
-var top_speed := 60.0          # m/s (auto-calculated)
+var top_speed_kmh := 200.0
+var top_speed := 60.0
 var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
@@ -27,16 +27,14 @@ var idle_rpm := 900.0
 var rpm := 900.0
 var torque := 0.0
 
-# GEARS (override per car)
+# GEARS
 var gear_count := 6
-var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]  # realistic defaults
+var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]
 var current_gear := 1
 var shift_up_rpm := 6200
 var shift_down_rpm := 2000
 
-# ============================================================
-#  INTERNAL
-# ============================================================
+# INTERNAL
 var acceleration_calc := 0.0
 var steering := 0.0
 var old_rotation_y := 0.0
@@ -51,9 +49,9 @@ var debug_timer := 0.0
 #  APPLY STATS
 # ============================================================
 func apply_stats():
-	acceleration_calc = 27.78 / zero_to_hundred
+	acceleration_calc = (27.78 / zero_to_hundred) * 2.0
 	torque = (horsepower * 5252.0) / max_rpm
-	top_speed = top_speed_kmh / 3.6   # <-- NOW WORKS
+	top_speed = top_speed_kmh / 3.6
 
 # ============================================================
 #  READY
@@ -94,25 +92,25 @@ func _physics_process(delta):
 	if velocity.length() > 0.1 and abs(delta_rot) > 0.0005:
 		velocity = velocity.rotated(Vector3.UP, delta_rot)
 
-
 	# VISUAL LEAN
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
 
-	# DIRECTIONS  **(CHANGED: use body transform, not forward_ref)**
-	var forward: Vector3 = -global_transform.basis.z.normalized()
-	var right: Vector3 = global_transform.basis.x.normalized()
+	# DIRECTIONS
+	var forward := -transform.basis.z
+	forward.y = 0.0
+	forward = forward.normalized()
+
+	var right := transform.basis.x.normalized()
 
 	# ============================================================
 	# RPM + GEARS
 	# ============================================================
-	var speed_kmh := forward.dot(velocity) * 3.6
+	var speed_kmh := velocity.length() * 3.6
 
-	# Base RPM behavior
 	rpm += accel * 3000.0 * delta
 	rpm -= (rpm - idle_rpm) * 0.5 * delta
 	rpm = clamp(rpm, idle_rpm, max_rpm)
 
-	# Correct RPM scaling
 	rpm = clamp(speed_kmh * gear_ratios[current_gear - 1] * 35.0, idle_rpm, max_rpm)
 
 	update_gears(speed_kmh)
@@ -120,73 +118,87 @@ func _physics_process(delta):
 	var torque_factor := rpm / max_rpm
 
 	# ============================================================
-	# DRIVETRAIN TRACTION
+	# DRIVETRAIN TRACTION  (DECLARED HERE!)
 	# ============================================================
 	var traction_factor := 1.0
 	match transmission:
-		"Front-wheel drive": traction_factor = 0.85
-		"Rear-wheel drive": traction_factor = 1.0
-		"Four-wheel drive": traction_factor = 1.15
+		"Front-wheel drive":
+			traction_factor = 0.85
+		"Rear-wheel drive":
+			traction_factor = 1.0
+		"Four-wheel drive":
+			traction_factor = 1.15
 
 	# ============================================================
-	# ACCELERATION
+	# ACCELERATION (FIXED)
 	# ============================================================
+	var accel_force := 0.0
+
 	if accel > 0.0:
-
 		var launch_boost := 1.0
 		if current_gear == 1:
-			launch_boost = 1.4   # smoother but strong
+			launch_boost = 1.4
 
-		var accel_force := acceleration_calc * torque_factor * traction_factor * launch_boost
+		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost
 		velocity += forward * accel_force * delta
-
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, ENGINE_BRAKE * delta)
 
 	# ============================================================
-	# BRAKING (weight-based)
+	# BRAKING
 	# ============================================================
 	if brake > 0.0:
 		var brake_force := brake_strength * (mass / 1200.0) * 1.4
 		velocity = velocity.move_toward(Vector3.ZERO, brake_force * delta)
 
+	# ============================================================
 	# DRAG
-	var forward_speed := forward.dot(velocity)
-	var new_forward_speed := move_toward(forward_speed, 0.0, DRAG * delta)
-	velocity += forward * (new_forward_speed - forward_speed)
+	# ============================================================
+	velocity -= velocity * DRAG * delta
 
-	# LATERAL FRICTION
+	# ============================================================
+	# LATERAL FRICTION (FIXED)
+	# ============================================================
 	var lateral := right.dot(velocity)
-	if abs(lateral) > 0.05:
-		velocity -= right * lateral * lateral_friction * delta
 
-	# DRIVETRAIN PERSONALITY
+	if abs(lateral) > 0.2:
+		velocity -= right * lateral * (lateral_friction * 0.5) * delta
+
+	# ============================================================
+	# DRIVETRAIN PERSONALITY (FIXED)
+	# ============================================================
 	match transmission:
 		"Front-wheel drive":
 			if accel > 0.7 and abs(steering) > 0.01:
-				rotation.y += steering * 0.1 * delta
+				rotation.y += steering * 0.05 * delta
 
 		"Rear-wheel drive":
-			velocity -= right * lateral * 0.15 * delta
+			velocity -= right * lateral * 0.05 * delta
 
 		"Four-wheel drive":
-			velocity -= right * lateral * 0.1 * delta
-			velocity += forward * 0.2 * delta
+			velocity -= right * lateral * 0.03 * delta
+			velocity += forward * 0.1 * delta
 
+	# ============================================================
 	# SPEED LIMIT
+	# ============================================================
 	var flat := Vector3(velocity.x, 0, velocity.z)
 	if flat.length() > top_speed:
 		flat = flat.normalized() * top_speed
 		velocity.x = flat.x
 		velocity.z = flat.z
 
+	# ============================================================
 	# GRAVITY
+	# ============================================================
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
 		velocity.y = 0.0
 
+	# ============================================================
 	# COLLISIONS
+	# ============================================================
 	var old_velocity := velocity
 	move_and_slide()
 
@@ -199,12 +211,6 @@ func _physics_process(delta):
 
 	# DEBUG
 	_debug_stats(delta, flat.length())
-	
-	print("ACCEL:", accel, "  BRAKE:", brake)
-	print("Body forward:", -global_transform.basis.z.normalized())
-	print("Ref  forward:", (-forward_ref.global_transform.basis.z).normalized())
-
-
 
 # ============================================================
 #  DEBUG
@@ -218,10 +224,10 @@ func _debug_stats(delta, speed):
 		return
 	debug_timer = 0.0
 
-	var speed_kmh :int= speed * 3.6
-
+	var speed_kmh: int = speed * 3.6
 	print("\n===== CAR DEBUG =====")
-	print("Gear:", current_gear, "/", gear_count)
-	print("RPM:", rpm)
 	print("Speed:", speed_kmh, "km/h")
 	print("=====================\n")
+	print("ON FLOOR:", is_on_floor(), "vel:", velocity)
+	print("BODY POS:", global_transform.origin)
+	print("MODEL POS:", car_model.global_transform.origin)
