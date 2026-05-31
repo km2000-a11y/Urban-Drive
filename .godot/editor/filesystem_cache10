@@ -1,8 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1780211341
+::res://::1780213273
 main.tscn::PackedScene/PackedScene::6405392885157970654::1780209030::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://dq5h6hmf1n7rf::::res://Scenes/mini_cooper_s.tscn
-::res://Scenes/::1780211317
-mini_cooper_s.tscn::PackedScene::8344695646933605999::1780211317::0::1::::<><><>0<>0<><>::uid://dympqogqfcqkr::::res://Scripts/mini_cooper_s_2012.gd
+::res://Scenes/::1780211413
+mini_cooper_s.tscn::PackedScene::8344695646933605999::1780211413::0::1::::<><><>0<>0<><>::uid://dympqogqfcqkr::::res://Scripts/mini_cooper_s_2012.gd
 ::res://Scripts/::1780150869
 base_car.gd::GDScript/GDScript::2507978259736890772::1780150869::0::1::::CarController<>CharacterBody3D<><>0<>0<><>::
 mini_cooper_s_2012.gd::GDScript/GDScript::8869506904364247429::1780149994::0::1::::<>CarController<><>0<>0<><>::
