@@ -1,8 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1780213273
-main.tscn::PackedScene/PackedScene::6405392885157970654::1780209030::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://dq5h6hmf1n7rf::::res://Scenes/mini_cooper_s.tscn
-::res://Scenes/::1780211413
-mini_cooper_s.tscn::PackedScene::8344695646933605999::1780211413::0::1::::<><><>0<>0<><>::uid://dympqogqfcqkr::::res://Scripts/mini_cooper_s_2012.gd
+::res://::1780218880
+main.tscn::PackedScene::6405392885157970654::1780213317::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://dq5h6hmf1n7rf::::res://Scenes/mini_cooper_s.tscn
+::res://Scenes/::1780213317
+mini_cooper_s.tscn::PackedScene::8344695646933605999::1780213317::0::1::::<><><>0<>0<><>::uid://dympqogqfcqkr::::res://Scripts/mini_cooper_s_2012.gd
 ::res://Scripts/::1780150869
 base_car.gd::GDScript/GDScript::2507978259736890772::1780150869::0::1::::CarController<>CharacterBody3D<><>0<>0<><>::
 mini_cooper_s_2012.gd::GDScript/GDScript::8869506904364247429::1780149994::0::1::::<>CarController<><>0<>0<><>::
@@ -11,5 +11,5 @@ brake.mp3::AudioStreamMP3/AudioStreamMP3::4893041847237595360::1777636221::17777
 crash.mp3::AudioStreamMP3/AudioStreamMP3::5855399304817107656::1777570214::1777735652::1::::<><><>0<>0<>6f035230c9539ed522e664609e54eafc<>res://.godot/imported/crash.mp3-e02bf8cc97fc1a06c4617716f5019b7a.mp3str::
 rev.mp3::AudioStreamMP3/AudioStreamMP3::6252064369620662412::1777570106::1777735652::1::::<><><>0<>0<>f446bcf02fb347cd837ce91f085e0d6c<>res://.godot/imported/rev.mp3-ecb7c29767564301e0294a04ed220ac6.mp3str::
 skid.mp3::AudioStreamMP3/AudioStreamMP3::7895215211737247329::1777570083::1777735652::1::::<><><>0<>0<>3ec0fbe6784b5d60e112e6aa2bed12de<>res://.godot/imported/skid.mp3-08baa1bcda1c3b735ef6bfc3c4a25c17.mp3str::
-::res://Tracks/::1780209031
-track.tscn::PackedScene/PackedScene::4177357173487848459::1780209031::0::1::::<><><>0<>0<><>::
+::res://Tracks/::1780213317
+track.tscn::PackedScene::4177357173487848459::1780213317::0::1::::<><><>0<>0<><>::

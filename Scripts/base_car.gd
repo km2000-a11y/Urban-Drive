@@ -39,6 +39,10 @@ var acceleration_calc := 0.0
 var steering := 0.0
 var old_rotation_y := 0.0
 
+# DRIFT SYSTEM
+var drifting := false
+var drift_factor := 0.0
+
 var debug_enabled := true
 var debug_timer := 0.0
 
@@ -77,11 +81,17 @@ func update_gears(speed_kmh):
 #  PHYSICS
 # ============================================================
 func _physics_process(delta):
-
 	# INPUT
 	var accel := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
+	var drift_input := Input.is_action_pressed("drift")
+
+	# DRIFT SMOOTHING
+	var target_drift := 0.0
+	if drift_input:
+		target_drift = 1.0
+	drift_factor = lerp(drift_factor, target_drift, delta * 6.0)
 
 	# STEERING
 	old_rotation_y = rotation.y
@@ -118,7 +128,7 @@ func _physics_process(delta):
 	var torque_factor := rpm / max_rpm
 
 	# ============================================================
-	# DRIVETRAIN TRACTION  (DECLARED HERE!)
+	# DRIVETRAIN TRACTION
 	# ============================================================
 	var traction_factor := 1.0
 	match transmission:
@@ -130,7 +140,7 @@ func _physics_process(delta):
 			traction_factor = 1.15
 
 	# ============================================================
-	# ACCELERATION (FIXED)
+	# ACCELERATION
 	# ============================================================
 	var accel_force := 0.0
 
@@ -142,16 +152,14 @@ func _physics_process(delta):
 		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost
 		velocity += forward * accel_force * delta
 	else:
-	# Slow down forward motion, but NEVER go backwards
 		var flat := Vector3(velocity.x, 0, velocity.z)
-
 		if flat.dot(forward) > 0.0:
 			flat = flat.move_toward(Vector3.ZERO, ENGINE_BRAKE * delta)
 		else:
 			flat = Vector3.ZERO
-
 		velocity.x = flat.x
 		velocity.z = flat.z
+
 	# ============================================================
 	# BRAKING
 	# ============================================================
@@ -165,46 +173,52 @@ func _physics_process(delta):
 	velocity -= velocity * DRAG * delta
 
 	# ============================================================
-	# LATERAL FRICTION (FIXED)
+	# LATERAL FRICTION + DRIFT
 	# ============================================================
 	var lateral := right.dot(velocity)
 
-	if abs(lateral) > 0.2:
-		velocity -= right * lateral * (lateral_friction * 0.5) * delta
+	var friction_strength := lateral_friction
+	friction_strength = lerp(friction_strength, 0.25, drift_factor)
+
+	if abs(lateral) > 0.1:
+		velocity -= right * lateral * (friction_strength * 0.5) * delta
+
+	# Extra rotation during drift
+	if drift_factor > 0.1:
+		rotation.y += steering * drift_factor * 1.5 * delta
 
 	# ============================================================
-	# DRIVETRAIN PERSONALITY (FIXED)
+	# DRIVETRAIN PERSONALITY
 	# ============================================================
 	match transmission:
 		"Front-wheel drive":
-			if accel > 0.7 and abs(steering) > 0.01:
-				rotation.y += steering * 0.05 * delta
+			if drift_factor > 0.1:
+				rotation.y += steering * 0.8 * delta
 
 		"Rear-wheel drive":
-			velocity -= right * lateral * 0.05 * delta
+			if drift_factor > 0.1:
+				velocity += right * steering * 4.0 * delta
 
 		"Four-wheel drive":
-			velocity -= right * lateral * 0.03 * delta
-			velocity += forward * 0.1 * delta
+			if drift_factor > 0.1:
+				velocity += right * steering * 2.0 * delta
 
 	# ============================================================
 	# SPEED LIMIT
 	# ============================================================
-	var flat := Vector3(velocity.x, 0, velocity.z)
-	if flat.length() > top_speed:
-		flat = flat.normalized() * top_speed
-		velocity.x = flat.x
-		velocity.z = flat.z
+	var flat2 := Vector3(velocity.x, 0, velocity.z)
+	if flat2.length() > top_speed:
+		flat2 = flat2.normalized() * top_speed
+		velocity.x = flat2.x
+		velocity.z = flat2.z
 
 	# ============================================================
 	# GRAVITY
 	# ============================================================
-	# Proper CharacterBody3D gravity handling
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
-		velocity.y = -0.01   # keeps the body grounded without killing forward motion
-
+		velocity.y = -0.01
 
 	# ============================================================
 	# COLLISIONS
@@ -212,28 +226,22 @@ func _physics_process(delta):
 	var old_velocity := velocity
 	move_and_slide()
 
-	# ============================================================
-# MOMENTUM-BASED COLLISION RESPONSE (p = m * v)
-# ============================================================
+	# MOMENTUM EXCHANGE
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
 
 		if other is CarController:
 			var my_p := mass * velocity
-			var their_p :Vector3= other.mass * other.velocity
+			var their_p :Vector3 = other.mass * other.velocity
 
-			# Momentum exchange
 			var impulse := (my_p - their_p) * 0.5
 
-			# Apply impulses
 			velocity += impulse / mass
 			other.velocity -= impulse / other.mass
 
 	# DEBUG
-	_debug_stats(delta, flat.length())
-	print("VEL:", velocity, " FLOOR NORMAL:", get_floor_normal())
-
+	_debug_stats(delta, flat2.length())
 
 # ============================================================
 #  DEBUG
