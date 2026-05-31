@@ -48,6 +48,8 @@ var debug_timer := 0.0
 
 @onready var car_model := $ModelRoot
 @onready var forward_ref := $ForwardRef
+@onready var nitro:=$Exhaust/GPUParticles3D
+
 
 # ============================================================
 #  APPLY STATS
@@ -62,6 +64,7 @@ func apply_stats():
 # ============================================================
 func _ready():
 	apply_stats()
+	nitro.hide()
 
 # ============================================================
 #  GEAR LOGIC
@@ -86,6 +89,7 @@ func _physics_process(delta):
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 	var drift_input := Input.is_action_pressed("drift")
+	var nitrous:=Input.is_action_pressed("nos")
 
 	# DRIFT SMOOTHING
 	var target_drift := 0.0
@@ -211,7 +215,12 @@ func _physics_process(delta):
 		flat2 = flat2.normalized() * top_speed
 		velocity.x = flat2.x
 		velocity.z = flat2.z
-
+	
+	if nitrous:
+		nitro.show()
+	else:
+		nitro.hide()
+		
 	# ============================================================
 	# GRAVITY
 	# ============================================================

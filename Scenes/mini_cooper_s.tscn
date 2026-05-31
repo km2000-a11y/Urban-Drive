@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dq5h6hmf1n7rf"]
+[gd_scene load_steps=30 format=3 uid="uid://dq5h6hmf1n7rf"]
 
 [ext_resource type="Script" uid="uid://dympqogqfcqkr" path="res://Scripts/mini_cooper_s_2012.gd" id="1_08euy"]
 
@@ -82,6 +82,20 @@ height = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_08euy"]
 size = Vector3(1, 1, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0kf0"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sibdw"]
+spread = 10.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.6
+scale_min = 0.25
+scale_max = 0.5
+color = Color(0, 0, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
+size = Vector2(0.5, 0.2)
 
 [node name="Mini Cooper S" type="CharacterBody3D"]
 axis_lock_angular_x = true
@@ -213,11 +227,20 @@ material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165649, 0, -0.237939)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165649, -0.0040794, -0.237939)
 shape = SubResource("BoxShape3D_08euy")
 
 [node name="ForwardRef" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00341237, 0.00285846, -0.00810623)
 
 [node name="Exhaust" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142345, -0.195076, 0.501985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142345, -0.236664, 0.501985)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Exhaust"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.195621, -0.0775336, -0.0298217)
+material_override = SubResource("StandardMaterial3D_v0kf0")
+amount = 15
+lifetime = 0.25
+preprocess = 0.1
+process_material = SubResource("ParticleProcessMaterial_sibdw")
+draw_pass_1 = SubResource("QuadMesh_twcfh")
