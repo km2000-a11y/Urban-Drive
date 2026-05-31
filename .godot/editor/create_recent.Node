@@ -1,5 +1,6 @@
-MeshInstance3D
+GPUParticles3D
 Node3D
+MeshInstance3D
 CharacterBody3D
 CollisionShape3D
 VehicleWheel3D
@@ -10,5 +11,4 @@ Camera3D
 StaticBody3D
 AudioStreamPlayer3D
 Area3D
-GPUParticles3D
 Marker3D
