@@ -1,4 +1,4 @@
 res://main.tscn
+res://Scripts/base_car.gd
 res://Tracks/track.tscn
 res://Scenes/mini_cooper_s.tscn
-res://Scripts/base_car.gd

@@ -42,14 +42,14 @@ var old_rotation_y := 0.0
 # DRIFT SYSTEM
 var drifting := false
 var drift_factor := 0.0
-var boost=false
+var boost := false
 
 var debug_enabled := true
 var debug_timer := 0.0
 
 @onready var car_model := $ModelRoot
 @onready var forward_ref := $ForwardRef
-@onready var nitro:=$Exhaust/GPUParticles3D
+@onready var nitro := $Exhaust/GPUParticles3D
 
 
 # ============================================================
@@ -60,12 +60,14 @@ func apply_stats():
 	torque = (horsepower * 5252.0) / max_rpm
 	top_speed = top_speed_kmh / 3.6
 
+
 # ============================================================
 #  READY
 # ============================================================
 func _ready():
 	apply_stats()
 	nitro.hide()
+
 
 # ============================================================
 #  GEAR LOGIC
@@ -81,6 +83,7 @@ func update_gears(speed_kmh):
 
 	current_gear = clamp(current_gear, 1, gear_count)
 
+
 # ============================================================
 #  PHYSICS
 # ============================================================
@@ -90,7 +93,7 @@ func _physics_process(delta):
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 	var drift_input := Input.is_action_pressed("drift")
-	var nitrous:=Input.is_action_pressed("nos")
+	var nitrous := Input.is_action_pressed("nos")
 
 	# DRIFT SMOOTHING
 	var target_drift := 0.0
@@ -121,17 +124,9 @@ func _physics_process(delta):
 	# RPM + GEARS
 	# ============================================================
 	var speed_kmh := velocity.length() * 3.6
-	if nitrous and boost==false:
-		nitro.show()
-		speed_kmh=speed_kmh*1.12	
-		boost=true	
-	elif nitrous==false:
-		nitro.hide()
-		speed_kmh=velocity.length()*3.6*0.8
 	rpm += accel * 3000.0 * delta
 	rpm -= (rpm - idle_rpm) * 0.5 * delta
 	rpm = clamp(rpm, idle_rpm, max_rpm)
-
 	rpm = clamp(speed_kmh * gear_ratios[current_gear - 1] * 35.0, idle_rpm, max_rpm)
 
 	update_gears(speed_kmh)
@@ -151,7 +146,7 @@ func _physics_process(delta):
 			traction_factor = 1.15
 
 	# ============================================================
-	# ACCELERATION
+	# ACCELERATION (CALCULATED FIRST)
 	# ============================================================
 	var accel_force := 0.0
 
@@ -170,6 +165,21 @@ func _physics_process(delta):
 			flat = Vector3.ZERO
 		velocity.x = flat.x
 		velocity.z = flat.z
+
+	# ============================================================
+	# NITRO (NOW accel_force EXISTS)
+	# ============================================================
+	if nitrous:
+		nitro.show()
+
+		var nitro_accel := 1.35
+		velocity += forward * accel_force * nitro_accel * delta
+
+		var nitro_top := top_speed * 1.10
+		if velocity.length() > nitro_top:
+			velocity = velocity.normalized() * nitro_top
+	else:
+		nitro.hide()
 
 	# ============================================================
 	# BRAKING
@@ -222,7 +232,7 @@ func _physics_process(delta):
 		flat2 = flat2.normalized() * top_speed
 		velocity.x = flat2.x
 		velocity.z = flat2.z
-		
+
 	# ============================================================
 	# GRAVITY
 	# ============================================================
@@ -237,14 +247,13 @@ func _physics_process(delta):
 	var old_velocity := velocity
 	move_and_slide()
 
-	# MOMENTUM EXCHANGE
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
 
 		if other is CarController:
 			var my_p := mass * velocity
-			var their_p :Vector3 = other.mass * other.velocity
+			var their_p : Vector3 = other.mass * other.velocity
 
 			var impulse := (my_p - their_p) * 0.5
 
@@ -253,6 +262,7 @@ func _physics_process(delta):
 
 	# DEBUG
 	_debug_stats(delta, flat2.length())
+
 
 # ============================================================
 #  DEBUG
@@ -267,7 +277,7 @@ func _debug_stats(delta, speed):
 	debug_timer = 0.0
 
 	var speed_kmh: int = speed * 3.6
-	
+
 	print("\n===== CAR DEBUG =====")
 	print("Speed:", speed_kmh, "km/h")
 	print("=====================\n")
