@@ -237,7 +237,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00341237, 0.00285846, -0.00
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142345, -0.236664, 0.501985)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Exhaust"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.195621, -0.0775336, -0.0298217)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.195621, 0.00549865, -0.0298217)
 material_override = SubResource("StandardMaterial3D_v0kf0")
 amount = 15
 lifetime = 0.25

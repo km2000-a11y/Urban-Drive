@@ -42,6 +42,7 @@ var old_rotation_y := 0.0
 # DRIFT SYSTEM
 var drifting := false
 var drift_factor := 0.0
+var boost=false
 
 var debug_enabled := true
 var debug_timer := 0.0
@@ -120,7 +121,13 @@ func _physics_process(delta):
 	# RPM + GEARS
 	# ============================================================
 	var speed_kmh := velocity.length() * 3.6
-
+	if nitrous and boost==false:
+		nitro.show()
+		speed_kmh=speed_kmh*1.12	
+		boost=true	
+	elif nitrous==false:
+		nitro.hide()
+		speed_kmh=velocity.length()*3.6*0.8
 	rpm += accel * 3000.0 * delta
 	rpm -= (rpm - idle_rpm) * 0.5 * delta
 	rpm = clamp(rpm, idle_rpm, max_rpm)
@@ -215,11 +222,6 @@ func _physics_process(delta):
 		flat2 = flat2.normalized() * top_speed
 		velocity.x = flat2.x
 		velocity.z = flat2.z
-	
-	if nitrous:
-		nitro.show()
-	else:
-		nitro.hide()
 		
 	# ============================================================
 	# GRAVITY
@@ -265,6 +267,7 @@ func _debug_stats(delta, speed):
 	debug_timer = 0.0
 
 	var speed_kmh: int = speed * 3.6
+	
 	print("\n===== CAR DEBUG =====")
 	print("Speed:", speed_kmh, "km/h")
 	print("=====================\n")
