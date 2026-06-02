@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dq5h6hmf1n7rf"]
+[gd_scene load_steps=32 format=3 uid="uid://dq5h6hmf1n7rf"]
 
 [ext_resource type="Script" uid="uid://dympqogqfcqkr" path="res://Scripts/mini_cooper_s_2012.gd" id="1_08euy"]
 
@@ -86,6 +86,13 @@ size = Vector3(1, 1, 1.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0kf0"]
 albedo_color = Color(0, 0, 1, 1)
 
+[sub_resource type="Gradient" id="Gradient_08euy"]
+offsets = PackedFloat32Array(0, 0.542553, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.766792, 0.989237, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nfu50"]
+gradient = SubResource("Gradient_08euy")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sibdw"]
 spread = 10.0
 initial_velocity_min = 3.0
@@ -93,9 +100,10 @@ initial_velocity_max = 5.6
 scale_min = 0.25
 scale_max = 0.5
 color = Color(0, 0, 1, 1)
+color_ramp = SubResource("GradientTexture1D_nfu50")
 
 [sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
-size = Vector2(0.5, 0.2)
+size = Vector2(0.5, 0.5)
 
 [node name="Mini Cooper S" type="CharacterBody3D"]
 axis_lock_angular_x = true
@@ -105,7 +113,7 @@ script = ExtResource("1_08euy")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
 current = true
-fov = 45.0
+fov = 55.0
 
 [node name="ModelRoot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.315375, 0)
@@ -237,10 +245,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00341237, 0.00285846, -0.00
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142345, -0.236664, 0.501985)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Exhaust"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.195621, 0.00549865, -0.0298217)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.195621, 0.142489, -0.0298217)
 material_override = SubResource("StandardMaterial3D_v0kf0")
-amount = 15
+amount = 50
 lifetime = 0.25
 preprocess = 0.1
+explosiveness = 0.2
 process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
