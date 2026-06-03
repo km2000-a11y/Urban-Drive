@@ -224,14 +224,20 @@ func _physics_process(delta):
 			if drift_factor > 0.1:
 				velocity += right * steering * 2.0 * delta
 
-	# ============================================================
 	# SPEED LIMIT
-	# ============================================================
 	var flat2 := Vector3(velocity.x, 0, velocity.z)
-	if flat2.length() > top_speed:
-		flat2 = flat2.normalized() * top_speed
-		velocity.x = flat2.x
-		velocity.z = flat2.z
+
+	if nitrous:
+		var nitro_top := top_speed * 1.12
+		if flat2.length() > nitro_top:
+			flat2 = flat2.normalized() * nitro_top
+	else:
+		if flat2.length() > top_speed:
+			flat2 = flat2.normalized() * top_speed
+
+	velocity.x = flat2.x
+	velocity.z = flat2.z
+
 
 	# ============================================================
 	# GRAVITY
