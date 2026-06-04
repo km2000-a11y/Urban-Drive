@@ -1,0 +1,25 @@
+extends CarController
+
+# COSMETIC INFO (UI only)
+var car_name := "Eisenach Q‑3"
+var country := "Germany"
+var engine := "2.5L I6"
+var weight_kg := 1380
+var zero_to_hundred_display := 7.2
+
+func _ready():
+	# GAMEPLAY STATS
+	mass = 1380.0
+	horsepower = 192
+	max_rpm = 6500.0
+	zero_to_hundred = 7.2
+	top_speed_kmh = 240
+	turn_speed = 2.7
+	brake_strength = 11.0
+	lateral_friction = 1.05
+	transmission = "Rear-wheel drive"
+
+	# RWD-friendly gearing (smooth, momentum-based)
+	
+	apply_stats()
+	print("Child READY loaded:", car_name)

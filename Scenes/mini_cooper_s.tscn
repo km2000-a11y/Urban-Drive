@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dq5h6hmf1n7rf"]
+[gd_scene load_steps=34 format=3 uid="uid://dq5h6hmf1n7rf"]
 
 [ext_resource type="Script" uid="uid://dympqogqfcqkr" path="res://Scripts/mini_cooper_s_2012.gd" id="1_08euy"]
 
@@ -79,6 +79,12 @@ albedo_color = Color(0, 0, 0, 1)
 top_radius = 0.15
 bottom_radius = 0.15
 height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfuam"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ntlxt"]
+size = Vector3(0.5, 0.2, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_08euy"]
 size = Vector3(1, 1, 1.5)
@@ -233,6 +239,11 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.132
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.293306, 0.115741, -0.00769967)
 material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104899, 0.358526, -0.378138)
+material_override = SubResource("StandardMaterial3D_bfuam")
+mesh = SubResource("BoxMesh_ntlxt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.165649, -0.0040794, -0.237939)

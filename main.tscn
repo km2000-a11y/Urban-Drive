@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="PackedScene" uid="uid://b0rspyplkxvyp" path="res://Tracks/track.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://dq5h6hmf1n7rf" path="res://Scenes/mini_cooper_s.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ddqsqld4vm2tw" path="res://Scenes/bmw_325ti.tscn" id="2_0xm2m"]
 
 [node name="Node" type="Node"]
 
@@ -11,10 +11,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.439076, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
-[node name="Mini Cooper S" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0527905, 0.827149, 1.68485)
+[node name="BMW 325TI" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0451444, 0.926278, 1.28647)
 
-[node name="CollisionShape3D" parent="Mini Cooper S" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.158899, -0.259409)
-
-[editable path="Mini Cooper S"]
+[editable path="BMW 325TI"]
