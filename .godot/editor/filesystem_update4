@@ -1,5 +1,8 @@
-res://Scenes/mini_cooper_s.tscn
-res://bmw_325ti_2002.gd
 res://main.tscn
 res://Tracks/track.tscn
+res://Scenes/mini_cooper_s.tscn
 res://Scenes/bmw_325ti.tscn
+res://Scenes/hummer_h1.tscn
+res://Scenes/vw_new_beetle_rsi.tscn
+res://Scripts/base_car.gd
+res://Scripts/hummer_h1_2000.gd

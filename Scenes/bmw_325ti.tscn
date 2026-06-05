@@ -1,6 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://ddqsqld4vm2tw"]
+[gd_scene load_steps=37 format=3 uid="uid://ddqsqld4vm2tw"]
 
-[ext_resource type="Script" uid="uid://6x022nlj3us0" path="res://bmw_325ti_2002.gd" id="1_yw7ql"]
+[ext_resource type="Script" uid="uid://6x022nlj3us0" path="res://Scripts/bmw_325ti_2002.gd" id="1_yw7ql"]
+[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_x1dwm"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_signy"]
+[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_1o7eg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -281,3 +284,14 @@ preprocess = 0.1
 explosiveness = 0.2
 process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
+
+[node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_x1dwm")
+
+[node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_signy")
+
+[node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
+
+[node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_1o7eg")

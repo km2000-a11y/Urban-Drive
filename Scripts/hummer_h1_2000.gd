@@ -1,0 +1,29 @@
+extends CarController
+
+# COSMETIC INFO (UI only)
+var car_name := "Colossus Titan Max"
+var country := "USA"
+var engine := "6.5L V8"
+var weight_kg := 3500
+var zero_to_hundred_display := 13.5
+
+func _ready():
+	# GAMEPLAY STATS
+	mass = 3500.0
+	horsepower = 195
+	max_rpm = 3400.0
+	zero_to_hundred = 13.5
+	top_speed_kmh = 170
+	turn_speed = 1.4
+	brake_strength = 9.0
+	lateral_friction = 0.92
+	transmission = "Four-wheel drive"
+
+	# H1-style gearing (torque-heavy, low-speed grunt)
+	gear_count = 4
+	gear_ratios = [2.48, 1.48, 1.00, 0.75]
+	shift_up_rpm = 3200
+	shift_down_rpm = 1500
+
+	apply_stats()
+	print("Child READY loaded:", car_name)
