@@ -49,19 +49,6 @@ var debug_enabled := true
 var debug_timer := 0.0
 
 # ============================================================
-#  AUDIO SYSTEM
-# ============================================================
-var engine_pitch := 1.0
-var engine_volume := 1.0
-var gear_shift_cooldown := 0.0
-var audio_rpm := 900.0
-
-@onready var rev_player := $RevPlayer
-@onready var brake_player := $BrakePlayer
-@onready var skid_player := $SkidPlayer
-@onready var crash_player := $CrashPlayer
-
-# ============================================================
 #  NODES
 # ============================================================
 @onready var car_model := $ModelRoot
@@ -82,10 +69,6 @@ func apply_stats():
 func _ready():
 	apply_stats()
 	nitro.hide()
-	if rev_player:
-		rev_player.pitch_scale = 1.0
-		rev_player.volume_db = linear_to_db(0.6)
-		rev_player.play()
 
 # ============================================================
 #  GEAR LOGIC
@@ -94,12 +77,10 @@ func update_gears(speed_kmh):
 	if rpm > shift_up_rpm and current_gear < gear_count:
 		current_gear += 1
 		rpm *= 0.6
-		gear_shift_cooldown = 0.12
 
 	if rpm < shift_down_rpm and current_gear > 1:
 		current_gear -= 1
 		rpm *= 1.3
-		gear_shift_cooldown = 0.12
 
 	current_gear = clamp(current_gear, 1, gear_count)
 
@@ -140,7 +121,7 @@ func _physics_process(delta):
 	var right := transform.basis.x.normalized()
 
 	# ============================================================
-	# RPM + GEARS (ENGINE RPM SEPARATED FROM WHEEL RPM)
+	# RPM + GEARS
 	# ============================================================
 	var speed_kmh := velocity.length() * 3.6
 
@@ -150,7 +131,7 @@ func _physics_process(delta):
 		else:
 			rpm = lerp(rpm, idle_rpm, delta * 3.0)
 	else:
-		var wheel_rpm :float= speed_kmh * gear_ratios[current_gear - 1] * 35.0
+		var wheel_rpm :float = speed_kmh * gear_ratios[current_gear - 1] * 35.0
 		rpm = lerp(rpm, wheel_rpm, delta * 4.0)
 
 	rpm = clamp(rpm, idle_rpm, max_rpm)
@@ -158,56 +139,6 @@ func _physics_process(delta):
 	update_gears(speed_kmh)
 
 	var torque_factor := rpm / max_rpm
-	# ============================================================
-	# ENGINE SOUND SYSTEM (SMOOTH, REACTIVE, NO POPS)
-	# ============================================================
-
-	audio_rpm = lerp(audio_rpm, rpm, delta * 8.0)
-
-	var rpm_ratio = audio_rpm / max_rpm
-	var speed_ratio = clamp(speed_kmh / top_speed_kmh, 0.0, 1.0)
-
-		# Base pitch from RPM
-	engine_pitch = lerp(0.7, 1.4, rpm_ratio)
-	engine_pitch += speed_ratio * 0.1
-
-	# Nitro pitch boost
-	if nitrous:
-		engine_pitch += 0.08
-
-	# Volume based on throttle
-	if accel > 0.1:
-		engine_volume = lerp(engine_volume, 0.95, delta * 6.0)
-	else:
-		engine_volume = lerp(engine_volume, 0.5, delta * 4.0)
-
-	# Idle wobble
-	if audio_rpm < idle_rpm + 150.0:
-		engine_pitch += randf_range(-0.01, 0.01)
-
-	# Gearshift dip
-	if gear_shift_cooldown > 0.0:
-		gear_shift_cooldown -= delta
-		engine_pitch -= 0.05
-		engine_volume = lerp(engine_volume, engine_volume * 0.85, delta * 8.0)
-
-	# ============================================================
-	# TRUE IDLE MUTE (NO POPS, NO SILENCE BUGS)
-	# ============================================================
-
-	var is_true_idle = false
-	if rpm <= idle_rpm + 5.0 and speed_kmh < 1.0:
-		is_true_idle = true
-
-	if is_true_idle:
-		engine_volume = lerp(engine_volume, 0.0, delta * 8.0)
-	else:
-		engine_volume = clamp(engine_volume, 0.1, 1.0)
-
-	# Apply audio safely
-	if rev_player:
-		rev_player.pitch_scale = engine_pitch
-		rev_player.volume_db = linear_to_db(max(engine_volume, 0.001))
 
 	# ============================================================
 	# DRIVETRAIN TRACTION
@@ -247,8 +178,7 @@ func _physics_process(delta):
 	# ============================================================
 	if nitrous:
 		nitro.show()
-		var nitro_accel := 1.35
-		velocity += forward * accel_force * nitro_accel * delta
+		velocity += forward * accel_force * 1.35 * delta
 
 		var nitro_top := top_speed * 1.10
 		if velocity.length() > nitro_top:
@@ -257,17 +187,11 @@ func _physics_process(delta):
 		nitro.hide()
 
 	# ============================================================
-	# BRAKING + BRAKE SOUND
+	# BRAKING
 	# ============================================================
 	if brake > 0.1:
 		var brake_force := brake_strength * (mass / 1200.0) * 1.4
 		velocity = velocity.move_toward(Vector3.ZERO, brake_force * delta)
-
-		if brake_player and not brake_player.playing:
-			brake_player.play()
-	else:
-		if brake_player and brake_player.playing:
-			brake_player.stop()
 
 	# ============================================================
 	# DRAG
@@ -275,7 +199,7 @@ func _physics_process(delta):
 	velocity -= velocity * DRAG * delta
 
 	# ============================================================
-	# LATERAL FRICTION + DRIFT + SKID SOUND
+	# LATERAL FRICTION + DRIFT
 	# ============================================================
 	var lateral := right.dot(velocity)
 
@@ -283,13 +207,6 @@ func _physics_process(delta):
 
 	if abs(lateral) > 0.1:
 		velocity -= right * lateral * (friction_strength * 0.5) * delta
-
-	if abs(lateral) > 4.0 or drift_factor > 0.25:
-		if skid_player and not skid_player.playing:
-			skid_player.play()
-	else:
-		if skid_player and skid_player.playing:
-			skid_player.stop()
 
 	if drift_factor > 0.1:
 		rotation.y += steering * drift_factor * 1.5 * delta
@@ -333,7 +250,7 @@ func _physics_process(delta):
 		velocity.y = -0.01
 
 	# ============================================================
-	# COLLISIONS + CRASH SOUND
+	# COLLISIONS
 	# ============================================================
 	var old_velocity := velocity
 	move_and_slide()
@@ -341,10 +258,6 @@ func _physics_process(delta):
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
-
-		if col.get_normal().dot(old_velocity) < -2.0:
-			if crash_player:
-				crash_player.play()
 
 		if other is CarController:
 			var my_p := mass * velocity
