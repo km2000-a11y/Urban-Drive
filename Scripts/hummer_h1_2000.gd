@@ -3,9 +3,9 @@ extends CarController
 # COSMETIC INFO (UI only)
 var car_name := "Colossus Titan Max"
 var country := "USA"
-var engine := "6.5L V8"
+var engine := "V8 6.5L"
 var weight_kg := 3500
-var zero_to_hundred_display := 13.5
+var zero_to_hundred_display := 13.50
 
 func _ready():
 	# GAMEPLAY STATS

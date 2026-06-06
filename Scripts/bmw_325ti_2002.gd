@@ -3,9 +3,9 @@ extends CarController
 # COSMETIC INFO (UI only)
 var car_name := "Eisenach Q‑3"
 var country := "Germany"
-var engine := "2.5L I6"
+var engine := "V6 2.5L"
 var weight_kg := 1380
-var zero_to_hundred_display := 7.2
+var zero_to_hundred_display := 7.20
 
 func _ready():
 	# GAMEPLAY STATS

@@ -3,9 +3,9 @@ extends CarController
 # COSMETIC INFO (UI only)
 var car_name := "Comet Spryte"
 var country := "UK"
-var engine := "1.6L I4 Turbo"
+var engine := "L4 1.6L"
 var weight_kg := 1210
-var zero_to_hundred_display := 6.9
+var zero_to_hundred_display := 6.90
 
 func _ready():
 	# GAMEPLAY STATS
