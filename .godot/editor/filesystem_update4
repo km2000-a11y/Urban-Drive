@@ -1,5 +1,5 @@
 res://Scenes/audi_tt.tscn
-res://Scripts/base_car.gd
+res://Scenes/audi_tt_roadster_32_2004.gd
 res://main.tscn
 res://Tracks/track.tscn
 res://Scenes/mini_cooper_s.tscn

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="PackedScene" uid="uid://b0rspyplkxvyp" path="res://Tracks/track.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://biqgwfdnkllcs" path="res://Scenes/new_beetle.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://72uh2jduq10m" path="res://Scenes/audi_tt.tscn" id="2_0xm2m"]
 
 [node name="Node" type="Node"]
 
@@ -11,7 +11,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.439076, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
-[node name="NEW BEETLE" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93337, 0.687959, -2.75711)
+[node name="AUDI TT" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8858, 0.687959, -0.98077)
 
-[editable path="NEW BEETLE"]
+[editable path="AUDI TT"]
