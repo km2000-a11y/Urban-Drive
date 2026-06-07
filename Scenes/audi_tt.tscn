@@ -295,22 +295,22 @@ material_override = SubResource("StandardMaterial3D_srhm5")
 mesh = SubResource("BoxMesh_0cham")
 
 [node name="MeshInstance3D22" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267524, 0.546574, 0.41175)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.242714, 0.511935, 0.437887)
 material_override = SubResource("StandardMaterial3D_i0x3i")
 mesh = SubResource("BoxMesh_4a4rh")
 
 [node name="MeshInstance3D23" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.262344, 0.386309, 0.407092)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.262344, 0.353756, 0.446997)
 material_override = SubResource("StandardMaterial3D_hf3ky")
 mesh = SubResource("BoxMesh_bl4ea")
 
 [node name="MeshInstance3D24" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34887, 0.420132, 0.503281)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34887, 0.399254, 0.503281)
 material_override = SubResource("StandardMaterial3D_yso3f")
 mesh = SubResource("BoxMesh_j83nq")
 
 [node name="MeshInstance3D25" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173713, 0.420132, 0.503281)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173713, 0.395793, 0.503281)
 material_override = SubResource("StandardMaterial3D_yso3f")
 mesh = SubResource("BoxMesh_j83nq")
 
