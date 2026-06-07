@@ -44,6 +44,9 @@ var drifting := false
 var drift_factor := 0.0
 var boost := false
 
+# PERFORMANCE POINTS
+var performance_points := 0
+
 # DEBUG
 var debug_enabled := true
 var debug_timer := 0.0
@@ -62,6 +65,10 @@ func apply_stats():
 	acceleration_calc = (27.78 / zero_to_hundred) * 2.0
 	torque = (horsepower * 5252.0) / max_rpm
 	top_speed = top_speed_kmh / 3.6
+
+	# PERFORMANCE POINTS
+	performance_points = round((top_speed_kmh * 1.5) + ((100.0 / zero_to_hundred) * 12))
+
 
 # ============================================================
 #  READY
@@ -88,20 +95,17 @@ func update_gears(speed_kmh):
 #  PHYSICS
 # ============================================================
 func _physics_process(delta):
-	# INPUT
 	var accel := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 	var drift_input := Input.is_action_pressed("drift")
 	var nitrous := Input.is_action_pressed("nos")
 
-	# DRIFT SMOOTHING
 	var target_drift := 0.0
 	if drift_input:
 		target_drift = 1.0
 	drift_factor = lerp(drift_factor, target_drift, delta * 6.0)
 
-	# STEERING
 	old_rotation_y = rotation.y
 	steering = lerp(steering, steer, delta * 6.0)
 	rotation.y += steering * turn_speed * delta
@@ -110,19 +114,14 @@ func _physics_process(delta):
 	if velocity.length() > 0.1 and abs(delta_rot) > 0.0005:
 		velocity = velocity.rotated(Vector3.UP, delta_rot)
 
-	# VISUAL LEAN
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
 
-	# DIRECTIONS
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
 
 	var right := transform.basis.x.normalized()
 
-	# ============================================================
-	# RPM + GEARS
-	# ============================================================
 	var speed_kmh := velocity.length() * 3.6
 
 	if speed_kmh < 2.0:
@@ -140,9 +139,6 @@ func _physics_process(delta):
 
 	var torque_factor := rpm / max_rpm
 
-	# ============================================================
-	# DRIVETRAIN TRACTION
-	# ============================================================
 	var traction_factor := 1.0
 	match transmission:
 		"Front-wheel drive":
@@ -152,9 +148,6 @@ func _physics_process(delta):
 		"Four-wheel drive":
 			traction_factor = 1.15
 
-	# ============================================================
-	# ACCELERATION
-	# ============================================================
 	var accel_force := 0.0
 
 	if accel > 0.0:
@@ -173,9 +166,6 @@ func _physics_process(delta):
 		velocity.x = flat.x
 		velocity.z = flat.z
 
-	# ============================================================
-	# NITRO
-	# ============================================================
 	if nitrous:
 		nitro.show()
 		velocity += forward * accel_force * 1.35 * delta
@@ -186,23 +176,13 @@ func _physics_process(delta):
 	else:
 		nitro.hide()
 
-	# ============================================================
-	# BRAKING
-	# ============================================================
 	if brake > 0.1:
 		var brake_force := brake_strength * (mass / 1200.0) * 1.4
 		velocity = velocity.move_toward(Vector3.ZERO, brake_force * delta)
 
-	# ============================================================
-	# DRAG
-	# ============================================================
 	velocity -= velocity * DRAG * delta
 
-	# ============================================================
-	# LATERAL FRICTION + DRIFT
-	# ============================================================
 	var lateral := right.dot(velocity)
-
 	var friction_strength : float = lerp(lateral_friction, 0.25, drift_factor)
 
 	if abs(lateral) > 0.1:
@@ -211,9 +191,6 @@ func _physics_process(delta):
 	if drift_factor > 0.1:
 		rotation.y += steering * drift_factor * 1.5 * delta
 
-	# ============================================================
-	# DRIVETRAIN PERSONALITY
-	# ============================================================
 	match transmission:
 		"Front-wheel drive":
 			if drift_factor > 0.1:
@@ -227,7 +204,6 @@ func _physics_process(delta):
 			if drift_factor > 0.1:
 				velocity += right * steering * 2.0 * delta
 
-	# SPEED LIMIT
 	var flat2 := Vector3(velocity.x, 0, velocity.z)
 
 	if nitrous:
@@ -241,17 +217,11 @@ func _physics_process(delta):
 	velocity.x = flat2.x
 	velocity.z = flat2.z
 
-	# ============================================================
-	# GRAVITY
-	# ============================================================
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
 		velocity.y = -0.01
 
-	# ============================================================
-	# COLLISIONS
-	# ============================================================
 	var old_velocity := velocity
 	move_and_slide()
 
@@ -286,6 +256,7 @@ func _debug_stats(delta, speed):
 
 	print("\n===== CAR DEBUG =====")
 	print("Speed:", speed_kmh, "km/h")
+	print("PP:", performance_points)
 	print("=====================\n")
 	print("ON FLOOR:", is_on_floor(), "vel:", velocity)
 	print("BODY POS:", global_transform.origin)
