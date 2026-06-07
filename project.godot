@@ -15,6 +15,10 @@ run/main_scene="uid://cxi25dbhhlmu5"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [input]
 
 accelerate={

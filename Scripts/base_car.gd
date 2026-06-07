@@ -161,6 +161,20 @@ func _physics_process(delta: float) -> void:
 	# ------------------------------------------------------------
 	# RPM & GEARS
 	# ------------------------------------------------------------
+	var wall_block := false
+	var wall_scrape := false
+
+	for i in range(get_slide_collision_count()):
+		var col := get_slide_collision(i)
+		var n := col.get_normal()
+
+		# Direct head‑on wall block
+		if forward.dot(n) < -0.75:
+			wall_block = true
+
+		# Side scrape (right or left)
+		if abs(right.dot(n)) > 0.55:
+			wall_scrape = true
 	if speed_kmh < 2.0:
 		if accel > 0.1:
 			rpm = lerp(rpm, idle_rpm + 2500.0, delta * 2.5)
@@ -206,6 +220,9 @@ func _physics_process(delta: float) -> void:
 			flat = Vector3.ZERO
 		velocity.x = flat.x
 		velocity.z = flat.z
+		
+	if wall_scrape:
+		velocity*=0.97
 
 	# ------------------------------------------------------------
 	# NITROUS
@@ -271,6 +288,8 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x = flat2.x
 	velocity.z = flat2.z
+	
+	Global.speed=speed_kmh
 
 	# ------------------------------------------------------------
 	# GRAVITY
@@ -300,26 +319,4 @@ func _physics_process(delta: float) -> void:
 			other.velocity -= impulse / other.mass
 
 	# DEBUG
-	_debug_stats(delta, flat2.length())
-
-# ============================================================
-#  DEBUG
-# ============================================================
-func _debug_stats(delta: float, speed: float) -> void:
-	if not debug_enabled:
-		return
-
-	debug_timer += delta
-	if debug_timer < 1.0:
-		return
-	debug_timer = 0.0
-
-	var speed_kmh: int = speed * 3.6
-
-	print("\n===== CAR DEBUG =====")
-	print("Speed:", speed_kmh, "km/h")
-	print("PP:", performance_points)
-	print("=====================\n")
-	print("ON FLOOR:", is_on_floor(), "vel:", velocity)
-	print("BODY POS:", global_transform.origin)
-	print("MODEL POS:", car_model.global_transform.origin)
+	

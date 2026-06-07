@@ -1,3 +1,7 @@
+TextureRect
+Label
+Control
+CanvasLayer
 MeshInstance3D
 CarController
 AudioStreamPlayer3D
@@ -9,6 +13,3 @@ VehicleWheel3D
 VehicleBody3D
 RigidBody3D
 RayCast3D
-Camera3D
-StaticBody3D
-Area3D
