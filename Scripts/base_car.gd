@@ -106,21 +106,47 @@ func _physics_process(delta):
 		target_drift = 1.0
 	drift_factor = lerp(drift_factor, target_drift, delta * 6.0)
 
+	# ============================================================
+#  STEERING & DRIFT HANDLING (REWRITTEN)
+# ============================================================
+
+	# ============================================================
+#  STEERING & DRIFT HANDLING (REWRITTEN)
+# ============================================================
+
 	old_rotation_y = rotation.y
 	steering = lerp(steering, steer, delta * 6.0)
-	rotation.y += steering * turn_speed * delta
 
-	var delta_rot := rotation.y - old_rotation_y
-	if velocity.length() > 0.1 and abs(delta_rot) > 0.0005:
-		velocity = velocity.rotated(Vector3.UP, delta_rot)
+	# NORMAL TURNING
+	if drift_factor < 0.1:
+		rotation.y += steering * turn_speed * delta
 
+		if velocity.length() > 0.1:
+			velocity = velocity.rotated(Vector3.UP, steering * turn_speed * 0.25 * delta)
+
+		lateral_friction = 1.2
+
+	# DRIFT TURNING
+	else:
+		var drift_steer := steering * (turn_speed * 0.4)
+		rotation.y += drift_steer * delta
+
+		var slip_strength := 6.0 * drift_factor
+		velocity = velocity.rotated(Vector3.UP, -steer * slip_strength * delta)
+
+		lateral_friction = lerp(1.2, 0.15, drift_factor)
+
+	# Car body tilt animation
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
 
+	# ⭐ RESTORE FORWARD VECTOR (THIS WAS MISSING)
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
 
+	# Right vector
 	var right := transform.basis.x.normalized()
+
 
 	var speed_kmh := velocity.length() * 3.6
 
