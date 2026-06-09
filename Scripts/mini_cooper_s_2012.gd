@@ -19,7 +19,20 @@ func _ready():
 	lateral_friction = 1.12
 	transmission = "Front-wheel drive"
 
-	# ARCADE GEAR RATIOS (Mini but fun)
-	
+	# SHORTER, HOT HATCH GEARS
+	gear_count = 6
+	gear_ratios = [3.8, 2.4, 1.8, 1.4, 1.15, 0.95]
+	shift_up_rpm = 6200
+	shift_down_rpm = 2000
+
+	# DISTINCT HANDLING PROFILE
+	handling_type = "fwd_hot_hatch"
+
+	# APPLY BASE STATS + HANDLING
 	apply_stats()
+	apply_handling_profile()
+
+	# MINI-ONLY ACCELERATION BUFF
+	
+
 	print("Child READY loaded:", car_name)

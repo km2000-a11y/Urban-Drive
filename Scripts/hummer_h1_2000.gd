@@ -25,5 +25,11 @@ func _ready():
 	shift_up_rpm = 3200
 	shift_down_rpm = 1500
 
+	# DISTINCT HANDLING PROFILE
+	handling_type = "luxury_boat"
+
+	# APPLY STATS + HANDLING
 	apply_stats()
+	apply_handling_profile()
+
 	print("Child READY loaded:", car_name)

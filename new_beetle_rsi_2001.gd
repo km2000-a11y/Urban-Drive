@@ -19,7 +19,11 @@ func _ready():
 	lateral_friction = 1.20
 	transmission = "Four-wheel drive"
 
-	# AWD-friendly gearing (grippy, stable)
-	
+	# DISTINCT HANDLING PROFILE
+	handling_type = "awd_grip"
+
+	# APPLY STATS + HANDLING
 	apply_stats()
+	apply_handling_profile()
+
 	print("Child READY loaded:", car_name)
