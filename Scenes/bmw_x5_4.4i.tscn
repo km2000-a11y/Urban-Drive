@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://dro1osynp8vem"]
 
-[ext_resource type="Script" uid="uid://cwm67ct5bf8tv" path="res://Scenes/bmw_x5_4.4i_2003.gd" id="1_w546f"]
+[ext_resource type="Script" uid="uid://cwm67ct5bf8tv" path="res://Scripts/bmw_x5_4.4i_2003.gd" id="1_w546f"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_qiyv2"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_wvydp"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="4_cah42"]

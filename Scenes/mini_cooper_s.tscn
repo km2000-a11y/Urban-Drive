@@ -1,10 +1,50 @@
-[gd_scene load_steps=38 format=3 uid="uid://dq5h6hmf1n7rf"]
+[gd_scene load_steps=38 format=3 uid="uid://cc018vng4l68e"]
 
-[ext_resource type="Script" uid="uid://dympqogqfcqkr" path="res://Scripts/mini_cooper_s_2012.gd" id="1_08euy"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_grg88"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_ypi0l"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="4_a701d"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_v0kf0"]
+
+[sub_resource type="GDScript" id="GDScript_dxrdl"]
+script/source = "extends CarController
+
+# COSMETIC INFO (UI only)
+var car_name := \"Comet Spryte\"
+var country := \"UK\"
+var engine := \"L4 1.6L\"
+var weight_kg := 1210
+var zero_to_hundred_display := 6.90
+
+func _ready():
+	# GAMEPLAY STATS
+	mass = 1210.0
+	horsepower = 181
+	max_rpm = 6500.0
+	zero_to_hundred = 6.9
+	top_speed_kmh = 225
+	turn_speed = 3.0
+	brake_strength = 12.0
+	lateral_friction = 1.12
+	transmission = \"Front wheel drive\"
+
+	# SHORTER, HOT HATCH GEARS
+	gear_count = 6
+	gear_ratios = [3.8, 2.4, 1.8, 1.4, 1.15, 0.95]
+	shift_up_rpm = 6200
+	shift_down_rpm = 2000
+
+	# DISTINCT HANDLING PROFILE
+	handling_type = \"fwd_hot_hatch\"
+
+	# APPLY BASE STATS + HANDLING
+	apply_stats()
+	apply_handling_profile()
+
+	# MINI-ONLY ACCELERATION BUFF
+	
+
+	print(\"Child READY loaded:\", car_name)
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfu50"]
 albedo_color = Color(1, 1, 0, 1)
@@ -118,7 +158,7 @@ size = Vector2(0.5, 0.5)
 [node name="Mini Cooper S" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_08euy")
+script = SubResource("GDScript_dxrdl")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)

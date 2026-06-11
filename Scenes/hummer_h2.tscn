@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://dsw58u40tvuob"]
 
-[ext_resource type="Script" uid="uid://c5oleqv1hg6ua" path="res://Scenes/hummer_h2_2004.gd" id="1_fcoua"]
+[ext_resource type="Script" uid="uid://c5oleqv1hg6ua" path="res://Scripts/hummer_h2_2004.gd" id="1_fcoua"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_bh44a"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_2o1hv"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="4_qb1gu"]

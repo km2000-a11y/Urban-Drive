@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://bgyjhumjxsgik"]
 
-[ext_resource type="Script" uid="uid://gvooraosokcf" path="res://Scenes/lexus_gs350_f_sport_2013.gd" id="1_w2s4m"]
+[ext_resource type="Script" uid="uid://gvooraosokcf" path="res://Scripts/lexus_gs350_f_sport_2013.gd" id="1_w2s4m"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_w6feq"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_acmvw"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_2yb3i"]

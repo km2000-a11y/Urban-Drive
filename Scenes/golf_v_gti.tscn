@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://c43ew0n3xvjie"]
 
-[ext_resource type="Script" uid="uid://b5septx0dqwth" path="res://Scenes/vw_golf_vi_r_2012.gd" id="1_mbbh6"]
+[ext_resource type="Script" uid="uid://b5septx0dqwth" path="res://Scripts/vw_golf_v_gti_2003.gd" id="1_mqa82"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_l8bej"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_gutwf"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_ehj30"]
@@ -98,10 +98,10 @@ color_ramp = SubResource("GradientTexture1D_nfu50")
 [sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
 size = Vector2(0.5, 0.5)
 
-[node name="GOLF VI R" type="CharacterBody3D"]
+[node name="GOLF V GTI" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_mbbh6")
+script = ExtResource("1_mqa82")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)

@@ -1,9 +1,36 @@
-[gd_scene load_steps=37 format=3 uid="uid://ddqsqld4vm2tw"]
+[gd_scene load_steps=37 format=3 uid="uid://bitexnmia2hni"]
 
-[ext_resource type="Script" uid="uid://6x022nlj3us0" path="res://Scripts/bmw_325ti_2002.gd" id="1_yw7ql"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_x1dwm"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_signy"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_1o7eg"]
+
+[sub_resource type="GDScript" id="GDScript_41wmj"]
+script/source = "extends CarController
+
+# COSMETIC INFO (UI only)
+var car_name := \"Eisenach Q‑3\"
+var country := \"Germany\"
+var engine := \"V6 2.5L\"
+var weight_kg := 1380
+var zero_to_hundred_display := 7.20
+
+func _ready():
+	# GAMEPLAY STATS
+	mass = 1380.0
+	horsepower = 192
+	max_rpm = 6500.0
+	zero_to_hundred = 7.2
+	top_speed_kmh = 240
+	turn_speed = 2.7
+	brake_strength = 11.0
+	lateral_friction = 1.05
+	transmission = \"Rear wheel drive\"
+
+	handling_type = \"light_sport\"
+
+	apply_stats()
+	apply_handling_profile()
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -116,7 +143,7 @@ size = Vector2(0.5, 0.5)
 [node name="BMW 325TI" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_yw7ql")
+script = SubResource("GDScript_41wmj")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
