@@ -17,7 +17,7 @@ func _ready():
 	turn_speed = 3.0
 	brake_strength = 12.0
 	lateral_friction = 1.12
-	transmission = "Front-wheel drive"
+	transmission = "Front wheel drive"
 
 	# SHORTER, HOT HATCH GEARS
 	gear_count = 6

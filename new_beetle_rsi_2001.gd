@@ -17,7 +17,7 @@ func _ready():
 	turn_speed = 2.5
 	brake_strength = 20.0
 	lateral_friction = 1.20
-	transmission = "Four-wheel drive"
+	transmission = "Four wheel drive"
 
 	# DISTINCT HANDLING PROFILE
 	handling_type = "awd_grip"

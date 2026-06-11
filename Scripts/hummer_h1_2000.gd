@@ -17,7 +17,7 @@ func _ready():
 	turn_speed = 1.4
 	brake_strength = 9.0
 	lateral_friction = 0.92
-	transmission = "Four-wheel drive"
+	transmission = "Four wheel drive"
 
 	# H1-style gearing (torque-heavy, low-speed grunt)
 	gear_count = 4
