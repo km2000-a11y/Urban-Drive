@@ -1,14 +1,14 @@
 CarController
 MeshInstance3D
+CharacterBody3D
+Label
 SpringArm3D
 TextureRect
-Label
 Control
 CanvasLayer
 AudioStreamPlayer3D
 GPUParticles3D
 Node3D
-CharacterBody3D
 CollisionShape3D
 VehicleWheel3D
 VehicleBody3D

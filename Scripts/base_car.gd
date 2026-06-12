@@ -393,6 +393,8 @@ func _physics_process(delta: float) -> void:
 
 			velocity += impulse / mass
 			other.velocity -= impulse / other.mass
+	Global.speed = speed_kmh
+	Global.gear = current_gear
 
 	# DEBUG
 	if debug_enabled:
