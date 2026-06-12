@@ -18,7 +18,10 @@ var top_speed := 60.0
 var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
-var transmission := "Front-wheel drive"
+var transmission := "Front-wheel drive" # "Front-wheel drive", "Rear-wheel drive", "Four-wheel drive"
+
+# DIESEL FLAG
+var is_diesel := false
 
 # ENGINE
 var horsepower := 150.0
@@ -65,8 +68,13 @@ var handling_type := "balanced"
 #  APPLY STATS
 # ============================================================
 func apply_stats():
-	acceleration_calc = (27.78 / zero_to_hundred)*2.0
+	acceleration_calc = (27.78 / zero_to_hundred) * 2.0
 	torque = (horsepower * 5252.0) / max_rpm
+
+	# DIESEL TORQUE MULTIPLIER
+	if is_diesel:
+		torque *= 1.6
+
 	top_speed = top_speed_kmh / 3.6
 
 	# PERFORMANCE POINTS
@@ -191,7 +199,7 @@ func _physics_process(delta: float) -> void:
 	right = transform.basis.x.normalized()
 
 	# ------------------------------------------------------------
-	# RPM & GEARS
+	# COLLISION CHECKS
 	# ------------------------------------------------------------
 	var wall_block := false
 	var wall_scrape := false
@@ -206,26 +214,20 @@ func _physics_process(delta: float) -> void:
 		if abs(right.dot(n)) > 0.55:
 			wall_scrape = true
 
-# ------------------------------------------------------------
-# COLLISION SLOWDOWN (NEW)
-# ------------------------------------------------------------
+	# COLLISION SLOWDOWN
 	if wall_block:
-		# Heavy frontal impact slowdown
-		var impact_strength :float= clamp(speed_kmh / 120.0, 0.2, 1.0)
+		var impact_strength :float = clamp(speed_kmh / 120.0, 0.2, 1.0)
 		velocity *= (1.0 - impact_strength * 0.55)
-
-		# Extra bounce-back feeling
 		velocity -= forward * (impact_strength * 4.0)
 
 	if wall_scrape:
-		# Gentle slowdown when scraping walls
-		var scrape_strength :float= clamp(speed_kmh / 220.0, 0.05, 0.25)
+		var scrape_strength :float = clamp(speed_kmh / 220.0, 0.05, 0.25)
 		velocity -= right * (scrape_strength * 6.0)
-
-		# Reduce speed slightly
 		velocity *= (1.0 - scrape_strength * 0.15)
 
-
+	# ------------------------------------------------------------
+	# RPM & GEARS
+	# ------------------------------------------------------------
 	if speed_kmh < 2.0:
 		if accel > 0.1:
 			rpm = lerp(rpm, idle_rpm + 2500.0, delta * 2.5)
@@ -240,15 +242,28 @@ func _physics_process(delta: float) -> void:
 
 	var torque_factor := rpm / max_rpm
 
-	# Traction factor by drivetrain
+	# ------------------------------------------------------------
+	# DRIVETRAIN BEHAVIOR (FWD / RWD / 4WD)
+	# ------------------------------------------------------------
 	var traction_factor := 1.0
+	var throttle_steer := 0.0
+	var launch_grip := 1.0
+
 	match transmission:
 		"Front-wheel drive":
-			traction_factor = 0.94
+			traction_factor = 0.90
+			throttle_steer = -steering * 0.35   # FWD pulls wide under throttle
+			launch_grip = 1.15                  # strong initial bite
+
 		"Rear-wheel drive":
-			traction_factor = 1.0
+			traction_factor = 1.05
+			throttle_steer = steering * 0.55    # RWD rotates on throttle
+			launch_grip = 0.85                  # easier to spin
+
 		"Four-wheel drive":
-			traction_factor = 1.15
+			traction_factor = 1.20
+			throttle_steer = steering * 0.25    # mild rotation
+			launch_grip = 1.35                  # monster launch
 
 	# ------------------------------------------------------------
 	# ACCELERATION / ENGINE BRAKE
@@ -260,13 +275,16 @@ func _physics_process(delta: float) -> void:
 		if current_gear == 1:
 			launch_boost = 1.4
 
-		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost
+		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost * launch_grip
 
 		# EXTRA FWD LAUNCH HELP
 		if transmission == "Front-wheel drive" and current_gear == 1:
 			accel_force *= 1.25
 
 		velocity += forward * accel_force * delta
+
+		# THROTTLE-STEER EFFECT
+		velocity = velocity.rotated(Vector3.UP, throttle_steer * delta)
 	else:
 		var flat := Vector3(velocity.x, 0, velocity.z)
 
@@ -320,11 +338,17 @@ func _physics_process(delta: float) -> void:
 	if drifting:
 		match transmission:
 			"Front-wheel drive":
-				rotation.y += steering * 0.8 * delta
+				# FWD drift = pull out of angle, less rotation
+				rotation.y += steering * 0.6 * delta
+				velocity += right * (-steering * 2.0) * delta
 			"Rear-wheel drive":
-				velocity += right * steering * 4.0 * delta
+				# RWD drift = big angle, throttle steer
+				velocity += right * (steering * 6.0) * delta
+				rotation.y += steering * 0.25 * delta
 			"Four-wheel drive":
-				velocity += right * steering * 2.0 * delta
+				# AWD drift = shallow, stable
+				velocity += right * (steering * 3.0) * delta
+				rotation.y += steering * 0.15 * delta
 
 	# ------------------------------------------------------------
 	# TOP SPEED LIMIT
@@ -371,4 +395,5 @@ func _physics_process(delta: float) -> void:
 			other.velocity -= impulse / other.mass
 
 	# DEBUG
-	print("PP: ", performance_points)
+	if debug_enabled:
+		print("PP: ", performance_points, " | RPM: ", rpm, " | Gear: ", current_gear, " | Drivetrain: ", transmission, " | Diesel: ", is_diesel)

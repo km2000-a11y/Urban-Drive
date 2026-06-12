@@ -27,6 +27,7 @@ func _ready():
 
 	# DISTINCT HANDLING PROFILE
 	handling_type = "luxury_boat"
+	is_diesel=true
 
 	# APPLY STATS + HANDLING
 	apply_stats()
