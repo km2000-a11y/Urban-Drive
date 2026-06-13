@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://w2tv6db2io6j"]
 
-[ext_resource type="Script" uid="uid://cal1vadg8ruea" path="res://Scenes/morgan_aero_8.gd" id="1_y0xy8"]
+[ext_resource type="Script" uid="uid://cal1vadg8ruea" path="res://Scripts/morgan_aero_8.gd" id="1_y0xy8"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_s080k"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_1wrt1"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_4nw15"]

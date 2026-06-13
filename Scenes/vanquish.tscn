@@ -1,10 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://bh6i0v8m5aont"]
+[gd_scene load_steps=36 format=3 uid="uid://b41y5h0qmn5kf"]
 
-[ext_resource type="Script" uid="uid://c7j4r626feeqh" path="res://Scripts/aston_db9_2007.gd" id="1_mmf8n"]
-[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_tf7do"]
-[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_ati5w"]
-[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_q8w4g"]
-[ext_resource type="Script" uid="uid://d1mqntnj4csbu" path="res://Scenes/camera_rig.gd" id="5_jl4au"]
+[ext_resource type="Script" uid="uid://d055xoa0xwn0k" path="res://Scripts/vanquish_2002.gd" id="1_c4wk5"]
+[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_6qnqg"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_yegrn"]
+[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_4jsms"]
+[ext_resource type="Script" uid="uid://d1mqntnj4csbu" path="res://Scenes/camera_rig.gd" id="5_1uuev"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -15,13 +15,13 @@ bottom_radius = 0.15
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_emdka"]
-albedo_color = Color(0.180392, 0.211765, 0.25098, 1)
+albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mmf8n"]
 size = Vector3(0.8, 0.3, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf7do"]
-albedo_color = Color(0.180392, 0.211765, 0.25098, 1)
+albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ati5w"]
 size = Vector3(0.8, 0.1, 0.5)
@@ -30,24 +30,24 @@ size = Vector3(0.8, 0.1, 0.5)
 albedo_color = Color(1, 0.752941, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jl4au"]
-top_radius = 0.04
-bottom_radius = 0.04
+top_radius = 0.055
+bottom_radius = 0.07
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03bty"]
-albedo_color = Color(0.180392, 0.211765, 0.25098, 1)
+albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_f36x5"]
 size = Vector3(0.1, 0.35, 0.75)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqext"]
-albedo_color = Color(0.180392, 0.211765, 0.25098, 1)
+albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_eemg7"]
 size = Vector3(0.8, 0.3, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpcag"]
-albedo_color = Color(0.180392, 0.211765, 0.25098, 1)
+albedo_color = Color(0.752941, 0.752941, 0.752941, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_l215d"]
 size = Vector3(0.8, 0.1, 0.7)
@@ -69,15 +69,15 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_1oqrs"]
 left_to_right = 0.1
-size = Vector3(0.3, 0.17, 0.1)
+size = Vector3(0.2, 0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfcoi"]
 albedo_color = Color(0.752941, 0, 0.2, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xw5is"]
-top_radius = 0.04
-bottom_radius = 0.04
-height = 0.15
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ati5w"]
 albedo_color = Color(0, 0, 0, 1)
@@ -110,10 +110,10 @@ color_ramp = SubResource("GradientTexture1D_nfu50")
 [sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
 size = Vector2(0.5, 0.5)
 
-[node name="ASTON DB9" type="CharacterBody3D"]
+[node name="VANQUISH" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_mmf8n")
+script = ExtResource("1_c4wk5")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
@@ -171,7 +171,7 @@ material_override = SubResource("StandardMaterial3D_q8w4g")
 mesh = SubResource("CylinderMesh_jl4au")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.289296, 0.257441, 1.32957)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.289296, 0.257441, 1.32957)
 material_override = SubResource("StandardMaterial3D_q8w4g")
 mesh = SubResource("CylinderMesh_jl4au")
 
@@ -229,7 +229,7 @@ material_override = SubResource("StandardMaterial3D_unmbb")
 mesh = SubResource("PrismMesh_1oqrs")
 
 [node name="MeshInstance3D16" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.286687, 0.402186, -0.135408)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.286687, 0.36053, -0.135408)
 material_override = SubResource("StandardMaterial3D_nfcoi")
 mesh = SubResource("CylinderMesh_xw5is")
 
@@ -264,17 +264,17 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_tf7do")
+stream = ExtResource("2_6qnqg")
 max_polyphony = 4
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_ati5w")
+stream = ExtResource("3_yegrn")
 
 [node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_q8w4g")
+stream = ExtResource("4_4jsms")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("follow_target")]
-script = ExtResource("5_jl4au")
+script = ExtResource("5_1uuev")
 follow_target = NodePath("..")

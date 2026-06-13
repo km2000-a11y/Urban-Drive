@@ -1,6 +1,6 @@
 [gd_scene load_steps=47 format=3 uid="uid://bosrka0n87x30"]
 
-[ext_resource type="Script" uid="uid://bl6s5amr84tgr" path="res://Scenes/jaguar_xkr_volante_2004.gd" id="1_ms65m"]
+[ext_resource type="Script" uid="uid://bl6s5amr84tgr" path="res://Scripts/jaguar_xkr_volante_2004.gd" id="1_ms65m"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_a4yli"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_27ur1"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_bfyhm"]

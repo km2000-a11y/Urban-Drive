@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://cfm7jcsshwba6"]
 
-[ext_resource type="Script" uid="uid://6dd5tko82okh" path="res://Scenes/lexus_ls_430_2003.gd" id="1_3mclm"]
+[ext_resource type="Script" uid="uid://6dd5tko82okh" path="res://Scripts/lexus_ls_430_2003.gd" id="1_3mclm"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_lrhpf"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_kqt6i"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_uwb4v"]

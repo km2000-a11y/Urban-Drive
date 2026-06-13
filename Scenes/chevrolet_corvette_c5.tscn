@@ -1,6 +1,6 @@
 [gd_scene load_steps=47 format=3 uid="uid://cbpmgn3ce63dq"]
 
-[ext_resource type="Script" uid="uid://b2jd3l85l4b84" path="res://Scenes/chevrolet_corvette_c5_1998.gd" id="1_g1wri"]
+[ext_resource type="Script" uid="uid://b2jd3l85l4b84" path="res://Scripts/chevrolet_corvette_c5_1998.gd" id="1_g1wri"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_yf66y"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_62jjs"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_fk7pn"]

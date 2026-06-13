@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://un78slbsud25"]
 
-[ext_resource type="Script" uid="uid://ctq74b56dnymy" path="res://Scenes/vw_touareg_v10_tdi_2007.gd" id="1_vh25x"]
+[ext_resource type="Script" uid="uid://ctq74b56dnymy" path="res://Scripts/vw_touareg_v10_tdi_2007.gd" id="1_vh25x"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_iliql"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_qf37p"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="4_f1w3s"]
