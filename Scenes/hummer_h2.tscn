@@ -30,7 +30,7 @@ size = Vector3(1.4, 0.2, 0.7)
 albedo_color = Color(1, 0.843137, 0.00392157, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2o1hv"]
-size = Vector3(1.4, 1, 2.2)
+size = Vector3(1.4, 0.9, 2.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qb1gu"]
 albedo_color = Color(0, 0, 0, 1)

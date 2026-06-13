@@ -1,5 +1,4 @@
 res://main.tscn
-res://Scenes/aston_db9_2007.gd
 res://Tracks/track.tscn
 res://Scenes/mini_cooper_s.tscn
 res://Scenes/bmw_325ti.tscn
@@ -19,8 +18,5 @@ res://Scenes/chevrolet_corvette_c5.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/aston_db9.tscn
 res://Scenes/vanquish.tscn
-res://Scenes/vanquish_2002.gd
 res://Scenes/granturismo.tscn
-res://Scenes/granturismo_s_2009.gd
 res://Scenes/bmw_z4.tscn
-res://Scenes/bmw_z4_sdrive35is_2011.gd
