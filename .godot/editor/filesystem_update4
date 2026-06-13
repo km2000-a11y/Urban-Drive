@@ -1,4 +1,3 @@
-res://Scenes/lexus_gs350_f.tscn
 res://main.tscn
 res://Tracks/track.tscn
 res://Scenes/mini_cooper_s.tscn
@@ -8,13 +7,13 @@ res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
 res://Scenes/speedometer.tscn
 res://Scenes/hummer_h2.tscn
-res://Scenes/bmw_x5_4.4i.tscn
 res://Scenes/bmw_750il.tscn
 res://Scenes/golf_v_gti.tscn
-res://global.gd
-res://Scripts/speedometer.gd
-res://Scripts/base_car.gd
 res://Scenes/vw_touareg_v10.tscn
-res://Scenes/vw_touareg_v10_tdi_2007.gd
 res://Scenes/lexus_sl430.tscn
-res://Scenes/lexus_ls_430_2003.gd
+res://Scenes/nissan_350z.tscn
+res://Scenes/lotus_exige_s.tscn
+res://Scenes/jaguar_xkr_volante.tscn
+res://Scenes/jaguar_xkr_volante_2004.gd
+res://Scenes/chevrolet_corvette_c5.tscn
+res://Scenes/chevrolet_corvette_c5_1998.gd

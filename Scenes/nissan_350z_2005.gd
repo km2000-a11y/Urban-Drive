@@ -1,0 +1,26 @@
+extends CarController
+
+# COSMETIC INFO (UI only)
+var car_name := "Zenith Horizon"
+var country := "Japan"
+var engine := "V6 3.5L"
+var weight_kg := 1460
+var zero_to_hundred_display := 5.90
+
+func _ready():
+	# GAMEPLAY STATS
+	mass = 1460.0
+	horsepower = 287
+	max_rpm = 6500.0
+	zero_to_hundred = 5.9
+	top_speed_kmh = 250
+	turn_speed = 2.9
+	brake_strength = 20.0
+	lateral_friction = 1.12
+	transmission = "Rear-wheel drive"
+
+	handling_type = "light_sport"
+
+	apply_stats()
+	apply_handling_profile()
+	print("Child READY loaded:", car_name)
