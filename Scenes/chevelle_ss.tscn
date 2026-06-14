@@ -1,10 +1,10 @@
 [gd_scene load_steps=36 format=3 uid="uid://bnsxtjfepabvf"]
 
-[ext_resource type="Script" uid="uid://bgysrb1eh8kea" path="res://Scenes/chevelle_ss_454_1970.gd" id="1_012ba"]
-[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_xntp1"]
-[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_js0o8"]
-[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_ospeu"]
-[ext_resource type="Script" uid="uid://d1mqntnj4csbu" path="res://Scenes/camera_rig.gd" id="5_m1g4q"]
+[ext_resource type="Script" uid="uid://bgysrb1eh8kea" path="res://Scenes/chevelle_ss_454_1970.gd" id="1_webrg"]
+[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_n3hin"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_2iasq"]
+[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_wh84s"]
+[ext_resource type="Script" uid="uid://d1mqntnj4csbu" path="res://Scenes/camera_rig.gd" id="5_h78xk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -111,7 +111,7 @@ size = Vector2(0.5, 0.5)
 [node name="CHEVELLE SS" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_012ba")
+script = ExtResource("1_webrg")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
@@ -184,7 +184,7 @@ material_override = SubResource("StandardMaterial3D_3fqkc")
 mesh = SubResource("BoxMesh_lc3ty")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -1.20865e-07, 0.55962, 0.800452)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -1.20865e-07, 0.518945, 0.800452)
 material_override = SubResource("StandardMaterial3D_3xsm0")
 mesh = SubResource("BoxMesh_tj00k")
 
@@ -269,17 +269,17 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_xntp1")
+stream = ExtResource("2_n3hin")
 max_polyphony = 4
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_js0o8")
+stream = ExtResource("3_2iasq")
 
 [node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_ospeu")
+stream = ExtResource("4_wh84s")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("follow_target")]
-script = ExtResource("5_m1g4q")
+script = ExtResource("5_h78xk")
 follow_target = NodePath("..")
