@@ -184,7 +184,7 @@ func _physics_process(delta: float) -> void:
 		var drift_steer := steering * (turn_speed * 0.35)
 		rotation.y += drift_steer * delta
 
-		var slip_strength := 4.0 * drift_factor
+		var slip_strength := 2.0 * drift_factor
 		velocity = velocity.rotated(Vector3.UP, -steer * slip_strength * delta)
 
 		lateral_friction = lerp(1.2, 0.12, drift_factor)
@@ -329,7 +329,7 @@ func _physics_process(delta: float) -> void:
 	# LATERAL FRICTION (SLIDE CONTROL)
 	# ------------------------------------------------------------
 	var lateral := right.dot(velocity)
-	var friction_strength: float = lerp(lateral_friction, 0.25, drift_factor)
+	var friction_strength: float = lerp(lateral_friction, 0.7, drift_factor)
 
 	if abs(lateral) > 0.1:
 		velocity -= right * lateral * (friction_strength * 0.15) * delta
