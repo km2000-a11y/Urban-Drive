@@ -1,7 +1,6 @@
+res://Scenes/bmw_z4.tscn
 res://main.tscn
 res://Tracks/track.tscn
-res://Scenes/mini_cooper_s.tscn
-res://Scenes/bmw_325ti.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -19,4 +18,3 @@ res://Scenes/morgan_aero_8.tscn
 res://Scenes/aston_db9.tscn
 res://Scenes/vanquish.tscn
 res://Scenes/granturismo.tscn
-res://Scenes/bmw_z4.tscn
