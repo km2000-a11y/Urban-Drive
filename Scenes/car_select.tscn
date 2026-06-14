@@ -1,3 +1,97 @@
-[gd_scene format=3 uid="uid://d3nevfhxlkrec"]
+[gd_scene load_steps=2 format=3 uid="uid://d3nevfhxlkrec"]
+
+[ext_resource type="Script" uid="uid://bqdrqyuuwy61y" path="res://Scenes/car_select.gd" id="1_74av0"]
 
 [node name="CarSelect" type="CanvasLayer"]
+script = ExtResource("1_74av0")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 241.0
+offset_bottom = 374.0
+
+[node name="4x4SUV" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "4x4 SUV"
+
+[node name="CompactCars" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Compact Cars"
+
+[node name="MuscleCars" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Muslce Cars"
+
+[node name="Sedans" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sedans"
+
+[node name="UrbanRacers" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Urban Racers"
+
+[node name="SportCoupe" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sport Coupe"
+
+[node name="Supercars" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Supercars"
+
+[node name="Cars" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 269.0
+offset_right = 1085.0
+offset_bottom = 88.0
+
+[node name="CarName" type="Label" parent="Control/Cars"]
+layout_mode = 2
+
+[node name="CarStats" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 744.0
+offset_top = 389.0
+offset_right = 1173.0
+offset_bottom = 642.0
+
+[node name="PPLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="CountryLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="WeightLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="ZeroToHundredLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="EngineLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="TransmissionLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[connection signal="pressed" from="Control/VBoxContainer/4x4SUV" to="." method="_on_4x4suv_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/CompactCars" to="." method="_on_compact_cars_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/MuscleCars" to="." method="_on_muscle_cars_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Sedans" to="." method="_on_sedans_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/UrbanRacers" to="." method="_on_urban_racers_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/SportCoupe" to="." method="_on_sport_coupe_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Supercars" to="." method="_on_supercars_pressed"]
