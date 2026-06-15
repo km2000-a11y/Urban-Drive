@@ -12,7 +12,7 @@ var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Straeda Pitbull"]
 var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Berkshire Blunt", "Brutus Stingray", "Kestrel Speedster"]
-var sedans_list = ["Eisenach Monarch", "Kuro Vault", "Schroder Kaiser"]
+var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Zephyr V6", "Kuro Vault"]
 var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Eisenach Roadstar"]
 var supercars_list = ["Linetti Terror", "Kestrel Battleaxe", "Linetti Shepherd", "Linetti Firestorm"]
 
@@ -22,7 +22,7 @@ var supercars_list = ["Linetti Terror", "Kestrel Battleaxe", "Linetti Shepherd",
 
 var suv = {
 	"Colossus Titan Max":["301 PP","Country: USA","HP: 195","WEIGHT: 3500 KG","0-100 KM/H: 13.5s","TOP SPEED: 170 KM/H","ENGINE: V8 6.5L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Colossus Behemoth":["399 PP","Country: USA","HP: 316","WEIGHT: 2900 KG","0-100 KM/H: 9.3s","TOP SPEED: 208 KM/H","ENGINE: V8 6.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
+	"Colossus Behemoth":["398 PP","Country: USA","HP: 316","WEIGHT: 2900 KG","0-100 KM/H: 10.1s","TOP SPEED: 208 KM/H","ENGINE: V8 6.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
 	"Straeda Pitbull":["436 PP","Country: Germany","HP: 309","WEIGHT: 2520 KG","0-100 KM/H: 7.8s","TOP SPEED: 225 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"]
 }
 
@@ -47,8 +47,9 @@ var urban_racers = {
 
 var sedans = {
 	"Eisenach Monarch":["523 PP","Country: Germany","HP: 322","WEIGHT: 2050 KG","0-100 KM/H: 6.6s","TOP SPEED: 265 KM/H","ENGINE: V12 5.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Schroder Kaiser":["521 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 250 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"]
+	"Schroder Kaiser":["521 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 250 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
+	"Kuro Zephyr V6":["512 PP","Country: Japan","HP: 272","WEIGHT: 1624 KG","0-100 KM/H: 5.8s","TOP SPEED: 242 KM/H","ENGINE: V6 3.5L","TRANSMISSION: FRONT-WHEEL DRIVE"],
+	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 var sport = {
@@ -84,8 +85,9 @@ var car_scene_paths = {
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Brutus Mauler": "res://Scenes/chevelle_ss.tscn",
 	"Eisenach Monarch": "res://Scenes/bmw_750il.tscn",
-	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
+	"Kuro Zephyr V6":"res://Scenes/lexus_es350.tscn",
+	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 	"Eisenach Roadstar":"res://Scenes/bmw_z4.tscn",

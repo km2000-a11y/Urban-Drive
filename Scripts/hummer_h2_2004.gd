@@ -5,14 +5,14 @@ var car_name := "Colossus Behemoth"
 var country := "USA"
 var engine := "V8 6.0L"
 var weight_kg := 2900
-var zero_to_hundred_display := 9.30
+var zero_to_hundred_display := 10.10
 
 func _ready():
 	# GAMEPLAY STATS
 	mass = 2900.0
 	horsepower = 316
 	max_rpm = 5200.0
-	zero_to_hundred = 9.3
+	zero_to_hundred = 10.1
 	top_speed_kmh = 208
 	turn_speed = 1.8
 	brake_strength = 14.0

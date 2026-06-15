@@ -68,7 +68,7 @@ var handling_type := "balanced"
 #  APPLY STATS
 # ============================================================
 func apply_stats():
-	acceleration_calc = (27.78 / zero_to_hundred) * 2.35
+	acceleration_calc = (27.78 / zero_to_hundred) * 3.0
 	torque = (horsepower * 5252.0) / max_rpm
 
 	# DIESEL TORQUE MULTIPLIER

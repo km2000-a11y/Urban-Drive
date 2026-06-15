@@ -1,7 +1,9 @@
-Label
 Button
-Node3D
+SubViewport
+SubViewportContainer
 CarController
+Label
+Node3D
 Node
 VBoxContainer
 TextEdit
@@ -10,5 +12,3 @@ CanvasLayer
 MeshInstance3D
 CharacterBody3D
 SpringArm3D
-TextureRect
-AudioStreamPlayer3D
