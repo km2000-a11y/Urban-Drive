@@ -1,12 +1,12 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1781527493
+::res://::1781533351
 cars.gd::GDScript/GDScript::4638379143861819802::1781502163::0::1::::<>Node<><>0<>0<><>::
 export_presets.cfg::TextFile/TextFile::-1::1780771107::0::1::::<><><>0<>0<><>::
 global.gd::GDScript/GDScript::4048092237940241440::1781265675::0::1::::<>Node<><>0<>0<><>::
 main.gd::GDScript/GDScript::5875087716934220587::1781502163::0::1::::<>Node<><>0<>0<><>::
 main.tscn::PackedScene/PackedScene::6405392885157970654::1781527038::0::1::::<><><>0<>0<><>::uid://b0rspyplkxvyp::::res://Tracks/track.tscn<>uid://cpx63o2nbliu2::::res://main.gd<>uid://bhj15vaqmgc72::::res://Scenes/speedometer.tscn
 new_beetle_rsi_2001.gd::GDScript/GDScript::4907014386427882763::1781194743::0::1::::<>CarController<><>0<>0<><>::
-::res://Scenes/::1781527411
+::res://Scenes/::1781527534
 aston_db9.tscn::PackedScene/PackedScene::2942269834879165477::1781527039::0::1::::<><><>0<>0<><>::uid://c7j4r626feeqh::::res://Scripts/aston_db9_2007.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3<>uid://d1mqntnj4csbu::::res://Scenes/camera_rig.gd
 audi_a8.tscn::PackedScene/PackedScene::260973396008591591::1781527040::0::1::::<><><>0<>0<><>::uid://c3pyr47qwkgbe::::res://Scripts/audi_a8_42_2004.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_tt.tscn::PackedScene/PackedScene::2303009468386700198::1781527038::0::1::::<><><>0<>0<><>::uid://b0isf7hyx4jdo::::res://Scripts/audi_tt_roadster_32_2004.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3<>uid://d1mqntnj4csbu::::res://Scenes/camera_rig.gd
@@ -25,7 +25,7 @@ gt500.tscn::PackedScene/PackedScene::6603888115369881017::1781527040::0::1::::<>
 hummer_h1.tscn::PackedScene/PackedScene::7113350852199427499::1781527038::0::1::::<><><>0<>0<><>::uid://d2cuwdh8tfis8::::res://Scripts/hummer_h1_2000.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://cpontoff1o0wi::::res://SFX/crash.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 hummer_h2.tscn::PackedScene/PackedScene::8469959084563512549::1781527038::0::1::::<><><>0<>0<><>::uid://c5oleqv1hg6ua::::res://Scripts/hummer_h2_2004.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://cpontoff1o0wi::::res://SFX/crash.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 jaguar_xkr_volante.tscn::PackedScene/PackedScene::3407273380270864541::1781527039::0::1::::<><><>0<>0<><>::uid://bl6s5amr84tgr::::res://Scripts/jaguar_xkr_volante_2004.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3<>uid://d1mqntnj4csbu::::res://Scenes/camera_rig.gd
-lexus_is350.tscn::PackedScene::8833175450894235600::1781527411::0::1::::<><><>0<>0<><>::uid://cylet5y5ljolj::::res://Scenes/lexus_is350_2009.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
+lexus_is350.tscn::PackedScene::8833175450894235600::1781527534::0::1::::<><><>0<>0<><>::uid://cylet5y5ljolj::::res://Scenes/lexus_is350_2009.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 lexus_is350_2009.gd::GDScript/GDScript::6480360182202838767::1781526745::0::1::::<>CarController<><>0<>0<><>::
 lexus_ls430.tscn::PackedScene/PackedScene::5150517268219989891::1781527039::0::1::::<><><>0<>0<><>::uid://6dd5tko82okh::::res://Scripts/lexus_ls_430_2003.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 lexus_lx470.tscn::PackedScene/PackedScene::5716238804237328439::1781527040::0::1::::<><><>0<>0<><>::uid://f2chpmrpwgv6::::res://Scenes/lexus_lx_470_2004.gd<>uid://cvcst7i255e7m::::res://SFX/rev.mp3<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://cpontoff1o0wi::::res://SFX/crash.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
