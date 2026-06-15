@@ -48,7 +48,7 @@ var urban_racers = {
 var sedans = {
 	"Eisenach Monarch":["523 PP","Country: Germany","HP: 322","WEIGHT: 2050 KG","0-100 KM/H: 6.6s","TOP SPEED: 265 KM/H","ENGINE: V12 5.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Schroder Kaiser":["521 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 250 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Kuro Zephyr V6":["512 PP","Country: Japan","HP: 272","WEIGHT: 1624 KG","0-100 KM/H: 5.8s","TOP SPEED: 242 KM/H","ENGINE: V6 3.5L","TRANSMISSION: FRONT-WHEEL DRIVE"],
+	"Kuro Zephyr V6":["525 PP","Country: Japan","HP: 306","WEIGHT: 1600 KG","0-100 KM/H: 5.6s","TOP SPEED: 250 KM/H","ENGINE: V6 3.5L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
@@ -63,7 +63,7 @@ var supercars = {
 	"Linetti Terror":["768 PP","Country: Italy","HP: 572","WEIGHT: 1630 KG","0-100 KM/H: 3.7s","TOP SPEED: 330 KM/H","ENGINE: V12 6.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
 	"Kestrel Battleaxe":["739 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.5s","TOP SPEED: 298 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Linetti Shepherd":["726 PP","Country: Italy","HP: 500","WEIGHT: 1430 KG","0-100 KM/H: 4.2s","TOP SPEED: 305 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: FOUR-WHEEL DRIVE"]
 }
 
 # -------------------------
@@ -86,7 +86,7 @@ var car_scene_paths = {
 	"Brutus Mauler": "res://Scenes/chevelle_ss.tscn",
 	"Eisenach Monarch": "res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
-	"Kuro Zephyr V6":"res://Scenes/lexus_es350.tscn",
+	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
@@ -104,16 +104,6 @@ var car_scene_paths = {
 
 func update_car_ui(stats: Array, name: String):
 	print("UI update called for:", name)
-	print("CarName node:", $Control/Cars/CarName)
-	print("CarName:", $Control/Cars/CarName)
-	print("PPLabel:", $Control/CarStats/PPLabel)
-	print("CountryLabel:", $Control/CarStats/CountryLabel)
-	print("HPLabel:", $Control/CarStats/HPLabel)
-	print("WeightLabel:", $Control/CarStats/WeightLabel)
-	print("ZeroToHundredLabel:", $Control/CarStats/ZeroToHundredLabel)
-	print("TopSpeedLabel:", $Control/CarStats/TopSpeedLabel)
-	print("EngineLabel:", $Control/CarStats/EngineLabel)
-	print("TransmissionLabel:", $Control/CarStats/TransmissionLabel)
 	$Control/Cars/CarName.text = name
 	$Control/CarStats/PPLabel.text = stats[0]
 	$Control/CarStats/CountryLabel.text = stats[1]
@@ -123,12 +113,6 @@ func update_car_ui(stats: Array, name: String):
 	$Control/CarStats/TopSpeedLabel.text = stats[5]
 	$Control/CarStats/EngineLabel.text = stats[6]
 	$Control/CarStats/TransmissionLabel.text = stats[7]
-	
-	print("Updating UI for:", name)
-
-	print("CarName exists:", $Control/Cars/CarName)
-	print("PPLabel exists:", $Control/CarStats/PPLabel)
-
 
 # -------------------------
 # CLASS BUTTONS

@@ -1,9 +1,9 @@
 [gd_scene load_steps=33 format=3 uid="uid://dx34dyfmswcbw"]
 
-[ext_resource type="Script" uid="uid://cylet5y5ljolj" path="res://Scenes/lexus_es350_2009.gd" id="1_ygedt"]
-[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_26ql3"]
-[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_b08hy"]
-[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_bidcc"]
+[ext_resource type="Script" uid="uid://cylet5y5ljolj" path="res://Scenes/lexus_is350_2009.gd" id="1_op76e"]
+[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_6m1y3"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_45l8h"]
+[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_6r8be"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -26,7 +26,7 @@ size = Vector3(0.8, 0.1, 0.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5b1h"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wromi"]
-size = Vector3(0.1, 0.4, 0.8)
+size = Vector3(0.1, 0.4, 0.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu0u7"]
 
@@ -97,7 +97,7 @@ size = Vector2(0.5, 0.5)
 [node name="LEXUS ES350" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_ygedt")
+script = ExtResource("1_op76e")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
@@ -160,7 +160,7 @@ material_override = SubResource("StandardMaterial3D_b5b1h")
 mesh = SubResource("BoxMesh_wromi")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0565882, 0.416204, -0.4631)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0565882, 0.416204, -0.380736)
 material_override = SubResource("StandardMaterial3D_gu0u7")
 mesh = SubResource("BoxMesh_7iopj")
 
@@ -215,12 +215,12 @@ material_override = SubResource("StandardMaterial3D_8lu5v")
 mesh = SubResource("BoxMesh_bb72w")
 
 [node name="MeshInstance3D16" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19386, 0.504888, -0.572391)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19386, 0.504888, -0.509898)
 material_override = SubResource("StandardMaterial3D_7avg5")
 mesh = SubResource("BoxMesh_0cpdq")
 
 [node name="MeshInstance3D17" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319009, 0.504025, -0.560263)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319009, 0.504025, -0.478653)
 material_override = SubResource("StandardMaterial3D_7avg5")
 mesh = SubResource("BoxMesh_0cpdq")
 
@@ -245,13 +245,13 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_26ql3")
+stream = ExtResource("2_6m1y3")
 max_polyphony = 4
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_b08hy")
+stream = ExtResource("3_45l8h")
 
 [node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_bidcc")
+stream = ExtResource("4_6r8be")
