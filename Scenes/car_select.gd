@@ -101,6 +101,17 @@ var car_scene_paths = {
 # -------------------------
 
 func update_car_ui(stats: Array, name: String):
+	print("UI update called for:", name)
+	print("CarName node:", $Control/Cars/CarName)
+	print("CarName:", $Control/Cars/CarName)
+	print("PPLabel:", $Control/CarStats/PPLabel)
+	print("CountryLabel:", $Control/CarStats/CountryLabel)
+	print("HPLabel:", $Control/CarStats/HPLabel)
+	print("WeightLabel:", $Control/CarStats/WeightLabel)
+	print("ZeroToHundredLabel:", $Control/CarStats/ZeroToHundredLabel)
+	print("TopSpeedLabel:", $Control/CarStats/TopSpeedLabel)
+	print("EngineLabel:", $Control/CarStats/EngineLabel)
+	print("TransmissionLabel:", $Control/CarStats/TransmissionLabel)
 	$Control/Cars/CarName.text = name
 	$Control/CarStats/PPLabel.text = stats[0]
 	$Control/CarStats/CountryLabel.text = stats[1]
@@ -212,5 +223,5 @@ func switch_car(direction):
 # -------------------------
 
 func _on_select_pressed():
-	Global.selected_car = car_scene_paths[car_name]
+	Cars.selected_car = car_scene_paths[car_name]
 	get_tree().change_scene_to_file("res://main.tscn")

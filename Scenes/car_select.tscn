@@ -62,10 +62,10 @@ layout_mode = 2
 
 [node name="CarStats" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 744.0
-offset_top = 389.0
-offset_right = 1173.0
-offset_bottom = 642.0
+offset_left = 484.0
+offset_top = 221.0
+offset_right = 1141.0
+offset_bottom = 487.0
 
 [node name="PPLabel" type="Label" parent="Control/CarStats"]
 layout_mode = 2
@@ -86,6 +86,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TransmissionLabel" type="Label" parent="Control/CarStats"]
+layout_mode = 2
+
+[node name="TopSpeedLabel" type="Label" parent="Control/CarStats"]
 layout_mode = 2
 
 [node name="Select" type="Button" parent="Control/CarStats"]
