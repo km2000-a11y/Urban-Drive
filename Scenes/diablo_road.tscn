@@ -1,6 +1,6 @@
 [gd_scene load_steps=49 format=3 uid="uid://i32nflgc00dy"]
 
-[ext_resource type="Script" uid="uid://psdajcpubghk" path="res://Scenes/diablo_roadster_1997.gd" id="1_fbyp1"]
+[ext_resource type="Script" uid="uid://psdajcpubghk" path="res://Scripts/diablo_roadster_1997.gd" id="1_fbyp1"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_e4csn"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_8dujf"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_0qww2"]

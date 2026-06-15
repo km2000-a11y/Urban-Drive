@@ -88,6 +88,12 @@ layout_mode = 2
 [node name="TransmissionLabel" type="Label" parent="Control/CarStats"]
 layout_mode = 2
 
+[node name="Select" type="Button" parent="Control/CarStats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SELECT CAR
+"
+
 [connection signal="pressed" from="Control/VBoxContainer/4x4SUV" to="." method="_on_4x4suv_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/CompactCars" to="." method="_on_compact_cars_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/MuscleCars" to="." method="_on_muscle_cars_pressed"]
@@ -95,3 +101,4 @@ layout_mode = 2
 [connection signal="pressed" from="Control/VBoxContainer/UrbanRacers" to="." method="_on_urban_racers_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/SportCoupe" to="." method="_on_sport_coupe_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Supercars" to="." method="_on_supercars_pressed"]
+[connection signal="pressed" from="Control/CarStats/Select" to="." method="_on_select_pressed"]

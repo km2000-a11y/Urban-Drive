@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://ch3itsw8iw222"]
 
-[ext_resource type="Script" uid="uid://ku1dw3p10nmc" path="res://Scenes/lamborghini_murcielago_2005.gd" id="1_a7pq1"]
+[ext_resource type="Script" uid="uid://ku1dw3p10nmc" path="res://Scripts/lamborghini_murcielago_2005.gd" id="1_a7pq1"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_j031w"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_evjps"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_s3mq5"]

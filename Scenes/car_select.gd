@@ -12,12 +12,12 @@ var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Straeda Pitbull"]
 var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Berkshire Blunt", "Brutus Stingray", "Kestrel Speedster"]
-var sedans_list = ["Eisenach Monarch", "Kuro Vault"]
+var sedans_list = ["Eisenach Monarch", "Kuro Vault", "Schroder Kaiser"]
 var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Eisenach Roadstar"]
 var supercars_list = ["Linetti Terror", "Kestrel Battleaxe", "Linetti Shepherd", "Linetti Firestorm"]
 
 # -------------------------
-# CAR DICTIONARIES
+# DISPLAY STATS DICTIONARIES
 # -------------------------
 
 var suv = {
@@ -47,7 +47,8 @@ var urban_racers = {
 
 var sedans = {
 	"Eisenach Monarch":["523 PP","Country: Germany","HP: 322","WEIGHT: 2050 KG","0-100 KM/H: 6.6s","TOP SPEED: 265 KM/H","ENGINE: V12 5.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Schroder Kaiser":["521 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 250 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"]
 }
 
 var sport = {
@@ -65,6 +66,37 @@ var supercars = {
 }
 
 # -------------------------
+# FILE PATH LOOKUP TABLE
+# -------------------------
+
+var car_scene_paths = {
+	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
+	"Colossus Behemoth":"res://Scenes/hummer_h2.tscn",
+	"Straeda Pitbull":"res://Scenes/vw_touareg_v10.tscn",
+	"Schroder Atrix Q32":"res://Scenes/audi_tt.tscn",
+	"Straeda B32":"res://Scenes/new_beetle.tscn",
+	"Zenith Horizon":"res://Scenes/nissan_350z.tscn",
+	"Straeda G25": "res://Scenes/golf_v_gti.tscn",
+	"Kestrel Seabird":"res://Scenes/lotus_exige_s.tscn",
+	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
+	"Berkshire Blunt":"res://Scenes/jaguar_xkr_volante.tscn",
+	"Brutus Stingray":"res://Scenes/chevrolet_corvette_c5.tscn",
+	"Brutus Viper":"res://Scenes/gt500.tscn",
+	"Brutus Mauler": "res://Scenes/chevelle_ss.tscn",
+	"Eisenach Monarch": "res://Scenes/bmw_750il.tscn",
+	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
+	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
+	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
+	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
+	"Eisenach Roadstar":"res://Scenes/bmw_z4.tscn",
+	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
+	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
+	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
+	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
+	"Linetti Terror":"res://Scenes/murcielago.tscn"
+}
+
+# -------------------------
 # UNIVERSAL UI UPDATE
 # -------------------------
 
@@ -78,6 +110,12 @@ func update_car_ui(stats: Array, name: String):
 	$Control/CarStats/TopSpeedLabel.text = stats[5]
 	$Control/CarStats/EngineLabel.text = stats[6]
 	$Control/CarStats/TransmissionLabel.text = stats[7]
+	
+	print("Updating UI for:", name)
+
+	print("CarName exists:", $Control/Cars/CarName)
+	print("PPLabel exists:", $Control/CarStats/PPLabel)
+
 
 # -------------------------
 # CLASS BUTTONS
@@ -168,3 +206,11 @@ func switch_car(direction):
 
 	car_name = list[car_index]
 	update_car_ui(dict[car_name], car_name)
+
+# -------------------------
+# SELECT BUTTON
+# -------------------------
+
+func _on_select_pressed():
+	Global.selected_car = car_scene_paths[car_name]
+	get_tree().change_scene_to_file("res://main.tscn")
