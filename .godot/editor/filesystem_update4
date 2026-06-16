@@ -1,5 +1,5 @@
-res://Scenes/gallardo.tscn
 res://main.tscn
+res://Scenes/car_select.gd
 res://Tracks/track.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -22,10 +22,12 @@ res://Scenes/bmw_z4.tscn
 res://Scenes/gt500.tscn
 res://Scenes/diablo_road.tscn
 res://Scenes/sagaris.tscn
+res://Scenes/gallardo.tscn
 res://Scenes/murcielago.tscn
 res://Scenes/chevelle_ss.tscn
 res://Scenes/car_select.tscn
 res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
-res://Scripts/bmw_750il_1995.gd
+res://Scenes/lexus_is_f.tscn
+res://Scenes/lexus_is_f_2011.gd

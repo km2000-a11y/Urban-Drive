@@ -1,9 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://dx34dyfmswcbw"]
+[gd_scene load_steps=33 format=3 uid="uid://1wjptgwipa4f"]
 
-[ext_resource type="Script" uid="uid://cylet5y5ljolj" path="res://Scenes/lexus_is350_2009.gd" id="1_op76e"]
-[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_6m1y3"]
-[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_45l8h"]
-[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_6r8be"]
+[ext_resource type="Script" uid="uid://yqcoqrmmbgk6" path="res://Scenes/lexus_is_f_2011.gd" id="1_vpyik"]
+[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_sdyrn"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_w7swj"]
+[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_m34gc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -14,21 +14,25 @@ bottom_radius = 0.15
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrhpf"]
+albedo_color = Color(0.27451, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kqt6i"]
 size = Vector3(0.8, 0.3, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwb4v"]
+albedo_color = Color(0.294118, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_q4xfq"]
 size = Vector3(0.8, 0.1, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5b1h"]
+albedo_color = Color(0.27451, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wromi"]
 size = Vector3(0.1, 0.4, 0.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu0u7"]
+albedo_color = Color(0.27451, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7iopj"]
 size = Vector3(0.8, 0.25, 0.2)
@@ -40,6 +44,7 @@ albedo_color = Color(0, 0, 0, 1)
 size = Vector3(0.8, 0.2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjpq4"]
+albedo_color = Color(0.27451, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kuo4o"]
 size = Vector3(0.8, 0.05, 0.7)
@@ -95,10 +100,10 @@ color_ramp = SubResource("GradientTexture1D_nfu50")
 [sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
 size = Vector2(0.5, 0.5)
 
-[node name="LEXUS IS350" type="CharacterBody3D"]
+[node name="LEXUS IS F" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_op76e")
+script = ExtResource("1_vpyik")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
@@ -136,7 +141,7 @@ mesh = SubResource("CylinderMesh_nfu50")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.132687, -0.269031, -0.173557)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/WheelHolder4"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.154448, 0.453203, -0.0271415)
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.154448, 0.453203, 0.316433)
 material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
 
@@ -146,7 +151,7 @@ material_override = SubResource("StandardMaterial3D_lrhpf")
 mesh = SubResource("BoxMesh_kqt6i")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14325e-07, 0.44047, 0.757141)
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, -1.14325e-07, 0.44047, 0.757141)
 material_override = SubResource("StandardMaterial3D_uwb4v")
 mesh = SubResource("BoxMesh_q4xfq")
 
@@ -246,13 +251,13 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_6m1y3")
+stream = ExtResource("2_sdyrn")
 max_polyphony = 4
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_45l8h")
+stream = ExtResource("3_w7swj")
 
 [node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_6r8be")
+stream = ExtResource("4_m34gc")
