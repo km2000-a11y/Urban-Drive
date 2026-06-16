@@ -1,9 +1,11 @@
+DirectionalLight3D
+Node3D
+Camera3D
+SubViewport
 CarController
 Button
-SubViewport
 SubViewportContainer
 Label
-Node3D
 Node
 VBoxContainer
 TextEdit
@@ -11,4 +13,3 @@ Control
 CanvasLayer
 MeshInstance3D
 CharacterBody3D
-SpringArm3D

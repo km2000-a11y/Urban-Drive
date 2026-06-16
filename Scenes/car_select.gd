@@ -1,11 +1,19 @@
 extends CanvasLayer
 
-var car_class = ""
-var car_name = ""
-var car_index = 0
+# -------------------------
+# CAR SELECT STATE
+# -------------------------
+
+var car_class := ""
+var car_name := ""
+var car_index := 0
+
+# 3D Preview
+@onready var preview_holder: Node3D = $SubViewportContainer/SubViewport/CarPreview/CarHolder
+var preview_car: Node3D = null
 
 # -------------------------
-# CAR LISTS (ORDER MATTERS)
+# CAR LISTS
 # -------------------------
 
 var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Straeda Pitbull"]
@@ -17,7 +25,7 @@ var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Ei
 var supercars_list = ["Linetti Terror", "Kestrel Battleaxe", "Linetti Shepherd", "Linetti Firestorm"]
 
 # -------------------------
-# DISPLAY STATS DICTIONARIES
+# CAR STATS
 # -------------------------
 
 var suv = {
@@ -69,7 +77,7 @@ var supercars = {
 }
 
 # -------------------------
-# FILE PATH LOOKUP TABLE
+# SCENE PATHS
 # -------------------------
 
 var car_scene_paths = {
@@ -80,14 +88,14 @@ var car_scene_paths = {
 	"Schroder Atrix Q32":"res://Scenes/audi_tt.tscn",
 	"Straeda B32":"res://Scenes/new_beetle.tscn",
 	"Zenith Horizon":"res://Scenes/nissan_350z.tscn",
-	"Straeda G25": "res://Scenes/golf_v_gti.tscn",
+	"Straeda G25":"res://Scenes/golf_v_gti.tscn",
 	"Kestrel Seabird":"res://Scenes/lotus_exige_s.tscn",
 	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr_volante.tscn",
 	"Brutus Stingray":"res://Scenes/chevrolet_corvette_c5.tscn",
 	"Brutus Viper":"res://Scenes/gt500.tscn",
-	"Brutus Mauler": "res://Scenes/chevelle_ss.tscn",
-	"Eisenach Monarch": "res://Scenes/bmw_750il.tscn",
+	"Brutus Mauler":"res://Scenes/chevelle_ss.tscn",
+	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Kuro Supreme":"res://Scenes/lexus_is_f.tscn",
@@ -103,11 +111,10 @@ var car_scene_paths = {
 }
 
 # -------------------------
-# UNIVERSAL UI UPDATE
+# UI UPDATE
 # -------------------------
 
 func update_car_ui(stats: Array, name: String):
-	print("UI update called for:", name)
 	$Control/Cars/CarName.text = name
 	$Control/CarStats/PPLabel.text = stats[0]
 	$Control/CarStats/CountryLabel.text = stats[1]
@@ -119,6 +126,26 @@ func update_car_ui(stats: Array, name: String):
 	$Control/CarStats/TransmissionLabel.text = stats[7]
 
 # -------------------------
+# 3D PREVIEW LOADING
+# -------------------------
+
+func load_preview_car(path: String):
+	if preview_car:
+		preview_car.queue_free()
+
+	var car_scene = load(path)
+	if car_scene == null:
+		return
+
+	var car = car_scene.instantiate()
+	preview_holder.add_child(car)
+	preview_car = car
+
+	# make it visibly larger (uniform scale)
+	preview_car.scale = Vector3.ONE * 3.0
+	preview_car.position = Vector3.ZERO
+
+# -------------------------
 # CLASS BUTTONS
 # -------------------------
 
@@ -127,42 +154,49 @@ func _on_4x4suv_pressed():
 	car_index = 0
 	car_name = suv_list[car_index]
 	update_car_ui(suv[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 func _on_compact_cars_pressed():
 	car_class = "compact"
 	car_index = 0
 	car_name = compact_list[car_index]
 	update_car_ui(compact[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 func _on_muscle_cars_pressed():
 	car_class = "muscle"
 	car_index = 0
 	car_name = muscle_list[car_index]
 	update_car_ui(muscle[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 func _on_urban_racers_pressed():
 	car_class = "urban"
 	car_index = 0
 	car_name = urban_list[car_index]
 	update_car_ui(urban_racers[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 func _on_sedans_pressed():
 	car_class = "sedans"
 	car_index = 0
 	car_name = sedans_list[car_index]
 	update_car_ui(sedans[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 func _on_sport_coupe_pressed():
 	car_class = "sport"
 	car_index = 0
 	car_name = sport_list[car_index]
 	update_car_ui(sport[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 func _on_supercars_pressed():
 	car_class = "supercars"
 	car_index = 0
 	car_name = supercars_list[car_index]
 	update_car_ui(supercars[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 # -------------------------
 # LEFT / RIGHT SWITCHING
@@ -207,6 +241,7 @@ func switch_car(direction):
 
 	car_name = list[car_index]
 	update_car_ui(dict[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
 
 # -------------------------
 # SELECT BUTTON

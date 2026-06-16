@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3nevfhxlkrec"]
+[gd_scene load_steps=3 format=3 uid="uid://d3nevfhxlkrec"]
 
 [ext_resource type="Script" uid="uid://bqdrqyuuwy61y" path="res://Scenes/car_select.gd" id="1_74av0"]
+[ext_resource type="Script" uid="uid://h13g0sj0tkdf" path="res://Scripts/AutoRotate.gd" id="2_2dip6"]
 
 [node name="CarSelect" type="CanvasLayer"]
 script = ExtResource("1_74av0")
@@ -97,19 +98,30 @@ theme_override_font_sizes/font_size = 30
 text = "SELECT CAR
 "
 
-[node name="BackButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_top = 397.0
-offset_right = 322.0
-offset_bottom = 453.0
-theme_override_font_sizes/font_size = 30
-text = "Back"
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_left = 361.0
-offset_top = 82.0
-offset_right = 789.0
-offset_bottom = 594.0
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.12
+anchor_right = 0.98
+anchor_bottom = 0.5
+offset_top = -0.400002
+offset_right = 49.6
+offset_bottom = 76.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(600, 350)
+
+[node name="CarPreview" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="PreviewCamera" type="Camera3D" parent="SubViewportContainer/SubViewport/CarPreview"]
+current = true
+fov = 45.0
+
+[node name="CarHolder" type="Node3D" parent="SubViewportContainer/SubViewport/CarPreview"]
+script = ExtResource("2_2dip6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [connection signal="pressed" from="Control/ClassList/4x4SUV" to="." method="_on_4x4suv_pressed"]
 [connection signal="pressed" from="Control/ClassList/CompactCars" to="." method="_on_compact_cars_pressed"]

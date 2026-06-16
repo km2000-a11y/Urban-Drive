@@ -1,5 +1,4 @@
 res://main.tscn
-res://Scenes/car_select.gd
 res://Tracks/track.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -30,4 +29,5 @@ res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
-res://Scenes/lexus_is_f_2011.gd
+res://Scripts/AutoRotate.gd
+res://Scenes/car_select.gd
