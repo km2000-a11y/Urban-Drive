@@ -195,6 +195,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.87149e-08, 0.580825, 0.455
 material_override = SubResource("StandardMaterial3D_mpcag")
 mesh = SubResource("BoxMesh_l215d")
 
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.87149e-08, 0.580825, 0.455077)
+material_override = SubResource("StandardMaterial3D_mpcag")
+mesh = SubResource("BoxMesh_l215d")
+
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="ModelRoot"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -1.27928e-07, 0.492615, 0.84723)
 material_override = SubResource("StandardMaterial3D_b27qf")

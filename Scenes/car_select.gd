@@ -91,7 +91,7 @@ var car_scene_paths = {
 	"Straeda G25":"res://Scenes/golf_v_gti.tscn",
 	"Kestrel Seabird":"res://Scenes/lotus_exige_s.tscn",
 	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
-	"Berkshire Blunt":"res://Scenes/jaguar_xkr_volante.tscn",
+	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
 	"Brutus Stingray":"res://Scenes/chevrolet_corvette_c5.tscn",
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Brutus Mauler":"res://Scenes/chevelle_ss.tscn",

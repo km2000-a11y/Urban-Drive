@@ -29,9 +29,5 @@ res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
-res://Scripts/AutoRotate.gd
 res://Scenes/car_select.gd
-res://Scripts/base_car.gd
-res://Scripts/lotus_exige_s_2007.gd
-res://Scripts/nissan_350z_2005.gd
-res://Scripts/vw_golf_v_gti_2003.gd
+res://Scenes/jaguar_xkr.tscn
