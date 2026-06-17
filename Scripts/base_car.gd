@@ -328,6 +328,49 @@ func _physics_process(delta: float) -> void:
 	# ------------------------------------------------------------
 	# LATERAL FRICTION (SLIDE CONTROL)
 	# ------------------------------------------------------------
+	# ============================================================
+#  FWD UNDERSTEER / RWD OVERSTEER
+# ============================================================
+
+# How much grip the front and rear have
+	var front_grip := 1.0
+	var rear_grip := 1.0
+
+	match transmission:
+		"Front wheel drive":
+			# FWD pushes wide under throttle
+			front_grip = 0.85
+			rear_grip = 1.15
+
+			# Understeer: reduce turning ability at speed
+			var understeer_strength :float= clamp(speed_kmh / 120.0, 0.0, 1.0)
+			rotation.y += steering * turn_speed * delta * (1.0 - understeer_strength * 0.55)
+
+			# Push car outward (wider corner)
+			velocity += right * (steering * understeer_strength * 2.0) * delta
+
+		"Rear wheel drive":
+			# RWD rotates more on throttle
+			front_grip = 1.15
+			rear_grip = 0.85
+
+			# Oversteer: rear steps out
+			var oversteer_strength :float= clamp(speed_kmh / 140.0, 0.0, 1.0)
+
+			# Add yaw rotation (car rotates more)
+			rotation.y += steering * turn_speed * delta * (1.0 + oversteer_strength * 0.65)
+
+			# Kick the rear out
+			velocity += right * (steering * oversteer_strength * 4.0) * delta
+
+		"Four wheel drive":
+			# AWD is stable, mild rotation
+			front_grip = 1.05
+			rear_grip = 1.05
+
+			var awd_balance :float= clamp(speed_kmh / 160.0, 0.0, 1.0)
+			rotation.y += steering * turn_speed * delta * (1.0 + awd_balance * 0.15)
+
 	var lateral := right.dot(velocity)
 	var friction_strength: float = lerp(lateral_friction, 0.7, drift_factor)
 

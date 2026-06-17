@@ -141,9 +141,20 @@ func load_preview_car(path: String):
 	preview_holder.add_child(car)
 	preview_car = car
 
-	# make it visibly larger (uniform scale)
-	preview_car.scale = Vector3.ONE * 3.0
-	preview_car.position = Vector3.ZERO
+	# Try to rotate ModelRoot if it exists, otherwise rotate the car root
+	var model_root: Node3D = null
+	if car.has_node("ModelRoot"):
+		model_root = car.get_node("ModelRoot")
+	else:
+		model_root = car
+
+	# Attach rotation script to the visual root
+	model_root.set_script(load("res://rotate_preview.gd"))
+
+	model_root.scale = Vector3.ONE * 1.5
+	model_root.position = Vector3.ZERO
+
+
 
 # -------------------------
 # CLASS BUTTONS

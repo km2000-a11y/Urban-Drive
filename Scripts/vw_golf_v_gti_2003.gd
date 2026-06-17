@@ -17,7 +17,7 @@ func _ready():
 	turn_speed = 2.7
 	brake_strength = 10.8
 	lateral_friction = 1.03
-	transmission = "Front-wheel drive"
+	transmission = "Front wheel drive"
 
 	handling_type = "hot_hatch_fwd"
 
