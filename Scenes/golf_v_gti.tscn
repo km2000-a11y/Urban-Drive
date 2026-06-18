@@ -101,6 +101,7 @@ size = Vector2(0.5, 0.5)
 [node name="GOLF V GTI" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+floor_max_angle = 1.5708
 script = ExtResource("1_mqa82")
 
 [node name="Camera3D" type="Camera3D" parent="."]
