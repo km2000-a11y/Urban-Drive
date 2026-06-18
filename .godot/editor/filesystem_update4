@@ -11,7 +11,7 @@ res://Scenes/vw_touareg_v10.tscn
 res://Scenes/lexus_ls430.tscn
 res://Scenes/nissan_350z.tscn
 res://Scenes/lotus_exige_s.tscn
-res://Scenes/jaguar_xkr_volante.tscn
+res://Scenes/jaguar_xkr.tscn
 res://Scenes/chevrolet_corvette_c5.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/aston_db9.tscn
@@ -29,5 +29,8 @@ res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
+res://main.gd
+res://Scripts/lotus_exige_s_2007.gd
+res://Scripts/vw_touareg_v10_tdi_2007.gd
+res://Scripts/base_car.gd
 res://Scenes/car_select.gd
-res://Scenes/jaguar_xkr.tscn

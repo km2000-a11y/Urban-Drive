@@ -11,6 +11,7 @@ var car_index := 0
 # 3D Preview
 @onready var preview_holder: Node3D = $SubViewportContainer/SubViewport/CarPreview/CarHolder
 var preview_car: Node3D = null
+var rotation_speed := 1.0
 
 # -------------------------
 # CAR LISTS
@@ -141,20 +142,31 @@ func load_preview_car(path: String):
 	preview_holder.add_child(car)
 	preview_car = car
 
-	# Try to rotate ModelRoot if it exists, otherwise rotate the car root
+	# Center & scale
 	var model_root: Node3D = null
 	if car.has_node("ModelRoot"):
 		model_root = car.get_node("ModelRoot")
 	else:
 		model_root = car
 
-	# Attach rotation script to the visual root
-	model_root.set_script(load("res://rotate_preview.gd"))
-
 	model_root.scale = Vector3.ONE * 1.5
 	model_root.position = Vector3.ZERO
 
+# -------------------------
+# ROTATE PREVIEW EACH FRAME
+# -------------------------
 
+func _process(delta):
+	if preview_car == null:
+		return
+
+	var model_root: Node3D = null
+	if preview_car.has_node("ModelRoot"):
+		model_root = preview_car.get_node("ModelRoot")
+	else:
+		model_root = preview_car
+
+	model_root.rotate_y(rotation_speed * delta)
 
 # -------------------------
 # CLASS BUTTONS

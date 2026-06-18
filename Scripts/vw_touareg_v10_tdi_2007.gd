@@ -34,7 +34,7 @@ func _ready():
 	
 	is_diesel=true
 	# DISTINCT HANDLING PROFILE
-	handling_type = "diesel_torque_suv"
+	handling_type = "luxury_boat"
 
 	# APPLY STATS + HANDLING
 	apply_stats()
