@@ -29,8 +29,3 @@ res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
-res://main.gd
-res://Scripts/lotus_exige_s_2007.gd
-res://Scripts/vw_touareg_v10_tdi_2007.gd
-res://Scripts/base_car.gd
-res://Scenes/car_select.gd
