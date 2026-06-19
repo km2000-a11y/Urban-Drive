@@ -122,6 +122,10 @@ var supercars = {
 # SCENE PATHS
 # -------------------------
 
+func _ready():
+	$Control/ColorSelector.visible = false
+
+
 var car_scene_paths = {
 	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
 	"Colossus Behemoth":"res://Scenes/hummer_h2.tscn",
@@ -329,8 +333,10 @@ func switch_car(direction):
 
 func _reset_color():
 	color_index = 0
+	$Control/ColorSelector.visible = true
 	apply_color_to_preview(car_colors[car_name][0])
 	update_color_ui()
+
 
 func change_color(direction):
 	var colors = car_colors[car_name]
@@ -371,4 +377,5 @@ func update_color_ui():
 
 func _on_select_pressed():
 	Cars.selected_car = car_scene_paths[car_name]
+	Cars.selected_color = car_colors[car_name][color_index]
 	get_tree().change_scene_to_file("res://main.tscn")

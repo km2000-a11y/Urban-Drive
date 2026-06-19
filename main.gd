@@ -4,7 +4,7 @@ func _ready():
 	spawn_selected_car()
 
 func spawn_selected_car():
-	var path :String= Cars.selected_car
+	var path :String = Cars.selected_car
 	if path == "" or path == null:
 		print("ERROR: No car selected!")
 		return
@@ -17,10 +17,19 @@ func spawn_selected_car():
 	var car: CarController = car_scene.instantiate()
 	add_child(car)
 
+	# ⭐ APPLY SAVED COLOR HERE ⭐
+	if car.has_node("ModelRoot/Body"):
+		var body: Node3D = car.get_node("ModelRoot/Body")
+		for child in body.get_children():
+			if child is MeshInstance3D:
+				var mat = child.get_active_material(0)
+				if mat:
+					mat.albedo_color = Cars.selected_color
+
 	if has_node("SpawnPoint"):
 		var sp: Node3D = $SpawnPoint
 
-		# Base: match spawn point transformw
+		# Base: match spawn point transform
 		car.global_transform = sp.global_transform
 
 		# Apply per-car yaw correction
