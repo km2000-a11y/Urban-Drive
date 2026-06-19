@@ -315,33 +315,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161722, 0.509338, 0.109156)
 material_override = SubResource("StandardMaterial3D_djt8e")
 mesh = SubResource("BoxMesh_mlxq6")
 
-[node name="Node3D" type="Node3D" parent="ModelRoot"]
+[node name="Body" type="Node3D" parent="ModelRoot"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/Node3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0214668, 0.120184, 1.07903)
 material_override = SubResource("StandardMaterial3D_p2w3l")
 mesh = SubResource("BoxMesh_j8p6p")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelRoot/Node3D"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelRoot/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0350285, 0.301105, 0.938104)
 material_override = SubResource("StandardMaterial3D_j8p6p")
 mesh = SubResource("BoxMesh_s0kkr")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="ModelRoot/Node3D"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="ModelRoot/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394541, 0.230986, 0.446167)
 material_override = SubResource("StandardMaterial3D_epe3n")
 mesh = SubResource("BoxMesh_epe3n")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="ModelRoot/Node3D"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="ModelRoot/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.423432, 0.230986, 0.368936)
 material_override = SubResource("StandardMaterial3D_6d3fy")
 mesh = SubResource("BoxMesh_epe3n")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="ModelRoot/Node3D"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="ModelRoot/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08358e-08, 0.16155, 0.0717624)
 material_override = SubResource("StandardMaterial3D_s0kkr")
 mesh = SubResource("BoxMesh_6d3fy")

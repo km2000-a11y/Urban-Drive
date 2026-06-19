@@ -1,6 +1,6 @@
+Node3D
 ColorRect
 VBoxContainer
-Node3D
 CollisionShape3D
 StaticBody3D
 MeshInstance3D
@@ -12,4 +12,3 @@ Button
 SubViewportContainer
 Label
 Node
-TextEdit
