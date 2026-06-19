@@ -7,11 +7,52 @@ extends CanvasLayer
 var car_class := ""
 var car_name := ""
 var car_index := 0
+var color_index := 0
 
 # 3D Preview
 @onready var preview_holder: Node3D = $SubViewportContainer/SubViewport/CarPreview/CarHolder
 var preview_car: Node3D = null
 var rotation_speed := 1.0
+
+# -------------------------
+# COLOR DATA
+# -------------------------
+
+var car_colors := {
+	"Straeda Pitbull":[Color8(128,128,0), Color8(90,90,90), Color8(180,150,80), Color8(0,70,40)],
+	"Colossus Behemoth":[Color8(215,255,1), Color8(255,255,255), Color8(200,180,120), Color8(160,0,0)],
+	"Kuro Fortress":[Color8(0,0,192), Color8(255,255,255), Color8(64,64,64), Color8(0,80,160)],
+	"Colossus Titan Max":[Color8(255,0,0), Color8(180,180,180), Color8(210,180,90), Color8(120,40,40)],
+
+	"Zenith Horizon":[Color8(255,116,49), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
+	"Schroder Atrix Q32":[Color8(192,192,192), Color8(255,255,255), Color8(140,0,255), Color8(0,120,160)],
+	"Straeda G25":[Color8(133,82,141), Color8(255,0,0), Color8(255,255,255), Color8(180,180,180)],
+	"Straeda B32":[Color8(132,132,132), Color8(255,255,255), Color8(255,140,0), Color8(0,120,200)],
+
+	"Brutus Mauler":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
+	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
+
+	"Brutus Stingray":[Color8(255,255,0), Color8(255,255,255), Color8(255,0,0), Color8(160,160,160)],
+	"Kestrel Speedster":[Color8(192,192,192), Color8(255,255,255), Color8(0,120,180), Color8(180,180,180)],
+	"Berkshire Blunt":[Color8(0,66,37), Color8(255,255,255), Color8(180,180,180), Color8(0,120,80)],
+	"Kestrel Seabird":[Color8(50,205,50), Color8(255,255,255), Color8(255,200,0), Color8(0,120,200)],
+	"Kuro Zephyr V6":[Color8(255,255,255), Color8(64,64,64), Color8(0,90,180), Color8(180,180,180)],
+
+	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
+	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
+	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
+
+	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
+	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
+	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
+	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
+	"Kuro Supreme":[Color8(75,0,255), Color8(255,255,255), Color8(160,160,160), Color8(0,80,160)],
+
+	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
+	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
+	"Linetti Firestorm":[Color8(225,220,40), Color8(255,255,255), Color8(255,80,0), Color8(200,160,0)],
+	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)]
+}
 
 # -------------------------
 # CAR LISTS
@@ -142,7 +183,6 @@ func load_preview_car(path: String):
 	preview_holder.add_child(car)
 	preview_car = car
 
-	# Center & scale
 	var model_root: Node3D = null
 	if car.has_node("ModelRoot"):
 		model_root = car.get_node("ModelRoot")
@@ -178,6 +218,7 @@ func _on_4x4suv_pressed():
 	car_name = suv_list[car_index]
 	update_car_ui(suv[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 func _on_compact_cars_pressed():
 	car_class = "compact"
@@ -185,6 +226,7 @@ func _on_compact_cars_pressed():
 	car_name = compact_list[car_index]
 	update_car_ui(compact[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 func _on_muscle_cars_pressed():
 	car_class = "muscle"
@@ -192,6 +234,7 @@ func _on_muscle_cars_pressed():
 	car_name = muscle_list[car_index]
 	update_car_ui(muscle[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 func _on_urban_racers_pressed():
 	car_class = "urban"
@@ -199,6 +242,7 @@ func _on_urban_racers_pressed():
 	car_name = urban_list[car_index]
 	update_car_ui(urban_racers[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 func _on_sedans_pressed():
 	car_class = "sedans"
@@ -206,6 +250,7 @@ func _on_sedans_pressed():
 	car_name = sedans_list[car_index]
 	update_car_ui(sedans[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 func _on_sport_coupe_pressed():
 	car_class = "sport"
@@ -213,6 +258,7 @@ func _on_sport_coupe_pressed():
 	car_name = sport_list[car_index]
 	update_car_ui(sport[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 func _on_supercars_pressed():
 	car_class = "supercars"
@@ -220,9 +266,10 @@ func _on_supercars_pressed():
 	car_name = supercars_list[car_index]
 	update_car_ui(supercars[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
 
 # -------------------------
-# LEFT / RIGHT SWITCHING
+# INPUT
 # -------------------------
 
 func _input(event):
@@ -230,6 +277,15 @@ func _input(event):
 		switch_car(-1)
 	if event.is_action_pressed("car_select_right"):
 		switch_car(1)
+
+	if event.is_action_pressed("color_select_up"):
+		change_color(1)
+	if event.is_action_pressed("color_select_down"):
+		change_color(-1)
+
+# -------------------------
+# LEFT / RIGHT SWITCHING
+# -------------------------
 
 func switch_car(direction):
 	var list
@@ -265,6 +321,49 @@ func switch_car(direction):
 	car_name = list[car_index]
 	update_car_ui(dict[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
+
+# -------------------------
+# COLOR SYSTEM
+# -------------------------
+
+func _reset_color():
+	color_index = 0
+	apply_color_to_preview(car_colors[car_name][0])
+	update_color_ui()
+
+func change_color(direction):
+	var colors = car_colors[car_name]
+	color_index = (color_index + direction) % colors.size()
+	if color_index < 0:
+		color_index = colors.size() - 1
+
+	apply_color_to_preview(colors[color_index])
+	update_color_ui()
+
+func apply_color_to_preview(color: Color):
+	if preview_car == null:
+		return
+
+	if preview_car.has_node("ModelRoot/Body"):
+		var body: Node3D = preview_car.get_node("ModelRoot/Body")
+		for child in body.get_children():
+			if child is MeshInstance3D:
+				var mat = child.get_active_material(0)
+				if mat:
+					mat.albedo_color = color
+
+func update_color_ui():
+	var colors = car_colors[car_name]
+
+	$Control/ColorSelector/ColorBox1.color = colors[0]
+	$Control/ColorSelector/ColorBox2.color = colors[1]
+	$Control/ColorSelector/ColorBox3.color = colors[2]
+	$Control/ColorSelector/ColorBox4.color = colors[3]
+
+	for i in range(4):
+		var box = $Control/ColorSelector.get_child(i)
+		box.modulate = Color(1,1,1,1) if i == color_index else Color(0.6,0.6,0.6,1)
 
 # -------------------------
 # SELECT BUTTON
