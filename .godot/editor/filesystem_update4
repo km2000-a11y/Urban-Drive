@@ -1,6 +1,4 @@
 res://main.tscn
-res://Scripts/audi_a8_42_2004.gd
-res://Scenes/car_select.gd
 res://Tracks/track.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -31,4 +29,3 @@ res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
-res://Scripts/hummer_h1_2000.gd
