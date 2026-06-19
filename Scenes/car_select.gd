@@ -58,7 +58,7 @@ var urban_racers = {
 
 var sedans = {
 	"Eisenach Monarch":["523 PP","Country: Germany","HP: 322","WEIGHT: 2050 KG","0-100 KM/H: 6.6s","TOP SPEED: 265 KM/H","ENGINE: V12 5.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Schroder Kaiser":["521 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 250 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
+	"Schroder Kaiser":["532 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 257 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
 	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
@@ -74,7 +74,7 @@ var supercars = {
 	"Linetti Terror":["768 PP","Country: Italy","HP: 572","WEIGHT: 1630 KG","0-100 KM/H: 3.7s","TOP SPEED: 330 KM/H","ENGINE: V12 6.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
 	"Kestrel Battleaxe":["739 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.5s","TOP SPEED: 298 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Linetti Shepherd":["726 PP","Country: Italy","HP: 500","WEIGHT: 1430 KG","0-100 KM/H: 4.2s","TOP SPEED: 305 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: FOUR-WHEEL DRIVE"]
+	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 # -------------------------
