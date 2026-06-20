@@ -32,5 +32,4 @@ res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
 res://Scenes/dodge_viper.tscn
 res://Scenes/tvr t 440r.tscn
-res://Scripts/barrier_1.gd
-res://Tracks/barrier_2.gd
+res://Scenes/granturismo_police.tscn
