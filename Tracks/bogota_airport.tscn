@@ -294,7 +294,7 @@ mesh = SubResource("BoxMesh_oyvec")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75086, 1.95107, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86637, 1.95107, 0)
 mesh = SubResource("BoxMesh_wcwfe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
@@ -320,7 +320,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86327, 1.67201, 0)
 shape = SubResource("BoxShape3D_4pfva")
 
 [node name="RigidBody3D4" type="RigidBody3D" parent="."]
-transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 13.2334, -0.387479, -246.047)
+transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 12.6063, -0.387479, -246.943)
 script = ExtResource("2_tarm0")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="RigidBody3D4"]
@@ -742,7 +742,7 @@ mesh = SubResource("BoxMesh_xyydk")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10175, 3.12646, -81.0272)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10175, 3.86382, -81.0272)
 mesh = SubResource("BoxMesh_tarm0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D11"]
@@ -2703,7 +2703,7 @@ material_override = SubResource("StandardMaterial3D_wcwfe")
 mesh = SubResource("BoxMesh_j8ute")
 
 [node name="MeshInstance3D21" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 224.775, 0, -372.694)
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 224.775, -0.006, -372.694)
 material_override = SubResource("StandardMaterial3D_xyydk")
 mesh = SubResource("BoxMesh_hcfb2")
 
@@ -3068,3 +3068,6 @@ shape = SubResource("BoxShape3D_b34v5")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D21/MeshInstance3D12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8147e-06, 0, -92.7096)
+
+[connection signal="body_entered" from="RigidBody3D2" to="RigidBody3D" method="_on_rigid_body_3d_2_body_entered"]
+[connection signal="body_entered" from="RigidBody3D4" to="RigidBody3D" method="_on_rigid_body_3d_4_body_entered"]
