@@ -1,4 +1,3 @@
-res://Scenes/car_select.tscn
 res://main.tscn
 res://Tracks/track.tscn
 res://Scenes/hummer_h1.tscn
@@ -25,10 +24,14 @@ res://Scenes/sagaris.tscn
 res://Scenes/gallardo.tscn
 res://Scenes/murcielago.tscn
 res://Scenes/chevelle_ss.tscn
+res://Scenes/car_select.tscn
 res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/lexus_is_f.tscn
-res://cars.gd
-res://Scenes/car_select.gd
-res://main.gd
+res://Scenes/dodge_viper.tscn
+res://Scenes/tvr t 440r.tscn
+res://Tracks/bogota_airport.tscn
+res://Scripts/base_car.gd
+res://Scripts/barrier_1.gd
+res://Tracks/barrier_2.gd

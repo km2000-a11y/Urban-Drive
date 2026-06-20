@@ -51,7 +51,11 @@ var car_colors := {
 	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
 	"Linetti Firestorm":[Color8(225,220,40), Color8(255,255,255), Color8(255,80,0), Color8(200,160,0)],
-	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)]
+	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)],
+	
+	"Brutus Venom":[Color8(255,0,0), Color8(255,255,255), Color8(180,180,180), Color8(0,0,0)],
+	"Kestrel Guillotine":[Color8(120,0,180), Color8(255,255,255), Color8(200,160,255), Color8(60,0,90)]
+
 }
 
 # -------------------------
@@ -64,7 +68,8 @@ var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Berkshire Blunt", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster"]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault"]
 var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Eisenach Roadstar", "Kuro Supreme"]
-var supercars_list = ["Linetti Terror", "Kestrel Battleaxe", "Linetti Shepherd", "Linetti Firestorm"]
+var sport_racing_list = ["Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
+var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine"]
 
 # -------------------------
 # CAR STATS
@@ -110,11 +115,15 @@ var sport = {
 	"Eisenach Roadstar":["567 PP","Country: Germany","HP: 335","WEIGHT: 1600 KG","0-100 KM/H: 4.4s","TOP SPEED: 265 KM/H","ENGINE: V6 3.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Kuro Supreme":["615 PP","Country: Japan","HP: 416","WEIGHT: 1690 KG","0-100 KM/H: 4.6s","TOP SPEED: 280 KM/H","ENGINE: V8 5.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
+var sport_racing = {
+	"Kestrel Battleaxe":["720 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.8s","TOP SPEED: 287 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Linetti Shepherd":["726 PP","Country: Italy","HP: 500","WEIGHT: 1430 KG","0-100 KM/H: 4.2s","TOP SPEED: 305 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
+	"Brutus Venom":["661 PP","Country: USA","HP: 415","WEIGHT: 1560 KG","0-100 KM/H: 4.1s","TOP SPEED: 300 KM/H","ENGINE: V10 8.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
+}
 
 var supercars = {
 	"Linetti Terror":["768 PP","Country: Italy","HP: 572","WEIGHT: 1630 KG","0-100 KM/H: 3.7s","TOP SPEED: 330 KM/H","ENGINE: V12 6.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Kestrel Battleaxe":["739 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.5s","TOP SPEED: 298 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Linetti Shepherd":["726 PP","Country: Italy","HP: 500","WEIGHT: 1430 KG","0-100 KM/H: 4.2s","TOP SPEED: 305 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
+	"Kestrel Guillotine":["780 PP","Country: UK","HP: 440","WEIGHT: 1100 KG","0-100 KM/H: 3.6s","TOP SPEED: 315 KM/H","ENGINE: V6 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
@@ -153,7 +162,9 @@ var car_scene_paths = {
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
-	"Linetti Terror":"res://Scenes/murcielago.tscn"
+	"Linetti Terror":"res://Scenes/murcielago.tscn",
+	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
+	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 }
 
 # -------------------------
@@ -317,6 +328,10 @@ func switch_car(direction):
 		"supercars":
 			list = supercars_list
 			dict = supercars
+		"sport_racing":
+			list = sport_racing_list
+			dict = sport_racing
+
 
 	car_index = (car_index + direction) % list.size()
 	if car_index < 0:
@@ -379,3 +394,12 @@ func _on_select_pressed():
 	Cars.selected_car = car_scene_paths[car_name]
 	Cars.selected_color = car_colors[car_name][color_index]
 	get_tree().change_scene_to_file("res://main.tscn")
+
+
+func _on_sport_racing_pressed() -> void:
+	car_class = "sport_racing"
+	car_index = 0
+	car_name = sport_racing_list[car_index]
+	update_car_ui(sport_racing[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
+	_reset_color()

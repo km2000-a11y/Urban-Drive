@@ -364,17 +364,35 @@ func _physics_process(delta: float) -> void:
 	var old_velocity := velocity
 	move_and_slide()
 
+		# ============================================================
+	# COLLISIONS
+	# ============================================================
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
+		var n := col.get_normal()
+		n.y = 0.0
+		n = n.normalized()
 
+
+		# --- LIGHT RIGIDBODY COLLISION (barriers, cones, props) ---
+		if other is RigidBody3D:
+			var impact :float= max(velocity.length(), 5.0) * 0.25
+
+			# Push the barrier away
+			other.apply_impulse(-n * impact, col.get_position())
+
+			# Let the car keep moving instead of stopping dead
+			velocity += -n * (impact * 0.35)
+
+			continue
+
+		# --- CAR–CAR COLLISIONS (momentum exchange) ---
 		if other is CarController:
 			var my_p := mass * velocity
-			var their_p: Vector3 = other.mass * other.velocity
+			var their_p : Vector3 = other.mass * other.velocity
+
 			var impulse := (my_p - their_p) * 0.5
 
 			velocity += impulse / mass
 			other.velocity -= impulse / other.mass
-
-	if debug_enabled:
-		print("PP: ", performance_points, " | RPM: ", rpm, " | Gear: ", current_gear, " | Drivetrain: ", transmission, " | Diesel: ", is_diesel)

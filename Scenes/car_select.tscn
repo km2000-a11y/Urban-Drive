@@ -52,6 +52,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Supercars"
 
+[node name="SportRacing" type="Button" parent="Control/ClassList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sports Racing Cars"
+
 [node name="Cars" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 269.0
@@ -156,4 +161,5 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [connection signal="pressed" from="Control/ClassList/UrbanRacers" to="." method="_on_urban_racers_pressed"]
 [connection signal="pressed" from="Control/ClassList/SportCoupe" to="." method="_on_sport_coupe_pressed"]
 [connection signal="pressed" from="Control/ClassList/Supercars" to="." method="_on_supercars_pressed"]
+[connection signal="pressed" from="Control/ClassList/SportRacing" to="." method="_on_sport_racing_pressed"]
 [connection signal="pressed" from="Control/CarStats/Select" to="." method="_on_select_pressed"]
