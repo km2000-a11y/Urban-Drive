@@ -1,7 +1,4 @@
 res://main.tscn
-res://Scripts/bmw_z4_sdrive35is_2011.gd
-res://Scripts/jaguar_xkr_2003.gd
-res://Scripts/tvr_sagaris_2005.gd
 res://Tracks/track.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
