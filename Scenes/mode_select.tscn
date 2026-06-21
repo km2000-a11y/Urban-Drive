@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://bve3h4ovsdox4"]
+[gd_scene load_steps=2 format=3 uid="uid://bve3h4ovsdox4"]
+
+[ext_resource type="Script" uid="uid://cj2cjcg724xul" path="res://Scenes/mode_select.gd" id="1_qw3jj"]
 
 [node name="ModeSelect" type="CanvasLayer"]
+script = ExtResource("1_qw3jj")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimeTrialBtn" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 40
+text = "TIME TRIAL"
+
+[connection signal="pressed" from="Control/TimeTrialBtn" to="." method="_on_time_trial_btn_pressed"]

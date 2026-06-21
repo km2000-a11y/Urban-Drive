@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Urban Drive"
-run/main_scene="uid://d3nevfhxlkrec"
+run/main_scene="uid://bve3h4ovsdox4"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://global.gd"
 Cars="*res://cars.gd"
+Modes="*res://modes.gd"
 
 [display]
 

@@ -1,3 +1,5 @@
+Label
+Timer
 Button
 Control
 CanvasLayer
@@ -11,4 +13,3 @@ ColorRect
 VBoxContainer
 DirectionalLight3D
 Camera3D
-SubViewport
