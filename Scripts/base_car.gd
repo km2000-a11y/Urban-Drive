@@ -375,17 +375,21 @@ func _physics_process(delta: float) -> void:
 		n = n.normalized()
 
 
-		# --- LIGHT RIGIDBODY COLLISION (barriers, cones, props) ---
+				# --- LIGHT RIGIDBODY COLLISION (barriers, cones, props) ---
 		if other is RigidBody3D:
-			var impact :float= max(velocity.length(), 5.0) * 0.25
+			var impact :float= clamp(velocity.length(), 4.0, 18.0)
 
-			# Push the barrier away
-			other.apply_impulse(-n * impact, col.get_position())
+			# Push the prop away strongly
+			other.apply_impulse(-n * impact * 1.4, col.get_position())
 
-			# Let the car keep moving instead of stopping dead
-			velocity += -n * (impact * 0.35)
+			# Minimal slowdown for the car (arcade style)
+			velocity += -n * (impact * 0.10)
+
+			# Slight sideways wobble for feel
+			velocity = velocity.rotated(Vector3.UP, randf_range(-0.05, 0.05))
 
 			continue
+
 
 		# --- CAR–CAR COLLISIONS (momentum exchange) ---
 		if other is CarController:
