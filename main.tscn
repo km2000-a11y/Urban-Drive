@@ -13,13 +13,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Speedometer" parent="." instance=ExtResource("3_h2yge")]
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324175, 2019.59)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324175, 2014.44)
 
 [node name="BogotaAirport" parent="." instance=ExtResource("3_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296989, 0, 1992.3)
-
-[node name="Timer" type="Timer" parent="."]
-
-[node name="TimerLbl" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0

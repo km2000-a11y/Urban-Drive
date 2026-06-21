@@ -1,9 +1,10 @@
+CollisionShape3D
+Area3D
 Label
 Timer
 Button
 Control
 CanvasLayer
-CollisionShape3D
 StaticBody3D
 MeshInstance3D
 RigidBody3D
@@ -11,5 +12,3 @@ Node3D
 CarController
 ColorRect
 VBoxContainer
-DirectionalLight3D
-Camera3D

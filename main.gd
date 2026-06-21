@@ -1,18 +1,11 @@
 extends Node
 
 var mode 
-@onready var timer:=$Timer
-@onready var timer_label:=$TimerLbl
 
 func _ready():
 	mode=Modes.mode
 	spawn_selected_car()
-	timer.start()
-	
-func _process(delta: float) -> void:
-	timer_label.text=str(timer.time_left)
-	
-	
+
 func spawn_selected_car():
 	var path :String = Cars.selected_car
 	if path == "" or path == null:
@@ -48,3 +41,6 @@ func spawn_selected_car():
 	else:
 		print("WARNING: No SpawnPoint found in main.tscn")
 		
+func _on_time_trial_area_body_entered(body: Node3D) -> void:
+	print(body.name)
+	
