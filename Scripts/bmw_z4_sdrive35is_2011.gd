@@ -38,3 +38,4 @@ func _ready():
 
 	apply_stats()
 	print("Child READY loaded:", car_name)
+	

@@ -13,7 +13,7 @@ func _ready():
 	horsepower = 406
 	max_rpm = 7800.0
 	zero_to_hundred = 3.5
-	top_speed_kmh = 298
+	top_speed_kmh = 287
 
 	# HANDLING
 	turn_speed = 3.25
@@ -36,3 +36,4 @@ func _ready():
 
 	apply_stats()
 	print("Child READY loaded:", car_name)
+	
