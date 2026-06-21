@@ -17,3 +17,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324175, 2019.59)
 
 [node name="BogotaAirport" parent="." instance=ExtResource("3_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296989, 0, 1992.3)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TimerLbl" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

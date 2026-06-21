@@ -36,3 +36,4 @@ res://Scenes/granturismo_police.tscn
 res://Scenes/mode_select.tscn
 res://Scenes/mode_select.gd
 res://modes.gd
+res://main.gd

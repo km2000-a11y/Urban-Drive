@@ -1,8 +1,18 @@
 extends Node
 
-func _ready():
-	spawn_selected_car()
+var mode 
+@onready var timer:=$Timer
+@onready var timer_label:=$TimerLbl
 
+func _ready():
+	mode=Modes.mode
+	spawn_selected_car()
+	timer.start()
+	
+func _process(delta: float) -> void:
+	timer_label.text=str(timer.time_left)
+	
+	
 func spawn_selected_car():
 	var path :String = Cars.selected_car
 	if path == "" or path == null:
@@ -37,3 +47,4 @@ func spawn_selected_car():
 			car.rotate_y(deg_to_rad(car.spawn_yaw_deg))
 	else:
 		print("WARNING: No SpawnPoint found in main.tscn")
+		
