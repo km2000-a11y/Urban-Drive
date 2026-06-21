@@ -200,7 +200,15 @@ func _physics_process(delta: float) -> void:
 
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
+		var other := col.get_collider()
+
+		# Skip props — they should NOT trigger wall slowdown
+		if other is RigidBody3D:
+			continue
+
 		var n := col.get_normal()
+		n.y = 0.0
+		n = n.normalized()
 
 		if forward.dot(n) < -0.75:
 			wall_block = true
@@ -364,9 +372,9 @@ func _physics_process(delta: float) -> void:
 	var old_velocity := velocity
 	move_and_slide()
 
-		# ============================================================
-	# COLLISIONS
 	# ============================================================
+# COLLISIONS (AFTER MOVE)
+# ============================================================
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
@@ -374,27 +382,33 @@ func _physics_process(delta: float) -> void:
 		n.y = 0.0
 		n = n.normalized()
 
-
-				# --- LIGHT RIGIDBODY COLLISION (barriers, cones, props) ---
+		# --- LIGHT RIGIDBODY COLLISION (cones, crates, barriers) ---
+				# --- LIGHT RIGIDBODY COLLISION (cones, crates, barriers) ---
 		if other is RigidBody3D:
-			var impact :float= clamp(velocity.length(), 4.0, 18.0)
+			# Save speed BEFORE collision
+			var pre_speed := velocity.length()
 
-			# Push the prop away strongly
+			# Calculate impact force
+			var impact: float = clamp(pre_speed, 4.0, 18.0)
+
+			# Push the prop away
 			other.apply_impulse(-n * impact * 1.4, col.get_position())
 
-			# Minimal slowdown for the car (arcade style)
-			velocity += -n * (impact * 0.10)
+			# Apply tiny directional pushback
+			velocity += -n * (impact * 0.05)
 
-			# Slight sideways wobble for feel
-			velocity = velocity.rotated(Vector3.UP, randf_range(-0.05, 0.05))
+			# Restore EXACT speed (100% retention)
+			velocity = velocity.normalized() * pre_speed
+
+			# Optional wobble for feel
+			velocity = velocity.rotated(Vector3.UP, randf_range(-0.03, 0.03))
 
 			continue
-
 
 		# --- CAR–CAR COLLISIONS (momentum exchange) ---
 		if other is CarController:
 			var my_p := mass * velocity
-			var their_p : Vector3 = other.mass * other.velocity
+			var their_p: Vector3 = other.mass * other.velocity
 
 			var impulse := (my_p - their_p) * 0.5
 

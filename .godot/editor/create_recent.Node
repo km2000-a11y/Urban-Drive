@@ -1,8 +1,8 @@
 MeshInstance3D
 CollisionShape3D
 StaticBody3D
-Node3D
 RigidBody3D
+Node3D
 Button
 CarController
 ColorRect
