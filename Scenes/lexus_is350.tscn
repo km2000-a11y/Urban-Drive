@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://dx34dyfmswcbw"]
+[gd_scene load_steps=34 format=3 uid="uid://dx34dyfmswcbw"]
 
 [ext_resource type="Script" uid="uid://cylet5y5ljolj" path="res://Scenes/lexus_is350_2009.gd" id="1_op76e"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_6m1y3"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/camera.gd" id="2_45l8h"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_45l8h"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_6r8be"]
 
@@ -100,10 +101,12 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_op76e")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
 current = true
 fov = 55.0
+script = ExtResource("2_45l8h")
+target = NodePath("..")
 
 [node name="ModelRoot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.315375, 0)

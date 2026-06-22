@@ -19,5 +19,4 @@ theme_override_font_sizes/font_size = 40
 text = "RADAR RACE
 "
 
-[connection signal="pressed" from="Control/RadarRaceBtn" to="." method="_on_time_trial_btn_pressed"]
 [connection signal="pressed" from="Control/RadarRaceBtn" to="." method="_on_radar_race_btn_pressed"]
