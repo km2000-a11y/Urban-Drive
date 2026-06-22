@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3nevfhxlkrec"]
 
-[ext_resource type="Script" uid="uid://bqdrqyuuwy61y" path="res://Scenes/car_select.gd" id="1_74av0"]
+[ext_resource type="Script" uid="uid://bqdrqyuuwy61y" path="res://Scripts/car_select.gd" id="1_74av0"]
 [ext_resource type="Script" uid="uid://h13g0sj0tkdf" path="res://Scripts/AutoRotate.gd" id="2_2dip6"]
 
 [node name="CarSelect" type="CanvasLayer"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=34 format=3 uid="uid://1wjptgwipa4f"]
 
-[ext_resource type="Script" uid="uid://yqcoqrmmbgk6" path="res://Scenes/lexus_is_f_2011.gd" id="1_vpyik"]
+[ext_resource type="Script" uid="uid://yqcoqrmmbgk6" path="res://Scripts/lexus_is_f_2011.gd" id="1_vpyik"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_sdyrn"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/camera.gd" id="2_w7swj"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_w7swj"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_w7swj"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_m34gc"]
 
