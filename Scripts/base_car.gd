@@ -18,9 +18,8 @@ var top_speed := 60.0
 var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
-var transmission := "Front-wheel drive" # "Front-wheel drive", "Rear-wheel drive", "Four-wheel drive"
+var transmission := "Front-wheel drive"
 
-# DIESEL FLAG
 var is_diesel := false
 
 # ENGINE
@@ -57,13 +56,14 @@ var debug_enabled := true
 var handling_type := "balanced"
 
 # ============================================================
+#  CONTROL FREEZE FLAG ⭐
+# ============================================================
+var controls_enabled: bool = true
+
+# ============================================================
 #  SPAWN ORIENTATION
 # ============================================================
 @export var spawn_yaw_deg: float = 0.0
-# Set this per car:
-# 0   = already faces correct way
-# 180 = model is backwards
-# 90/-90 = sideways, etc.
 
 # ============================================================
 #  NODES
@@ -148,21 +148,41 @@ func update_gears(speed_kmh: float) -> void:
 #  PHYSICS
 # ============================================================
 func _physics_process(delta: float) -> void:
+
+	# ============================================================
+	#  FREEZE CONTROLS ⭐
+	# ============================================================
+	if not controls_enabled:
+		if not is_on_floor():
+			velocity.y -= GRAVITY * delta
+		move_and_slide()
+		return
+
+	# ============================================================
+	#  INPUT
+	# ============================================================
 	var accel := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
 	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 	var drift_input := Input.is_action_pressed("drift")
 	var nitrous := Input.is_action_pressed("nos")
 
+	# ============================================================
+	#  DRIFT INPUT (NO ?)
+	# ============================================================
 	var target_drift := 0.0
 	if drift_input:
 		target_drift = 1.0
+
 	drift_factor = lerp(drift_factor, target_drift, delta * 6.0)
 	drifting = drift_factor > 0.1
 
 	old_rotation_y = rotation.y
 	steering = lerp(steering, steer, delta * 6.0)
 
+	# ============================================================
+	#  DIRECTION VECTORS
+	# ============================================================
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
@@ -172,6 +192,9 @@ func _physics_process(delta: float) -> void:
 	var speed := velocity.length()
 	var speed_kmh := speed * 3.6
 
+	# ============================================================
+	#  STEERING + DRIFT ROTATION
+	# ============================================================
 	if not drifting:
 		rotation.y += steering * turn_speed * delta
 
@@ -190,11 +213,15 @@ func _physics_process(delta: float) -> void:
 
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
 
+	# Refresh forward/right after rotation
 	forward = -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
 	right = transform.basis.x.normalized()
 
+	# ============================================================
+	#  WALL COLLISIONS
+	# ============================================================
 	var wall_block := false
 	var wall_scrape := false
 
@@ -202,7 +229,6 @@ func _physics_process(delta: float) -> void:
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
 
-		# Skip props — they should NOT trigger wall slowdown
 		if other is RigidBody3D:
 			continue
 
@@ -226,6 +252,9 @@ func _physics_process(delta: float) -> void:
 		velocity -= right * (scrape_strength * 6.0)
 		velocity *= (1.0 - scrape_strength * 0.15)
 
+	# ============================================================
+	#  RPM + GEARS
+	# ============================================================
 	if speed_kmh < 2.0:
 		if accel > 0.1:
 			rpm = lerp(rpm, idle_rpm + 2500.0, delta * 2.5)
@@ -240,24 +269,29 @@ func _physics_process(delta: float) -> void:
 
 	var torque_factor := rpm / max_rpm
 
+	# ============================================================
+	#  TRACTION + THROTTLE STEER
+	# ============================================================
 	var traction_factor := 1.0
 	var throttle_steer := 0.0
 	var launch_grip := 1.0
 
-	match transmission:
-		"Front-wheel drive":
-			traction_factor = 0.90
-			throttle_steer = -steering * 0.35
-			launch_grip = 1.15
-		"Rear-wheel drive":
-			traction_factor = 1.05
-			throttle_steer = steering * 0.55
-			launch_grip = 0.85
-		"Four-wheel drive":
-			traction_factor = 1.20
-			throttle_steer = steering * 0.25
-			launch_grip = 1.35
+	if transmission == "Front-wheel drive":
+		traction_factor = 0.90
+		throttle_steer = -steering * 0.35
+		launch_grip = 1.15
+	elif transmission == "Rear-wheel drive":
+		traction_factor = 1.05
+		throttle_steer = steering * 0.55
+		launch_grip = 0.85
+	elif transmission == "Four-wheel drive":
+		traction_factor = 1.20
+		throttle_steer = steering * 0.25
+		launch_grip = 1.35
 
+	# ============================================================
+	#  ACCELERATION
+	# ============================================================
 	var accel_force := 0.0
 
 	if accel > 0.0:
@@ -287,6 +321,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = flat.x
 		velocity.z = flat.z
 
+	# ============================================================
+	#  NITRO
+	# ============================================================
 	if nitrous:
 		nitro.show()
 		velocity += forward * accel_force * 1.35 * delta
@@ -297,57 +334,73 @@ func _physics_process(delta: float) -> void:
 	else:
 		nitro.hide()
 
+	# ============================================================
+	#  BRAKING
+	# ============================================================
 	if brake > 0.1:
 		var brake_force := brake_strength * (mass / 1200.0) * 1.4
 		velocity = velocity.move_toward(Vector3.ZERO, brake_force * delta)
 
+	# ============================================================
+	#  DRAG
+	# ============================================================
 	velocity -= velocity * DRAG * delta
 
+	# ============================================================
+	#  GRIP + UNDERSTEER / OVERSTEER
+	# ============================================================
 	var front_grip := 1.0
 	var rear_grip := 1.0
 
-	match transmission:
-		"Front wheel drive":
-			front_grip = 0.85
-			rear_grip = 1.15
+	if transmission == "Front wheel drive":
+		front_grip = 0.85
+		rear_grip = 1.15
 
-			var understeer_strength :float = clamp(speed_kmh / 120.0, 0.0, 1.0)
-			rotation.y += steering * turn_speed * delta * (1.0 - understeer_strength * 0.55)
-			velocity += right * (steering * understeer_strength * 2.0) * delta
+		var understeer_strength :float = clamp(speed_kmh / 120.0, 0.0, 1.0)
+		rotation.y += steering * turn_speed * delta * (1.0 - understeer_strength * 0.55)
+		velocity += right * (steering * understeer_strength * 2.0) * delta
 
-		"Rear wheel drive":
-			front_grip = 1.15
-			rear_grip = 0.85
+	elif transmission == "Rear wheel drive":
+		front_grip = 1.15
+		rear_grip = 0.85
 
-			var oversteer_strength :float = clamp(speed_kmh / 140.0, 0.0, 1.0)
-			rotation.y += steering * turn_speed * delta * (1.0 + oversteer_strength * 0.65)
-			velocity += right * (steering * oversteer_strength * 4.0) * delta
+		var oversteer_strength :float = clamp(speed_kmh / 140.0, 0.0, 1.0)
+		rotation.y += steering * turn_speed * delta * (1.0 + oversteer_strength * 0.65)
+		velocity += right * (steering * oversteer_strength * 4.0) * delta
 
-		"Four wheel drive":
-			front_grip = 1.05
-			rear_grip = 1.05
+	elif transmission == "Four wheel drive":
+		front_grip = 1.05
+		rear_grip = 1.05
 
-			var awd_balance :float = clamp(speed_kmh / 160.0, 0.0, 1.0)
-			rotation.y += steering * turn_speed * delta * (1.0 + awd_balance * 0.15)
+		var awd_balance :float = clamp(speed_kmh / 160.0, 0.0, 1.0)
+		rotation.y += steering * turn_speed * delta * (1.0 + awd_balance * 0.15)
 
+	# ============================================================
+	#  LATERAL FRICTION
+	# ============================================================
 	var lateral := right.dot(velocity)
 	var friction_strength: float = lerp(lateral_friction, 0.7, drift_factor)
 
 	if abs(lateral) > 0.1:
 		velocity -= right * lateral * (friction_strength * 0.15) * delta
 
+	# ============================================================
+	#  DRIFT BEHAVIOR
+	# ============================================================
 	if drifting:
-		match transmission:
-			"Front-wheel drive":
-				rotation.y += steering * 0.6 * delta
-				velocity += right * (-steering * 2.0) * delta
-			"Rear-wheel drive":
-				velocity += right * (steering * 6.0) * delta
-				rotation.y += steering * 0.25 * delta
-			"Four-wheel drive":
-				velocity += right * (steering * 3.0) * delta
-				rotation.y += steering * 0.15 * delta
+		if transmission == "Front-wheel drive":
+			rotation.y += steering * 0.6 * delta
+			velocity += right * (-steering * 2.0) * delta
+		elif transmission == "Rear-wheel drive":
+			velocity += right * (steering * 6.0) * delta
+			rotation.y += steering * 0.25 * delta
+		elif transmission == "Four-wheel drive":
+			velocity += right * (steering * 3.0) * delta
+			rotation.y += steering * 0.15 * delta
 
+	# ============================================================
+	#  TOP SPEED LIMIT
+	# ============================================================
 	var flat2 := Vector3(velocity.x, 0, velocity.z)
 
 	if nitrous:
@@ -361,20 +414,29 @@ func _physics_process(delta: float) -> void:
 	velocity.x = flat2.x
 	velocity.z = flat2.z
 
+	# ============================================================
+	#  GLOBAL HUD VALUES
+	# ============================================================
 	Global.speed = speed_kmh
 	Global.gear = current_gear
 
+	# ============================================================
+	#  GRAVITY
+	# ============================================================
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
 		velocity.y = -0.01
 
+	# ============================================================
+	#  MOVE
+	# ============================================================
 	var old_velocity := velocity
 	move_and_slide()
 
 	# ============================================================
-# COLLISIONS (AFTER MOVE)
-# ============================================================
+	#  COLLISIONS AFTER MOVE
+	# ============================================================
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
@@ -382,30 +444,18 @@ func _physics_process(delta: float) -> void:
 		n.y = 0.0
 		n = n.normalized()
 
-		# --- LIGHT RIGIDBODY COLLISION (cones, crates, barriers) ---
-				# --- LIGHT RIGIDBODY COLLISION (cones, crates, barriers) ---
+		# LIGHT RIGIDBODY COLLISION
 		if other is RigidBody3D:
-			# Save speed BEFORE collision
 			var pre_speed := velocity.length()
-
-			# Calculate impact force
 			var impact: float = clamp(pre_speed, 4.0, 18.0)
 
-			# Push the prop away
 			other.apply_impulse(-n * impact * 1.4, col.get_position())
-
-			# Apply tiny directional pushback
 			velocity += -n * (impact * 0.05)
-
-			# Restore EXACT speed (100% retention)
 			velocity = velocity.normalized() * pre_speed
-
-			# Optional wobble for feel
 			velocity = velocity.rotated(Vector3.UP, randf_range(-0.03, 0.03))
-
 			continue
 
-		# --- CAR–CAR COLLISIONS (momentum exchange) ---
+		# CAR–CAR COLLISIONS
 		if other is CarController:
 			var my_p := mass * velocity
 			var their_p: Vector3 = other.mass * other.velocity
