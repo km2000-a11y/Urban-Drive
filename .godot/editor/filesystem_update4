@@ -1,3 +1,4 @@
+res://Scenes/win_screen_radar.tscn
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -35,5 +36,3 @@ res://Scenes/granturismo_police.tscn
 res://Scenes/mode_select.tscn
 res://main.gd
 res://Scripts/win_screen_radar.gd
-res://Scenes/win_screen_radar.tscn
-res://Scripts/base_car.gd
