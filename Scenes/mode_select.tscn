@@ -20,13 +20,4 @@ theme_override_font_sizes/font_size = 40
 text = "RADAR RACE
 "
 
-[node name="DuelBtn" type="Button" parent="Control"]
-layout_mode = 0
-offset_top = 164.0
-offset_right = 1258.0
-offset_bottom = 226.0
-theme_override_font_sizes/font_size = 40
-text = "DUEL"
-
 [connection signal="pressed" from="Control/RadarRaceBtn" to="." method="_on_radar_race_btn_pressed"]
-[connection signal="pressed" from="Control/DuelBtn" to="." method="_on_duel_btn_pressed"]

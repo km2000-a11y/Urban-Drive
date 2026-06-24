@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://5uek186lh4p3"]
 
 [ext_resource type="Script" uid="uid://cikjntu0khfsj" path="res://Scripts/granturismo_s_2009.gd" id="1_u54ja"]
-[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_oojgv"]
+[ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="2_yu6uc"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_cee2k"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_au4wr"]
 
@@ -332,7 +332,7 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_oojgv")
+stream = ExtResource("2_yu6uc")
 max_polyphony = 4
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]

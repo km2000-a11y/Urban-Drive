@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Linetti Tempest"
+var car_name := "Linetti Terror"
 var country := "Italy"
 var engine := "V12 6.2L"
 var weight_kg := 1650

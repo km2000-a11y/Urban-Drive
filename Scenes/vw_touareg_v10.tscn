@@ -1,8 +1,8 @@
 [gd_scene load_steps=40 format=3 uid="uid://un78slbsud25"]
 
 [ext_resource type="Script" uid="uid://ctq74b56dnymy" path="res://Scripts/vw_touareg_v10_tdi_2007.gd" id="1_vh25x"]
-[ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_iliql"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_qf37p"]
+[ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_iliql"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_qf37p"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="4_f1w3s"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_l06pl"]
@@ -303,7 +303,7 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_iliql")
+stream = ExtResource("3_iliql")
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_qf37p")
