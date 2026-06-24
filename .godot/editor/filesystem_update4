@@ -1,5 +1,31 @@
-res://Scenes/win_screen_radar.tscn
+res://Scripts/base_car.gd
+res://race_results.gd
 res://main.tscn
+res://ai_car.gd
+res://Scripts_AI/bmw_750il_1995.gd
+res://Scripts_AI/bmw_z4_sdrive35is_2011.gd
+res://Scripts_AI/chevelle_ss_454_1970.gd
+res://Scripts_AI/chevrolet_corvette_c5_1998.gd
+res://Scripts_AI/diablo_roadster_1997.gd
+res://Scripts_AI/granturismo_s_2009.gd
+res://Scripts_AI/hummer_h1_2000.gd
+res://Scripts_AI/hummer_h2_2004.gd
+res://Scripts_AI/jaguar_xkr_2003.gd
+res://Scripts_AI/lamborghini_gallardo_2004.gd
+res://Scripts_AI/lamborghini_murcielago_2005.gd
+res://Scripts_AI/lexus_is350_2009.gd
+res://Scripts_AI/lexus_is_f_2011.gd
+res://Scripts_AI/lexus_ls_430_2003.gd
+res://Scripts_AI/lotus_exige_s_2007.gd
+res://main.gd
+res://Scripts_AI/morgan_aero_8.gd
+res://Scripts_AI/new_beetle_rsi_2001.gd
+res://Scripts_AI/nissan_350z_2005.gd
+res://Scripts_AI/shelby_gt500_1968.gd
+res://Scripts_AI/tvr_sagaris_2005.gd
+res://Scripts_AI/vanquish_2002.gd
+res://Scripts_AI/vw_golf_v_gti_2003.gd
+res://Scripts_AI/vw_touareg_v10_tdi_2007.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -34,5 +60,8 @@ res://Scenes/tvr t 440r.tscn
 res://Tracks/bogota_airport.tscn
 res://Scenes/granturismo_police.tscn
 res://Scenes/mode_select.tscn
-res://main.gd
-res://Scripts/win_screen_radar.gd
+res://Scenes/win_screen_radar.tscn
+res://AI CARS/audi_a8.tscn
+res://AI CARS/aston_db9.tscn
+res://cars.gd
+res://Scenes/leaderboard.tscn

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dqgnkspdapku1"]
+
+[node name="Leaderboard" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 1278.0
+offset_bottom = 724.0
+
+[node name="TitleLabel" type="Label" parent="Control/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

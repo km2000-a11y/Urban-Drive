@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://biqgwfdnkllcs"]
 
-[ext_resource type="Script" uid="uid://cb582snb2vx44" path="res://new_beetle_rsi_2001.gd" id="1_q1kep"]
+[ext_resource type="Script" uid="uid://cb582snb2vx44" path="res://Scripts/new_beetle_rsi_2001.gd" id="1_q1kep"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_21584"]
 [ext_resource type="AudioStream" uid="uid://cvcst7i255e7m" path="res://SFX/rev.mp3" id="2_xwjyd"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_21584"]

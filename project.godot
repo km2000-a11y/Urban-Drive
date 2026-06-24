@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Global="*res://global.gd"
 Cars="*res://cars.gd"
 Modes="*res://modes.gd"
+RaceResults="*res://race_results.gd"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxi25dbhhlmu5"]
+[gd_scene load_steps=7 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="Script" uid="uid://cpx63o2nbliu2" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://b4drvxor1nx4s" path="res://Tracks/bogota_airport.tscn" id="3_1bvp3"]
@@ -9,6 +9,9 @@ size = Vector3(7, 6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
 size = Vector3(1, 6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+size = Vector3(9, 20, 1)
 
 [node name="Node" type="Node"]
 script = ExtResource("1_h2yge")
@@ -34,5 +37,15 @@ shape = SubResource("BoxShape3D_h2yge")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RadarTrap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.74138, -0.134766)
 mesh = SubResource("BoxMesh_1bvp3")
+
+[node name="AISpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1927.84)
+
+[node name="LapLine" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2007.16)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LapLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.90903, 0)
+shape = SubResource("BoxShape3D_1bvp3")
 
 [connection signal="body_entered" from="RadarTrap" to="." method="_on_radar_trap_body_entered"]
