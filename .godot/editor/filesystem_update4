@@ -1,3 +1,4 @@
+res://Scenes/mode_select.tscn
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -32,7 +33,8 @@ res://Scenes/dodge_viper.tscn
 res://Scenes/tvr t 440r.tscn
 res://Tracks/bogota_airport.tscn
 res://Scenes/granturismo_police.tscn
-res://Scenes/mode_select.tscn
 res://Scenes/win_screen_radar.tscn
+res://Scenes/leaderboard.tscn
 res://Scenes/cls_350_cdi.tscn
 res://Scenes/win_screen_duel.tscn
+res://Scripts/base_car.gd

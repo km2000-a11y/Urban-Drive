@@ -37,6 +37,7 @@ var old_rotation_y := 0.0
 var drifting := false
 var drift_factor := 0.0
 var boost := false
+var nitro_top_speed_multiplier:=1.12
 
 var performance_points := 0
 var debug_enabled := true
@@ -267,8 +268,12 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	velocity -= velocity * DRAG * delta
 
 	var flat2 := Vector3(velocity.x, 0, velocity.z)
-	if flat2.length() > top_speed:
-		flat2 = flat2.normalized() * top_speed
+	var current_top_speed := top_speed
+	if nitrous:
+		current_top_speed = top_speed * nitro_top_speed_multiplier
+	if flat2.length() > current_top_speed:
+		flat2 = flat2.normalized() * current_top_speed
+
 	velocity.x = flat2.x
 	velocity.z = flat2.z
 
