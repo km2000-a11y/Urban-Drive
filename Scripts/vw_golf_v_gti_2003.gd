@@ -19,7 +19,7 @@ func _ready():
 	lateral_friction = 1.03
 	transmission = "Front wheel drive"
 
-	handling_type = "hot_hatch_fwd"
+	
 
 	apply_stats()
 	print("Child READY loaded:", car_name)

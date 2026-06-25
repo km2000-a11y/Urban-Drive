@@ -20,8 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Viper RT/10 handling (raw, heavy steering, torque-heavy)
-	handling_type = "american_brute"
-
+	
 	# Dodge 6-speed manual (long gears, big torque)
 	gear_count = 6
 	gear_ratios = [

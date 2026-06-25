@@ -20,7 +20,6 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# IS F handling: aggressive, planted, heavy but precise
-	handling_type = "balanced"
 
 	# 8‑speed Direct Shift automatic (real IS F gearbox)
 	gear_count = 8

@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Maserati GranTurismo-style handling (smooth GT, slightly softer than DB9/Vanquish)
-	handling_type = "balanced"
+	
 
 	# ZF 6-speed automatic (GT gearing, longer than Vanquish)
 	gear_count = 6

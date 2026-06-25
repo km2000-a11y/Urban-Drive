@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Chevelle SS handling (big‑block weight, straight‑line brute)
-	handling_type = "heavy_muscle"
+	
 
 	# 3‑speed TH400‑style gearing (long, torque-heavy)
 	gear_count = 3

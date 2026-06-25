@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Shelby GT500 handling (heavy nose, big torque, classic muscle feel)
-	handling_type = "heavy_muscle"
+	
 
 	# 4‑speed muscle car gearing (long, torque-focused)
 	gear_count = 4

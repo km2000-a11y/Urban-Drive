@@ -34,10 +34,10 @@ func _ready():
 	
 	is_diesel=true
 	# DISTINCT HANDLING PROFILE
-	handling_type = "luxury_boat"
+	
 
 	# APPLY STATS + HANDLING
 	apply_stats()
-	apply_handling_profile()
+	
 
 	print("Child READY loaded:", car_name)

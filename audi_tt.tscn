@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ctnbqwh4l8od6"]
+[gd_scene load_steps=50 format=3 uid="uid://itttgu3e2jai"]
 
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="1_a1icq"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="2_a1icq"]

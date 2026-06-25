@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive" # Changed from Front wheel drive
 
 	# IS350-style handling (Sharp, agile, athletic, prone to power-slides if pushed too hard)
-	handling_type = "balanced"
+	
 
 	# Toyota/Lexus 2GR-FSE 6-Speed Sport Gearing (Tighter ratios to maximize the higher 306 hp power band)
 	gear_count = 6

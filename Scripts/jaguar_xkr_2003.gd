@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Jaguar XKR-style handling (heavy, smooth, torque-rich GT)
-	handling_type = "luxury_boat"
+	
 
 	# Jaguar 6-speed auto (long gears, smooth shifts)
 	gear_count = 6

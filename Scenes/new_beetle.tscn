@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://biqgwfdnkllcs"]
+[gd_scene load_steps=41 format=3 uid="uid://biqgwfdnkllcs"]
 
 [ext_resource type="Script" uid="uid://cb582snb2vx44" path="res://Scripts/new_beetle_rsi_2001.gd" id="1_q1kep"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_21584"]
@@ -93,6 +93,12 @@ albedo_color = Color(0.517647, 0.517647, 0.517647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tihv4"]
 size = Vector3(0.65, 0.7, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tihv4"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0a3aj"]
+size = Vector3(0.5, 0.1, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_08euy"]
 size = Vector3(1, 1, 1.7)
@@ -263,6 +269,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.109253, 0.682123, 0.229173
 material_override = SubResource("StandardMaterial3D_0a3aj")
 mesh = SubResource("BoxMesh_xdn64")
 skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103766, 0.465368, -0.24261)
+material_override = SubResource("StandardMaterial3D_tihv4")
+mesh = SubResource("BoxMesh_0a3aj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0383226, 0.144474, -0.156084)

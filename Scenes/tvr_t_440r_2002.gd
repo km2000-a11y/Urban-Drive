@@ -19,7 +19,7 @@ func _ready():
 	turn_speed = 3.45
 	brake_strength = 14.2
 	lateral_friction = 1.18
-	handling_type = "super_sport"
+	
 
 	# DRIVETRAIN
 	transmission = "Rear wheel drive"

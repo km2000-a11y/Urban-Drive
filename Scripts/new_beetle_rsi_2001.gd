@@ -20,10 +20,9 @@ func _ready():
 	transmission = "Four wheel drive"
 
 	# DISTINCT HANDLING PROFILE
-	handling_type = "awd_grip"
-
+	
 	# APPLY STATS + HANDLING
 	apply_stats()
-	apply_handling_profile()
+	
 
 	print("Child READY loaded:", car_name)

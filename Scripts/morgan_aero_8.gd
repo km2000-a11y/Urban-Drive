@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Morgan Aero 8-style handling (ultra-light, twitchy, raw RWD)
-	handling_type = "light_sport"
+	
 
 	# BMW/Morgan 6-speed manual (short, punchy gears)
 	gear_count = 6

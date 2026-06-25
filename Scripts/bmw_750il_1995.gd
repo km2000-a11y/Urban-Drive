@@ -19,7 +19,7 @@ func _ready():
 	lateral_friction = 1.00
 	transmission = "Rear wheel drive"
 
-	handling_type = "luxury_boat"
+	
 
 	# REAL E38 750iL GEAR RATIOS
 	gear_count = 5

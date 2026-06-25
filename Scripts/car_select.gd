@@ -41,6 +41,8 @@ var car_colors := {
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
 	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
+	"Kronstadt Blade":[Color8(85,85,85), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
+
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
@@ -66,7 +68,7 @@ var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Str
 var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster"]
-var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault"]
+var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
 var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Kuro Supreme", "Berkshire Blunt"]
 var sport_racing_list = ["Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine"]
@@ -104,8 +106,9 @@ var urban_racers = {
 
 var sedans = {
 	"Eisenach Monarch":["523 PP","Country: Germany","HP: 322","WEIGHT: 2050 KG","0-100 KM/H: 6.6s","TOP SPEED: 265 KM/H","ENGINE: V12 5.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Schroder Kaiser":["532 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.0s","TOP SPEED: 257 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Schroder Kaiser":["532 PP","Country: Germany","HP: 330","WEIGHT: 1780 KG","0-100 KM/H: 6.2s","TOP SPEED: 257 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
+	"Kuro Vault":["503 PP","Country: Japan","HP: 290","WEIGHT: 1760 KG","0-100 KM/H: 6.3s","TOP SPEED: 248 KM/H","ENGINE: V8 4.3L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Kronstadt Blade":["495 PP","Country: Germany","HP: 266","WEIGHT: 1810 KG","0-100 KM/H: 5.9s","TOP SPEED: 250 KM/H","ENGINE: V6 3.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 var sport = {
@@ -165,6 +168,7 @@ var car_scene_paths = {
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
+	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn"
 }
 
 # -------------------------
@@ -393,6 +397,7 @@ func update_color_ui():
 func _on_select_pressed():
 	Cars.selected_car = car_scene_paths[car_name]
 	Cars.selected_color = car_colors[car_name][color_index]
+	Cars.selected_class = car_class   # ⭐ THIS WAS MISSING ⭐
 	get_tree().change_scene_to_file("res://main.tscn")
 
 

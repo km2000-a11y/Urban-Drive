@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Diablo Roadster handling (90s exotic, wide stance, heavy V12)
-	handling_type = "supercar"
+	
 
 	# 5‑speed manual (long 90s gearing, huge top speed)
 	gear_count = 5

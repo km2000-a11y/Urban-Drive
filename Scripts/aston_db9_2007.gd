@@ -19,8 +19,7 @@ func _ready():
 	lateral_friction = 1.08
 	transmission = "Rear wheel drive"
 
-	# Aston Martin DB9-style handling (smooth GT, stable, long wheelbase)
-	handling_type = "balanced"
+	
 
 	# Aston 6-speed automatic (long gears, smooth shifts)
 	gear_count = 6

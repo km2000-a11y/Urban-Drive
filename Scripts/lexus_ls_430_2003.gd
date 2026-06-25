@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# LS430-style handling (smooth, soft, premium)
-	handling_type = "luxury_boat"
+	
 
 	# Toyota/Lexus V8 gearing (long, smooth, early shifts)
 	gear_count = 5

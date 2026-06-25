@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Corvette C5-style handling (light nose, playful RWD, stable at speed)
-	handling_type = "light_sport"
+	
 
 	# GM 6-speed manual (shorter gears, aggressive acceleration)
 	gear_count = 6

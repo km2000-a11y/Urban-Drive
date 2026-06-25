@@ -19,8 +19,8 @@ func _ready():
 	lateral_friction = 1.26
 	transmission = "Rear wheel drive"
 
-	handling_type = "light_sport"
+	
 
 	apply_stats()
-	apply_handling_profile()
+	
 	print("Child READY loaded:", car_name)

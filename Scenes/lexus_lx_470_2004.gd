@@ -32,10 +32,10 @@ func _ready():
 	shift_down_rpm = 2000
 
 	# DISTINCT HANDLING PROFILE (Plush but heavy luxury brawler)
-	handling_type = "luxury_boat"
+	
 
 	# APPLY STATS + HANDLING
 	apply_stats()
-	apply_handling_profile()
+	
 
 	print("Child READY loaded:", car_name)

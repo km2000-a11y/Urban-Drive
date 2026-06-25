@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dhkm82e0bxb2e"]
+[gd_scene load_steps=34 format=3 uid="uid://bpj1syhf3cpl2"]
 
 [ext_resource type="Script" uid="uid://c37hkfhnenfnh" path="res://Scenes/lexus_lx_470_2004_ai.gd" id="1_f1gla"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_aakim"]

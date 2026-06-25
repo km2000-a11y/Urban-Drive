@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# BMW Z4 handling (sharp, playful roadster feel)
-	handling_type = "light_sport"
+	
 
 	# 7‑speed DCT‑style gearing (short, punchy)
 	gear_count = 7

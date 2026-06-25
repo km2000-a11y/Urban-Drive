@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Rear wheel drive"
 
 	# Aston Martin Vanquish-style handling (sharper GT, more aggressive than DB9)
-	handling_type = "balanced"
+	
 
 	# Aston 6-speed automatic (slightly shorter gearing than DB9)
 	gear_count = 6
