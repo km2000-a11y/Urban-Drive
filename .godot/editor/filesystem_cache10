@@ -1,5 +1,5 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1782463237
+::res://::1782469559
 aston_db9.tscn::PackedScene/PackedScene::7422556213708327541::1782397379::0::1::::<><><>0<>0<><>::uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_a8.tscn::PackedScene/PackedScene::4017700870543264684::1782397379::0::1::::<><><>0<>0<><>::uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_tt.tscn::PackedScene/PackedScene::601921826692948676::1782397379::0::1::::<><><>0<>0<><>::uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
@@ -22,10 +22,10 @@ main.gd::GDScript/GDScript::5875087716934220587::1782397376::0::1::::<>Node<><>0
 main.tscn::PackedScene/PackedScene::6405392885157970654::1782403254::0::1::::<><><>0<>0<><>::uid://cpx63o2nbliu2::::res://main.gd<>uid://b4drvxor1nx4s::::res://Tracks/bogota_airport.tscn<>uid://bhj15vaqmgc72::::res://Scenes/speedometer.tscn
 modes.gd::GDScript/GDScript::6169788489058946643::1782051465::0::1::::<>Node<><>0<>0<><>::
 race_results.gd::GDScript/GDScript::4521338802104354928::1782309627::0::1::::<>Node<><>0<>0<><>::
-::res://Scenes/::1782463237
+::res://Scenes/::1782463640
 aston_db9.tscn::PackedScene/PackedScene::2942269834879165477::1782403255::0::1::::<><><>0<>0<><>::uid://c7j4r626feeqh::::res://Scripts/aston_db9_2007.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_a8.tscn::PackedScene/PackedScene::260973396008591591::1782403256::0::1::::<><><>0<>0<><>::uid://c3pyr47qwkgbe::::res://Scripts/audi_a8_42_2004.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
-audi_rs5.tscn::PackedScene::1870900493244968471::1782463246::0::1::::<><><>0<>0<><>::uid://yqcoqrmmbgk6::::res://Scripts/lexus_is_f_2011.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
+audi_rs5.tscn::PackedScene::1870900493244968471::1782463640::0::1::::<><><>0<>0<><>::uid://yqcoqrmmbgk6::::res://Scripts/audi_Rs5_2013.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_tt.tscn::PackedScene/PackedScene::2303009468386700198::1782403254::0::1::::<><><>0<>0<><>::uid://b0isf7hyx4jdo::::res://Scripts/audi_tt_roadster_32_2004.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 bmw_750il.tscn::PackedScene/PackedScene::2375408369599800176::1782403254::0::1::::<><><>0<>0<><>::uid://bi0llg6bqivjm::::res://Scripts/bmw_750il_1995.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 bmw_z4.tscn::PackedScene/PackedScene::6418319620519477867::1782403256::0::1::::<><><>0<>0<><>::uid://cs7cdg04ml8s::::res://Scripts/bmw_z4_sdrive35is_2011.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
@@ -64,10 +64,11 @@ vanquish.tscn::PackedScene/PackedScene::4477082159472246585::1782403255::0::1:::
 vw_touareg_v10.tscn::PackedScene/PackedScene::1432616621014244320::1782403255::0::1::::<><><>0<>0<><>::uid://ctq74b56dnymy::::res://Scripts/vw_touareg_v10_tdi_2007.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://cpontoff1o0wi::::res://SFX/crash.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 win_screen_duel.tscn::PackedScene/PackedScene::6758527590991771374::1782403257::0::1::::<><><>0<>0<><>::
 win_screen_radar.tscn::PackedScene/PackedScene::2934901466802473566::1782403257::0::1::::<><><>0<>0<><>::uid://doicu1o2h0alg::::res://Scripts/win_screen_radar.gd
-::res://Scripts/::1782403254
+::res://Scripts/::1782463641
 AIController.gd::GDScript/GDScript::5229643791783707223::1782396895::0::1::::<>Node3D<><>0<>0<><>::
 aston_db9_2007.gd::GDScript/GDScript::7039256586225302983::1782395553::0::1::::<>CarController<><>0<>0<><>::
 audi_a8_42_2004.gd::GDScript/GDScript::6770583795252445550::1782397375::0::1::::<>CarController<><>0<>0<><>::
+audi_Rs5_2013.gd::GDScript::1717709593674520211::1782463641::0::1::::<>CarController<><>0<>0<><>::
 audi_tt_roadster_32_2004.gd::GDScript/GDScript::4158760324198881456::1782395553::0::1::::<>CarController<><>0<>0<><>::
 AutoRotate.gd::GDScript/GDScript::546707858965989979::1781704266::0::1::::<>Node3D<><>0<>0<><>::
 barrier_1.gd::GDScript/GDScript::386676009891401718::1782028375::0::1::::<>RigidBody3D<><>0<>0<><>::
@@ -75,7 +76,7 @@ base_car.gd::GDScript/GDScript::2507978259736890772::1782403254::0::1::::CarCont
 bmw_750il_1995.gd::GDScript/GDScript::3000228770398433074::1782395553::0::1::::<>CarController<><>0<>0<><>::
 bmw_z4_sdrive35is_2011.gd::GDScript/GDScript::179483170219479152::1782395553::0::1::::<>CarController<><>0<>0<><>::
 camera.gd::GDScript/GDScript::362575050681860707::1782131783::0::1::::<>Camera3D<><>0<>0<><>::
-car_select.gd::GDScript/GDScript::3516697369138886440::1782397376::0::1::::<>CanvasLayer<><>0<>0<><>::
+car_select.gd::GDScript::3516697369138886440::1782463641::0::1::::<>CanvasLayer<><>0<>0<><>::
 chevelle_ss_454_1970.gd::GDScript/GDScript::2858222168865579304::1782395553::0::1::::<>CarController<><>0<>0<><>::
 chevrolet_corvette_c5_1998.gd::GDScript/GDScript::4300331645028451739::1782395553::0::1::::<>CarController<><>0<>0<><>::
 cls_350_cdi.gd::GDScript/GDScript::720606750349385109::1782395553::0::1::::<>CarController<><>0<>0<><>::
@@ -87,7 +88,6 @@ jaguar_xkr_2003.gd::GDScript/GDScript::3223640173129569857::1782395554::0::1::::
 lamborghini_gallardo_2004.gd::GDScript/GDScript::3832818255708052645::1782395554::0::1::::<>CarController<><>0<>0<><>::
 lamborghini_murcielago_2005.gd::GDScript/GDScript::744761190140663062::1782395554::0::1::::<>CarController<><>0<>0<><>::
 lexus_is350_2009.gd::GDScript/GDScript::6480360182202838767::1782395554::0::1::::<>CarController<><>0<>0<><>::
-lexus_is_f_2011.gd::GDScript/GDScript::1717709593674520211::1782395554::0::1::::<>CarController<><>0<>0<><>::
 lexus_ls_430_2003.gd::GDScript/GDScript::2182284024909599163::1782395554::0::1::::<>CarController<><>0<>0<><>::
 lotus_exige_s_2007.gd::GDScript/GDScript::6138488159526185486::1782395554::0::1::::<>CarController<><>0<>0<><>::
 mode_select.gd::GDScript/GDScript::5460416781425493031::1782391726::0::1::::<>CanvasLayer<><>0<>0<><>::

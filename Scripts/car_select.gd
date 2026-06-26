@@ -48,7 +48,7 @@ var car_colors := {
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
 	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
-	"Kuro Supreme":[Color8(75,0,255), Color8(255,255,255), Color8(160,160,160), Color8(0,80,160)],
+	"Schroder Predator":[Color8(75,0,255), Color8(255,255,255), Color8(160,160,160), Color8(0,80,160)],
 
 	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
@@ -69,7 +69,7 @@ var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Stra
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster"]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
-var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Kuro Supreme", "Berkshire Blunt"]
+var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Schroder Predator", "Berkshire Blunt"]
 var sport_racing_list = ["Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine"]
 
@@ -156,7 +156,7 @@ var car_scene_paths = {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
-	"Kuro Supreme":"res://Scenes/lexus_is_f.tscn",
+	"Schroder Predator":"res://Scenes/audi_rs5.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
