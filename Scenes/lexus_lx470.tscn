@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cno8vamavv10f"]
+[gd_scene load_steps=36 format=3 uid="uid://cno8vamavv10f"]
 
 [ext_resource type="Script" uid="uid://f2chpmrpwgv6" path="res://Scenes/lexus_lx_470_2004.gd" id="1_h2ebh"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_2unh6"]
@@ -39,6 +39,12 @@ albedo_color = Color(1, 0.752941, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m1o2d"]
 size = Vector3(0.4, 0.15, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6hled"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2unh6"]
+size = Vector3(0.1, 0.15, 0.06)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j53kg"]
 albedo_color = Color(0, 0, 0, 1)
@@ -188,6 +194,16 @@ mesh = SubResource("PrismMesh_h2ebh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.179498, 0.688984, 0.67796)
 material_override = SubResource("StandardMaterial3D_2we7t")
 mesh = SubResource("BoxMesh_m1o2d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/MeshInstance3D11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0397674, 0.00630111, 0.0524834)
+material_override = SubResource("StandardMaterial3D_6hled")
+mesh = SubResource("BoxMesh_2unh6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="ModelRoot/MeshInstance3D11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.940977, 0.00630111, 0.0524833)
+material_override = SubResource("StandardMaterial3D_6hled")
+mesh = SubResource("BoxMesh_2unh6")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="ModelRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.848641, 0.688984, 0.67796)
