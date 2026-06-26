@@ -20,7 +20,7 @@ func _ready():
 	transmission = "Four wheel drive"
 
 	# RS5 handling: planted, grippy, heavy front, stable at high speed
-	handling_type = "awdsport"
+	
 
 	# Audi 7‑speed S‑tronic dual‑clutch (RS5 gearbox)
 	gear_count = 7

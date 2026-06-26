@@ -48,4 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2007.16)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.90903, 0)
 shape = SubResource("BoxShape3D_1bvp3")
 
+[node name="RoadDirection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
+
 [connection signal="body_entered" from="RadarTrap" to="." method="_on_radar_trap_body_entered"]

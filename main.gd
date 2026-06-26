@@ -71,46 +71,6 @@ var car_classes := {
 	]
 }
 
-var car_class_map = {
-	"Straeda Pitbull": "4x4 SUV",
-	"Colossus Behemoth": "4x4 SUV",
-	"Kuro Fortress": "4x4 SUV",
-	"Colossus Titan Max": "4x4 SUV",
-
-	"Zenith Horizon": "Compact Cars",
-	"Schroder Atrix Q32": "Compact Cars",
-	"Straeda G25": "Compact Cars",
-	"Straeda B32": "Compact Cars",
-
-	"Brutus Mauler": "Muscle Cars",
-	"Brutus Viper": "Muscle Cars",
-
-	"Brutus Stingray": "Urban Racers",
-	"Kestrel Speedster": "Urban Racers",
-	"Kestrel Seabird": "Urban Racers",
-	"Kuro Zephyr V6": "Urban Racers",
-	"Eisenach Roadstar": "Urban Racers",
-
-	"Eisenach Monarch": "Sedans",
-	"Schroder Kaiser": "Sedans",
-	"Kuro Vault": "Sedans",
-	"Kronstadt Blade": "Sedans",
-
-	"Berkshire Tempest": "Sport Coupes",
-	"Berkshire V12-S": "Sport Coupes",
-	"Bartoli Cruiser": "Sport Coupes",
-	"Kuro Supreme": "Sport Coupes",
-	"Berkshire Blunt": "Sport Coupes",
-
-	"Kestrel Battleaxe": "Sport Racing Cars",
-	"Linetti Shepherd": "Sport Racing Cars",
-	"Brutus Venom": "Sport Racing Cars",
-
-	"Linetti Terror": "Supercars",
-	"Linetti Firestorm": "Supercars",
-	"Kestrel Guillotine": "Supercars"
-}
-
 # ============================
 # CAR NAME → SCENE PATH
 # ============================
@@ -132,7 +92,7 @@ var car_scene_paths := {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
-	"Kuro Supreme":"res://Scenes/lexus_is_f.tscn",
+	"Schroder Predator":"res://Scenes/audi_rs5.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
@@ -152,6 +112,7 @@ var car_scene_paths := {
 # ============================================================
 func _ready():
 	mode = Modes.mode
+	print("[DEBUG] Mode:", mode)
 
 	load_radar_best()
 	spawn_player_car()
@@ -169,6 +130,8 @@ func _ready():
 # PLAYER CAR
 # ============================================================
 func spawn_player_car():
+	print("[DEBUG] Spawning player car...")
+
 	var path = Cars.selected_car
 	if path == "":
 		push_error("No player car selected!")
@@ -182,6 +145,9 @@ func spawn_player_car():
 	player_car = scene.instantiate()
 	add_child(player_car)
 
+	print("[DEBUG] Player car instance:", player_car)
+
+	# Apply color
 	if player_car.has_node("ModelRoot/Body"):
 		var body = player_car.get_node("ModelRoot/Body")
 		for child in body.get_children():
@@ -190,53 +156,98 @@ func spawn_player_car():
 				if mat:
 					mat.albedo_color = Cars.selected_color
 
+	# Spawn position
 	if has_node("SpawnPoint"):
 		player_car.global_transform = $SpawnPoint.global_transform
+		print("[DEBUG] Player spawn at SpawnPoint")
+
+	# Force player camera active (does NOT touch your HUD globals)
+	if player_car.has_node("Camera3D"):
+		var cam = player_car.get_node("Camera3D")
+		cam.current = true
+		print("[DEBUG] Player camera set current:", cam)
 
 # ============================================================
 # AI CAR
 # ============================================================
 func spawn_ai_car():
+	print("[DEBUG] Spawning AI car...")
+
 	var ai_name: String
 
-	# If player selected a specific AI car, use that
+	# Pick AI car from same class as player
 	if Cars.selected_ai_car != "":
 		ai_name = Cars.selected_ai_car
 	else:
-		# Otherwise pick random AI car from same class as player
-		var player_class :String= Cars.selected_class
+		var player_class: String = Cars.selected_class
 		if player_class == "" or not car_classes.has(player_class):
-			# Fallback: random from all cars
 			var keys_all = car_scene_paths.keys()
 			ai_name = keys_all[randi() % keys_all.size()]
 		else:
 			var list = car_classes[player_class]
 			ai_name = list[randi() % list.size()]
 
-	print("AI SELECTED:", ai_name)
+	print("[DEBUG] AI SELECTED:", ai_name)
 
 	if not car_scene_paths.has(ai_name):
-		push_error("AI car not found in scene dictionary: " + ai_name)
+		push_error("AI car not found: " + ai_name)
 		return
 
-	var ai_path = car_scene_paths[ai_name]
-	var ai_scene = load(ai_path)
-
+	var ai_scene = load(car_scene_paths[ai_name])
 	if ai_scene == null:
-		push_error("AI scene missing: " + ai_path)
+		push_error("AI scene missing: " + car_scene_paths[ai_name])
 		return
 
 	duel_ai_car = ai_scene.instantiate()
 	add_child(duel_ai_car)
 
+	print("[DEBUG] AI car instance:", duel_ai_car)
+
+	# Spawn AI position
 	if has_node("AISpawnPoint"):
 		duel_ai_car.global_transform = $AISpawnPoint.global_transform
+		print("[DEBUG] AI spawn at AISpawnPoint")
+
+	# Make sure AI camera never steals POV
+	if duel_ai_car.has_node("Camera3D"):
+		var ai_cam = duel_ai_car.get_node("Camera3D")
+		ai_cam.current = false
+		print("[DEBUG] AI camera disabled:", ai_cam)
 
 	# Attach AI brain
 	var ai_brain = load("res://Scripts/AIController.gd").new()
 	duel_ai_car.add_child(ai_brain)
+	print("[DEBUG] AI brain attached:", ai_brain)
+
+	# Assign car
 	ai_brain.car = duel_ai_car
+
+	# Assign road direction (ONE NODE IN MAP)
+	if has_node("RoadDirection"):
+		ai_brain.road_direction = $RoadDirection
+		print("[DEBUG] RoadDirection assigned:", $RoadDirection)
+	else:
+		print("[DEBUG] RoadDirection NOT FOUND")
+
+	# AI chases the player
+	ai_brain.chase_player = player_car
+	print("[DEBUG] AI chase target:", player_car)
+
+	# Apply PP behavior
 	ai_brain.apply_pp_behavior(duel_ai_car.performance_points)
+	print("[DEBUG] AI PP:", duel_ai_car.performance_points)
+
+	# Assign driver name + car name for leaderboard
+	duel_ai_car.driver_name = ai_brain.ai_name
+	duel_ai_car.car_name = ai_name
+	print("[DEBUG] AI driver:", duel_ai_car.driver_name, "car:", duel_ai_car.car_name)
+	# Force player camera active again (AI sometimes overrides)
+	if player_car.has_node("Camera3D"):
+		player_car.get_node("Camera3D").current = true
+		print("[DEBUG] Player camera re-activated after AI spawn")
+	else:
+		print("[DEBUG] Player car has NO Camera3D node!")
+
 
 # ============================================================
 # LAP TRIGGER
@@ -250,9 +261,11 @@ func _on_lap_line_body_entered(body):
 
 	if body == player_car:
 		duel_player_laps += 1
+		print("[DEBUG] Player lap:", duel_player_laps)
 
 	if body == duel_ai_car:
 		duel_ai_laps += 1
+		print("[DEBUG] AI lap:", duel_ai_laps)
 
 	_check_duel_finish()
 
@@ -274,9 +287,10 @@ func _finish_duel(player_won: bool):
 	duel_finished = true
 	player_car.controls_enabled = false
 
-	# Disable AI by freezing its controls
 	if duel_ai_car:
 		duel_ai_car.controls_enabled = false
+
+	print("[DEBUG] Duel finished. Player won:", player_won)
 
 	_send_results_to_leaderboard()
 
