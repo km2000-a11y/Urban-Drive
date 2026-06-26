@@ -1,10 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://1wjptgwipa4f"]
+[gd_scene load_steps=35 format=3 uid="uid://1wjptgwipa4f"]
 
-[ext_resource type="Script" uid="uid://yqcoqrmmbgk6" path="res://Scripts/lexus_is_f_2011.gd" id="1_vpyik"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_w7swj"]
-[ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_sdyrn"]
-[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_w7swj"]
-[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_m34gc"]
+[ext_resource type="Script" uid="uid://yqcoqrmmbgk6" path="res://Scripts/audi_Rs5_2013.gd" id="1_teoe3"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_sg1yu"]
+[ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_btaip"]
+[ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_3kua5"]
+[ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_1icea"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -26,6 +26,10 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_rmeoq"]
 size = Vector3(0.1, 0.18, 0.3)
 
+[sub_resource type="PrismMesh" id="PrismMesh_teoe3"]
+left_to_right = 0.1
+size = Vector3(0.3, 0.2, 0.1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kceoh"]
 albedo_color = Color(1, 0.752941, 0, 1)
 
@@ -37,7 +41,7 @@ size = Vector3(0.2, 0.1, 0.1)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bb72w"]
-size = Vector3(0.5, 0.1, 0.1)
+size = Vector3(0.4, 0.2, 0.1)
 subdivide_width = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7avg5"]
@@ -101,16 +105,16 @@ color_ramp = SubResource("GradientTexture1D_nfu50")
 [sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
 size = Vector2(0.5, 0.5)
 
-[node name="LEXUS IS F" type="CharacterBody3D"]
+[node name="RS5" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_vpyik")
+script = ExtResource("1_teoe3")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
 current = true
 fov = 55.0
-script = ExtResource("2_w7swj")
+script = ExtResource("2_sg1yu")
 target = NodePath("..")
 
 [node name="ModelRoot" type="Node3D" parent="."]
@@ -163,15 +167,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.329322, 0.593983, 0.30087)
 material_override = SubResource("StandardMaterial3D_j171l")
 mesh = SubResource("BoxMesh_rmeoq")
 
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.329322, 0.593983, -0.0914251)
-material_override = SubResource("StandardMaterial3D_j171l")
-mesh = SubResource("BoxMesh_rmeoq")
-
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.387473, 0.593983, -0.0579049)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.387473, 0.593983, -0.0579049)
 material_override = SubResource("StandardMaterial3D_j171l")
-mesh = SubResource("BoxMesh_rmeoq")
+mesh = SubResource("PrismMesh_teoe3")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.336096, 0.593983, -0.057905)
+material_override = SubResource("StandardMaterial3D_j171l")
+mesh = SubResource("PrismMesh_teoe3")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="ModelRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.387506, 0.593983, 0.282994)
@@ -189,7 +193,7 @@ material_override = SubResource("StandardMaterial3D_kceoh")
 mesh = SubResource("PrismMesh_op76e")
 
 [node name="MeshInstance3D15" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63147e-07, 0.382313, 1.08048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63147e-07, 0.302401, 1.08048)
 material_override = SubResource("StandardMaterial3D_8lu5v")
 mesh = SubResource("BoxMesh_bb72w")
 
@@ -262,13 +266,13 @@ process_material = SubResource("ParticleProcessMaterial_sibdw")
 draw_pass_1 = SubResource("QuadMesh_twcfh")
 
 [node name="RevPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_sdyrn")
+stream = ExtResource("3_btaip")
 max_polyphony = 4
 
 [node name="BrakePlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_w7swj")
+stream = ExtResource("4_3kua5")
 
 [node name="CrashPlayer" type="AudioStreamPlayer3D" parent="."]
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_m34gc")
+stream = ExtResource("5_1icea")

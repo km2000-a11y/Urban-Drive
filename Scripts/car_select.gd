@@ -116,7 +116,7 @@ var sport = {
 	"Berkshire Tempest":["648 PP","Country: UK","HP: 460","WEIGHT: 1875 KG","0-100 KM/H: 4.8s","TOP SPEED: 303 KM/H","ENGINE: V12 5.9L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Bartoli Cruiser":["624 PP","Country: Italy","HP: 433","WEIGHT: 1880 KG","0-100 KM/H: 4.9s","TOP SPEED: 295 KM/H","ENGINE: V8 4.7L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Berkshire Blunt":["593 PP","Country: UK","HP: 396","WEIGHT: 1832 KG","0-100 KM/H: 5.2s","TOP SPEED: 286 KM/H","ENGINE: V8 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Kuro Supreme":["615 PP","Country: Japan","HP: 416","WEIGHT: 1690 KG","0-100 KM/H: 4.6s","TOP SPEED: 280 KM/H","ENGINE: V8 5.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Schroder Predator":["625 PP","Country: Germany","HP: 450","WEIGHT: 1780 KG","0-100 KM/H: 4.6s","TOP SPEED: 284 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"]
 }
 var sport_racing = {
 	"Kestrel Battleaxe":["720 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.8s","TOP SPEED: 287 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
