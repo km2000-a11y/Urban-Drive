@@ -1,4 +1,6 @@
 res://main.tscn
+res://Scripts/AIController.gd
+res://main.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -37,7 +39,3 @@ res://Scenes/win_screen_radar.tscn
 res://Scenes/leaderboard.tscn
 res://Scenes/cls_350_cdi.tscn
 res://Scenes/win_screen_duel.tscn
-res://Scripts/car_select.gd
-res://Scripts/audi_Rs5_2013.gd
-res://Scripts/AIController.gd
-res://main.gd

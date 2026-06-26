@@ -4,14 +4,8 @@ var mode: String
 var win_screen_radar
 var player_car: CarController
 
-# ============================
-# RADAR RACE
-# ============================
 var best_radar_speed: int = 0
 
-# ============================
-# DUEL MODE
-# ============================
 var duel_ai_car: CarController
 var duel_player_laps := 0
 var duel_ai_laps := 0
@@ -19,9 +13,6 @@ var duel_total_laps := 2
 var duel_finished := false
 var lap_cooldown := false
 
-# ============================
-# CAR CLASS → CAR LIST
-# ============================
 var car_classes := {
 	"4x4 SUV": [
 		"Straeda Pitbull",
@@ -71,9 +62,6 @@ var car_classes := {
 	]
 }
 
-# ============================
-# CAR NAME → SCENE PATH
-# ============================
 var car_scene_paths := {
 	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
 	"Colossus Behemoth":"res://Scenes/hummer_h2.tscn",
@@ -107,13 +95,8 @@ var car_scene_paths := {
 	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn"
 }
 
-# ============================================================
-# READY
-# ============================================================
 func _ready():
 	mode = Modes.mode
-	print("[DEBUG] Mode:", mode)
-
 	load_radar_best()
 	spawn_player_car()
 
@@ -126,12 +109,7 @@ func _ready():
 	if mode == "Duel":
 		spawn_ai_car()
 
-# ============================================================
-# PLAYER CAR
-# ============================================================
 func spawn_player_car():
-	print("[DEBUG] Spawning player car...")
-
 	var path = Cars.selected_car
 	if path == "":
 		push_error("No player car selected!")
@@ -145,9 +123,6 @@ func spawn_player_car():
 	player_car = scene.instantiate()
 	add_child(player_car)
 
-	print("[DEBUG] Player car instance:", player_car)
-
-	# Apply color
 	if player_car.has_node("ModelRoot/Body"):
 		var body = player_car.get_node("ModelRoot/Body")
 		for child in body.get_children():
@@ -156,26 +131,15 @@ func spawn_player_car():
 				if mat:
 					mat.albedo_color = Cars.selected_color
 
-	# Spawn position
 	if has_node("SpawnPoint"):
 		player_car.global_transform = $SpawnPoint.global_transform
-		print("[DEBUG] Player spawn at SpawnPoint")
 
-	# Force player camera active (does NOT touch your HUD globals)
 	if player_car.has_node("Camera3D"):
-		var cam = player_car.get_node("Camera3D")
-		cam.current = true
-		print("[DEBUG] Player camera set current:", cam)
+		player_car.get_node("Camera3D").current = true
 
-# ============================================================
-# AI CAR
-# ============================================================
 func spawn_ai_car():
-	print("[DEBUG] Spawning AI car...")
-
 	var ai_name: String
 
-	# Pick AI car from same class as player
 	if Cars.selected_ai_car != "":
 		ai_name = Cars.selected_ai_car
 	else:
@@ -186,8 +150,6 @@ func spawn_ai_car():
 		else:
 			var list = car_classes[player_class]
 			ai_name = list[randi() % list.size()]
-
-	print("[DEBUG] AI SELECTED:", ai_name)
 
 	if not car_scene_paths.has(ai_name):
 		push_error("AI car not found: " + ai_name)
@@ -201,57 +163,33 @@ func spawn_ai_car():
 	duel_ai_car = ai_scene.instantiate()
 	add_child(duel_ai_car)
 
-	print("[DEBUG] AI car instance:", duel_ai_car)
-
-	# Spawn AI position
 	if has_node("AISpawnPoint"):
 		duel_ai_car.global_transform = $AISpawnPoint.global_transform
-		print("[DEBUG] AI spawn at AISpawnPoint")
 
-	# Make sure AI camera never steals POV
+	# Align AI facing with player
+	duel_ai_car.rotation.y = player_car.rotation.y
+
 	if duel_ai_car.has_node("Camera3D"):
-		var ai_cam = duel_ai_car.get_node("Camera3D")
-		ai_cam.current = false
-		print("[DEBUG] AI camera disabled:", ai_cam)
+		duel_ai_car.get_node("Camera3D").current = false
 
-	# Attach AI brain
 	var ai_brain = load("res://Scripts/AIController.gd").new()
 	duel_ai_car.add_child(ai_brain)
-	print("[DEBUG] AI brain attached:", ai_brain)
 
-	# Assign car
 	ai_brain.car = duel_ai_car
 
-	# Assign road direction (ONE NODE IN MAP)
 	if has_node("RoadDirection"):
 		ai_brain.road_direction = $RoadDirection
-		print("[DEBUG] RoadDirection assigned:", $RoadDirection)
-	else:
-		print("[DEBUG] RoadDirection NOT FOUND")
 
-	# AI chases the player
 	ai_brain.chase_player = player_car
-	print("[DEBUG] AI chase target:", player_car)
-
-	# Apply PP behavior
 	ai_brain.apply_pp_behavior(duel_ai_car.performance_points)
-	print("[DEBUG] AI PP:", duel_ai_car.performance_points)
 
-	# Assign driver name + car name for leaderboard
 	duel_ai_car.driver_name = ai_brain.ai_name
 	duel_ai_car.car_name = ai_name
-	print("[DEBUG] AI driver:", duel_ai_car.driver_name, "car:", duel_ai_car.car_name)
-	# Force player camera active again (AI sometimes overrides)
+
+	# Make sure player camera stays active
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
-		print("[DEBUG] Player camera re-activated after AI spawn")
-	else:
-		print("[DEBUG] Player car has NO Camera3D node!")
 
-
-# ============================================================
-# LAP TRIGGER
-# ============================================================
 func _on_lap_line_body_entered(body):
 	if lap_cooldown or duel_finished:
 		return
@@ -261,11 +199,9 @@ func _on_lap_line_body_entered(body):
 
 	if body == player_car:
 		duel_player_laps += 1
-		print("[DEBUG] Player lap:", duel_player_laps)
 
 	if body == duel_ai_car:
 		duel_ai_laps += 1
-		print("[DEBUG] AI lap:", duel_ai_laps)
 
 	_check_duel_finish()
 
@@ -273,9 +209,6 @@ func _start_lap_cooldown():
 	await get_tree().create_timer(1.0).timeout
 	lap_cooldown = false
 
-# ============================================================
-# DUEL FINISH
-# ============================================================
 func _check_duel_finish():
 	if duel_player_laps >= duel_total_laps:
 		_finish_duel(true)
@@ -290,13 +223,8 @@ func _finish_duel(player_won: bool):
 	if duel_ai_car:
 		duel_ai_car.controls_enabled = false
 
-	print("[DEBUG] Duel finished. Player won:", player_won)
-
 	_send_results_to_leaderboard()
 
-# ============================================================
-# LEADERBOARD
-# ============================================================
 func _send_results_to_leaderboard():
 	RaceResults.clear()
 
@@ -314,9 +242,6 @@ func _send_results_to_leaderboard():
 
 	get_tree().change_scene_to_file("res://Scenes/Leaderboard.tscn")
 
-# ============================================================
-# RADAR TRAP
-# ============================================================
 func _on_radar_trap_body_entered(body):
 	if mode != "Radar Race":
 		return
@@ -335,9 +260,6 @@ func _on_radar_trap_body_entered(body):
 		player_car.controls_enabled = false
 		win_screen_radar.show_win(speed, best_radar_speed)
 
-# ============================================================
-# SAVE / LOAD
-# ============================================================
 func load_radar_best():
 	if FileAccess.file_exists("user://radar_best.save"):
 		var f = FileAccess.open("user://radar_best.save", FileAccess.READ)
