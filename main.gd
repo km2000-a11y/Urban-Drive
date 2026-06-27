@@ -7,7 +7,7 @@ var player_car: CarController
 var best_radar_speed: int = 0
 
 # ---------------------------------------------------------
-# CAR SCENE PATHS (RESTORED)
+# CAR SCENE PATHS
 # ---------------------------------------------------------
 
 var car_scene_paths := {
@@ -28,7 +28,7 @@ var car_scene_paths := {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
-	"Schroder Predator":"res://Scenes/audi_rs5.tscn",
+	"Gruber Targa":"res://Scenes/porsche_911_targa_993.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
@@ -51,7 +51,9 @@ func _ready():
 	mode = Modes.mode
 	load_radar_best()
 
-	spawn_player_car()
+	# Only spawn player car in NON-DUEL modes
+	if mode != "Duel":
+		spawn_player_car()
 
 	if mode == "Radar Race":
 		var ws_scene = load("res://Scenes/win_screen_radar.tscn")
@@ -86,6 +88,11 @@ func spawn_player_car():
 	player_car = scene.instantiate()
 	add_child(player_car)
 
+	# Assign player car to speedometer (CanvasLayer root)
+	if has_node("Speedometer"):
+		var speedo = get_node("Speedometer")
+		speedo.target_car = player_car
+
 	# Apply selected color
 	if player_car.has_node("ModelRoot/Body"):
 		var body = player_car.get_node("ModelRoot/Body")
@@ -115,11 +122,9 @@ func _setup_duel():
 	DuelManager.player_car_path = Cars.selected_car
 	DuelManager.ai_car_path = Cars.selected_ai_car
 
-	# If no AI car selected → random fallback
+	# If AI car not selected → just pick same car as player
 	if DuelManager.ai_car_path == "":
-		var keys_all = car_scene_paths.keys()
-		var random_name = keys_all[randi() % keys_all.size()]
-		DuelManager.ai_car_path = car_scene_paths[random_name]
+		DuelManager.ai_car_path = Cars.selected_car
 
 	DuelManager.spawn_duel(self)
 

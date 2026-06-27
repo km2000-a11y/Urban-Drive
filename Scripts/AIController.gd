@@ -24,6 +24,8 @@ func _ready():
 	last_pos = global_transform.origin
 	print("[AI READY] Driver:", ai_name)
 
+	if car:
+		car.driver_name = ai_name   # ⭐ CRITICAL FIX ⭐
 
 # ---------------------------------------------------------
 # MAIN LOOP

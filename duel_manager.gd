@@ -1,7 +1,7 @@
 extends Node
 
 # ---------------------------------------------------------
-#  DUEL CONFIG (set by menu before loading main.tscn)
+# CONFIG (set by main.gd)
 # ---------------------------------------------------------
 
 var player_car_path: String = ""
@@ -23,26 +23,30 @@ var lap_cooldown := false
 
 
 # ---------------------------------------------------------
-#  CALLED BY main.gd AFTER SCENE LOAD
+# SPAWN DUEL
 # ---------------------------------------------------------
 
 func spawn_duel(main_scene: Node):
+	# If AI car not set → pick unique car from same class
+	if ai_car_path == "":
+		ai_car_path = _pick_unique_ai_car()
+
 	if player_car_path == "" or ai_car_path == "":
 		push_error("DuelManager: Car paths not set!")
 		return
 
-	# Spawn player car
+	# --- Spawn Player ---
 	player_car = load(player_car_path).instantiate()
 	player_car.global_position = player_spawn
 	main_scene.add_child(player_car)
 
-	# Spawn AI car
+	# --- Spawn AI ---
 	ai_car = load(ai_car_path).instantiate()
 	ai_car.global_position = ai_spawn
 	main_scene.add_child(ai_car)
 
-	_assign_player_control()
-	_assign_ai_control()
+	_setup_player()
+	_setup_ai()
 
 	duel_active = true
 	winner = ""
@@ -51,10 +55,33 @@ func spawn_duel(main_scene: Node):
 
 
 # ---------------------------------------------------------
-#  PLAYER CONTROL SETUP
+# AI CAR SELECTION (same class, unique)
 # ---------------------------------------------------------
 
-func _assign_player_control():
+func _pick_unique_ai_car() -> String:
+	var cls = Cars.selected_class
+	var list = Cars.class_lists.get(cls, [])
+
+	# Remove player car from list
+	var filtered := []
+	for name in list:
+		if name != Cars.selected_car_name:
+			filtered.append(name)
+
+	# If class has only one car → AI uses same car
+	if filtered.size() == 0:
+		return Cars.selected_car
+
+	# Pick random unique car
+	var chosen = filtered[randi() % filtered.size()]
+	return Cars.car_scene_paths[chosen]
+
+
+# ---------------------------------------------------------
+# PLAYER SETUP
+# ---------------------------------------------------------
+
+func _setup_player():
 	if player_car == null:
 		return
 
@@ -69,10 +96,10 @@ func _assign_player_control():
 
 
 # ---------------------------------------------------------
-#  AI CONTROL SETUP
+# AI SETUP
 # ---------------------------------------------------------
 
-func _assign_ai_control():
+func _setup_ai():
 	if ai_car == null:
 		return
 
@@ -87,20 +114,17 @@ func _assign_ai_control():
 
 
 # ---------------------------------------------------------
-#  UPDATE LOOP (called from main.gd)
+# UPDATE LOOP
 # ---------------------------------------------------------
 
 func update_duel():
 	if not duel_active:
 		return
-
-	# DuelManager does NOT check health.
-	# Duel is a race. Win is determined by laps only.
 	pass
 
 
 # ---------------------------------------------------------
-#  LAP HANDLING (called from main.gd lap trigger)
+# LAP HANDLING
 # ---------------------------------------------------------
 
 func register_lap(body):
@@ -137,7 +161,7 @@ func _check_finish():
 
 
 # ---------------------------------------------------------
-#  END DUEL
+# END DUEL
 # ---------------------------------------------------------
 
 func _end_duel(who_won: String):
@@ -149,13 +173,11 @@ func _end_duel(who_won: String):
 
 	print("DuelManager: Winner =", winner)
 
-	# Freeze both cars
 	if player_car and player_car.has_node("CarController"):
 		player_car.get_node("CarController").set_process(false)
 
 	if ai_car and ai_car.has_node("AIController"):
 		ai_car.get_node("AIController").set_process(false)
 
-	# Notify UI if needed
 	if get_tree().current_scene.has_node("UI"):
 		get_tree().current_scene.get_node("UI").show_winner(winner)

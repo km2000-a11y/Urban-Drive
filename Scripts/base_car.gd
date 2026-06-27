@@ -277,8 +277,13 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	velocity.x = flat2.x
 	velocity.z = flat2.z
 
-	Global.speed = speed_kmh
-	Global.gear = current_gear
+	# Only the PLAYER updates the global speedometer
+		# Only update speed if this car is controlled by the player
+	if controls_enabled:
+		Global.speed = speed_kmh
+		Global.gear = current_gear
+
+
 
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta

@@ -44,3 +44,6 @@ res://main.gd
 res://Scenes/porsche_911_targa_993.gd
 res://Scripts/AIController.gd
 res://duel_manager.gd
+res://Scripts/speedometer.gd
+res://cars.gd
+res://Scripts/base_car.gd
