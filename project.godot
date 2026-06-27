@@ -21,6 +21,7 @@ Global="*res://global.gd"
 Cars="*res://cars.gd"
 Modes="*res://modes.gd"
 RaceResults="*res://race_results.gd"
+DuelManager="*res://duel_manager.gd"
 
 [display]
 

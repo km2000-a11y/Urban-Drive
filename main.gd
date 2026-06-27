@@ -6,61 +6,9 @@ var player_car: CarController
 
 var best_radar_speed: int = 0
 
-var duel_ai_car: CarController
-var duel_player_laps := 0
-var duel_ai_laps := 0
-var duel_total_laps := 2
-var duel_finished := false
-var lap_cooldown := false
-
-var car_classes := {
-	"4x4 SUV": [
-		"Straeda Pitbull",
-		"Colossus Behemoth",
-		"Kuro Fortress",
-		"Colossus Titan Max"
-	],
-	"Compact Cars": [
-		"Zenith Horizon",
-		"Schroder Atrix Q32",
-		"Straeda G25",
-		"Straeda B32"
-	],
-	"Muscle Cars": [
-		"Brutus Mauler",
-		"Brutus Viper"
-	],
-	"Urban Racers": [
-		"Brutus Stingray",
-		"Kestrel Speedster",
-		"Kestrel Seabird",
-		"Kuro Zephyr V6",
-		"Eisenach Roadstar"
-	],
-	"Sedans": [
-		"Eisenach Monarch",
-		"Schroder Kaiser",
-		"Kuro Vault",
-		"Kronstadt Blade"
-	],
-	"Sport Coupes": [
-		"Berkshire Tempest",
-		"Berkshire V12-S",
-		"Bartoli Cruiser",
-		"Kuro Supreme",
-		"Berkshire Blunt"
-	],
-	"Sport Racing Cars": [
-		"Kestrel Battleaxe",
-		"Linetti Shepherd",
-		"Brutus Venom"
-	],
-	"Supercars": [
-		"Linetti Terror",
-		"Linetti Firestorm",
-		"Kestrel Guillotine"
-	]
-}
+# ---------------------------------------------------------
+# CAR SCENE PATHS (RESTORED)
+# ---------------------------------------------------------
 
 var car_scene_paths := {
 	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
@@ -91,13 +39,18 @@ var car_scene_paths := {
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
-	"Kestrel Guillotine":"res://Scenes/tvr_t_440r.tscn",
+	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn"
 }
+
+# ---------------------------------------------------------
+# READY
+# ---------------------------------------------------------
 
 func _ready():
 	mode = Modes.mode
 	load_radar_best()
+
 	spawn_player_car()
 
 	if mode == "Radar Race":
@@ -107,7 +60,17 @@ func _ready():
 		win_screen_radar.visible = false
 
 	if mode == "Duel":
-		spawn_ai_car()
+		_setup_duel()
+
+
+func _process(delta):
+	if mode == "Duel":
+		DuelManager.update_duel()
+
+
+# ---------------------------------------------------------
+# PLAYER CAR SPAWN
+# ---------------------------------------------------------
 
 func spawn_player_car():
 	var path = Cars.selected_car
@@ -123,6 +86,7 @@ func spawn_player_car():
 	player_car = scene.instantiate()
 	add_child(player_car)
 
+	# Apply selected color
 	if player_car.has_node("ModelRoot/Body"):
 		var body = player_car.get_node("ModelRoot/Body")
 		for child in body.get_children():
@@ -131,116 +95,38 @@ func spawn_player_car():
 				if mat:
 					mat.albedo_color = Cars.selected_color
 
+	# Spawn position
 	if has_node("SpawnPoint"):
 		player_car.global_transform = $SpawnPoint.global_transform
 
+	# Activate player camera
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
-func spawn_ai_car():
-	var ai_name: String
 
-	if Cars.selected_ai_car != "":
-		ai_name = Cars.selected_ai_car
-	else:
-		var player_class: String = Cars.selected_class
-		if player_class == "" or not car_classes.has(player_class):
-			var keys_all = car_scene_paths.keys()
-			ai_name = keys_all[randi() % keys_all.size()]
-		else:
-			var list = car_classes[player_class]
-			ai_name = list[randi() % list.size()]
+# ---------------------------------------------------------
+# DUEL MODE SETUP
+# ---------------------------------------------------------
 
-	if not car_scene_paths.has(ai_name):
-		push_error("AI car not found: " + ai_name)
-		return
+func _setup_duel():
+	DuelManager.player_spawn = $SpawnPoint.global_position
+	DuelManager.ai_spawn = $AISpawnPoint.global_position
 
-	var ai_scene = load(car_scene_paths[ai_name])
-	if ai_scene == null:
-		push_error("AI scene missing: " + car_scene_paths[ai_name])
-		return
+	DuelManager.player_car_path = Cars.selected_car
+	DuelManager.ai_car_path = Cars.selected_ai_car
 
-	duel_ai_car = ai_scene.instantiate()
-	add_child(duel_ai_car)
+	# If no AI car selected → random fallback
+	if DuelManager.ai_car_path == "":
+		var keys_all = car_scene_paths.keys()
+		var random_name = keys_all[randi() % keys_all.size()]
+		DuelManager.ai_car_path = car_scene_paths[random_name]
 
-	if has_node("AISpawnPoint"):
-		duel_ai_car.global_transform = $AISpawnPoint.global_transform
+	DuelManager.spawn_duel(self)
 
-	# Align AI facing with player
-	duel_ai_car.rotation.y = player_car.rotation.y
 
-	if duel_ai_car.has_node("Camera3D"):
-		duel_ai_car.get_node("Camera3D").current = false
-
-	var ai_brain = load("res://Scripts/AIController.gd").new()
-	duel_ai_car.add_child(ai_brain)
-
-	ai_brain.car = duel_ai_car
-
-	if has_node("RoadDirection"):
-		ai_brain.road_direction = $RoadDirection
-
-	ai_brain.chase_player = player_car
-	ai_brain.apply_pp_behavior(duel_ai_car.performance_points)
-
-	duel_ai_car.driver_name = ai_brain.ai_name
-	duel_ai_car.car_name = ai_name
-
-	# Make sure player camera stays active
-	if player_car.has_node("Camera3D"):
-		player_car.get_node("Camera3D").current = true
-
-func _on_lap_line_body_entered(body):
-	if lap_cooldown or duel_finished:
-		return
-
-	lap_cooldown = true
-	_start_lap_cooldown()
-
-	if body == player_car:
-		duel_player_laps += 1
-
-	if body == duel_ai_car:
-		duel_ai_laps += 1
-
-	_check_duel_finish()
-
-func _start_lap_cooldown():
-	await get_tree().create_timer(1.0).timeout
-	lap_cooldown = false
-
-func _check_duel_finish():
-	if duel_player_laps >= duel_total_laps:
-		_finish_duel(true)
-
-	if duel_ai_laps >= duel_total_laps:
-		_finish_duel(false)
-
-func _finish_duel(player_won: bool):
-	duel_finished = true
-	player_car.controls_enabled = false
-
-	if duel_ai_car:
-		duel_ai_car.controls_enabled = false
-
-	_send_results_to_leaderboard()
-
-func _send_results_to_leaderboard():
-	RaceResults.clear()
-
-	RaceResults.add_result(
-		player_car.driver_name,
-		player_car.car_name,
-		player_car.total_race_time_ms
-	)
-
-	RaceResults.add_result(
-		duel_ai_car.driver_name,
-		duel_ai_car.car_name,
-		duel_ai_car.total_race_time_ms
-	)
-
-	get_tree().change_scene_to_file("res://Scenes/Leaderboard.tscn")
+# ---------------------------------------------------------
+# RADAR RACE
+# ---------------------------------------------------------
 
 func _on_radar_trap_body_entered(body):
 	if mode != "Radar Race":
@@ -259,6 +145,11 @@ func _on_radar_trap_body_entered(body):
 
 		player_car.controls_enabled = false
 		win_screen_radar.show_win(speed, best_radar_speed)
+
+
+# ---------------------------------------------------------
+# SAVE / LOAD
+# ---------------------------------------------------------
 
 func load_radar_best():
 	if FileAccess.file_exists("user://radar_best.save"):

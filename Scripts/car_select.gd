@@ -48,7 +48,13 @@ var car_colors := {
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
 	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
-	"Schroder Predator":[Color8(75,0,255), Color8(255,255,255), Color8(160,160,160), Color8(0,80,160)],
+	"Gruber Targa":[
+	Color8(192,192,192),  # ⭐ Silver (default)
+	Color8(255,255,255),  # White
+	Color8(200,0,0),      # Guards Red
+	Color8(0,40,120)      # Midnight Blue
+],
+
 
 	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
@@ -67,9 +73,9 @@ var car_colors := {
 var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Straeda Pitbull"]
 var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
-var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster"]
+var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster", "Berkshire Blunt"]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
-var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Schroder Predator", "Berkshire Blunt"]
+var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Gruber Targa"]
 var sport_racing_list = ["Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine"]
 
@@ -99,9 +105,10 @@ var muscle = {
 var urban_racers = {
 	"Kestrel Seabird":["543 PP","Country: UK","HP: 217","WEIGHT: 935 KG","0-100 KM/H: 4.3s","TOP SPEED: 238 KM/H","ENGINE: L4 1.8L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Brutus Stingray":["601 PP","Country: USA","HP: 345","WEIGHT: 1460 KG","0-100 KM/H: 5.0s","TOP SPEED: 277 KM/H","ENGINE: V8 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Kestrel Speedster":["562 PP","Country: UK","HP: 286","WEIGHT: 1145 KG","0-100 KM/H: 4.5s","TOP SPEED: 243 KM/H","ENGINE: V8 4.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Kestrel Speedster":["562 PP","Country: UK","HP: 286","WEIGHT: 1145 KG","0-100 KM/H: 4.7s","TOP SPEED: 243 KM/H","ENGINE: V8 4.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Kuro Zephyr V6":["525 PP","Country: Japan","HP: 306","WEIGHT: 1600 KG","0-100 KM/H: 5.6s","TOP SPEED: 250 KM/H","ENGINE: V6 3.5L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Eisenach Roadstar":["559 PP","Country: Germany","HP: 335","WEIGHT: 1600 KG","0-100 KM/H: 4.8s","TOP SPEED: 250 KM/H","ENGINE: V6 3.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Eisenach Roadstar":["559 PP","Country: Germany","HP: 335","WEIGHT: 1600 KG","0-100 KM/H: 4.8s","TOP SPEED: 250 KM/H","ENGINE: V6 3.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Berkshire Blunt":["593 PP","Country: UK","HP: 396","WEIGHT: 1832 KG","0-100 KM/H: 5.2s","TOP SPEED: 286 KM/H","ENGINE: V8 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 var sedans = {
@@ -115,9 +122,9 @@ var sport = {
 	"Berkshire V12-S":["643 PP","Country: UK","HP: 450","WEIGHT: 1740 KG","0-100 KM/H: 5.1s","TOP SPEED: 300 KM/H","ENGINE: V12 5.9L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Berkshire Tempest":["648 PP","Country: UK","HP: 460","WEIGHT: 1875 KG","0-100 KM/H: 4.8s","TOP SPEED: 303 KM/H","ENGINE: V12 5.9L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Bartoli Cruiser":["624 PP","Country: Italy","HP: 433","WEIGHT: 1880 KG","0-100 KM/H: 4.9s","TOP SPEED: 295 KM/H","ENGINE: V8 4.7L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Berkshire Blunt":["593 PP","Country: UK","HP: 396","WEIGHT: 1832 KG","0-100 KM/H: 5.2s","TOP SPEED: 286 KM/H","ENGINE: V8 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Schroder Predator":["625 PP","Country: Germany","HP: 450","WEIGHT: 1780 KG","0-100 KM/H: 4.6s","TOP SPEED: 284 KM/H","ENGINE: V8 4.2L","TRANSMISSION: FOUR-WHEEL DRIVE"]
+	"Gruber Targa":["572 PP","Country: Germany","HP: 285","WEIGHT: 1420 KG","0-100 KM/H: 4.5s","TOP SPEED: 273 KM/H","ENGINE: V6 3.0L","TRANSMISSION: FOUR-WHEEL DRIVE"]
 }
+
 var sport_racing = {
 	"Kestrel Battleaxe":["720 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.8s","TOP SPEED: 287 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Linetti Shepherd":["726 PP","Country: Italy","HP: 500","WEIGHT: 1430 KG","0-100 KM/H: 4.2s","TOP SPEED: 305 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
@@ -156,7 +163,7 @@ var car_scene_paths = {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
-	"Schroder Predator":"res://Scenes/audi_rs5.tscn",
+	"Gruber Targa":"res://Scenes/porsche_911_targa_993.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
