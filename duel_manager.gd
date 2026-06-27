@@ -10,8 +10,8 @@ var ai_car_path: String = ""
 var player_spawn: Vector3 = Vector3.ZERO
 var ai_spawn: Vector3 = Vector3.ZERO
 
-var player_car: Node3D = null
-var ai_car: Node3D = null
+var player_car: CarController = null
+var ai_car: CarController = null
 
 var duel_active := false
 var winner := ""
@@ -27,9 +27,8 @@ var lap_cooldown := false
 # ---------------------------------------------------------
 
 func spawn_duel(main_scene: Node):
-	# If AI car not set → pick unique car from same class
-	if ai_car_path == "":
-		ai_car_path = _pick_unique_ai_car()
+	# Pick unique AI car from same class
+	ai_car_path = _pick_unique_ai_car()
 
 	if player_car_path == "" or ai_car_path == "":
 		push_error("DuelManager: Car paths not set!")
@@ -59,22 +58,24 @@ func spawn_duel(main_scene: Node):
 # ---------------------------------------------------------
 
 func _pick_unique_ai_car() -> String:
-	var cls = Cars.selected_class
-	var list = Cars.class_lists.get(cls, [])
+	var cls: String = Cars.selected_class
+	var list: Array = Cars.class_lists.get(cls, [])
 
-	# Remove player car from list
-	var filtered := []
+	var filtered: Array = []
 	for name in list:
 		if name != Cars.selected_car_name:
 			filtered.append(name)
 
-	# If class has only one car → AI uses same car
+	# If only one car exists → AI uses same car
 	if filtered.size() == 0:
+		Cars.selected_ai_car_name = Cars.selected_car_name
 		return Cars.selected_car
 
 	# Pick random unique car
-	var chosen = filtered[randi() % filtered.size()]
-	return Cars.car_scene_paths[chosen]
+	var chosen_name: String = filtered[randi() % filtered.size()]
+	Cars.selected_ai_car_name = chosen_name
+
+	return Cars.car_scene_paths[chosen_name]
 
 
 # ---------------------------------------------------------
@@ -82,14 +83,10 @@ func _pick_unique_ai_car() -> String:
 # ---------------------------------------------------------
 
 func _setup_player():
-	if player_car == null:
-		return
-
-	if player_car.has_node("CarController"):
-		player_car.get_node("CarController").set_process(true)
-
-	if player_car.has_node("AIController"):
-		player_car.get_node("AIController").set_process(false)
+	if player_car is CarController:
+		player_car.controls_enabled = true
+		player_car.set_process(true)
+		player_car.set_physics_process(true)
 
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
@@ -103,12 +100,24 @@ func _setup_ai():
 	if ai_car == null:
 		return
 
-	if ai_car.has_node("AIController"):
-		ai_car.get_node("AIController").set_process(true)
+	# --- Add AIController brain ---
+	var ai_controller := AIController.new()
+	ai_car.add_child(ai_controller)
 
-	if ai_car.has_node("CarController"):
-		ai_car.get_node("CarController").set_process(false)
+	# Connect references
+	ai_controller.car = ai_car
+	ai_controller.chase_player = player_car
 
+	if get_tree().current_scene.has_node("RoadDirection"):
+		ai_controller.road_direction = get_tree().current_scene.get_node("RoadDirection")
+
+	# Disable player input for AI
+	if ai_car is CarController:
+		ai_car.controls_enabled = false
+		ai_car.set_process(true)
+		ai_car.set_physics_process(true)
+
+	# Disable AI camera
 	if ai_car.has_node("Camera3D"):
 		ai_car.get_node("Camera3D").current = false
 
@@ -120,7 +129,7 @@ func _setup_ai():
 func update_duel():
 	if not duel_active:
 		return
-	pass
+	# AIController handles movement
 
 
 # ---------------------------------------------------------
@@ -173,11 +182,12 @@ func _end_duel(who_won: String):
 
 	print("DuelManager: Winner =", winner)
 
-	if player_car and player_car.has_node("CarController"):
-		player_car.get_node("CarController").set_process(false)
+	# Freeze both cars
+	if player_car is CarController:
+		player_car.controls_enabled = false
 
-	if ai_car and ai_car.has_node("AIController"):
-		ai_car.get_node("AIController").set_process(false)
+	if ai_car is CarController:
+		ai_car.controls_enabled = false
 
 	if get_tree().current_scene.has_node("UI"):
 		get_tree().current_scene.get_node("UI").show_winner(winner)

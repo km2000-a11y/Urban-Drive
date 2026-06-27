@@ -12,7 +12,6 @@ res://Scenes/nissan_350z.tscn
 res://Scenes/lotus_exige_s.tscn
 res://Scenes/jaguar_xkr.tscn
 res://Scenes/chevrolet_corvette_c5.tscn
-res://Scenes/morgan_aero_8.tscn
 res://Scenes/aston_db9.tscn
 res://Scenes/vanquish.tscn
 res://Scenes/granturismo.tscn
@@ -37,13 +36,10 @@ res://Scenes/win_screen_radar.tscn
 res://Scenes/leaderboard.tscn
 res://Scenes/cls_350_cdi.tscn
 res://Scenes/win_screen_duel.tscn
+res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
-res://Scripts/car_select.gd
-res://Scripts/morgan_aero_8.gd
-res://main.gd
-res://Scenes/porsche_911_targa_993.gd
-res://Scripts/AIController.gd
-res://duel_manager.gd
 res://Scripts/speedometer.gd
-res://cars.gd
 res://Scripts/base_car.gd
+res://duel_manager.gd
+res://Scripts/AIController.gd
+res://cars.gd

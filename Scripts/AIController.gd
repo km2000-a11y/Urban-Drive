@@ -1,3 +1,4 @@
+class_name AIController
 extends Node3D
 
 @export var car: CarController

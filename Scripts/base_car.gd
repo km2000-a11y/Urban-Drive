@@ -26,6 +26,7 @@ var torque := 0.0
 
 var gear_count := 6
 var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]
+var current_speed: float = 0.0
 var current_gear := 1
 var shift_up_rpm := 6200
 var shift_down_rpm := 2000
@@ -282,6 +283,9 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	if controls_enabled:
 		Global.speed = speed_kmh
 		Global.gear = current_gear
+		
+	current_speed = speed_kmh
+
 
 
 

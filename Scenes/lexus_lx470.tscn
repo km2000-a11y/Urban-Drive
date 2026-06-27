@@ -103,7 +103,7 @@ size = Vector2(0.5, 0.5)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2o1hv"]
 
-[node name="LEXUS LX470" type="CharacterBody3D"]
+[node name="LEXUS LX470" type="CharacterBody3D" groups=["player"]]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_h2ebh")
