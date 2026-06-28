@@ -2,6 +2,8 @@ class_name AIController
 extends Node3D
 
 @export var car: CarController
+@export var waypoint_root: Node3D
+
 
 # ---------------------------------------------------------
 # AI CONFIG
@@ -58,21 +60,11 @@ func _ready():
 # LOAD WAYPOINTS
 # ---------------------------------------------------------
 func _load_waypoints():
-	var scene = get_tree().get_current_scene()
-
-	# Find the BogotaAirport instance inside Main.tscn
-	var airport = scene.find_child("BogotaAirport", true, false)
-	if airport == null:
-		print("[AI ERROR] BogotaAirport instance NOT found in Main.tscn!")
-		return
-
-	# WayPoints is a DIRECT CHILD of BogotaAirport
-	if airport.has_node("Waypoints"):
-		var wp_root = airport.get_node("Waypoints")
-		waypoints = wp_root.get_children()
-		print("[AI] Loaded", waypoints.size(), "waypoints from BogotaAirport.")
+	if waypoint_root:
+		waypoints = waypoint_root.get_children()
+		print("[AI] Loaded", waypoints.size(), "waypoints.")
 	else:
-		print("[AI ERROR] WayPoints node NOT found under BogotaAirport!")
+		print("[AI ERROR] waypoint_root not assigned!")
 
 
 # ---------------------------------------------------------
@@ -230,4 +222,4 @@ func apply_pp_behavior(pp: int):
 		target_speed_kmh = 260
 		steer_strength = 2.6
 		aggression = 1.4
-		mistake_chance = 0.01
+		mistake_chance = 0.0
