@@ -36,8 +36,7 @@ func _load_waypoints():
 
 
 func _sort_waypoints():
-   waypoints.sort_custom(_wp_sort)
-
+	waypoints.sort_custom(_wp_sort)
 
 func _wp_sort(a, b):
 	var na = int(a.name.trim_prefix("WP"))
