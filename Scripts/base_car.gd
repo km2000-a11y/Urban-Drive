@@ -23,6 +23,9 @@ var max_rpm := 6500.0
 var idle_rpm := 900.0
 var rpm := 900.0
 var torque := 0.0
+var preserve_speed := false
+var preserved_speed := 0.0
+
 
 var gear_count := 6
 var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]
@@ -121,6 +124,10 @@ func _physics_process(delta: float) -> void:
 			velocity.y -= GRAVITY * delta
 		move_and_slide()
 		return
+		if preserve_speed:
+			velocity = velocity.normalized() * preserved_speed
+			preserve_speed = false
+
 
 	var accel := Input.get_action_strength("accelerate")
 	var brake := Input.get_action_strength("brake")
@@ -304,13 +311,20 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		n2 = n2.normalized()
 
 		if other2 is RigidBody3D:
-			var pre_speed := velocity.length()
-			var impact :float= clamp(pre_speed, 4.0, 18.0)
-			other2.apply_impulse(-n2 * impact * 1.4, col2.get_position())
-			velocity += -n2 * (impact * 0.05)
-			velocity = velocity.normalized() * pre_speed
-			velocity = velocity.rotated(Vector3.UP, randf_range(-0.03, 0.03))
+	# Store speed BEFORE collision
+			preserved_speed = velocity.length()
+			preserve_speed = true
+
+			# Push the object away
+			var push_force: float = clamp(preserved_speed * 1.2, 6.0, 22.0)
+			other2.apply_impulse(-n2 * push_force, col2.get_position())
+
+			# Keep direction but restore speed later
+			velocity = velocity.normalized() * preserved_speed
+
 			continue
+
+
 
 		if other2 is CarController:
 			var my_p := mass * velocity

@@ -402,10 +402,12 @@ func update_color_ui():
 # -------------------------
 
 func _on_select_pressed():
-	Cars.selected_car= car_scene_paths[car_name]
+	Cars.selected_car = car_scene_paths[car_name]
 	Cars.selected_color = car_colors[car_name][color_index]
-	Cars.selected_class = car_class   # ⭐ THIS WAS MISSING ⭐
+	Cars.save_color()   # ⭐ SAVE COLOR HERE ⭐
+	Cars.selected_class = car_class
 	get_tree().change_scene_to_file("res://main.tscn")
+
 
 
 func _on_sport_racing_pressed() -> void:

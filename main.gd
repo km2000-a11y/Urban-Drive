@@ -50,6 +50,8 @@ var car_scene_paths := {
 func _ready():
 	mode = Modes.mode
 	load_radar_best()
+	Cars.load_color()
+
 
 	# Only spawn player car in NON-DUEL modes
 	if mode != "Duel":
@@ -109,6 +111,10 @@ func spawn_player_car():
 	# Activate player camera
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
+		
+	
+	print("DEBUG COLOR LOADED =", Cars.selected_color)
+
 
 
 # ---------------------------------------------------------

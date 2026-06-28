@@ -26,7 +26,6 @@ res://Scenes/car_select.tscn
 res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
-res://Scenes/audi_rs5.tscn
 res://Scenes/dodge_viper.tscn
 res://Scenes/tvr t 440r.tscn
 res://Tracks/bogota_airport.tscn
@@ -39,7 +38,9 @@ res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
 res://Scripts/speedometer.gd
-res://Scripts/base_car.gd
-res://duel_manager.gd
 res://Scripts/AIController.gd
+res://Scripts/car_select.gd
 res://cars.gd
+res://main.gd
+res://duel_manager.gd
+res://Scripts/base_car.gd

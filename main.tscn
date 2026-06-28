@@ -52,3 +52,5 @@ shape = SubResource("BoxShape3D_1bvp3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
 
 [connection signal="body_entered" from="RadarTrap" to="." method="_on_radar_trap_body_entered"]
+
+[editable path="BogotaAirport"]

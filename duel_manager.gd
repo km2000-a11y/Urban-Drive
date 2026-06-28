@@ -27,7 +27,6 @@ var lap_cooldown := false
 # ---------------------------------------------------------
 
 func spawn_duel(main_scene: Node):
-	# Pick unique AI car from same class
 	ai_car_path = _pick_unique_ai_car()
 
 	if player_car_path == "" or ai_car_path == "":
@@ -38,6 +37,26 @@ func spawn_duel(main_scene: Node):
 	player_car = load(player_car_path).instantiate()
 	player_car.global_position = player_spawn
 	main_scene.add_child(player_car)
+
+	# Enable player controls
+	if player_car is CarController:
+		player_car.controls_enabled = true
+		player_car.set_process(true)
+		player_car.set_physics_process(true)
+
+	# Apply saved color
+	print("DUEL COLOR LOADED =", Cars.selected_color)
+	if player_car.has_node("ModelRoot/Body"):
+		var body = player_car.get_node("ModelRoot/Body")
+		for child in body.get_children():
+			if child is MeshInstance3D:
+				var mat = child.get_active_material(0)
+				if mat:
+					mat.albedo_color = Cars.selected_color
+
+	# Player camera
+	if player_car.has_node("Camera3D"):
+		player_car.get_node("Camera3D").current = true
 
 	# --- Spawn AI ---
 	ai_car = load(ai_car_path).instantiate()
@@ -66,12 +85,10 @@ func _pick_unique_ai_car() -> String:
 		if name != Cars.selected_car_name:
 			filtered.append(name)
 
-	# If only one car exists → AI uses same car
 	if filtered.size() == 0:
 		Cars.selected_ai_car_name = Cars.selected_car_name
 		return Cars.selected_car
 
-	# Pick random unique car
 	var chosen_name: String = filtered[randi() % filtered.size()]
 	Cars.selected_ai_car_name = chosen_name
 
@@ -100,24 +117,16 @@ func _setup_ai():
 	if ai_car == null:
 		return
 
-	# --- Add AIController brain ---
 	var ai_controller := AIController.new()
 	ai_car.add_child(ai_controller)
 
-	# Connect references
 	ai_controller.car = ai_car
-	ai_controller.chase_player = player_car
 
-	if get_tree().current_scene.has_node("RoadDirection"):
-		ai_controller.road_direction = get_tree().current_scene.get_node("RoadDirection")
-
-	# Disable player input for AI
 	if ai_car is CarController:
 		ai_car.controls_enabled = false
 		ai_car.set_process(true)
 		ai_car.set_physics_process(true)
 
-	# Disable AI camera
 	if ai_car.has_node("Camera3D"):
 		ai_car.get_node("Camera3D").current = false
 
@@ -137,9 +146,7 @@ func update_duel():
 # ---------------------------------------------------------
 
 func register_lap(body):
-	if not duel_active:
-		return
-	if lap_cooldown:
+	if not duel_active or lap_cooldown:
 		return
 
 	lap_cooldown = true
@@ -164,8 +171,7 @@ func _start_lap_cooldown():
 func _check_finish():
 	if player_laps >= total_laps:
 		_end_duel("Player")
-
-	if ai_laps >= total_laps:
+	elif ai_laps >= total_laps:
 		_end_duel("AI")
 
 
@@ -182,12 +188,10 @@ func _end_duel(who_won: String):
 
 	print("DuelManager: Winner =", winner)
 
-	# Freeze both cars
 	if player_car is CarController:
 		player_car.controls_enabled = false
 
 	if ai_car is CarController:
 		ai_car.controls_enabled = false
 
-	if get_tree().current_scene.has_node("UI"):
-		get_tree().current_scene.get_node("UI").show_winner(winner)
+	

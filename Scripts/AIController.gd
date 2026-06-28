@@ -2,17 +2,30 @@ class_name AIController
 extends Node3D
 
 @export var car: CarController
-@export var road_direction: Node3D
-@export var chase_player: CarController
+
+# ---------------------------------------------------------
+# AI CONFIG
+# ---------------------------------------------------------
 
 var ai_name := ""
-var stuck_timer := 0.0
-var last_pos := Vector3.ZERO
-
 var target_speed_kmh := 180.0
 var steer_strength := 1.8
 var aggression := 1.0
 var mistake_chance := 0.02
+
+var stuck_timer := 0.0
+var last_pos := Vector3.ZERO
+
+# ---------------------------------------------------------
+# WAYPOINT SYSTEM
+# ---------------------------------------------------------
+
+var waypoints: Array = []
+var current_wp := 0
+
+# ---------------------------------------------------------
+# NAMES
+# ---------------------------------------------------------
 
 const AI_NAMES = [
 	"David","Takashi","Ricco","Chris","Petar","Nina",
@@ -20,13 +33,43 @@ const AI_NAMES = [
 	"Abdullah","Will","Jimmy M."
 ]
 
+# ---------------------------------------------------------
+# READY
+# ---------------------------------------------------------
+
 func _ready():
 	ai_name = AI_NAMES.pick_random()
 	last_pos = global_transform.origin
-	print("[AI READY] Driver:", ai_name)
 
 	if car:
-		car.driver_name = ai_name   # ⭐ CRITICAL FIX ⭐
+		car.driver_name = ai_name
+
+	# Delay waypoint loading by one frame
+	await get_tree().process_frame
+	_load_waypoints()
+
+#$BogotaAirport/Waypoints
+#$BogotaAirport
+# --------------------------------------------------------
+# LOAD WAYPOINTS
+# ---------------------------------------------------------
+func _load_waypoints():
+	var scene = get_tree().get_current_scene()
+
+	# Find the BogotaAirport instance inside Main.tscn
+	var airport = scene.find_child("BogotaAirport", true, false)
+	if airport == null:
+		print("[AI ERROR] BogotaAirport instance NOT found in Main.tscn!")
+		return
+
+	# WayPoints is a DIRECT CHILD of BogotaAirport
+	if airport.has_node("WayPoints"):
+		var wp_root = airport.get_node("WayPoints")
+		waypoints = wp_root.get_children()
+		print("[AI] Loaded", waypoints.size(), "waypoints from BogotaAirport.")
+	else:
+		print("[AI ERROR] WayPoints node NOT found under BogotaAirport!")
+
 
 # ---------------------------------------------------------
 # MAIN LOOP
@@ -44,51 +87,49 @@ func _physics_process(delta):
 
 	handle_stuck(delta)
 
-
 # ---------------------------------------------------------
-# STEERING LOGIC
+# STEERING (WAYPOINT + RAYCAST HYBRID)
 # ---------------------------------------------------------
 
 func compute_steer() -> float:
 	var steer := 0.0
 
+	# ---------------------------------------------------------
+	# 1. WAYPOINT STEERING (MAIN BRAIN)
+	# ---------------------------------------------------------
+	if waypoints.size() > 0:
+		var target = waypoints[current_wp].global_transform.origin
+		var to_wp = (target - car.global_transform.origin).normalized()
+
+		var local = car.global_transform.basis.inverse() * to_wp
+		steer += clamp(local.x * steer_strength, -1.0, 1.0)
+
+		# Switch waypoint when close
+		if car.global_transform.origin.distance_to(target) < 8.0:
+			current_wp = (current_wp + 1) % waypoints.size()
+
+	# ---------------------------------------------------------
+	# 2. OBSTACLE AVOIDANCE
+	# ---------------------------------------------------------
 	var forward = -car.transform.basis.z
 	var left = -car.transform.basis.x
 	var right = car.transform.basis.x
 
-	# 1. Follow road direction
-	if road_direction:
-		var dir = -road_direction.global_transform.basis.z
-		var local = car.global_transform.basis.inverse() * dir
-		steer += clamp(local.x * steer_strength, -1.0, 1.0)
-
-	# 2. Chase player (soft)
-	if chase_player:
-		var to_player = (chase_player.global_transform.origin - car.global_transform.origin).normalized()
-		var local_p = car.global_transform.basis.inverse() * to_player
-		steer += clamp(local_p.x * 0.35, -0.35, 0.35)
-
-	# 3. Obstacle avoidance
 	if ray(forward, 10.0):
-		steer += randf_range(-0.5, 0.5)
+		steer += randf_range(-0.4, 0.4)
 
-	if ray(left + forward * 0.6, 8.0):
-		steer += 0.7
-	if ray(right + forward * 0.6, 8.0):
-		steer -= 0.7
+	if ray(left, 3.0):
+		steer += 0.6
+	if ray(right, 3.0):
+		steer -= 0.6
 
-	# 4. Wall avoidance (close)
-	if ray(left, 2.5):
-		steer += 0.5
-	if ray(right, 2.5):
-		steer -= 0.5
-
-	# 5. Random mistakes
+	# ---------------------------------------------------------
+	# 3. HUMAN MISTAKES
+	# ---------------------------------------------------------
 	if randf() < mistake_chance:
-		steer += randf_range(-0.15, 0.15)
+		steer += randf_range(-0.1, 0.1)
 
 	return clamp(steer, -1.0, 1.0)
-
 
 # ---------------------------------------------------------
 # ACCELERATION
@@ -101,7 +142,6 @@ func compute_accel() -> float:
 		return 1.0 * aggression
 
 	return 0.0
-
 
 # ---------------------------------------------------------
 # BRAKING
@@ -118,7 +158,6 @@ func compute_brake() -> float:
 
 	return 0.0
 
-
 # ---------------------------------------------------------
 # RAYCAST
 # ---------------------------------------------------------
@@ -131,7 +170,6 @@ func ray(dir: Vector3, dist: float) -> bool:
 	q.to = q.from + dir.normalized() * dist
 
 	return space.intersect_ray(q).size() > 0
-
 
 # ---------------------------------------------------------
 # STUCK HANDLING
@@ -150,7 +188,6 @@ func handle_stuck(delta):
 	if stuck_timer > 1.0:
 		car._drive(delta, -0.7, 0.0, randf_range(-0.5, 0.5))
 		stuck_timer = 0.0
-
 
 # ---------------------------------------------------------
 # PP BEHAVIOR

@@ -51,3 +51,19 @@ var car_scene_paths = {
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn"
 }
+
+func save_color():
+	var f = FileAccess.open("user://car_color.save", FileAccess.WRITE)
+	if f:
+		f.store_line(str(selected_color.r) + "," + str(selected_color.g) + "," + str(selected_color.b) + "," + str(selected_color.a))
+		f.close()
+
+func load_color():
+	if FileAccess.file_exists("user://car_color.save"):
+		var f = FileAccess.open("user://car_color.save", FileAccess.READ)
+		if f:
+			var line = f.get_line()
+			var parts = line.split(",")
+			if parts.size() == 4:
+				selected_color = Color(parts[0].to_float(), parts[1].to_float(), parts[2].to_float(), parts[3].to_float())
+			f.close()
