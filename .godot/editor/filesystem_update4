@@ -1,4 +1,5 @@
 res://main.tscn
+res://Scripts/AIController.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -37,4 +38,3 @@ res://Scenes/cls_350_cdi.tscn
 res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
-res://Scripts/AIController.gd

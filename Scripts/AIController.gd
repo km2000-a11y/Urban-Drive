@@ -4,222 +4,117 @@ extends Node3D
 @export var car: CarController
 @export var waypoint_root: Node3D
 
+var waypoints: Array = []
+var current_wp := 0
+var target: Vector3 = Vector3.ZERO
 
-# ---------------------------------------------------------
-# AI CONFIG
-# ---------------------------------------------------------
-
-var ai_name := ""
-var target_speed_kmh :=40.0
-var steer_strength := 1.8
+var target_speed_kmh := 140.0
+var steer_strength := 2.0
 var aggression := 1.0
-var mistake_chance := 0.02
 
 var stuck_timer := 0.0
 var last_pos := Vector3.ZERO
-var target: Vector3 = Vector3.ZERO
 
-
-# ---------------------------------------------------------
-# WAYPOINT SYSTEM
-# ---------------------------------------------------------
-
-var waypoints: Array = []
-var current_wp := 0
-
-# ---------------------------------------------------------
-# NAMES
-# ---------------------------------------------------------
-
-const AI_NAMES = [
-	"David","Takashi","Ricco","Chris","Petar","Nina",
-	"Steve","Linus","Jesse","Dimitri","Mirko",
-	"Abdullah","Will","Jimmy M."
-]
-
-# ---------------------------------------------------------
-# READY
-# ---------------------------------------------------------
 
 func _ready():
-	ai_name = AI_NAMES.pick_random()
-	last_pos = global_transform.origin
-
 	if car:
-		car.driver_name = ai_name
+		car.driver_name = "AI"
 
-	# Delay waypoint loading by one frame
 	await get_tree().process_frame
 	_load_waypoints()
-	print("WAYPOINT COUNT:", waypoints.size())
+	_sort_waypoints()
+	_start_at_closest_wp()
+
+	print("[AI] Ready with", waypoints.size(), "waypoints.")
 
 
-#$BogotaAirport/Waypoints
-#$BogotaAirport
-# --------------------------------------------------------
-# LOAD WAYPOINTS
-# ---------------------------------------------------------
 func _load_waypoints():
 	if waypoint_root:
 		waypoints = waypoint_root.get_children()
-		print("[AI] Loaded", waypoints.size(), "waypoints.")
 	else:
-		print("[AI ERROR] waypoint_root not assigned!")
+		push_error("AI ERROR: waypoint_root not assigned!")
 
 
-# ---------------------------------------------------------
-# MAIN LOOP
-# ---------------------------------------------------------
+func _sort_waypoints():
+   waypoints.sort_custom(_wp_sort)
+
+
+func _wp_sort(a, b):
+	var na = int(a.name.trim_prefix("WP"))
+	var nb = int(b.name.trim_prefix("WP"))
+	return na < nb
+
+
+func _start_at_closest_wp():
+	var best_dist := INF
+	var best_index := 0
+
+	for i in range(waypoints.size()):
+		var d = global_transform.origin.distance_to(waypoints[i].global_transform.origin)
+		if d < best_dist:
+			best_dist = d
+			best_index = i
+
+	current_wp = best_index
+	print("[AI] Starting at waypoint:", waypoints[current_wp].name)
+
 
 func _physics_process(delta):
-	if car == null:
+	if car == null or waypoints.size() == 0:
 		return
 
-	var steer = compute_steer()
-	var accel = compute_accel()
-	var brake = compute_brake()
+	var steer = _compute_steer()
+	var accel = _compute_accel()
+	var brake = _compute_brake()
 
 	car._drive(delta, accel, brake, steer)
 
-	handle_stuck(delta)
-	print(current_wp)
-	print("DIST:", car.global_transform.origin.distance_to(target))
+	_handle_stuck(delta)
 
 
-# ---------------------------------------------------------
-# STEERING (WAYPOINT + RAYCAST HYBRID)
-# ---------------------------------------------------------
+func _compute_steer() -> float:
+	target = waypoints[current_wp].global_transform.origin
 
-func compute_steer() -> float:
-	var steer := 0.0
+	var to_wp = (target - car.global_transform.origin).normalized()
+	var local = car.global_transform.basis.inverse() * to_wp
 
-	# ---------------------------------------------------------
-	# 1. WAYPOINT STEERING (MAIN BRAIN)
-	# ---------------------------------------------------------
-	if waypoints.size() > 0:
-		var target = waypoints[current_wp].global_transform.origin
-		var to_wp = (target - car.global_transform.origin).normalized()
+	var steer = clamp(local.x * steer_strength, -1.0, 1.0)
 
-		var local = car.global_transform.basis.inverse() * to_wp
-		steer += clamp(local.x * steer_strength, -1.0, 1.0)
+	if car.global_transform.origin.distance_to(target) < 25.0:
+		current_wp = (current_wp + 1) % waypoints.size()
+		print("[AI] Switched to:", waypoints[current_wp].name)
 
-		# Switch waypoint when close
-		if car.global_transform.origin.distance_to(target) < 30.0:
-			current_wp = (current_wp + 1) % waypoints.size()
-			print("I HAVE CROSSED THIS WAYPOINT!!!!")
+	return steer
 
-	# ---------------------------------------------------------
-	# 2. OBSTACLE AVOIDANCE
-	# ---------------------------------------------------------
-	var forward = -car.transform.basis.z
-	var left = -car.transform.basis.x
-	var right = car.transform.basis.x
 
-	if ray(forward, 10.0):
-		steer += randf_range(-0.4, 0.4)
-
-	if ray(left, 3.0):
-		steer += 0.6
-	if ray(right, 3.0):
-		steer -= 0.6
-
-	# ---------------------------------------------------------
-	# 3. HUMAN MISTAKES
-	# ---------------------------------------------------------
-	if randf() < mistake_chance:
-		steer += randf_range(-0.1, 0.1)
-
-	return clamp(steer, -1.0, 1.0)
-
-# ---------------------------------------------------------
-# ACCELERATION
-# ---------------------------------------------------------
-
-func compute_accel() -> float:
+func _compute_accel() -> float:
 	var speed_kmh = car.velocity.length() * 3.6
 
 	if speed_kmh < target_speed_kmh:
-		return 1.0 * aggression
+		return 1.0
+	else:
+		return 0.0
 
-	return 0.0
 
-# ---------------------------------------------------------
-# BRAKING
-# ---------------------------------------------------------
-
-func compute_brake() -> float:
+func _compute_brake() -> float:
 	var speed_kmh = car.velocity.length() * 3.6
 
-	if speed_kmh > target_speed_kmh + 12.0:
-		return 0.5
+	if speed_kmh > target_speed_kmh + 20.0:
+		return 0.7
+	else:
+		return 0.0
 
-	if ray(-car.transform.basis.z, 5.0):
-		return 0.8
 
-	return 0.0
+func _handle_stuck(delta):
+	var moved = global_transform.origin.distance_to(last_pos)
 
-# ---------------------------------------------------------
-# RAYCAST
-# ---------------------------------------------------------
-
-func ray(dir: Vector3, dist: float) -> bool:
-	var space = car.get_world_3d().direct_space_state
-	var q = PhysicsRayQueryParameters3D.new()
-
-	q.from = car.global_transform.origin + Vector3.UP * 1.5
-	q.to = q.from + dir.normalized() * dist
-
-	return space.intersect_ray(q).size() > 0
-
-# ---------------------------------------------------------
-# STUCK HANDLING
-# ---------------------------------------------------------
-
-func handle_stuck(delta):
-	var moved = car.global_transform.origin.distance_to(last_pos)
-
-	if moved < 0.4:
+	if moved < 0.3:
 		stuck_timer += delta
 	else:
 		stuck_timer = 0.0
 
-	last_pos = car.global_transform.origin
+	last_pos = global_transform.origin
 
 	if stuck_timer > 1.0:
-		car._drive(delta, -0.7, 0.0, randf_range(-0.5, 0.5))
+		car._drive(delta, -0.8, 0.0, randf_range(-0.5, 0.5))
 		stuck_timer = 0.0
-
-# ---------------------------------------------------------
-# PP BEHAVIOR
-# ---------------------------------------------------------
-
-func apply_pp_behavior(pp: int):
-	if pp < 350:
-		target_speed_kmh = 120
-		steer_strength = 1.2
-		aggression = 0.6
-		mistake_chance = 0.05
-
-	elif pp < 500:
-		target_speed_kmh = 150
-		steer_strength = 1.5
-		aggression = 0.8
-		mistake_chance = 0.03
-
-	elif pp < 650:
-		target_speed_kmh = 180
-		steer_strength = 1.8
-		aggression = 1.0
-		mistake_chance = 0.02
-
-	elif pp < 800:
-		target_speed_kmh = 220
-		steer_strength = 2.2
-		aggression = 1.2
-		mistake_chance = 0.015
-
-	else:
-		target_speed_kmh = 260
-		steer_strength = 2.6
-		aggression = 1.4
-		mistake_chance = 0.0
