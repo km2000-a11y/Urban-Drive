@@ -8,13 +8,15 @@ extends Node3D
 # ---------------------------------------------------------
 
 var ai_name := ""
-var target_speed_kmh := 180.0
+var target_speed_kmh :=40.0
 var steer_strength := 1.8
 var aggression := 1.0
 var mistake_chance := 0.02
 
 var stuck_timer := 0.0
 var last_pos := Vector3.ZERO
+var target: Vector3 = Vector3.ZERO
+
 
 # ---------------------------------------------------------
 # WAYPOINT SYSTEM
@@ -47,6 +49,8 @@ func _ready():
 	# Delay waypoint loading by one frame
 	await get_tree().process_frame
 	_load_waypoints()
+	print("WAYPOINT COUNT:", waypoints.size())
+
 
 #$BogotaAirport/Waypoints
 #$BogotaAirport
@@ -63,8 +67,8 @@ func _load_waypoints():
 		return
 
 	# WayPoints is a DIRECT CHILD of BogotaAirport
-	if airport.has_node("WayPoints"):
-		var wp_root = airport.get_node("WayPoints")
+	if airport.has_node("Waypoints"):
+		var wp_root = airport.get_node("Waypoints")
 		waypoints = wp_root.get_children()
 		print("[AI] Loaded", waypoints.size(), "waypoints from BogotaAirport.")
 	else:
@@ -86,6 +90,9 @@ func _physics_process(delta):
 	car._drive(delta, accel, brake, steer)
 
 	handle_stuck(delta)
+	print(current_wp)
+	print("DIST:", car.global_transform.origin.distance_to(target))
+
 
 # ---------------------------------------------------------
 # STEERING (WAYPOINT + RAYCAST HYBRID)
@@ -105,8 +112,9 @@ func compute_steer() -> float:
 		steer += clamp(local.x * steer_strength, -1.0, 1.0)
 
 		# Switch waypoint when close
-		if car.global_transform.origin.distance_to(target) < 8.0:
+		if car.global_transform.origin.distance_to(target) < 30.0:
 			current_wp = (current_wp + 1) % waypoints.size()
+			print("I HAVE CROSSED THIS WAYPOINT!!!!")
 
 	# ---------------------------------------------------------
 	# 2. OBSTACLE AVOIDANCE

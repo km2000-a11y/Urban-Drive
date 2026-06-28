@@ -24,13 +24,13 @@ size = Vector3(0.7, 0.2, 0.1)
 size = Vector3(0.8, 0.1, 0.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7iob"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.376471, 0.156863, 0.117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_yso3f"]
 size = Vector3(0.15, 0.3, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j83nq"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.376471, 0.156863, 0.117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fhe8l"]
 size = Vector3(0.15, 0.2, 0.2)
@@ -120,13 +120,13 @@ left_to_right = 0.9
 size = Vector3(0.35, 0.2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uklaq"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.376471, 0.156863, 0.117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tr32n"]
 size = Vector3(0.2, 0.2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqc66"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.376471, 0.156863, 0.117647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_s7h0l"]
 size = Vector3(0.2, 0.05, 0.15)

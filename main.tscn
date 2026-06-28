@@ -22,10 +22,16 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Speedometer" parent="." instance=ExtResource("3_h2yge")]
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.324175, 2014.44)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372705, 0.133247, 2021.35)
 
 [node name="BogotaAirport" parent="." instance=ExtResource("3_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296989, 0, 1992.3)
+
+[node name="WP24" parent="BogotaAirport/Waypoints" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.9541)
+
+[node name="WP5" parent="BogotaAirport/Waypoints" index="5"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 5.17339, 0, -247.99)
 
 [node name="RadarTrap" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2851.77)

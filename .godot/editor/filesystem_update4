@@ -37,10 +37,4 @@ res://Scenes/cls_350_cdi.tscn
 res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
-res://Scripts/speedometer.gd
 res://Scripts/AIController.gd
-res://Scripts/car_select.gd
-res://cars.gd
-res://main.gd
-res://duel_manager.gd
-res://Scripts/base_car.gd
