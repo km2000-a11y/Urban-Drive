@@ -163,16 +163,6 @@ func _setup_duel():
 # AI COLOR (NEW)
 # ---------------------------------------------------------
 
-func apply_random_ai_color(ai_car: CarController, car_name: String):
-	if not car_colors.has(car_name):
-		return
-
-	var palette :Array= car_colors[car_name]
-	var random_color :Color= palette[randi() % palette.size()]
-
-	_apply_color_to_car(ai_car, random_color)
-
-	print("[AI] Random color chosen:", random_color)
 
 
 func _apply_color_to_car(car: CarController, color: Color):

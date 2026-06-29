@@ -5,7 +5,18 @@ const GRAVITY := 30.0
 const ENGINE_BRAKE := 0.5
 const DRAG := 0.1
 
-var driver_name := "Player"
+# --- NEW ARCHITECTURE FLAGS ---
+var is_ai: bool = false
+
+# AI input coming from AIController
+var ai_throttle: float = 0.0
+var ai_brake: float = 0.0
+var ai_steer: float = 0.0
+
+# Unified input used by physics
+var throttle_input: float = 0.0
+var brake_input: float = 0.0
+var steer_input: float = 0.0
 
 var mass := 1200.0
 var zero_to_hundred := 7.0
@@ -26,7 +37,6 @@ var torque := 0.0
 var preserve_speed := false
 var preserved_speed := 0.0
 
-
 var gear_count := 6
 var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]
 var current_speed: float = 0.0
@@ -36,12 +46,11 @@ var shift_down_rpm := 2000
 
 var acceleration_calc := 0.0
 var steering := 0.0
-var old_rotation_y := 0.0
 
 var drifting := false
 var drift_factor := 0.0
 var boost := false
-var nitro_top_speed_multiplier:=1.12
+var nitro_top_speed_multiplier := 1.12
 
 var performance_points := 0
 var debug_enabled := true
@@ -119,30 +128,33 @@ func update_gears(speed_kmh: float) -> void:
 	current_gear = clamp(current_gear, 1, gear_count)
 
 func _physics_process(delta: float) -> void:
+	# If controls are globally disabled, just let physics run
 	if not controls_enabled:
 		if not is_on_floor():
 			velocity.y -= GRAVITY * delta
 		move_and_slide()
 		return
-		if preserve_speed:
-			velocity = velocity.normalized() * preserved_speed
-			preserve_speed = false
 
+	# Decide input source: AI or Player
+	if is_ai:
+		throttle_input = ai_throttle
+		brake_input = ai_brake
+		steer_input = ai_steer
+	else:
+		throttle_input = Input.get_action_strength("accelerate")
+		brake_input = Input.get_action_strength("brake")
+		steer_input = Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
-	var accel := Input.get_action_strength("accelerate")
-	var brake := Input.get_action_strength("brake")
-	var steer := Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
-
-	_drive(delta, accel, brake, steer)
+	_drive(delta, throttle_input, brake_input, steer_input)
 
 func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var drift_input := false
-	if driver_name == "Player":
+	var nitrous := false
+
+	# Only PLAYER can trigger drift and nitrous
+	if not is_ai:
 		if Input.is_action_pressed("drift"):
 			drift_input = true
-
-	var nitrous := false
-	if driver_name == "Player":
 		if Input.is_action_pressed("nos"):
 			nitrous = true
 
@@ -204,12 +216,12 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 			wall_scrape = true
 
 	if wall_block:
-		var impact_strength :float= clamp(speed_kmh / 120.0, 0.2, 1.0)
+		var impact_strength: float = clamp(speed_kmh / 120.0, 0.2, 1.0)
 		velocity *= (1.0 - impact_strength * 0.55)
 		velocity -= forward * (impact_strength * 4.0)
 
 	if wall_scrape:
-		var scrape_strength :float= clamp(speed_kmh / 220.0, 0.05, 0.25)
+		var scrape_strength: float = clamp(speed_kmh / 220.0, 0.05, 0.25)
 		velocity += -right * (scrape_strength * 6.0)
 		velocity *= (1.0 - scrape_strength * 0.15)
 
@@ -219,7 +231,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		else:
 			rpm = lerp(rpm, idle_rpm, delta * 3.0)
 	else:
-		var wheel_rpm :float= speed_kmh * gear_ratios[current_gear - 1] * 35.0
+		var wheel_rpm: float = speed_kmh * gear_ratios[current_gear - 1] * 35.0
 		rpm = lerp(rpm, wheel_rpm, delta * 4.0)
 
 	rpm = clamp(rpm, idle_rpm, max_rpm)
@@ -286,15 +298,11 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	velocity.z = flat2.z
 
 	# Only the PLAYER updates the global speedometer
-		# Only update speed if this car is controlled by the player
-	if controls_enabled:
+	if not is_ai and controls_enabled:
 		Global.speed = speed_kmh
 		Global.gear = current_gear
-		
+
 	current_speed = speed_kmh
-
-
-
 
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
@@ -311,7 +319,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		n2 = n2.normalized()
 
 		if other2 is RigidBody3D:
-	# Store speed BEFORE collision
+			# Store speed BEFORE collision
 			preserved_speed = velocity.length()
 			preserve_speed = true
 
@@ -324,11 +332,9 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 			continue
 
-
-
 		if other2 is CarController:
 			var my_p := mass * velocity
-			var their_p :Vector3= other2.mass * other2.velocity
+			var their_p: Vector3 = other2.mass * other2.velocity
 			var impulse := (my_p - their_p) * 0.5
 			velocity += impulse / mass
 			other2.velocity -= impulse / other2.mass

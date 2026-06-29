@@ -38,3 +38,5 @@ res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
 res://Scenes/saleen_s7.tscn
+res://Scripts/base_car.gd
+res://main.gd
