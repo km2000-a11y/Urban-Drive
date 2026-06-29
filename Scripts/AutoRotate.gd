@@ -4,4 +4,3 @@ extends Node3D
 
 func _process(delta):
 	rotate_y(rotation_speed * delta)
-	print(self.rotation_degrees)

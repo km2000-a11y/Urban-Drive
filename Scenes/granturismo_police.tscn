@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=3 uid="uid://5uek186lh4p3"]
+[gd_scene load_steps=42 format=3 uid="uid://5uek186lh4p3"]
 
-[ext_resource type="Script" uid="uid://cikjntu0khfsj" path="res://Scripts/granturismo_s_2009.gd" id="1_u54ja"]
+[ext_resource type="Script" uid="uid://nkovs0uaqqli" path="res://Scripts/granturismo_s_2009_police.gd" id="1_yu6uc"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="2_yu6uc"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_cee2k"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_au4wr"]
@@ -86,7 +86,11 @@ albedo_color = Color(1, 0.203922, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_u54ja"]
 size = Vector3(0.3, 0.1, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u54ja"]
+albedo_color = Color(0.00392157, 0.372549, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_oojgv"]
+size = Vector3(0.3, 0.1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cee2k"]
 albedo_color = Color(0, 0.203922, 1, 1)
@@ -183,7 +187,7 @@ func _physics_process(delta: float) -> void:
 [node name="GRANTURISMO POLICE" type="CharacterBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource("1_u54ja")
+script = ExtResource("1_yu6uc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
@@ -327,7 +331,8 @@ material_override = SubResource("StandardMaterial3D_yu6uc")
 mesh = SubResource("BoxMesh_u54ja")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.255085, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235483, 0.62699, 0.455221)
+material_override = SubResource("StandardMaterial3D_u54ja")
 mesh = SubResource("BoxMesh_oojgv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot"]

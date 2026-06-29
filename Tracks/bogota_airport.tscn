@@ -3493,7 +3493,7 @@ mesh = SubResource("BoxMesh_txcge")
 shape = SubResource("BoxShape3D_vtyxe")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D21"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35089, 0, 2.56415)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32609, 0, 2.56415)
 material_override = SubResource("StandardMaterial3D_rx3s2")
 mesh = SubResource("BoxMesh_txcge")
 

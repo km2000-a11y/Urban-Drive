@@ -1,9 +1,5 @@
 extends Node
 
-# ---------------------------------------------------------
-# CONFIG (set by main.gd)
-# ---------------------------------------------------------
-
 var player_car_path: String = ""
 var ai_car_path: String = ""
 
@@ -22,10 +18,6 @@ var total_laps := 2
 var lap_cooldown := false
 
 
-# ---------------------------------------------------------
-# SPAWN DUEL
-# ---------------------------------------------------------
-
 func spawn_duel(main_scene: Node):
 	ai_car_path = _pick_unique_ai_car()
 
@@ -38,13 +30,11 @@ func spawn_duel(main_scene: Node):
 	player_car.global_position = player_spawn
 	main_scene.add_child(player_car)
 
-	# Enable player controls
 	if player_car is CarController:
 		player_car.controls_enabled = true
 		player_car.set_process(true)
 		player_car.set_physics_process(true)
 
-	# Apply saved color
 	print("DUEL COLOR LOADED =", Cars.selected_color)
 	if player_car.has_node("ModelRoot/Body"):
 		var body = player_car.get_node("ModelRoot/Body")
@@ -54,7 +44,6 @@ func spawn_duel(main_scene: Node):
 				if mat:
 					mat.albedo_color = Cars.selected_color
 
-	# Player camera
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
@@ -71,10 +60,6 @@ func spawn_duel(main_scene: Node):
 
 	print("DuelManager: Duel started.")
 
-
-# ---------------------------------------------------------
-# AI CAR SELECTION (same class, unique)
-# ---------------------------------------------------------
 
 func _pick_unique_ai_car() -> String:
 	var cls: String = Cars.selected_class
@@ -95,10 +80,6 @@ func _pick_unique_ai_car() -> String:
 	return Cars.car_scene_paths[chosen_name]
 
 
-# ---------------------------------------------------------
-# PLAYER SETUP
-# ---------------------------------------------------------
-
 func _setup_player():
 	if player_car is CarController:
 		player_car.controls_enabled = true
@@ -109,18 +90,29 @@ func _setup_player():
 		player_car.get_node("Camera3D").current = true
 
 
-# ---------------------------------------------------------
-# AI SETUP
-# ---------------------------------------------------------
-
 func _setup_ai():
 	if ai_car == null:
 		return
 
+	# Create AIController and attach it to the AI car
 	var ai_controller := AIController.new()
 	ai_car.add_child(ai_controller)
 
+	# Assign the car reference
 	ai_controller.car = ai_car
+
+	# --- Random AI color from palette ---
+	if Cars.car_colors.has(Cars.selected_ai_car_name):
+		var palette: Array = Cars.car_colors[Cars.selected_ai_car_name]
+		var random_color: Color = palette[randi() % palette.size()]
+		if ai_car.has_node("ModelRoot/Body"):
+			var body = ai_car.get_node("ModelRoot/Body")
+			for child in body.get_children():
+				if child is MeshInstance3D:
+					var mat = child.get_active_material(0)
+					if mat:
+						mat.albedo_color = random_color
+		print("[AI] Random color for", Cars.selected_ai_car_name, "=", random_color)
 
 	if ai_car is CarController:
 		ai_car.controls_enabled = false
@@ -131,19 +123,11 @@ func _setup_ai():
 		ai_car.get_node("Camera3D").current = false
 
 
-# ---------------------------------------------------------
-# UPDATE LOOP
-# ---------------------------------------------------------
-
 func update_duel():
 	if not duel_active:
 		return
 	# AIController handles movement
 
-
-# ---------------------------------------------------------
-# LAP HANDLING
-# ---------------------------------------------------------
 
 func register_lap(body):
 	if not duel_active or lap_cooldown:
@@ -175,10 +159,6 @@ func _check_finish():
 		_end_duel("AI")
 
 
-# ---------------------------------------------------------
-# END DUEL
-# ---------------------------------------------------------
-
 func _end_duel(who_won: String):
 	if not duel_active:
 		return
@@ -193,5 +173,3 @@ func _end_duel(who_won: String):
 
 	if ai_car is CarController:
 		ai_car.controls_enabled = false
-
-	

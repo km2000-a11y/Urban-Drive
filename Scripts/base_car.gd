@@ -210,7 +210,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	if wall_scrape:
 		var scrape_strength :float= clamp(speed_kmh / 220.0, 0.05, 0.25)
-		velocity -= right * (scrape_strength * 6.0)
+		velocity += -right * (scrape_strength * 6.0)
 		velocity *= (1.0 - scrape_strength * 0.15)
 
 	if speed_kmh < 2.0:

@@ -42,6 +42,13 @@ var car_colors := {
 	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
 	"Kronstadt Blade":[Color8(85,85,85), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
+	"Brutus Predator":[
+	Color8(225,20,40),   # ⭐ Default — deep red
+	Color8(255,255,255), # White
+	Color8(160,160,160), # Silver
+	Color8(0,40,80)      # Midnight Blue
+],
+
 
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
@@ -77,7 +84,8 @@ var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Ku
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
 var sport_list = ["Berkshire V12-S", "Berkshire Tempest", "Bartoli Cruiser", "Gruber Targa"]
 var sport_racing_list = ["Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
-var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine"]
+var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine", "Brutus Predator"]
+
 
 # -------------------------
 # CAR STATS
@@ -98,8 +106,8 @@ var compact = {
 }
 
 var muscle = {
-	"Brutus Viper":["528 PP","Country: USA","HP: 355","WEIGHT: 1650 KG","0-100 KM/H: 5.8s","TOP SPEED: 241 KM/H","ENGINE: V8 7.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Brutus Mauler":["540 PP","Country: USA","HP: 360","WEIGHT: 1780 KG","0-100 KM/H: 5.6s","TOP SPEED: 245 KM/H","ENGINE: V8 7.4L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Brutus Viper":["505 PP","Country: USA","HP: 355","WEIGHT: 1650 KG","0-100 KM/H: 5.8s","TOP SPEED: 225 KM/H","ENGINE: V8 7.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Brutus Mauler":["507 PP","Country: USA","HP: 360","WEIGHT: 1780 KG","0-100 KM/H: 5.6s","TOP SPEED: 232 KM/H","ENGINE: V8 7.4L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 var urban_racers = {
@@ -128,14 +136,18 @@ var sport = {
 var sport_racing = {
 	"Kestrel Battleaxe":["720 PP","Country: UK","HP: 406","WEIGHT: 1078 KG","0-100 KM/H: 3.8s","TOP SPEED: 287 KM/H","ENGINE: V6 4.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Linetti Shepherd":["726 PP","Country: Italy","HP: 500","WEIGHT: 1430 KG","0-100 KM/H: 4.2s","TOP SPEED: 305 KM/H","ENGINE: V10 5.0L","TRANSMISSION: FOUR-WHEEL DRIVE"],
-	"Brutus Venom":["661 PP","Country: USA","HP: 415","WEIGHT: 1560 KG","0-100 KM/H: 4.1s","TOP SPEED: 300 KM/H","ENGINE: V10 8.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Brutus Venom":["691 PP","Country: USA","HP: 415","WEIGHT: 1560 KG","0-100 KM/H: 4.1s","TOP SPEED: 300 KM/H","ENGINE: V10 8.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 var supercars = {
 	"Linetti Terror":["768 PP","Country: Italy","HP: 572","WEIGHT: 1630 KG","0-100 KM/H: 3.7s","TOP SPEED: 330 KM/H","ENGINE: V12 6.2L","TRANSMISSION: FOUR-WHEEL DRIVE"],
 	"Kestrel Guillotine":["780 PP","Country: UK","HP: 440","WEIGHT: 1100 KG","0-100 KM/H: 3.6s","TOP SPEED: 315 KM/H","ENGINE: V6 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Linetti Firestorm":["728 PP","Country: Italy","HP: 493","WEIGHT: 1625 KG","0-100 KM/H: 4.2s","TOP SPEED: 328 KM/H","ENGINE: V12 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"],
+
+	# ⭐ NEW — SALEEN S7
+	"Brutus Predator":["773 PP","Country: USA","HP: 550","WEIGHT: 1250 KG","0-100 KM/H: 3.7s","TOP SPEED: 325 KM/H","ENGINE: V8 7.0L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
+
 
 # -------------------------
 # SCENE PATHS
@@ -175,7 +187,8 @@ var car_scene_paths = {
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
-	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn"
+	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn",
+	"Brutus Predator": "res://Scenes/saleen_s7.tscn"
 }
 
 # -------------------------
