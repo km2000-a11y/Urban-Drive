@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://c8eruqjvmh1ye"]
+[gd_scene load_steps=56 format=3 uid="uid://c8eruqjvmh1ye"]
 
 [ext_resource type="Script" uid="uid://db4x6x4ukros0" path="res://Scenes/porsche_911_targa_993.gd" id="1_d57au"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_7up2j"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_gfrmc"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_uklaq"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_tr32n"]
+[ext_resource type="Script" uid="uid://cgrjp7nbx0gix" path="res://Scripts/AIController.gd" id="6_7up2j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -458,3 +459,6 @@ stream = ExtResource("5_tr32n")
 [node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("follow_target")]
 script = SubResource("GDScript_madci")
 follow_target = NodePath("..")
+
+[node name="AIController" type="Node3D" parent="."]
+script = ExtResource("6_7up2j")
