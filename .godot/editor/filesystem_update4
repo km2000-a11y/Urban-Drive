@@ -38,7 +38,3 @@ res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
 res://Scenes/saleen_s7.tscn
-res://main.gd
-res://duel_manager.gd
-res://Scripts/AIController.gd
-res://cars.gd
