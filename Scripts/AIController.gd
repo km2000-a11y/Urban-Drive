@@ -34,12 +34,17 @@ func _ready():
 		print("[AI] ERROR: car not assigned")
 
 	if waypoint_root == null:
-		var scene := get_tree().get_current_scene()
-		if scene.has_node("BogotaAirport/Waypoints"):
-			waypoint_root = scene.get_node("BogotaAirport/Waypoints")
-			print("[AI] Found Waypoints:", waypoint_root)
-		else:
-			print("[AI] ERROR: Waypoints not found")
+	var scene := get_tree().get_current_scene()
+
+	# Deep search anywhere in the scene tree
+	var found := scene.find_child("Waypoints", true, false)
+
+	if found:
+		waypoint_root = found
+		print("[AI] Found Waypoints:", waypoint_root)
+	else:
+		print("[AI] ERROR: Waypoints not found in scene!")
+
 
 	await get_tree().process_frame
 

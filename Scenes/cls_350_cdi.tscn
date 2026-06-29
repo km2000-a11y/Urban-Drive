@@ -278,5 +278,6 @@ stream = ExtResource("4_65wg6")
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_cg0nx")
 
-[node name="AIController" type="Node3D" parent="."]
+[node name="AIController" type="Node3D" parent="." node_paths=PackedStringArray("car")]
 script = ExtResource("6_56eog")
+car = NodePath("..")

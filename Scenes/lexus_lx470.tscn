@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cno8vamavv10f"]
+[gd_scene load_steps=37 format=3 uid="uid://cno8vamavv10f"]
 
 [ext_resource type="Script" uid="uid://f2chpmrpwgv6" path="res://Scenes/lexus_lx_470_2004.gd" id="1_h2ebh"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_2unh6"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_6hled"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="4_s07to"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_idfgx"]
+[ext_resource type="Script" uid="uid://cgrjp7nbx0gix" path="res://Scripts/AIController.gd" id="7_2unh6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -281,3 +282,7 @@ stream = ExtResource("5_idfgx")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 shape = SubResource("SphereShape3D_2o1hv")
+
+[node name="AIController" type="Node3D" parent="." node_paths=PackedStringArray("car")]
+script = ExtResource("7_2unh6")
+car = NodePath("..")

@@ -360,5 +360,6 @@ stream = ExtResource("5_ebkbd")
 script = SubResource("GDScript_madci")
 follow_target = NodePath("..")
 
-[node name="AIController" type="Node3D" parent="."]
+[node name="AIController" type="Node3D" parent="." node_paths=PackedStringArray("car")]
 script = ExtResource("6_o0ipi")
+car = NodePath("..")
