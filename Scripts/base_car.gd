@@ -4,20 +4,33 @@ extends CharacterBody3D
 const GRAVITY := 30.0
 const ENGINE_BRAKE := 0.5
 const DRAG := 0.1
+const HARD_LIMIT_KMH := 400.0
+const HARD_LIMIT := HARD_LIMIT_KMH / 3.6
 
-# --- NEW ARCHITECTURE FLAGS ---
+# --- ROLE FLAGS ---
 var is_ai: bool = false
+var waypoint_root: Node3D = null
+var waypoints: Array[Node] = []
+var current_wp: int = 1
 
-# AI input coming from AIController
+
+# --- AI INPUT (ONLY WRITTEN BY AI LOGIC) ---
 var ai_throttle: float = 0.0
 var ai_brake: float = 0.0
 var ai_steer: float = 0.0
+var ai_names := [
+	"David", "Takashi", "Ricco", "Chris", "Petar", "Nina",
+	"Steve", "Linus", "Chris", "Jesse", "Dimitri", "Mirko",
+	"Abdullah", "Will", "Jimmy M.", "Tiffany", "Hoff", "Jake"
+]
 
-# Unified input used by physics
+
+# --- PLAYER INPUT (ONLY READ FROM Input) ---
 var throttle_input: float = 0.0
 var brake_input: float = 0.0
 var steer_input: float = 0.0
 
+# --- CAR STATS ---
 var mass := 1200.0
 var zero_to_hundred := 7.0
 var top_speed_kmh := 200.0
@@ -35,8 +48,6 @@ var max_rpm := 6500.0
 var idle_rpm := 900.0
 var rpm := 900.0
 var torque := 0.0
-var preserve_speed := false
-var preserved_speed := 0.0
 
 var gear_count := 6
 var gear_ratios := [3.5, 2.1, 1.5, 1.2, 1.0, 0.82]
@@ -57,6 +68,7 @@ var performance_points := 0
 var debug_enabled := true
 var handling_type := "balanced"
 
+# If false, neither player nor AI can control the car (used by game modes)
 var controls_enabled: bool = true
 
 @export var spawn_yaw_deg: float = 0.0
@@ -65,7 +77,7 @@ var controls_enabled: bool = true
 @onready var forward_ref := $ForwardRef
 @onready var nitro := $Exhaust/GPUParticles3D
 
-func apply_stats():
+func apply_stats() -> void:
 	acceleration_calc = (27.78 / zero_to_hundred) * 3.0
 	torque = (horsepower * 5252.0) / max_rpm
 
@@ -80,7 +92,7 @@ func apply_stats():
 		+ ((horsepower / mass) * 700.0)
 	)
 
-func apply_handling_profile():
+func apply_handling_profile() -> void:
 	match handling_type:
 		"light_sport":
 			turn_speed *= 1.25
@@ -112,13 +124,15 @@ func apply_handling_profile():
 		"balanced":
 			pass
 
-func _ready():
+func _ready() -> void:
 	apply_stats()
 	apply_handling_profile()
 	nitro.hide()
-	if not is_ai:
-		driver_name = "Player"
 
+	if is_ai:
+		driver_name = ai_names[randi() % ai_names.size()]
+	else:
+		driver_name = "Player"
 
 func update_gears(speed_kmh: float) -> void:
 	if rpm > shift_up_rpm and current_gear < gear_count:
@@ -132,15 +146,14 @@ func update_gears(speed_kmh: float) -> void:
 	current_gear = clamp(current_gear, 1, gear_count)
 
 func _physics_process(delta: float) -> void:
-	# If controls are globally disabled, just let physics run
 	if not controls_enabled:
 		if not is_on_floor():
 			velocity.y -= GRAVITY * delta
 		move_and_slide()
 		return
 
-	# Decide input source: AI or Player
 	if is_ai:
+		_update_ai_inputs(delta)
 		throttle_input = ai_throttle
 		brake_input = ai_brake
 		steer_input = ai_steer
@@ -150,6 +163,7 @@ func _physics_process(delta: float) -> void:
 		steer_input = Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
 	_drive(delta, throttle_input, brake_input, steer_input)
+
 
 func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var drift_input := false
@@ -295,13 +309,14 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var current_top_speed := top_speed
 	if nitrous:
 		current_top_speed = top_speed * nitro_top_speed_multiplier
+
 	if flat2.length() > current_top_speed:
 		flat2 = flat2.normalized() * current_top_speed
 
 	velocity.x = flat2.x
 	velocity.z = flat2.z
 
-	# Only the PLAYER updates the global speedometer
+	# Only PLAYER updates global HUD
 	if not is_ai and controls_enabled:
 		Global.speed = speed_kmh
 		Global.gear = current_gear
@@ -313,6 +328,15 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	else:
 		velocity.y = -0.01
 
+	# HARD GLOBAL SAFETY CLAMP (anti-100,000 km/h madness)
+	var flat_safe := Vector3(velocity.x, 0, velocity.z)
+	if flat_safe.length() > HARD_LIMIT:
+		flat_safe = flat_safe.normalized() * HARD_LIMIT
+		velocity.x = flat_safe.x
+		velocity.z = flat_safe.z
+
+	velocity.y = clamp(velocity.y, -HARD_LIMIT, HARD_LIMIT)
+
 	move_and_slide()
 
 	for i in range(get_slide_collision_count()):
@@ -323,31 +347,18 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		n2 = n2.normalized()
 
 		if other2 is RigidBody3D:
-			# --- SAFE PROP PHYSICS ---
-			# Store speed BEFORE collision
 			var pre_speed := velocity.length()
+			if pre_speed > HARD_LIMIT:
+				pre_speed = HARD_LIMIT
 
-			# Clamp the speed so props never cause bounce or slowdown
-			pre_speed = clamp(pre_speed, 0.0, top_speed * 1.1)
-
-			# Compute push force for the prop (props NEVER push the car)
-			var push_force :float= clamp(pre_speed * 0.9, 4.0, 18.0)
-
-			# Apply impulse ONLY to the prop
+			var push_force :float = clamp(pre_speed * 0.9, 4.0, 18.0)
 			other2.apply_impulse(-n2 * push_force, col2.get_position())
 
-			# Restore car speed but NEVER increase it
 			velocity = velocity.normalized() * pre_speed
-
-			# Prevent upward launch
 			velocity.y = min(velocity.y, 0.0)
-
-			# Prevent sideways teleportation
-			velocity.x = clamp(velocity.x, -top_speed, top_speed)
-			velocity.z = clamp(velocity.z, -top_speed, top_speed)
-
+			velocity.x = clamp(velocity.x, -HARD_LIMIT, HARD_LIMIT)
+			velocity.z = clamp(velocity.z, -HARD_LIMIT, HARD_LIMIT)
 			continue
-
 
 		if other2 is CarController:
 			var my_p := mass * velocity
@@ -355,3 +366,51 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 			var impulse := (my_p - their_p) * 0.5
 			velocity += impulse / mass
 			other2.velocity -= impulse / other2.mass
+
+func set_waypoints(root: Node3D) -> void:
+	waypoint_root = root
+	waypoints = root.get_children()
+	waypoints.sort_custom(_ai_sort_wp)
+	current_wp = 0
+
+func _ai_sort_wp(a, b):
+	var na := int(a.name.trim_prefix("WP"))
+	var nb := int(b.name.trim_prefix("WP"))
+	return na < nb
+
+func _update_ai_inputs(delta: float) -> void:
+	if waypoints.is_empty():
+		ai_throttle = 0.0
+		ai_brake = 1.0
+		ai_steer = 0.0
+		return
+
+	var wp := waypoints[current_wp] as Node3D
+	var to_wp := wp.global_position - global_position
+	to_wp.y = 0.0
+
+	var dir := to_wp.normalized()
+	var forward := -transform.basis.z
+	forward.y = 0.0
+	forward = forward.normalized()
+
+	var side := forward.cross(dir).y
+
+	ai_steer = clamp(side * 2.0, -1.0, 1.0)
+
+	var dist := to_wp.length()
+
+	if dist > 10.0:
+		ai_throttle = 1.0
+		ai_brake = 0.0
+	elif dist > 4.0:
+		ai_throttle = 0.4
+		ai_brake = 0.0
+	else:
+		ai_throttle = 0.0
+		ai_brake = 0.6
+
+	if dist < 3.0:
+		current_wp += 1
+		if current_wp >= waypoints.size():
+			current_wp = 0

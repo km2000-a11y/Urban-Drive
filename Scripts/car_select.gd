@@ -111,12 +111,12 @@ var muscle = {
 }
 
 var urban_racers = {
-	"Kestrel Seabird":["543 PP","Country: UK","HP: 217","WEIGHT: 935 KG","0-100 KM/H: 4.3s","TOP SPEED: 238 KM/H","ENGINE: L4 1.8L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Brutus Stingray":["601 PP","Country: USA","HP: 345","WEIGHT: 1460 KG","0-100 KM/H: 5.0s","TOP SPEED: 277 KM/H","ENGINE: V8 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Kestrel Seabird":["543 PP","Country: UK","HP: 217","WEIGHT: 935 KG","0-100 KM/H: 4.5s","TOP SPEED: 238 KM/H","ENGINE: L4 1.8L","TRANSMISSION: REAR-WHEEL DRIVE"],
+	"Brutus Stingray":["586 PP","Country: USA","HP: 345","WEIGHT: 1460 KG","0-100 KM/H: 5.0s","TOP SPEED: 270 KM/H","ENGINE: V8 5.7L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Kestrel Speedster":["562 PP","Country: UK","HP: 286","WEIGHT: 1145 KG","0-100 KM/H: 4.7s","TOP SPEED: 243 KM/H","ENGINE: V8 4.4L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Kuro Zephyr V6":["525 PP","Country: Japan","HP: 306","WEIGHT: 1600 KG","0-100 KM/H: 5.6s","TOP SPEED: 250 KM/H","ENGINE: V6 3.5L","TRANSMISSION: REAR-WHEEL DRIVE"],
 	"Eisenach Roadstar":["559 PP","Country: Germany","HP: 335","WEIGHT: 1600 KG","0-100 KM/H: 4.8s","TOP SPEED: 250 KM/H","ENGINE: V6 3.0L","TRANSMISSION: REAR-WHEEL DRIVE"],
-	"Berkshire Blunt":["593 PP","Country: UK","HP: 396","WEIGHT: 1832 KG","0-100 KM/H: 5.2s","TOP SPEED: 286 KM/H","ENGINE: V8 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"]
+	"Berkshire Blunt":["572 PP","Country: UK","HP: 396","WEIGHT: 1832 KG","0-100 KM/H: 5.2s","TOP SPEED: 277 KM/H","ENGINE: V8 4.2L","TRANSMISSION: REAR-WHEEL DRIVE"]
 }
 
 var sedans = {

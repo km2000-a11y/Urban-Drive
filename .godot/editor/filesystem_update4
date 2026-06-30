@@ -40,3 +40,9 @@ res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
 res://Scenes/saleen_s7.tscn
 res://Scripts/base_car.gd
+res://Scripts/car_select.gd
+res://Scripts/chevrolet_corvette_c5_1998.gd
+res://Scripts/jaguar_xkr_2003.gd
+res://Scripts/lotus_exige_s_2007.gd
+res://Tracks/barrier_2.gd
+res://duel_manager.gd

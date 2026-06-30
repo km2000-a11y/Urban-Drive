@@ -181,7 +181,7 @@ material_override = SubResource("StandardMaterial3D_2o1hv")
 mesh = SubResource("BoxMesh_qb1gu")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.378105, 1.25295, -1.606)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.31683, 1.25295, -1.606)
 material_override = SubResource("StandardMaterial3D_5kq3h")
 mesh = SubResource("PrismMesh_h2ebh")
 
