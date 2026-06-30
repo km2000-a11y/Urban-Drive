@@ -1,5 +1,5 @@
+res://Tracks/bogota_airport.tscn
 res://main.tscn
-res://Scripts/AIController.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -29,7 +29,6 @@ res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/dodge_viper.tscn
 res://Scenes/tvr t 440r.tscn
-res://Tracks/bogota_airport.tscn
 res://Scenes/granturismo_police.tscn
 res://Scenes/mode_select.tscn
 res://Scenes/win_screen_radar.tscn
@@ -40,9 +39,3 @@ res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
 res://Scenes/saleen_s7.tscn
 res://Scripts/base_car.gd
-res://Scripts/car_select.gd
-res://Scripts/chevrolet_corvette_c5_1998.gd
-res://Scripts/jaguar_xkr_2003.gd
-res://Scripts/lotus_exige_s_2007.gd
-res://Tracks/barrier_2.gd
-res://duel_manager.gd

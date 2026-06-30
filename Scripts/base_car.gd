@@ -348,17 +348,22 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 		if other2 is RigidBody3D:
 			var pre_speed := velocity.length()
-			if pre_speed > HARD_LIMIT:
-				pre_speed = HARD_LIMIT
+			pre_speed = min(pre_speed, HARD_LIMIT)
 
-			var push_force :float = clamp(pre_speed * 0.9, 4.0, 18.0)
+			# MUCH LOWER FORCE
+			var push_force :float = clamp(pre_speed * 0.25, 1.0, 6.0)
+
+			# Apply impulse gently
 			other2.apply_impulse(-n2 * push_force, col2.get_position())
 
-			velocity = velocity.normalized() * pre_speed
-			velocity.y = min(velocity.y, 0.0)
-			velocity.x = clamp(velocity.x, -HARD_LIMIT, HARD_LIMIT)
-			velocity.z = clamp(velocity.z, -HARD_LIMIT, HARD_LIMIT)
+			# Dampen your own velocity so you don't bounce or fly
+			velocity *= 0.85
+
+			# Kill upward launch
+			velocity.y = clamp(velocity.y, -2.0, 2.0)
+
 			continue
+
 
 		if other2 is CarController:
 			var my_p := mass * velocity
@@ -373,10 +378,23 @@ func set_waypoints(root: Node3D) -> void:
 	waypoints.sort_custom(_ai_sort_wp)
 	current_wp = 0
 
-func _ai_sort_wp(a, b):
-	var na := int(a.name.trim_prefix("WP"))
-	var nb := int(b.name.trim_prefix("WP"))
+func _ai_sort_wp(a: Node, b: Node) -> bool:
+	# Clean names
+	var na_str := a.name.strip_edges().to_upper()
+	var nb_str := b.name.strip_edges().to_upper()
+
+	# Remove "WP" prefix safely
+	if na_str.begins_with("WP"):
+		na_str = na_str.substr(2)
+	if nb_str.begins_with("WP"):
+		nb_str = nb_str.substr(2)
+
+	# Convert to numbers (fallback to 99999 if invalid)
+	var na := int(na_str) if na_str.is_valid_int() else 99999
+	var nb := int(nb_str) if nb_str.is_valid_int() else 99999
+
 	return na < nb
+
 
 func _update_ai_inputs(delta: float) -> void:
 	if waypoints.is_empty():
@@ -414,3 +432,15 @@ func _update_ai_inputs(delta: float) -> void:
 		current_wp += 1
 		if current_wp >= waypoints.size():
 			current_wp = 0
+
+func _find_closest_waypoint() -> int:
+	var best := 0
+	var best_dist := INF
+
+	for i in range(waypoints.size()):
+		var d := global_position.distance_to(waypoints[i].global_position)
+		if d < best_dist:
+			best_dist = d
+			best = i
+
+	return best
