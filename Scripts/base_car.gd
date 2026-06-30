@@ -150,6 +150,7 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			velocity.y -= GRAVITY * delta
 		move_and_slide()
+		velocity.y = -0.01
 		return
 
 	if is_ai:
@@ -350,27 +351,30 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 			var pre_speed := velocity.length()
 			pre_speed = min(pre_speed, HARD_LIMIT)
 
-			# MUCH LOWER FORCE
-			var push_force :float = clamp(pre_speed * 0.25, 1.0, 6.0)
+			# Gentle push force so props move but don't explode
+			var push_force: float = clamp(pre_speed * 0.20, 0.5, 5.0)
 
-			# Apply impulse gently
+			# Apply impulse to the prop
 			other2.apply_impulse(-n2 * push_force, col2.get_position())
 
-			# Dampen your own velocity so you don't bounce or fly
-			velocity *= 0.85
+			# Dampen car velocity to avoid bounce-back
+			velocity *= 0.80
 
-			# Kill upward launch
-			velocity.y = clamp(velocity.y, -2.0, 2.0)
+			# Completely remove ANY upward velocity
+			velocity.y = 0.0
+
+			# Also flatten the collision normal influence
+			n2.y = 0.0
 
 			continue
 
 
 		if other2 is CarController:
-			var my_p := mass * velocity
-			var their_p: Vector3 = other2.mass * other2.velocity
-			var impulse := (my_p - their_p) * 0.5
-			velocity += impulse / mass
-			other2.velocity -= impulse / other2.mass
+					var my_p := mass * velocity
+					var their_p: Vector3 = other2.mass * other2.velocity
+					var impulse := (my_p - their_p) * 0.5
+					velocity += impulse / mass
+					other2.velocity -= impulse / other2.mass
 
 func set_waypoints(root: Node3D) -> void:
 	waypoint_root = root
@@ -411,6 +415,14 @@ func _update_ai_inputs(delta: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
+	# --- SKIP WAYPOINTS BEHIND THE CAR ---
+	var dot := forward.dot(dir)
+	if dot < 0.0:
+		current_wp += 1
+		if current_wp >= waypoints.size():
+			current_wp = 0
+		return
+
 
 	var side := forward.cross(dir).y
 
