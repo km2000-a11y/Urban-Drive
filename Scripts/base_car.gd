@@ -25,6 +25,7 @@ var top_speed := 60.0
 var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
+var driver_name: String = "Unknown"
 var transmission := "Front-wheel drive"
 
 var is_diesel := false
@@ -115,6 +116,9 @@ func _ready():
 	apply_stats()
 	apply_handling_profile()
 	nitro.hide()
+	if not is_ai:
+		driver_name = "Player"
+
 
 func update_gears(speed_kmh: float) -> void:
 	if rpm > shift_up_rpm and current_gear < gear_count:
@@ -319,18 +323,31 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		n2 = n2.normalized()
 
 		if other2 is RigidBody3D:
+			# --- SAFE PROP PHYSICS ---
 			# Store speed BEFORE collision
-			preserved_speed = velocity.length()
-			preserve_speed = true
+			var pre_speed := velocity.length()
 
-			# Push the object away
-			var push_force: float = clamp(preserved_speed * 1.2, 6.0, 22.0)
+			# Clamp the speed so props never cause bounce or slowdown
+			pre_speed = clamp(pre_speed, 0.0, top_speed * 1.1)
+
+			# Compute push force for the prop (props NEVER push the car)
+			var push_force :float= clamp(pre_speed * 0.9, 4.0, 18.0)
+
+			# Apply impulse ONLY to the prop
 			other2.apply_impulse(-n2 * push_force, col2.get_position())
 
-			# Keep direction but restore speed later
-			velocity = velocity.normalized() * preserved_speed
+			# Restore car speed but NEVER increase it
+			velocity = velocity.normalized() * pre_speed
+
+			# Prevent upward launch
+			velocity.y = min(velocity.y, 0.0)
+
+			# Prevent sideways teleportation
+			velocity.x = clamp(velocity.x, -top_speed, top_speed)
+			velocity.z = clamp(velocity.z, -top_speed, top_speed)
 
 			continue
+
 
 		if other2 is CarController:
 			var my_p := mass * velocity

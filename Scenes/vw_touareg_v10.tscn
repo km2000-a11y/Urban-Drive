@@ -316,3 +316,5 @@ stream = ExtResource("5_l06pl")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 shape = SubResource("SphereShape3D_2o1hv")
+
+[node name="Node3D" type="Node3D" parent="."]

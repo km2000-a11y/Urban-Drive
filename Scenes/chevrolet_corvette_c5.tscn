@@ -420,3 +420,5 @@ stream = ExtResource("4_fk7pn")
 [node name="SpringArm3D" type="SpringArm3D" parent="." node_paths=PackedStringArray("follow_target")]
 script = SubResource("GDScript_madci")
 follow_target = NodePath("..")
+
+[node name="Node3D" type="Node3D" parent="."]

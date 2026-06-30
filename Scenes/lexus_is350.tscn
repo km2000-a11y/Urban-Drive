@@ -1,11 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://dx34dyfmswcbw"]
+[gd_scene load_steps=34 format=3 uid="uid://dx34dyfmswcbw"]
 
 [ext_resource type="Script" uid="uid://cylet5y5ljolj" path="res://Scripts/lexus_is350_2009.gd" id="1_op76e"]
 [ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_45l8h"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_6m1y3"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_45l8h"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_6r8be"]
-[ext_resource type="Script" uid="uid://cgrjp7nbx0gix" path="res://Scripts/AIController.gd" id="6_45l8h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08euy"]
 albedo_color = Color(0, 0, 0, 1)
@@ -268,7 +267,3 @@ stream = ExtResource("3_45l8h")
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_6r8be")
-
-[node name="AIController" type="Node3D" parent="." node_paths=PackedStringArray("car")]
-script = ExtResource("6_45l8h")
-car = NodePath("..")

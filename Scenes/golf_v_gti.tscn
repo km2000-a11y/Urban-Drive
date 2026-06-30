@@ -271,3 +271,5 @@ stream = ExtResource("3_gutwf")
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_ehj30")
+
+[node name="Node3D" type="Node3D" parent="."]
