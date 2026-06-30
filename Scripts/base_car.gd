@@ -380,7 +380,7 @@ func set_waypoints(root: Node3D) -> void:
 	waypoint_root = root
 	waypoints = root.get_children()
 	waypoints.sort_custom(_ai_sort_wp)
-	current_wp = 0
+	current_wp = 1
 
 func _ai_sort_wp(a: Node, b: Node) -> bool:
 	# Clean names
