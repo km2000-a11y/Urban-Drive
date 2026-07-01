@@ -85,6 +85,9 @@ func _ready():
 	mode = Modes.mode
 	load_radar_best()
 	Cars.load_color()
+ 
+	disable_all_ai()
+
 
 	if mode != "Duel":
 		spawn_player_car()
@@ -183,7 +186,7 @@ func _on_radar_trap_body_entered(body):
 	if mode != "Radar Race":
 		return
 
-	var car :CarController= body
+	var car = body
 	while car and not (car is CarController):
 		car = car.get_parent()
 
@@ -212,3 +215,8 @@ func save_radar_best():
 	var f := FileAccess.open("user://radar_best.save", FileAccess.WRITE)
 	f.store_string(str(best_radar_speed))
 	f.close()
+
+func disable_all_ai():
+	for node in get_tree().get_nodes_in_group("cars"):
+		if node is CarController:
+			node.is_ai = false

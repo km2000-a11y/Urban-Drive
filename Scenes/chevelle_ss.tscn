@@ -169,7 +169,7 @@ func _physics_process(delta: float) -> void:
 		spring_length = lerp(spring_length, target_zoom, delta * 4.0)
 "
 
-[node name="CHEVELLE SS" type="CharacterBody3D"]
+[node name="CHEVELLE SS" type="CharacterBody3D" groups=["cars"]]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_webrg")

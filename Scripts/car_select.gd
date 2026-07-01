@@ -301,6 +301,9 @@ var car_scene_paths = {
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
+	
+	"Brutus Viper":"res://Scenes/gt500.tscn",
+	"Brutus Mauler":"res://Scenes/chevelle_ss.tscn",
 
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",

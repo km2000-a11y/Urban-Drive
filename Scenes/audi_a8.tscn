@@ -99,7 +99,7 @@ color_ramp = SubResource("GradientTexture1D_nfu50")
 [sub_resource type="QuadMesh" id="QuadMesh_twcfh"]
 size = Vector2(0.5, 0.5)
 
-[node name="AUDI A8" type="CharacterBody3D"]
+[node name="AUDI A8" type="CharacterBody3D" groups=["cars"]]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_qokdn")

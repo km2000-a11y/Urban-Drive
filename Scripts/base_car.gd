@@ -11,10 +11,9 @@ const HARD_LIMIT := HARD_LIMIT_KMH / 3.6
 var is_ai: bool = false
 var waypoint_root: Node3D = null
 var waypoints: Array[Node] = []
-var current_wp: int = 1
+var current_wp: int = 0
 
-
-# --- AI INPUT (ONLY WRITTEN BY AI LOGIC) ---
+# --- AI INPUT ---
 var ai_throttle: float = 0.0
 var ai_brake: float = 0.0
 var ai_steer: float = 0.0
@@ -24,8 +23,7 @@ var ai_names := [
 	"Abdullah", "Will", "Jimmy M.", "Tiffany", "Hoff", "Jake"
 ]
 
-
-# --- PLAYER INPUT (ONLY READ FROM Input) ---
+# --- PLAYER INPUT ---
 var throttle_input: float = 0.0
 var brake_input: float = 0.0
 var steer_input: float = 0.0
@@ -39,7 +37,9 @@ var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
 var driver_name: String = "Unknown"
-var transmission := "Front-wheel drive"
+
+# Use consistent transmission strings
+var transmission := "Front wheel drive" # "Front wheel drive", "Rear wheel drive", "Four wheel drive"
 
 var is_diesel := false
 
@@ -68,7 +68,6 @@ var performance_points := 0
 var debug_enabled := true
 var handling_type := "balanced"
 
-# If false, neither player nor AI can control the car (used by game modes)
 var controls_enabled: bool = true
 
 @export var spawn_yaw_deg: float = 0.0
@@ -76,6 +75,10 @@ var controls_enabled: bool = true
 @onready var car_model := $ModelRoot
 @onready var forward_ref := $ForwardRef
 @onready var nitro := $Exhaust/GPUParticles3D
+
+# --- OVERTAKING ---
+var ai_overtake_offset: float = 0.0
+var ai_overtake_side: float = 0.0 # -1 left, +1 right
 
 func apply_stats() -> void:
 	acceleration_calc = (27.78 / zero_to_hundred) * 3.0
@@ -134,6 +137,8 @@ func _ready() -> void:
 	else:
 		driver_name = "Player"
 
+
+
 func update_gears(speed_kmh: float) -> void:
 	if rpm > shift_up_rpm and current_gear < gear_count:
 		current_gear += 1
@@ -170,7 +175,6 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var drift_input := false
 	var nitrous := false
 
-	# Only PLAYER can trigger drift and nitrous
 	if not is_ai:
 		if Input.is_action_pressed("drift"):
 			drift_input = true
@@ -195,16 +199,15 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var speed := velocity.length()
 	var speed_kmh := speed * 3.6
 
+	# --- CAR ORIENTATION ---
 	if not drifting:
 		rotation.y += steering * turn_speed * delta
-		if speed > 0.1:
-			velocity = velocity.rotated(Vector3.UP, steering * turn_speed * 0.20 * delta)
 		lateral_friction = 1.2
 	else:
 		var drift_steer := steering * (turn_speed * 0.35)
 		rotation.y += drift_steer * delta
 		var slip_strength := 2.0 * drift_factor
-		velocity = velocity.rotated(Vector3.UP, -steer * slip_strength * delta)
+		velocity = velocity.rotated(Vector3.UP, -steering * slip_strength * delta)
 		lateral_friction = lerp(1.2, 0.12, drift_factor)
 
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
@@ -244,6 +247,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		velocity += -right * (scrape_strength * 6.0)
 		velocity *= (1.0 - scrape_strength * 0.15)
 
+	# --- RPM & GEARS ---
 	if speed_kmh < 2.0:
 		if accel > 0.1:
 			rpm = lerp(rpm, idle_rpm + 2500.0, delta * 2.5)
@@ -258,32 +262,35 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	var torque_factor := rpm / max_rpm
 
+	# --- DRIVETRAIN ---
 	var traction_factor := 1.0
 	var throttle_steer := 0.0
 	var launch_grip := 1.0
 
 	if transmission == "Front wheel drive":
-		traction_factor = 0.90
-		throttle_steer = -steering * 0.35
-		launch_grip = 1.15
-	elif transmission == "Rear wheel drive":
 		traction_factor = 1.05
-		throttle_steer = steering * 0.55
-		launch_grip = 0.85
+		throttle_steer = steering * 0.15
+		launch_grip = 1.0
+	elif transmission == "Rear wheel drive":
+		traction_factor = 1.0
+		throttle_steer = steering * 0.35
+		launch_grip = 0.9
 	elif transmission == "Four wheel drive":
-		traction_factor = 1.20
-		throttle_steer = steering * 0.25
-		launch_grip = 1.35
+		traction_factor = 1.15
+		throttle_steer = steering * 0.10
+		launch_grip = 1.2
 
 	var accel_force := 0.0
 
 	if accel > 0.0:
 		var launch_boost := 1.0
 		if current_gear == 1:
-			launch_boost = 1.4
+			launch_boost = 1.25
 
 		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost * launch_grip
 		velocity += forward * accel_force * delta
+
+		# torque-steer only, no extra steering rotation
 		velocity = velocity.rotated(Vector3.UP, throttle_steer * delta)
 	else:
 		var flat := Vector3(velocity.x, 0, velocity.z)
@@ -317,7 +324,6 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	velocity.x = flat2.x
 	velocity.z = flat2.z
 
-	# Only PLAYER updates global HUD
 	if not is_ai and controls_enabled:
 		Global.speed = speed_kmh
 		Global.gear = current_gear
@@ -329,7 +335,6 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	else:
 		velocity.y = -0.01
 
-	# HARD GLOBAL SAFETY CLAMP (anti-100,000 km/h madness)
 	var flat_safe := Vector3(velocity.x, 0, velocity.z)
 	if flat_safe.length() > HARD_LIMIT:
 		flat_safe = flat_safe.normalized() * HARD_LIMIT
@@ -351,49 +356,37 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 			var pre_speed := velocity.length()
 			pre_speed = min(pre_speed, HARD_LIMIT)
 
-			# Gentle push force so props move but don't explode
 			var push_force: float = clamp(pre_speed * 0.20, 0.5, 5.0)
-
-			# Apply impulse to the prop
 			other2.apply_impulse(-n2 * push_force, col2.get_position())
 
-			# Dampen car velocity to avoid bounce-back
 			velocity *= 0.80
-
-			# Completely remove ANY upward velocity
 			velocity.y = 0.0
-
-			# Also flatten the collision normal influence
-			n2.y = 0.0
-
 			continue
 
-
 		if other2 is CarController:
-					var my_p := mass * velocity
-					var their_p: Vector3 = other2.mass * other2.velocity
-					var impulse := (my_p - their_p) * 0.5
-					velocity += impulse / mass
-					other2.velocity -= impulse / other2.mass
+			var my_p := mass * velocity
+			var their_p: Vector3 = other2.mass * other2.velocity
+			var impulse := (my_p - their_p) * 0.5
+			velocity += impulse / mass
+			other2.velocity -= impulse / other2.mass
+
 
 func set_waypoints(root: Node3D) -> void:
 	waypoint_root = root
 	waypoints = root.get_children()
 	waypoints.sort_custom(_ai_sort_wp)
-	current_wp = 1
+	current_wp = 0
+
 
 func _ai_sort_wp(a: Node, b: Node) -> bool:
-	# Clean names
 	var na_str := a.name.strip_edges().to_upper()
 	var nb_str := b.name.strip_edges().to_upper()
 
-	# Remove "WP" prefix safely
 	if na_str.begins_with("WP"):
 		na_str = na_str.substr(2)
 	if nb_str.begins_with("WP"):
 		nb_str = nb_str.substr(2)
 
-	# Convert to numbers (fallback to 99999 if invalid)
 	var na := int(na_str) if na_str.is_valid_int() else 99999
 	var nb := int(nb_str) if nb_str.is_valid_int() else 99999
 
@@ -409,11 +402,11 @@ func _update_ai_inputs(delta: float) -> void:
 
 	var wp := waypoints[current_wp] as Node3D
 
-	# --- LOOKAHEAD POINT (fixes sloppy waypoint placement)
+	# --- LOOKAHEAD (ROBUST TO SLOPPY WAYPOINTS) ---
 	var wp_forward := -wp.transform.basis.z
 	wp_forward.y = 0.0
 	wp_forward = wp_forward.normalized()
-	var lookahead_pos := wp.global_position + wp_forward * 6.0
+	var lookahead_pos := wp.global_position + wp_forward * 5.0
 
 	var to_wp := lookahead_pos - global_position
 	to_wp.y = 0.0
@@ -423,56 +416,100 @@ func _update_ai_inputs(delta: float) -> void:
 	forward.y = 0.0
 	forward = forward.normalized()
 
-	# --- ONLY SKIP IF *WAY* BEHIND (fixes zig-zag)
+	# --- NO REVERSING ---
 	var dot := forward.dot(dir)
-	if dot < -0.35:
+	if dot < -0.6 and to_wp.length() < 8.0:
 		current_wp += 1
 		if current_wp >= waypoints.size():
 			current_wp = 0
 		return
 
-	# --- SIDE ANGLE (steering direction)
+	# --- STEERING ---
 	var side := forward.cross(dir).y
+	var steer_limit: float = clamp(1.0 - (current_speed / 160.0), 0.2, 1.0)
+	ai_steer = clamp(side * steer_limit * 1.3, -1.0, 1.0)
 
-	# --- SPEED-BASED STEERING LIMIT (fixes drunk steering)
-	var steer_limit :float= clamp(1.0 - (current_speed / 160.0), 0.18, 1.0)
-	ai_steer = clamp(side * steer_limit * 1.35, -1.0, 1.0)
-
-	# --- DISTANCE & ANGLE
 	var dist := to_wp.length()
-	var angle :float= abs(side)
+	var angle: float = abs(side)
 
-	# --- CORNER SPEED CONTROL (fixes overshooting)
 	ai_brake = 0.0
 	ai_throttle = 0.0
 
-	# HARD CORNER
+	# --- CORNER SPEED CONTROL ---
 	if angle > 0.55:
 		if current_speed > 90.0:
-			ai_brake = 0.65
-			ai_throttle = 0.15
+			ai_brake = 0.6
+			ai_throttle = 0.2
 		else:
-			ai_throttle = 0.45
-
-	# MEDIUM CORNER
+			ai_throttle = 0.5
 	elif angle > 0.30:
 		if current_speed > 120.0:
-			ai_brake = 0.45
-			ai_throttle = 0.25
+			ai_brake = 0.4
+			ai_throttle = 0.3
 		else:
-			ai_throttle = 0.65
-
-	# STRAIGHT / LIGHT TURN
-	else:
-		if dist > 14.0:
-			ai_throttle = 1.0
-		elif dist > 7.0:
 			ai_throttle = 0.7
+	else:
+		if dist > 16.0:
+			ai_throttle = 1.0
+		elif dist > 8.0:
+			ai_throttle = 0.8
 		else:
-			ai_throttle = 0.45
+			ai_throttle = 0.5
 
-	# --- ADVANCE WAYPOINT (robust even with sloppy placement)
-	if dist < 3.5:
+	# --- SIMPLE RANDOM-SIDE OVERTAKING ---
+	var nearest_car := _find_nearest_car()
+	if nearest_car and nearest_car != self:
+		var to_car := nearest_car.global_position - global_position
+		to_car.y = 0.0
+		var car_dist := to_car.length()
+		var car_dir := to_car.normalized()
+		var car_dot := forward.dot(car_dir)
+
+		# Car ahead and close
+		if car_dot > 0.6 and car_dist < 12.0:
+			# Decide side once
+			if ai_overtake_side == 0.0:
+				if abs(side) > 0.1:
+					ai_overtake_side = sign(side)
+				else:
+					if randf() < 0.5:
+						ai_overtake_side = -1.0
+					else:
+						ai_overtake_side = 1.0
+
+			ai_overtake_offset = lerp(ai_overtake_offset, ai_overtake_side, delta * 1.5)
+			if ai_throttle < 0.85:
+				ai_throttle = 0.85
+		else:
+			ai_overtake_offset = lerp(ai_overtake_offset, 0.0, delta * 1.5)
+			if abs(ai_overtake_offset) < 0.05:
+				ai_overtake_side = 0.0
+	else:
+		ai_overtake_offset = lerp(ai_overtake_offset, 0.0, delta * 1.5)
+		if abs(ai_overtake_offset) < 0.05:
+			ai_overtake_side = 0.0
+
+	# --- ADVANCE WAYPOINT (ROBUST TO SLOPPY PLACEMENT) ---
+	if dist < 4.0:
 		current_wp += 1
 		if current_wp >= waypoints.size():
 			current_wp = 0
+
+
+func _find_nearest_car() -> CarController:
+	var nearest: CarController = null
+	var best_dist := 99999.0
+
+	for body in get_tree().get_nodes_in_group("cars"):
+		if body == self:
+			continue
+		if not (body is CarController):
+			continue
+
+		var cc := body as CarController
+		var d := cc.global_position.distance_to(global_position)
+		if d < best_dist:
+			best_dist = d
+			nearest = cc
+
+	return nearest
