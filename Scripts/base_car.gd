@@ -408,51 +408,71 @@ func _update_ai_inputs(delta: float) -> void:
 		return
 
 	var wp := waypoints[current_wp] as Node3D
-	var to_wp := wp.global_position - global_position
+
+	# --- LOOKAHEAD POINT (fixes sloppy waypoint placement)
+	var wp_forward := -wp.transform.basis.z
+	wp_forward.y = 0.0
+	wp_forward = wp_forward.normalized()
+	var lookahead_pos := wp.global_position + wp_forward * 6.0
+
+	var to_wp := lookahead_pos - global_position
 	to_wp.y = 0.0
 
 	var dir := to_wp.normalized()
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-	# --- SKIP WAYPOINTS BEHIND THE CAR ---
+
+	# --- ONLY SKIP IF *WAY* BEHIND (fixes zig-zag)
 	var dot := forward.dot(dir)
-	if dot < 0.0:
+	if dot < -0.35:
 		current_wp += 1
 		if current_wp >= waypoints.size():
 			current_wp = 0
 		return
 
-
+	# --- SIDE ANGLE (steering direction)
 	var side := forward.cross(dir).y
 
-	ai_steer = clamp(side * 2.0, -1.0, 1.0)
+	# --- SPEED-BASED STEERING LIMIT (fixes drunk steering)
+	var steer_limit :float= clamp(1.0 - (current_speed / 160.0), 0.18, 1.0)
+	ai_steer = clamp(side * steer_limit * 1.35, -1.0, 1.0)
 
+	# --- DISTANCE & ANGLE
 	var dist := to_wp.length()
+	var angle :float= abs(side)
 
-	if dist > 10.0:
-		ai_throttle = 1.0
-		ai_brake = 0.0
-	elif dist > 4.0:
-		ai_throttle = 0.4
-		ai_brake = 0.0
+	# --- CORNER SPEED CONTROL (fixes overshooting)
+	ai_brake = 0.0
+	ai_throttle = 0.0
+
+	# HARD CORNER
+	if angle > 0.55:
+		if current_speed > 90.0:
+			ai_brake = 0.65
+			ai_throttle = 0.15
+		else:
+			ai_throttle = 0.45
+
+	# MEDIUM CORNER
+	elif angle > 0.30:
+		if current_speed > 120.0:
+			ai_brake = 0.45
+			ai_throttle = 0.25
+		else:
+			ai_throttle = 0.65
+
+	# STRAIGHT / LIGHT TURN
 	else:
-		ai_throttle = 0.0
-		ai_brake = 0.6
+		if dist > 14.0:
+			ai_throttle = 1.0
+		elif dist > 7.0:
+			ai_throttle = 0.7
+		else:
+			ai_throttle = 0.45
 
-	if dist < 3.0:
+	# --- ADVANCE WAYPOINT (robust even with sloppy placement)
+	if dist < 3.5:
 		current_wp += 1
 		if current_wp >= waypoints.size():
 			current_wp = 0
-
-func _find_closest_waypoint() -> int:
-	var best := 0
-	var best_dist := INF
-
-	for i in range(waypoints.size()):
-		var d := global_position.distance_to(waypoints[i].global_position)
-		if d < best_dist:
-			best_dist = d
-			best = i
-
-	return best
