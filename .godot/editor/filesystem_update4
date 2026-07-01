@@ -1,3 +1,9 @@
+res://Scenes/bmw_z4.tscn
+res://Scripts/aston_db9_2007.gd
+res://Scripts/chevrolet_corvette_c5_1998.gd
+res://Scripts/granturismo_s_2009.gd
+res://Scripts/jaguar_xkr_2003.gd
+res://Scripts/vanquish_2002.gd
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -15,7 +21,6 @@ res://Scenes/chevrolet_corvette_c5.tscn
 res://Scenes/aston_db9.tscn
 res://Scenes/vanquish.tscn
 res://Scenes/granturismo.tscn
-res://Scenes/bmw_z4.tscn
 res://Scenes/gt500.tscn
 res://Scenes/diablo_road.tscn
 res://Scenes/sagaris.tscn
@@ -38,3 +43,9 @@ res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/porsche_911_targa_993.tscn
 res://Scenes/saleen_s7.tscn
+res://Scenes/lexus_sc400.tscn
+res://Scripts/base_car.gd
+res://Scenes/lexus_sc_400.gd
+res://Scenes/bmw_m5_e60.tscn
+res://Scripts/bmw_m_5_e_60.gd
+res://Scripts/car_select.gd

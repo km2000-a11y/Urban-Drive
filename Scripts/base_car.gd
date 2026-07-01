@@ -262,15 +262,15 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var throttle_steer := 0.0
 	var launch_grip := 1.0
 
-	if transmission == "Front-wheel drive":
+	if transmission == "Front wheel drive":
 		traction_factor = 0.90
 		throttle_steer = -steering * 0.35
 		launch_grip = 1.15
-	elif transmission == "Rear-wheel drive":
+	elif transmission == "Rear wheel drive":
 		traction_factor = 1.05
 		throttle_steer = steering * 0.55
 		launch_grip = 0.85
-	elif transmission == "Four-wheel drive":
+	elif transmission == "Four wheel drive":
 		traction_factor = 1.20
 		throttle_steer = steering * 0.25
 		launch_grip = 1.35

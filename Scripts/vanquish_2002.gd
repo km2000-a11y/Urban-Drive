@@ -5,14 +5,14 @@ var car_name := "Berkshire Tempest"
 var country := "UK"
 var engine := "V12 5.9L"
 var weight_kg := 1875
-var zero_to_hundred_display := 4.50
+var zero_to_hundred_display := 5.40
 
 func _ready():
 	# GAMEPLAY STATS
 	mass = 1875.0
 	horsepower = 460
 	max_rpm = 6800.0
-	zero_to_hundred = 4.8
+	zero_to_hundred = 5.4
 	top_speed_kmh = 303
 	turn_speed = 2.85
 	brake_strength = 13.8
