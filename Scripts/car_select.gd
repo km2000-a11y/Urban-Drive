@@ -48,12 +48,13 @@ var car_colors := {
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
 	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
    
-	"Kuro Dashibara":[
-		Color8(192,192,192),  # ⭐ Default — silver
-		Color8(255,255,255),  # White
-		Color8(0,40,80),      # Dark blue
-		Color8(160,160,160)   # Light silver
-	],
+	"Schroder Atrix Sport":[
+	Color8(0,192,192),   # ⭐ Default — Urban Drive Cyan
+	Color8(255,255,255), # White
+	Color8(60,60,60),    # Dark Grey
+	Color8(0,120,160)    # Deep Blue
+],
+
 
 	"Eisenach Goliath":[
 		Color8(255,99,71),    # ⭐ Default — tomato red
@@ -85,7 +86,7 @@ var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Stra
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster", "Berkshire Blunt"]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
-var sport_list = ["Kuro Dashibara", "Bartoli Cruiser", "Berkshire V12-S", "Berkshire Tempest"]
+var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", "Berkshire Tempest", "Schroder Atrix Sport"]
 var sport_racing_list = ["Eisenach Goliath", "Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine", "Brutus Predator"]
 
@@ -209,11 +210,12 @@ var sedans = {
 }
 
 var sport = {
-	"Kuro Dashibara":[
-		"", "Country: Japan", "HP: 295", "WEIGHT: 1540 KG",
-		"0-100 KM/H: 5.2s", "TOP SPEED: 265 KM/H",
-		"ENGINE: V8 4.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	],
+	"Schroder Atrix Sport":[
+	"", "Country: Germany", "HP: 340", "WEIGHT: 1470 KG",
+	"0-100 KM/H: 4.6s", "TOP SPEED: 266 KM/H",
+	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+],
+
 	"Bartoli Cruiser":[
 		"", "Country: Italy", "HP: 433", "WEIGHT: 1880 KG",
 		"0-100 KM/H: 4.9s", "TOP SPEED: 287 KM/H",
@@ -310,7 +312,7 @@ var car_scene_paths = {
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn",
 
-	"Kuro Dashibara":"res://Scenes/lexus_sc400.tscn",
+	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
