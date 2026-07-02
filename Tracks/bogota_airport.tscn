@@ -233,7 +233,7 @@ albedo_color = Color(0.188235, 0.188235, 0.188235, 1)
 size = Vector3(12, 1, 650)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wa87y"]
-size = Vector3(12, 1, 655)
+size = Vector3(12, 1, 650)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pryvf"]
 size = Vector3(1, 5, 650)
@@ -4147,6 +4147,7 @@ mesh = SubResource("BoxMesh_bswp8")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D5"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
 shape = SubResource("BoxShape3D_1jt33")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D"]
@@ -4157,6 +4158,7 @@ mesh = SubResource("BoxMesh_bswp8")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D6"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
 shape = SubResource("BoxShape3D_1jt33")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D"]
@@ -4167,6 +4169,7 @@ mesh = SubResource("BoxMesh_bswp8")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D7"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
 shape = SubResource("BoxShape3D_1jt33")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D"]
@@ -4177,6 +4180,7 @@ mesh = SubResource("BoxMesh_bswp8")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D8"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
 shape = SubResource("BoxShape3D_1jt33")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D"]
@@ -4187,6 +4191,7 @@ mesh = SubResource("BoxMesh_bswp8")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D9"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006, 0)
 shape = SubResource("BoxShape3D_1jt33")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/MeshInstance3D9"]
@@ -4336,7 +4341,7 @@ transform = Transform3D(-0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 
 transform = Transform3D(-0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 974.814, 0, 414.471)
 
 [node name="WP18" type="Node3D" parent="Waypoints"]
-transform = Transform3D(-0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 755.956, 0, 1015.78)
+transform = Transform3D(-0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 756.591, 0, 1014.04)
 
 [node name="WP19" type="Node3D" parent="Waypoints"]
 transform = Transform3D(-0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, -0.766044, 753.9, 0, 1021.43)

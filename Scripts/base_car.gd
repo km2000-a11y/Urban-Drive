@@ -402,61 +402,85 @@ func _update_ai_inputs(delta: float) -> void:
 
 	var wp := waypoints[current_wp] as Node3D
 
-	# --- LOOKAHEAD (ROBUST TO SLOPPY WAYPOINTS) ---
+	# --- LOOKAHEAD ---
 	var wp_forward := -wp.transform.basis.z
 	wp_forward.y = 0.0
 	wp_forward = wp_forward.normalized()
-	var lookahead_pos := wp.global_position + wp_forward * 5.0
+	var lookahead_pos := wp.global_position + wp_forward * 6.0
 
 	var to_wp := lookahead_pos - global_position
 	to_wp.y = 0.0
 
+	var dist := to_wp.length()
+	if dist < 0.1:
+		current_wp = (current_wp + 1) % waypoints.size()
+		return
+
 	var dir := to_wp.normalized()
+
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
 
-	# --- NO REVERSING ---
 	var dot := forward.dot(dir)
-	if dot < -0.6 and to_wp.length() < 8.0:
-		current_wp += 1
-		if current_wp >= waypoints.size():
-			current_wp = 0
+
+	# --- ORIENTATION SAFETY ---
+	if dot < -0.4 and dist > 10.0:
+		var side_back := forward.cross(dir).y
+		var steer_limit_back :float= clamp(1.0 - (current_speed / 140.0), 0.35, 1.0)
+		ai_steer = clamp(side_back * steer_limit_back * 1.5, -1.0, 1.0)
+		ai_throttle = 0.4
+		ai_brake = 0.0
+		return
+
+	if dot < -0.6 and dist < 6.0:
+		current_wp = (current_wp + 1) % waypoints.size()
+		ai_throttle = 0.3
+		ai_brake = 0.0
+		ai_steer = 0.0
 		return
 
 	# --- STEERING ---
 	var side := forward.cross(dir).y
-	var steer_limit: float = clamp(1.0 - (current_speed / 160.0), 0.2, 1.0)
-	ai_steer = clamp(side * steer_limit * 1.3, -1.0, 1.0)
+	var speed_factor :float= clamp(current_speed / 140.0, 0.0, 1.0)
+	var steer_limit :float= lerp(1.0, 0.35, speed_factor)
+	ai_steer = clamp(side * steer_limit * 1.25, -1.0, 1.0)
 
-	var dist := to_wp.length()
-	var angle: float = abs(side)
+	var angle :float= abs(side)
 
 	ai_brake = 0.0
 	ai_throttle = 0.0
 
 	# --- CORNER SPEED CONTROL ---
 	if angle > 0.55:
-		if current_speed > 90.0:
-			ai_brake = 0.6
-			ai_throttle = 0.2
+		if current_speed > 110.0:
+			ai_brake = 0.5
+			ai_throttle = 0.25
+		elif current_speed > 70.0:
+			ai_brake = 0.25
+			ai_throttle = 0.45
 		else:
-			ai_throttle = 0.5
+			ai_throttle = 0.65
+
 	elif angle > 0.30:
-		if current_speed > 120.0:
-			ai_brake = 0.4
-			ai_throttle = 0.3
+		if current_speed > 140.0:
+			ai_brake = 0.35
+			ai_throttle = 0.35
+		elif current_speed > 90.0:
+			ai_brake = 0.15
+			ai_throttle = 0.6
+		else:
+			ai_throttle = 0.8
+
+	else:
+		if dist > 20.0:
+			ai_throttle = 1.0
+		elif dist > 10.0:
+			ai_throttle = 0.9
 		else:
 			ai_throttle = 0.7
-	else:
-		if dist > 16.0:
-			ai_throttle = 1.0
-		elif dist > 8.0:
-			ai_throttle = 0.8
-		else:
-			ai_throttle = 0.5
 
-	# --- SIMPLE RANDOM-SIDE OVERTAKING ---
+	# --- OVERTAKING ---
 	var nearest_car := _find_nearest_car()
 	if nearest_car and nearest_car != self:
 		var to_car := nearest_car.global_position - global_position
@@ -465,9 +489,7 @@ func _update_ai_inputs(delta: float) -> void:
 		var car_dir := to_car.normalized()
 		var car_dot := forward.dot(car_dir)
 
-		# Car ahead and close
 		if car_dot > 0.6 and car_dist < 12.0:
-			# Decide side once
 			if ai_overtake_side == 0.0:
 				if abs(side) > 0.1:
 					ai_overtake_side = sign(side)
@@ -478,22 +500,27 @@ func _update_ai_inputs(delta: float) -> void:
 						ai_overtake_side = 1.0
 
 			ai_overtake_offset = lerp(ai_overtake_offset, ai_overtake_side, delta * 1.5)
+			ai_steer = clamp(ai_steer + (ai_overtake_offset * 0.25), -1.0, 1.0)
+
 			if ai_throttle < 0.85:
 				ai_throttle = 0.85
+
 		else:
 			ai_overtake_offset = lerp(ai_overtake_offset, 0.0, delta * 1.5)
 			if abs(ai_overtake_offset) < 0.05:
 				ai_overtake_side = 0.0
+
 	else:
 		ai_overtake_offset = lerp(ai_overtake_offset, 0.0, delta * 1.5)
 		if abs(ai_overtake_offset) < 0.05:
 			ai_overtake_side = 0.0
 
-	# --- ADVANCE WAYPOINT (ROBUST TO SLOPPY PLACEMENT) ---
+	# --- ADVANCE WAYPOINT ---
 	if dist < 4.0:
-		current_wp += 1
-		if current_wp >= waypoints.size():
-			current_wp = 0
+		current_wp = (current_wp + 1) % waypoints.size()
+
+
+
 
 
 func _find_nearest_car() -> CarController:
