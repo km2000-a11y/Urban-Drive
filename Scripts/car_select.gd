@@ -37,6 +37,13 @@ var car_colors := {
 	"Berkshire Blunt":[Color8(0,66,37), Color8(255,255,255), Color8(180,180,180), Color8(0,120,80)],
 	"Kestrel Seabird":[Color8(50,205,50), Color8(255,255,255), Color8(255,200,0), Color8(0,120,200)],
 	"Kuro Zephyr V6":[Color8(255,255,255), Color8(64,64,64), Color8(0,90,180), Color8(180,180,180)],
+	"Eisenach Compaque":[
+	Color8(192,192,192), # ⭐ Default — Silver
+	Color8(255,255,255), # White
+	Color8(60,60,60),    # Dark Grey
+	Color8(0,80,160)     # Deep Blue
+],
+
 
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
 	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
@@ -82,7 +89,7 @@ var car_colors := {
 # -------------------------
 
 var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Straeda Pitbull"]
-var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25"]
+var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25","Eisenach Compaque"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster", "Berkshire Blunt"]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
@@ -137,7 +144,12 @@ var compact = {
 		"", "Country: Germany", "HP: 197", "WEIGHT: 1350 KG",
 		"0-100 KM/H: 6.9s", "TOP SPEED: 233 KM/H",
 		"ENGINE: L4 2.0L", "TRANSMISSION: FRONT-WHEEL DRIVE"
-	]
+	],
+	"Eisenach Compaque":[
+	"", "Country: Germany", "HP: 162", "WEIGHT: 1360 KG",
+	"0-100 KM/H: 7.5s", "TOP SPEED: 223 KM/H",
+	"ENGINE: L4 2.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+]
 }
 
 var muscle = {
@@ -303,7 +315,7 @@ var car_scene_paths = {
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
-	
+	"Eisenach Compaque":"res://Scenes/bmw_120d.tscn",
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Brutus Mauler":"res://Scenes/chevelle_ss.tscn",
 

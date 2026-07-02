@@ -1,3 +1,4 @@
+res://Scenes/audi_tt_rs.tscn
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -37,8 +38,10 @@ res://Scenes/cls_350_cdi.tscn
 res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/saleen_s7.tscn
-res://Scenes/lexus_sc400.tscn
 res://Scenes/bmw_m5_e60.tscn
-res://Scenes/audi_tt_rs.tscn
-res://Scenes/audi_tt_rs.gd
+res://Scenes/bmw_120d.tscn
+res://Scripts/base_car.gd
+res://Scripts/bmw_120d.gd
 res://Scripts/car_select.gd
+res://main.gd
+res://Scripts/vw_golf_v_gti_2003.gd

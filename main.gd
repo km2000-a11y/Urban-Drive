@@ -31,13 +31,26 @@ var car_colors := {
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
 	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
-	"Gruber Targa":[Color8(192,192,192), Color8(255,255,255), Color8(200,0,0), Color8(0,40,120)],
 	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
 	"Linetti Firestorm":[Color8(225,220,40), Color8(255,255,255), Color8(255,80,0), Color8(200,160,0)],
 	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)],
 	"Brutus Venom":[Color8(255,0,0), Color8(255,255,255), Color8(180,180,180), Color8(0,0,0)],
-	"Kestrel Guillotine":[Color8(120,0,180), Color8(255,255,255), Color8(200,160,255), Color8(60,0,90)]
+	"Kestrel Guillotine":[Color8(120,0,180), Color8(255,255,255), Color8(200,160,255), Color8(60,0,90)],
+	"Eisenach Compaque":[
+	Color8(192,192,192),  # ⭐ Default — Silver
+	Color8(255,255,255),  # White
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,80,160)      # Deep Blue
+],
+
+"Schroder Atrix Sport":[
+	Color8(0,192,192),    # ⭐ Default — Urban Drive Cyan
+	Color8(255,255,255),  # White
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,120,160)     # Deep Blue
+],
+
 }
 
 # ---------------------------------------------------------
@@ -62,7 +75,6 @@ var car_scene_paths := {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
-	"Gruber Targa":"res://Scenes/porsche_911_targa_993.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
@@ -71,6 +83,8 @@ var car_scene_paths := {
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
+	"Eisenach Compaque":"res://Scenes/bmw_120d.tscn",
+	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
