@@ -1,4 +1,5 @@
 res://main.tscn
+res://Scripts/base_car.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -40,5 +41,3 @@ res://Scenes/saleen_s7.tscn
 res://Scenes/bmw_m5_e60.tscn
 res://Scenes/audi_tt_rs.tscn
 res://Scenes/bmw_120d.tscn
-res://main.gd
-res://Scripts/base_car.gd

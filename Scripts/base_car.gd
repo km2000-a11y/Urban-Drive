@@ -202,6 +202,9 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	# --- CAR ORIENTATION ---
 	if not drifting:
 		rotation.y += steering * turn_speed * delta
+		if is_ai:
+			if abs(steering)>0.05:
+				rotation.y+=steering*0.35*delta
 		lateral_friction = 1.2
 	else:
 		var drift_steer := steering * (turn_speed * 0.35)
@@ -224,13 +227,36 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
 
+		# --- RIGIDBODY PROP PUSH (always handled first) ---
 		if other is RigidBody3D:
+			var n := col.get_normal()
+			n.y = 0.0
+			n = n.normalized()
+
+			var push_force :float= clamp(velocity.length() * 0.25, 4.0, 18.0)
+			other.apply_impulse(-n * push_force, col.get_position())
 			continue
 
+
+		# --- NORMAL CALC ---
 		var n := col.get_normal()
 		n.y = 0.0
 		n = n.normalized()
 
+		# --- SEAM IGNORE LOGIC ---
+		# Ignore tiny normals (micro seams)
+		if n.length() < 0.2:
+			continue
+
+		var side_dot := right.dot(n)
+		var front_dot := forward.dot(n)
+
+		# Ignore normals that are not real walls (soft angled normals)
+		if abs(side_dot) < 0.25 and front_dot > -0.3:
+			continue
+
+
+		# --- REAL WALL DETECTION ---
 		if forward.dot(n) < -0.75:
 			wall_block = true
 
