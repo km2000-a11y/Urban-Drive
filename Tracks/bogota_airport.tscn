@@ -3497,7 +3497,7 @@ mesh = SubResource("BoxMesh_txcge")
 shape = SubResource("BoxShape3D_vtyxe")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D21"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32609, 0, 2.56415)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92756, 0, 2.56415)
 material_override = SubResource("StandardMaterial3D_rx3s2")
 mesh = SubResource("BoxMesh_txcge")
 
@@ -4306,7 +4306,7 @@ transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 5.96189, 0, -246.624)
 
 [node name="WP6" type="Node3D" parent="Waypoints"]
-transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 4.00861, 0, -248.613)
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 4.84615, 0, -247.162)
 
 [node name="WP7" type="Node3D" parent="Waypoints"]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 440.651, 0, -497.676)
