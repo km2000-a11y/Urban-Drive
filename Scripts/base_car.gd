@@ -202,9 +202,6 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	# --- CAR ORIENTATION ---
 	if not drifting:
 		rotation.y += steering * turn_speed * delta
-		if is_ai:
-			if abs(steering)>0.05:
-				rotation.y+=steering*0.35*delta
 		lateral_friction = 1.2
 	else:
 		var drift_steer := steering * (turn_speed * 0.35)
@@ -257,7 +254,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 
 		# --- REAL WALL DETECTION ---
-		if forward.dot(n) < -0.75:
+		if forward.dot(n) < -0.85:
 			wall_block = true
 
 		if abs(right.dot(n)) > 0.55:
@@ -372,29 +369,34 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	move_and_slide()
 
 	for i in range(get_slide_collision_count()):
-		var col2 := get_slide_collision(i)
-		var other2 := col2.get_collider()
-		var n2 := col2.get_normal()
-		n2.y = 0.0
-		n2 = n2.normalized()
+		var col := get_slide_collision(i)
+		var other := col.get_collider()
+		var n := col.get_normal()
+		n.y = 0.0
+		n = n.normalized()
 
-		if other2 is RigidBody3D:
-			var pre_speed := velocity.length()
-			pre_speed = min(pre_speed, HARD_LIMIT)
-
-			var push_force: float = clamp(pre_speed * 0.20, 0.5, 5.0)
-			other2.apply_impulse(-n2 * push_force, col2.get_position())
-
-			velocity *= 0.80
-			velocity.y = 0.0
+		# --- Ignore tiny normals (micro seams) ---
+		if n.length() < 0.2:
 			continue
 
-		if other2 is CarController:
-			var my_p := mass * velocity
-			var their_p: Vector3 = other2.mass * other2.velocity
-			var impulse := (my_p - their_p) * 0.5
-			velocity += impulse / mass
-			other2.velocity -= impulse / other2.mass
+		# --- Ignore soft angled normals (seams) ---
+		var side_dot := transform.basis.x.normalized().dot(n)
+		var front_dot := (-transform.basis.z).normalized().dot(n)
+
+		if abs(side_dot) < 0.25 and front_dot > -0.3:
+			continue
+
+		# --- RIGIDBODY COLLISION HANDLING ---
+		if other is RigidBody3D:
+			var push_force :float = clamp(velocity.length() * 0.25, 4.0, 18.0)
+			other.apply_impulse(-n * push_force, col.get_position())
+
+			# Ignore collision for the car
+			velocity.y = 0.0
+			velocity = Vector3(velocity.x, 0, velocity.z)
+
+			continue
+
 
 
 func set_waypoints(root: Node3D) -> void:
@@ -427,17 +429,17 @@ func _update_ai_inputs(delta: float) -> void:
 
 	var wp := waypoints[current_wp] as Node3D
 
-	# --- LONG LOOKAHEAD (STABILITY) ---
+	# --- BASIC LOOKAHEAD ---
 	var wp_forward := -wp.transform.basis.z
 	wp_forward.y = 0.0
 	wp_forward = wp_forward.normalized()
-	var lookahead_pos := wp.global_position + wp_forward * 18.0
+	var target := wp.global_position + wp_forward * 8.0
 
-	var to_wp := lookahead_pos - global_position
+	var to_wp := target - global_position
 	to_wp.y = 0.0
 
 	var dist := to_wp.length()
-	if dist < 0.5:
+	if dist < 3.0:
 		current_wp = (current_wp + 1) % waypoints.size()
 		return
 
@@ -446,77 +448,43 @@ func _update_ai_inputs(delta: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
+	# --- AI SEAM IGNORE LOGIC ---
+	var seam_hit := false
 
-	# --- SAFE STEERING ---
-	var side := forward.cross(dir).y
-	var angle :float= abs(side)
+	for i in range(get_slide_collision_count()):
+		var col := get_slide_collision(i)
+		var n := col.get_normal()
+		n.y = 0.0
+		n = n.normalized()
 
-	var steer_strength :float= 1.0 - clamp(current_speed / 180.0, 0.0, 0.75)
-	ai_steer = clamp(side * steer_strength * 1.4, -1.0, 1.0)
+		# Ignore tiny normals (micro seams)
+		if n.length() < 0.2:
+			seam_hit = true
+			continue
 
-	# --- THROTTLE & BRAKE ---
-	ai_brake = 0.0
-	ai_throttle = 0.0
+		# Ignore soft angled normals (seams)
+		var side_dot := transform.basis.x.normalized().dot(n)
+		var front_dot := forward.dot(n)
 
-	if angle > 0.55:
-		if current_speed > 120.0:
-			ai_brake = 0.45
-			ai_throttle = 0.25
-		else:
-			ai_throttle = 0.55
+		if abs(side_dot) < 0.25 and front_dot > -0.3:
+			seam_hit = true
+			continue
 
-	elif angle > 0.30:
-		if current_speed > 150.0:
-			ai_brake = 0.25
-			ai_throttle = 0.35
-		else:
-			ai_throttle = 0.75
 
+	# --- SIMPLE STEERING ---
+	var angle := forward.signed_angle_to(dir, Vector3.UP)
+	ai_steer = clamp(angle * 2.0, -1.0, 1.0)
+
+	# --- ALWAYS THROTTLE ---
+	ai_throttle = 1.0
+
+	# --- LIGHT BRAKE ONLY ON SHARP TURNS ---
+	if abs(angle) > 0.6:
+		ai_brake = 0.3
 	else:
-		if dist > 25.0:
-			ai_throttle = 1.0
-		elif dist > 12.0:
-			ai_throttle = 0.9
-		else:
-			ai_throttle = 0.75
-
-	# --- OVERTAKING ---
-	var nearest_car := _find_nearest_car()
-	if nearest_car and nearest_car != self:
-		var to_car := nearest_car.global_position - global_position
-		to_car.y = 0.0
-		var car_dist := to_car.length()
-		var car_dir := to_car.normalized()
-		var car_dot := forward.dot(car_dir)
-
-		if car_dot > 0.6 and car_dist < 10.0:
-			if ai_overtake_side == 0.0:
-				if abs(side) > 0.1:
-					ai_overtake_side = sign(side)
-				else:
-					if randf() < 0.5:
-						ai_overtake_side = -1.0
-					else:
-						ai_overtake_side = 1.0
-
-			ai_overtake_offset = lerp(ai_overtake_offset, ai_overtake_side, delta * 1.5)
-			ai_steer = clamp(ai_steer + ai_overtake_offset * 0.22, -1.0, 1.0)
-
-			if ai_throttle < 0.85:
-				ai_throttle = 0.85
-		else:
-			ai_overtake_offset = lerp(ai_overtake_offset, 0.0, delta * 1.5)
-			if abs(ai_overtake_offset) < 0.05:
-				ai_overtake_side = 0.0
-
-	else:
-		ai_overtake_offset = lerp(ai_overtake_offset, 0.0, delta * 1.5)
-		if abs(ai_overtake_offset) < 0.05:
-			ai_overtake_side = 0.0
-
-	# --- WAYPOINT ADVANCE ---
-	if dist < 4.0:
-		current_wp = (current_wp + 1) % waypoints.size()
+		ai_brake = 0.0
+		
+	print("WP:", current_wp, " angle:", angle, " dist:", dist)
 
 
 func _find_nearest_car() -> CarController:

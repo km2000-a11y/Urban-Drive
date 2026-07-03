@@ -28,6 +28,13 @@ var car_colors := {
 	"Schroder Atrix Q32":[Color8(192,192,192), Color8(255,255,255), Color8(140,0,255), Color8(0,120,160)],
 	"Straeda G25":[Color8(133,82,141), Color8(255,0,0), Color8(255,255,255), Color8(180,180,180)],
 	"Straeda B32":[Color8(132,132,132), Color8(255,255,255), Color8(255,140,0), Color8(0,120,200)],
+	"Strandberg Turbo":[
+	Color8(133,82,141),   # ⭐ Purple Metallic (default)
+	Color8(255,255,255),  # White
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,80,160)      # Deep Blue
+],
+
 
 	"Brutus Mauler":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
 	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
@@ -91,7 +98,15 @@ var car_colors := {
 var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Straeda Pitbull"]
 var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25","Eisenach Compaque"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
-var urban_list = ["Kestrel Seabird", "Eisenach Roadstar", "Brutus Stingray", "Kuro Zephyr V6", "Kestrel Speedster", "Berkshire Blunt"]
+var urban_list = [
+	"Kestrel Seabird",
+	"Eisenach Roadstar",
+	"Brutus Stingray",
+	"Kuro Zephyr V6",
+	"Kestrel Speedster",
+	"Berkshire Blunt",
+	"Strandberg Turbo"   # ⭐ NEW
+]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
 var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", "Berkshire Tempest", "Schroder Atrix Sport"]
 var sport_racing_list = ["Eisenach Goliath", "Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
@@ -195,7 +210,12 @@ var urban_racers = {
 		"", "Country: UK", "HP: 396", "WEIGHT: 1832 KG",
 		"0-100 KM/H: 5.2s", "TOP SPEED: 257 KM/H",
 		"ENGINE: V8 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	]
+	],
+	"Strandberg Turbo":[
+	"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
+	"0-100 KM/H: 5.4s", "TOP SPEED: 248 KM/H",
+	"ENGINE: L5 2.5L Turbo", "TRANSMISSION: FOUR-WHEEL DRIVE"
+]
 }
 
 var sedans = {
@@ -328,7 +348,8 @@ var car_scene_paths = {
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
-   
+	"Strandberg Turbo":"res://Scenes/volvo_s60r.tscn",
+
 	"Eisenach Goliath":"res://Scenes/bmw_m5_e60.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",

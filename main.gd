@@ -43,6 +43,12 @@ var car_colors := {
 	Color8(60,60,60),     # Dark Grey
 	Color8(0,80,160)      # Deep Blue
 ],
+"Strandberg Turbo":[
+	Color8(133,82,141),   # ⭐ Purple Metallic (default)
+	Color8(255,255,255),  # White
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,80,160)      # Deep Blue
+],
 
 "Schroder Atrix Sport":[
 	Color8(0,192,192),    # ⭐ Default — Urban Drive Cyan
@@ -77,6 +83,7 @@ var car_scene_paths := {
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
+	"Strandberg Turbo":"res://Scenes/volvo_s60r.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 	"Eisenach Roadstar":"res://Scenes/bmw_z4.tscn",
