@@ -484,6 +484,8 @@ func _update_ai_inputs(delta: float) -> void:
 	else:
 		ai_brake = 0.0
 		
+	
+		
 	print("WP:", current_wp, " angle:", angle, " dist:", dist)
 
 
