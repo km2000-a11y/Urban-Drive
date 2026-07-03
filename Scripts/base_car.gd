@@ -196,8 +196,16 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
+	
+	
 
 	var right := transform.basis.x.normalized()
+	
+	var forward_speed:=velocity.dot(forward)
+	var sideways_speed:=velocity.dot(right)
+	
+	sideways_speed=lerp(sideways_speed, 0.0, delta*8)
+	
 
 	var speed := velocity.length()
 	var speed_kmh := speed * 3.6

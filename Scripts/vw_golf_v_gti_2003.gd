@@ -14,10 +14,10 @@ func _ready():
 	max_rpm = 6500.0
 	zero_to_hundred = 6.9
 	top_speed_kmh = 233
-	turn_speed = 2.7
+	turn_speed = 2.5
 	brake_strength = 10.8
-	lateral_friction = 1.03
-	transmission = "Front wheel drive"
+	lateral_friction = 1.13
+	transmission = "Front-wheel drive"
 
 	
 
