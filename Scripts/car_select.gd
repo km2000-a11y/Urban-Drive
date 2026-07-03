@@ -214,7 +214,7 @@ var urban_racers = {
 	"Strandberg Turbo":[
 	"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
 	"0-100 KM/H: 5.4s", "TOP SPEED: 248 KM/H",
-	"ENGINE: L5 2.5L Turbo", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 ]
 }
 
