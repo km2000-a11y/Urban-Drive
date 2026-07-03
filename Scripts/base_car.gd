@@ -84,7 +84,7 @@ var ai_overtake_offset: float = 0.0
 var ai_overtake_side: float = 0.0 # -1 left, +1 right
 
 func apply_stats() -> void:
-	acceleration_calc = (27.78 / zero_to_hundred) * 3.0
+	acceleration_calc = (27.78 / zero_to_hundred) * 2.0
 	torque = (horsepower * 5252.0) / max_rpm
 
 	if is_diesel:
@@ -295,11 +295,11 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	if transmission == "Front wheel drive":
 		traction_factor = 1.05
-		throttle_steer = steering * 0.15
+		throttle_steer = steering * 0.08
 		launch_grip = 1.0
 	elif transmission == "Rear wheel drive":
 		traction_factor = 1.0
-		throttle_steer = steering * 0.35
+		throttle_steer = steering * 0.2
 		launch_grip = 0.9
 	elif transmission == "Four wheel drive":
 		traction_factor = 1.15

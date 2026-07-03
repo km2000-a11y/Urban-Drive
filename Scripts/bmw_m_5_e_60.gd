@@ -19,9 +19,7 @@ func _ready():
 	lateral_friction = 1.12
 	transmission = "Rear wheel drive"
 
-	# E60 M5-style handling (aggressive, high-rev, unstable at the limit)
-	handling_type = "sport_racing"
-
+	# E60 M5-style handling (aggressive, high-r
 	# SMG III 7-speed single-clutch (violent shifts, short mid gears)
 	gear_count = 7
 	gear_ratios = [

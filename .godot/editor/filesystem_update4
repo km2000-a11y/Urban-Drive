@@ -1,4 +1,3 @@
-res://Tracks/bogota_airport.tscn
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -29,6 +28,7 @@ res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
 res://Scenes/dodge_viper.tscn
 res://Scenes/tvr t 440r.tscn
+res://Tracks/bogota_airport.tscn
 res://Scenes/granturismo_police.tscn
 res://Scenes/mode_select.tscn
 res://Scenes/win_screen_radar.tscn
@@ -41,4 +41,5 @@ res://Scenes/bmw_m5_e60.tscn
 res://Scenes/audi_tt_rs.tscn
 res://Scenes/bmw_120d.tscn
 res://Scenes/volvo_s60r.tscn
+res://Scripts/bmw_m_5_e_60.gd
 res://Scripts/base_car.gd
