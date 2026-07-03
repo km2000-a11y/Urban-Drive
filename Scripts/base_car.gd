@@ -209,6 +209,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	var speed := velocity.length()
 	var speed_kmh := speed * 3.6
+	var throttle_steer := 0.0
 
 	# --- CAR ORIENTATION ---
 	if not drifting:
@@ -218,7 +219,9 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		var drift_steer := steering * (turn_speed * 0.35)
 		rotation.y += drift_steer * delta
 		var slip_strength := 2.0 * drift_factor
-		velocity = velocity.rotated(Vector3.UP, -steering * slip_strength * delta)
+		var grip = clamp(lateral_friction * 0.8, 0.0, 1.0)
+		velocity = velocity.rotated(Vector3.UP, throttle_steer * grip * delta)
+
 		lateral_friction = lerp(1.2, 0.12, drift_factor)
 
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
@@ -298,7 +301,7 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	# --- DRIVETRAIN ---
 	var traction_factor := 1.0
-	var throttle_steer := 0.0
+
 	var launch_grip := 1.0
 
 	if transmission == "Front wheel drive":
@@ -468,12 +471,18 @@ func _update_ai_inputs(delta: float) -> void:
 		n.y = 0.0
 		n = n.normalized()
 
-		# Ignore tiny normals (micro seams)
+		# --- SEAM IGNORE: tiny normals ---
 		if n.length() < 0.2:
 			seam_hit = true
 			continue
 
-		# Ignore soft angled normals (seams)
+		# --- WALL UNSTICK FIX ---
+		# Remove velocity pushing INTO the wall
+		var push_in := velocity.dot(n)
+		if push_in > 0.0:
+			velocity -= n * push_in
+
+		# --- SEAM IGNORE: soft angled normals ---
 		var side_dot := transform.basis.x.normalized().dot(n)
 		var front_dot := forward.dot(n)
 
@@ -481,6 +490,7 @@ func _update_ai_inputs(delta: float) -> void:
 			seam_hit = true
 			continue
 
+	# (Your real wall logic continues below this point)
 
 	# --- SIMPLE STEERING ---
 	var angle := forward.signed_angle_to(dir, Vector3.UP)
