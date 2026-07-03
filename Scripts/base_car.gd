@@ -12,6 +12,9 @@ var is_ai: bool = false
 var waypoint_root: Node3D = null
 var waypoints: Array[Node] = []
 var current_wp: int = 0
+var seam_wiggle_timer := 0.0
+var seam_wiggle_phase := 0
+
 
 # --- AI INPUT ---
 var ai_throttle: float = 0.0
@@ -506,3 +509,5 @@ func _find_nearest_car() -> CarController:
 			nearest = cc
 
 	return nearest
+	
+	

@@ -203,7 +203,7 @@ albedo_color = Color(0.188235, 0.188235, 0.188235, 1)
 size = Vector3(9, 1, 1020)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vx2fm"]
-size = Vector3(8.5, 1, 1020)
+size = Vector3(8.5, 1, 1025)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b34v5"]
 size = Vector3(2, 5, 1020)
@@ -4320,7 +4320,7 @@ transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 440.651, 0
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 448.476, 0, -502.31)
 
 [node name="WP9" type="Node3D" parent="Waypoints"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 454.082, 0, -496.647)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 454.082, 0, -498.181)
 
 [node name="WP10" type="Node3D" parent="Waypoints"]
 transform = Transform3D(-0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, -0.766044, 466.082, 0, -494.832)
