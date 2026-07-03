@@ -231,7 +231,7 @@ mesh = SubResource("BoxMesh_1lo8r")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324695, 0.393385, 0.156597)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324695, 0.393385, 0.178442)
 material_override = SubResource("StandardMaterial3D_o7hc6")
 mesh = SubResource("BoxMesh_1lo8r")
 skeleton = NodePath("../..")
