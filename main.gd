@@ -144,7 +144,9 @@ func spawn_player_car():
 		speedo.target_car = player_car
 
 	# Apply selected color
-	_apply_color_to_car(player_car, Cars.selected_color)
+	if mode != "Duel":
+		_apply_color_to_car(player_car, Cars.selected_color)
+
 
 	# Spawn position
 	if has_node("SpawnPoint"):

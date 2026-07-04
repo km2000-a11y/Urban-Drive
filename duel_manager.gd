@@ -105,10 +105,15 @@ func _apply_player_color(car: CarController) -> void:
 				if mat is BaseMaterial3D:
 					mat.albedo_color = color
 
-
 func _apply_random_ai_color(car: CarController) -> void:
 	var name := Cars.selected_ai_car_name
 
+	# If AI uses the same car as the player, DO NOT recolor it
+	if name == Cars.selected_car_name:
+		print("[AI] Same car as player, skipping AI color.")
+		return
+
+	# Apply random color from palette
 	if Cars.car_colors.has(name):
 		var palette: Array = Cars.car_colors[name]
 		var random_color: Color = palette[randi() % palette.size()]
@@ -119,10 +124,12 @@ func _apply_random_ai_color(car: CarController) -> void:
 				if child is MeshInstance3D:
 					var mat :Material= child.get_active_material(0)
 					if mat is BaseMaterial3D:
+						# Duplicate material so AI recolor NEVER affects player
+						mat = mat.duplicate()
+						child.set_surface_override_material(0, mat)
 						mat.albedo_color = random_color
 
 		print("[AI] Random color for", name, "=", random_color)
-
 
 func update_duel() -> void:
 	if not duel_active:

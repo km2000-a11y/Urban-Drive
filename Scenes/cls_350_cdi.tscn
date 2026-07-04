@@ -276,3 +276,6 @@ stream = ExtResource("4_65wg6")
 
 [node name="SkidPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_cg0nx")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5)

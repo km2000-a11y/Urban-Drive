@@ -20,7 +20,7 @@ var ai_steer: float = 0.0
 var ai_names := [
 	"David", "Takashi", "Ricco", "Chris", "Petar", "Nina",
 	"Steve", "Linus", "Chris", "Jesse", "Dimitri", "Mirko",
-	"Abdullah", "Will", "Jimmy M.", "Tiffany", "Hoff", "Jake"
+	"Abdullah", "Will", "Jimmy M.", "Tiffany", "Hoff", "Jake", "Britney","Laura","Francesca","Looping"
 ]
 
 # --- PLAYER INPUT ---
@@ -221,59 +221,60 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var wall_scrape := false
 
 	# --- COLLISION HANDLING (SEAMS + RIGIDBODIES) ---
+	# --- COLLISION HANDLING (SEAM-PROOF + WALL SCRAPE + PROPS) ---
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
+
+		# Raw normal
 		var n := col.get_normal()
 		n.y = 0.0
 		n = n.normalized()
 
-		# --- RIGIDBODY PROP PUSH ---
+		# --- PROP PUSH (RigidBody3D) ---
+		# --- COLLISION HANDLING (SEAM-PROOF + WALL SCRAPE + PROPS) ---
+	for i in range(get_slide_collision_count()):
+		var col := get_slide_collision(i)
+		var other := col.get_collider()
+
+		# Raw normal
+		var n := col.get_normal()
+		n.y = 0.0
+		n = n.normalized()
+
+		# --- PROP PUSH (RigidBody3D) ---
 		if other is RigidBody3D:
-			# n already exists in this scope — DO NOT redeclare it
-			# We only flatten it safely
 			var flat_n := Vector3(n.x, 0.0, n.z).normalized()
-
-			# Reduce impulse for heavy vehicles
 			var mass_factor :float= clamp(1200.0 / mass, 0.4, 1.0)
-
-			# Apply impulse LOWER to avoid torque flips
-			var impulse_pos := global_position
-			impulse_pos.y -= 0.45   # perfect height
-
-			# Much softer impulse
 			var push_force :float= clamp(velocity.length() * 0.10, 1.0, 5.0) * mass_factor
 
-			# Ignore upward normals (fake ramps)
-			if col.get_normal().y > 0.25:
-				continue
+			var impulse_pos := global_position
+			impulse_pos.y -= 0.45
 
-			# Apply impulse safely
-			other.apply_impulse(-flat_n * push_force, impulse_pos)
+			# Ignore upward normals (ramps)
+			if col.get_normal().y <= 0.25:
+				other.apply_impulse(-flat_n * push_force, impulse_pos)
 
-			# Prevent ANY upward launch
+			# Stabilize car
 			velocity.y = min(velocity.y, 0.0)
-
-			# Anti‑torque stabilization
 			rotation_degrees.x = lerp(rotation_degrees.x, 0.0, delta * 8.0)
 			rotation_degrees.z = lerp(rotation_degrees.z, 0.0, delta * 8.0)
 
 			continue
 
+		# --- SEAM FILTER (IGNORE MICRO NORMALS) ---
+		if n.length() < 0.45:
+			continue
 
-		# --- SEAM FILTER ---
-		var side_dot := right.dot(n)
+		# Ignore normals pointing upward (floor seams)
+		if n.dot(Vector3.UP) > 0.55:
+			continue
+
+		# Use the forward/right already computed earlier in _drive()
 		var front_dot := forward.dot(n)
+		var side_dot := right.dot(n)
 
-		# Ignore tiny normals (micro seams)
-		if n.length() < 0.35:
-			continue
-
-		# Ignore normals too close to ground (not real walls)
-		if n.dot(Vector3.UP) > 0.65:
-			continue
-
-		# Ignore normals not facing the car strongly
+		# Ignore normals not facing the car
 		if front_dot > -0.45:
 			continue
 
@@ -281,22 +282,12 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		if abs(side_dot) < 0.35:
 			continue
 
-		# --- REAL WALL DETECTION ---
-		if forward.dot(n) < -0.85:
+		# --- REAL WALL DETECTED ---
+		if front_dot < -0.85:
 			wall_block = true
 
-		if abs(right.dot(n)) > 0.55:
+		if abs(side_dot) > 0.55:
 			wall_scrape = true
-
-	if wall_block:
-		var impact_strength: float = clamp(speed_kmh / 120.0, 0.2, 1.0)
-		velocity *= (1.0 - impact_strength * 0.55)
-		velocity -= forward * (impact_strength * 4.0)
-
-	if wall_scrape:
-		var scrape_strength: float = clamp(speed_kmh / 220.0, 0.05, 0.25)
-		velocity += -right * (scrape_strength * 6.0)
-		velocity *= (1.0 - scrape_strength * 0.15)
 
 	# --- RPM & GEARS ---
 	if speed_kmh < 2.0:

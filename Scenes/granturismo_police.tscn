@@ -1,6 +1,7 @@
-[gd_scene load_steps=42 format=3 uid="uid://5uek186lh4p3"]
+[gd_scene load_steps=43 format=3 uid="uid://5uek186lh4p3"]
 
 [ext_resource type="Script" uid="uid://nkovs0uaqqli" path="res://Scripts/granturismo_s_2009_police.gd" id="1_yu6uc"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_u54ja"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="2_yu6uc"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_cee2k"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_au4wr"]
@@ -189,10 +190,12 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_yu6uc")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179, 2, 8)
 current = true
 fov = 55.0
+script = ExtResource("2_u54ja")
+target = NodePath("..")
 
 [node name="ModelRoot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.315375, 0)

@@ -20,9 +20,7 @@ var class_lists := {
 		"Kuro Zephyr",
 		"Zenith Horizon",
 		"Schroder Atrix Q32",
-		"Straeda B32",
-		"Straeda G25",
-		"Eisenach Compaque"
+		"Straeda B32"
 	],
 	"muscle": [
 		"Brutus Mauler",
