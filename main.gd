@@ -13,7 +13,6 @@ var car_colors := {
 	"Colossus Titan Max":[Color8(255,0,0), Color8(180,180,180), Color8(210,180,90), Color8(120,40,40)],
 	"Zenith Horizon":[Color8(255,116,49), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
 	"Schroder Atrix Q32":[Color8(192,192,192), Color8(255,255,255), Color8(140,0,255), Color8(0,120,160)],
-	"Straeda G25":[Color8(133,82,141), Color8(255,0,0), Color8(255,255,255), Color8(180,180,180)],
 	"Straeda B32":[Color8(132,132,132), Color8(255,255,255), Color8(255,140,0), Color8(0,120,200)],
 	"Brutus Mauler":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
 	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
@@ -37,12 +36,6 @@ var car_colors := {
 	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)],
 	"Brutus Venom":[Color8(255,0,0), Color8(255,255,255), Color8(180,180,180), Color8(0,0,0)],
 	"Kestrel Guillotine":[Color8(120,0,180), Color8(255,255,255), Color8(200,160,255), Color8(60,0,90)],
-	"Eisenach Compaque":[
-	Color8(192,192,192),  # ⭐ Default — Silver
-	Color8(255,255,255),  # White
-	Color8(60,60,60),     # Dark Grey
-	Color8(0,80,160)      # Deep Blue
-],
 "Strandberg Turbo":[
 	Color8(133,82,141),   # ⭐ Purple Metallic (default)
 	Color8(255,255,255),  # White
@@ -71,7 +64,7 @@ var car_scene_paths := {
 	"Schroder Atrix Q32":"res://Scenes/audi_tt.tscn",
 	"Straeda B32":"res://Scenes/new_beetle.tscn",
 	"Zenith Horizon":"res://Scenes/nissan_350z.tscn",
-	"Straeda G25":"res://Scenes/golf_v_gti.tscn",
+	"Kuro Zephyr":"res://Scenes/lexus_is250.tscn",
 	"Kestrel Seabird":"res://Scenes/lotus_exige_s.tscn",
 	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
@@ -90,7 +83,6 @@ var car_scene_paths := {
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
-	"Eisenach Compaque":"res://Scenes/bmw_120d.tscn",
 	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",

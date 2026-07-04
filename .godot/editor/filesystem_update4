@@ -41,4 +41,11 @@ res://Scenes/bmw_m5_e60.tscn
 res://Scenes/audi_tt_rs.tscn
 res://Scenes/bmw_120d.tscn
 res://Scenes/volvo_s60r.tscn
+res://Scenes/lexus_is250.tscn
+res://Scripts/car_select.gd
+res://Scenes/lexus_is_250.gd
+res://main.gd
 res://Scripts/base_car.gd
+res://cars.gd
+res://Scripts/barrier_1.gd
+res://Tracks/barrier_2.gd

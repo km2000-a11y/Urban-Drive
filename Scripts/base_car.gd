@@ -12,9 +12,6 @@ var is_ai: bool = false
 var waypoint_root: Node3D = null
 var waypoints: Array[Node] = []
 var current_wp: int = 0
-var seam_wiggle_timer := 0.0
-var seam_wiggle_phase := 0
-
 
 # --- AI INPUT ---
 var ai_throttle: float = 0.0
@@ -41,9 +38,7 @@ var brake_strength := 20.0
 var lateral_friction := 1.2
 var driver_name: String = "Unknown"
 
-# Use consistent transmission strings
 var transmission := "Front wheel drive" # "Front wheel drive", "Rear wheel drive", "Four wheel drive"
-
 var is_diesel := false
 
 var horsepower := 150.0
@@ -140,8 +135,6 @@ func _ready() -> void:
 	else:
 		driver_name = "Player"
 
-
-
 func update_gears(speed_kmh: float) -> void:
 	if rpm > shift_up_rpm and current_gear < gear_count:
 		current_gear += 1
@@ -173,7 +166,6 @@ func _physics_process(delta: float) -> void:
 
 	_drive(delta, throttle_input, brake_input, steer_input)
 
-
 func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var drift_input := false
 	var nitrous := false
@@ -196,16 +188,11 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-	
-	
 
 	var right := transform.basis.x.normalized()
-	
-	var forward_speed:=velocity.dot(forward)
-	var sideways_speed:=velocity.dot(right)
-	
-	sideways_speed=lerp(sideways_speed, 0.0, delta*8)
-	
+
+	var sideways_speed := velocity.dot(right)
+	sideways_speed = lerp(sideways_speed, 0.0, delta * 8.0)
 
 	var speed := velocity.length()
 	var speed_kmh := speed * 3.6
@@ -219,9 +206,8 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		var drift_steer := steering * (turn_speed * 0.35)
 		rotation.y += drift_steer * delta
 		var slip_strength := 2.0 * drift_factor
-		var grip = clamp(lateral_friction * 0.8, 0.0, 1.0)
+		var grip :float= clamp(lateral_friction * 0.8, 0.0, 1.0)
 		velocity = velocity.rotated(Vector3.UP, throttle_steer * grip * delta)
-
 		lateral_friction = lerp(1.2, 0.12, drift_factor)
 
 	car_model.rotation_degrees.z = lerp(car_model.rotation_degrees.z, -steering * 10.0, delta * 8.0)
@@ -234,38 +220,66 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var wall_block := false
 	var wall_scrape := false
 
+	# --- COLLISION HANDLING (SEAMS + RIGIDBODIES) ---
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
-
-		# --- RIGIDBODY PROP PUSH (always handled first) ---
-		if other is RigidBody3D:
-			var n := col.get_normal()
-			n.y = 0.0
-			n = n.normalized()
-
-			var push_force :float= clamp(velocity.length() * 0.25, 4.0, 18.0)
-			other.apply_impulse(-n * push_force, col.get_position())
-			continue
-
-
-		# --- NORMAL CALC ---
 		var n := col.get_normal()
 		n.y = 0.0
 		n = n.normalized()
 
-		# --- SEAM IGNORE LOGIC ---
-		# Ignore tiny normals (micro seams)
-		if n.length() < 0.2:
+		# --- RIGIDBODY PROP PUSH ---
+		if other is RigidBody3D:
+			# n already exists in this scope — DO NOT redeclare it
+			# We only flatten it safely
+			var flat_n := Vector3(n.x, 0.0, n.z).normalized()
+
+			# Reduce impulse for heavy vehicles
+			var mass_factor :float= clamp(1200.0 / mass, 0.4, 1.0)
+
+			# Apply impulse LOWER to avoid torque flips
+			var impulse_pos := global_position
+			impulse_pos.y -= 0.45   # perfect height
+
+			# Much softer impulse
+			var push_force :float= clamp(velocity.length() * 0.10, 1.0, 5.0) * mass_factor
+
+			# Ignore upward normals (fake ramps)
+			if col.get_normal().y > 0.25:
+				continue
+
+			# Apply impulse safely
+			other.apply_impulse(-flat_n * push_force, impulse_pos)
+
+			# Prevent ANY upward launch
+			velocity.y = min(velocity.y, 0.0)
+
+			# Anti‑torque stabilization
+			rotation_degrees.x = lerp(rotation_degrees.x, 0.0, delta * 8.0)
+			rotation_degrees.z = lerp(rotation_degrees.z, 0.0, delta * 8.0)
+
 			continue
 
+
+		# --- SEAM FILTER ---
 		var side_dot := right.dot(n)
 		var front_dot := forward.dot(n)
 
-		# Ignore normals that are not real walls (soft angled normals)
-		if abs(side_dot) < 0.25 and front_dot > -0.3:
+		# Ignore tiny normals (micro seams)
+		if n.length() < 0.35:
 			continue
 
+		# Ignore normals too close to ground (not real walls)
+		if n.dot(Vector3.UP) > 0.65:
+			continue
+
+		# Ignore normals not facing the car strongly
+		if front_dot > -0.45:
+			continue
+
+		# Ignore normals not strongly sideways
+		if abs(side_dot) < 0.35:
+			continue
 
 		# --- REAL WALL DETECTION ---
 		if forward.dot(n) < -0.85:
@@ -301,7 +315,6 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	# --- DRIVETRAIN ---
 	var traction_factor := 1.0
-
 	var launch_grip := 1.0
 
 	if transmission == "Front wheel drive":
@@ -327,7 +340,6 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 		accel_force = acceleration_calc * torque_factor * traction_factor * launch_boost * launch_grip
 		velocity += forward * accel_force * delta
 
-		# torque-steer only, no extra steering rotation
 		velocity = velocity.rotated(Vector3.UP, throttle_steer * delta)
 	else:
 		var flat := Vector3(velocity.x, 0, velocity.z)
@@ -382,43 +394,11 @@ func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 
 	move_and_slide()
 
-	for i in range(get_slide_collision_count()):
-		var col := get_slide_collision(i)
-		var other := col.get_collider()
-		var n := col.get_normal()
-		n.y = 0.0
-		n = n.normalized()
-
-		# --- Ignore tiny normals (micro seams) ---
-		if n.length() < 0.2:
-			continue
-
-		# --- Ignore soft angled normals (seams) ---
-		var side_dot := transform.basis.x.normalized().dot(n)
-		var front_dot := (-transform.basis.z).normalized().dot(n)
-
-		if abs(side_dot) < 0.25 and front_dot > -0.3:
-			continue
-
-		# --- RIGIDBODY COLLISION HANDLING ---
-		if other is RigidBody3D:
-			var push_force :float = clamp(velocity.length() * 0.25, 4.0, 18.0)
-			other.apply_impulse(-n * push_force, col.get_position())
-
-			# Ignore collision for the car
-			velocity.y = 0.0
-			velocity = Vector3(velocity.x, 0, velocity.z)
-
-			continue
-
-
-
 func set_waypoints(root: Node3D) -> void:
 	waypoint_root = root
 	waypoints = root.get_children()
 	waypoints.sort_custom(_ai_sort_wp)
 	current_wp = 0
-
 
 func _ai_sort_wp(a: Node, b: Node) -> bool:
 	var na_str := a.name.strip_edges().to_upper()
@@ -443,7 +423,6 @@ func _update_ai_inputs(delta: float) -> void:
 
 	var wp := waypoints[current_wp] as Node3D
 
-	# --- BASIC LOOKAHEAD ---
 	var wp_forward := -wp.transform.basis.z
 	wp_forward.y = 0.0
 	wp_forward = wp_forward.normalized()
@@ -462,53 +441,36 @@ func _update_ai_inputs(delta: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-	# --- AI SEAM IGNORE LOGIC ---
-	var seam_hit := false
 
+	# --- AI SEAM IGNORE + UNSTICK ---
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var n := col.get_normal()
 		n.y = 0.0
 		n = n.normalized()
 
-		# --- SEAM IGNORE: tiny normals ---
-		if n.length() < 0.2:
-			seam_hit = true
+		if n.length() < 0.35:
 			continue
 
-		# --- WALL UNSTICK FIX ---
-		# Remove velocity pushing INTO the wall
+		var side_dot := transform.basis.x.normalized().dot(n)
+		var front_dot := forward.dot(n)
+
+		if abs(side_dot) < 0.35 and front_dot > -0.45:
+			continue
+
 		var push_in := velocity.dot(n)
 		if push_in > 0.0:
 			velocity -= n * push_in
 
-		# --- SEAM IGNORE: soft angled normals ---
-		var side_dot := transform.basis.x.normalized().dot(n)
-		var front_dot := forward.dot(n)
-
-		if abs(side_dot) < 0.25 and front_dot > -0.3:
-			seam_hit = true
-			continue
-
-	# (Your real wall logic continues below this point)
-
-	# --- SIMPLE STEERING ---
 	var angle := forward.signed_angle_to(dir, Vector3.UP)
 	ai_steer = clamp(angle * 2.0, -1.0, 1.0)
 
-	# --- ALWAYS THROTTLE ---
 	ai_throttle = 1.0
 
-	# --- LIGHT BRAKE ONLY ON SHARP TURNS ---
 	if abs(angle) > 0.6:
 		ai_brake = 0.3
 	else:
 		ai_brake = 0.0
-		
-	
-		
-	print("WP:", current_wp, " angle:", angle, " dist:", dist)
-
 
 func _find_nearest_car() -> CarController:
 	var nearest: CarController = null
@@ -527,5 +489,3 @@ func _find_nearest_car() -> CarController:
 			nearest = cc
 
 	return nearest
-	
-	

@@ -76,6 +76,13 @@ var car_colors := {
 		Color8(60,60,60),     # Dark grey
 		Color8(0,0,0)         # Black
 	],
+	"Kuro Zephyr":[
+	Color8(240,240,240),   # ⭐ Pearl Cream (starter luxury vibe)
+	Color8(120,20,20),     # Crimson Garnet (deep red, unique to IS250)
+	Color8(0,110,130),     # Teal Mist (compact-class signature color)
+	Color8(70,70,70)       # Graphite Shadow (dark matte grey)
+],
+
 
 	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
@@ -96,7 +103,7 @@ var car_colors := {
 # -------------------------
 
 var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Straeda Pitbull"]
-var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Straeda G25","Eisenach Compaque"]
+var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Kuro Zephyr"]
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = [
 	"Kestrel Seabird",
@@ -155,15 +162,10 @@ var compact = {
 		"0-100 KM/H: 5.9s", "TOP SPEED: 250 KM/H",
 		"ENGINE: V6 3.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Straeda G25":[
-		"", "Country: Germany", "HP: 197", "WEIGHT: 1350 KG",
-		"0-100 KM/H: 6.9s", "TOP SPEED: 233 KM/H",
-		"ENGINE: L4 2.0L", "TRANSMISSION: FRONT-WHEEL DRIVE"
-	],
-	"Eisenach Compaque":[
-	"", "Country: Germany", "HP: 162", "WEIGHT: 1360 KG",
-	"0-100 KM/H: 7.5s", "TOP SPEED: 223 KM/H",
-	"ENGINE: L4 2.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	"Kuro Zephyr":[
+	"", "Country: Japan", "HP: 204", "WEIGHT: 1600 KG",
+	"0-100 KM/H: 7.3s", "TOP SPEED: 234 KM/H",
+	"ENGINE: V6 2.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
 ]
 }
 
@@ -358,7 +360,8 @@ var car_scene_paths = {
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
-	"Brutus Predator":"res://Scenes/saleen_s7.tscn"
+	"Brutus Predator":"res://Scenes/saleen_s7.tscn",
+	"Kuro Zephyr":"res://Scenes/lexus_is250.tscn"
 }
 
 # -------------------------
