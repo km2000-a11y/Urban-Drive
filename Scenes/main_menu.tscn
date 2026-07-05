@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://blwywdnqsnjx6"]
+
+[ext_resource type="Script" uid="uid://dwrxifbaa3ou3" path="res://Scenes/main_menu.gd" id="1_28flt"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_28flt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FreeRaceMenu" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 1252.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 50
+text = "FREE RACE"
+
+[connection signal="pressed" from="Control/FreeRaceMenu" to="." method="_on_free_race_menu_pressed"]

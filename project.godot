@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Urban Drive"
-run/main_scene="uid://bve3h4ovsdox4"
+run/main_scene="uid://blwywdnqsnjx6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,7 @@ Cars="*res://cars.gd"
 Modes="*res://modes.gd"
 RaceResults="*res://race_results.gd"
 DuelManager="*res://duel_manager.gd"
+GameMode="*res://game_mode.gd"
 
 [display]
 

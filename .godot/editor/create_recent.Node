@@ -1,13 +1,13 @@
+Label
+Control
+Button
+CanvasLayer
 CollisionShape3D
 StaticBody3D
 Node3D
 CarController
 MeshInstance3D
-CanvasLayer
-Button
-Label
 Panel
-Control
 CollisionShape2D
 Area3D
 VBoxContainer

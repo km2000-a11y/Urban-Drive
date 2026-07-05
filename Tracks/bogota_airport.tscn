@@ -251,7 +251,7 @@ size = Vector3(9, 1, 503)
 size = Vector3(2, 4, 769)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sfaje"]
-size = Vector3(1, 40, 769)
+size = Vector3(2, 40, 769)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4e46i"]
 size = Vector3(10, 4, 1)

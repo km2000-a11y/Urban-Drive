@@ -12,10 +12,21 @@ var ai_car: CarController = null
 var duel_active: bool = false
 var winner: String = ""
 
-var player_laps: int = 0
-var ai_laps: int = 0
+var player_laps: int = 1
+var ai_laps: int = 1
 var total_laps: int = 2
 var lap_cooldown: bool = false
+var hud: Node = null
+var player_crossed_start: bool = false
+var ai_crossed_start: bool = false
+
+
+
+
+
+func _process(delta):
+	if duel_active:
+		update_duel()
 
 
 func spawn_duel(main_scene: Node) -> void:
@@ -24,6 +35,10 @@ func spawn_duel(main_scene: Node) -> void:
 	if player_car_path == "" or ai_car_path == "":
 		push_error("DuelManager: Car paths not set!")
 		return
+	hud = main_scene.get_node("HUD")
+	hud.update_lap(player_laps, total_laps)
+	hud.update_position(2, 2)   # Player starts in 2nd place
+
 
 	# -----------------------------------------------------
 	# PLAYER CAR
@@ -67,8 +82,13 @@ func spawn_duel(main_scene: Node) -> void:
 	# -----------------------------------------------------
 	# START DUEL
 	# -----------------------------------------------------
-	player_laps = 0
-	ai_laps = 0
+		# -----------------------------------------------------
+	# START DUEL
+	# -----------------------------------------------------
+	player_laps = 1
+	ai_laps = 1
+	player_crossed_start = false
+	ai_crossed_start = false
 	winner = ""
 	duel_active = true
 
@@ -135,23 +155,33 @@ func update_duel() -> void:
 	if not duel_active:
 		return
 
+	_update_laps_from_progress()   # ← ADD THIS LINE
+
+	hud.update_stopwatch(player_car.total_race_time)
+	hud.update_lap(player_laps, total_laps)
+	hud.update_position(_calculate_position(), 2)
+
 
 func register_lap(body: Node) -> void:
 	if not duel_active or lap_cooldown:
 		return
 
+	var car := body
+	while car != null and not (car is CarController):
+		car = car.get_parent()
+
+	if car == null:
+		return
+
 	lap_cooldown = true
 	_start_lap_cooldown()
 
-	if body == player_car:
-		player_laps += 1
-		print("Player lap:", player_laps)
-	elif body == ai_car:
-		ai_laps += 1
-		print("AI lap:", ai_laps)
+	if car == player_car:
+		player_crossed_start = true
 
-	_check_finish()
-
+	elif car == ai_car:
+		ai_crossed_start = true
+		
 
 func _start_lap_cooldown() -> void:
 	await get_tree().create_timer(1.0).timeout
@@ -159,10 +189,11 @@ func _start_lap_cooldown() -> void:
 
 
 func _check_finish() -> void:
-	if player_laps >= total_laps:
+	if player_laps > total_laps:
 		_end_duel("Player")
-	elif ai_laps >= total_laps:
+	elif ai_laps > total_laps:
 		_end_duel("AI")
+
 
 
 func _end_duel(who_won: String) -> void:
@@ -179,3 +210,42 @@ func _end_duel(who_won: String) -> void:
 
 	if ai_car != null:
 		ai_car.controls_enabled = false
+
+func _calculate_position() -> int:
+	# 1. Lap comparison
+	_update_laps_from_progress()
+	if player_laps > ai_laps:
+		return 1
+	elif ai_laps > player_laps:
+		return 2
+
+	# 2. Waypoint index comparison
+	var p_wp := player_car.current_wp
+	var a_wp := ai_car.current_wp
+
+	if p_wp > a_wp:
+		return 1
+	elif a_wp > p_wp:
+		return 2
+
+	# 3. Distance comparison (same waypoint)
+	var wp := player_car.waypoints[p_wp]
+	var p_dist := player_car.global_position.distance_to(wp.global_position)
+	var a_dist := ai_car.global_position.distance_to(wp.global_position)
+
+	if p_dist < a_dist:
+		return 1
+	return 2
+	
+func _update_laps_from_progress() -> void:
+	# PLAYER
+	if player_crossed_start and player_car.current_wp == 1:
+		player_laps += 1
+		player_crossed_start = false
+		print("Player lap:", player_laps)
+
+	# AI
+	if ai_crossed_start and ai_car.current_wp == 1:
+		ai_laps += 1
+		ai_crossed_start = false
+		print("AI lap:", ai_laps)

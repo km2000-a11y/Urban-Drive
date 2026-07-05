@@ -53,6 +53,9 @@ var current_speed: float = 0.0
 var current_gear := 1
 var shift_up_rpm := 6200
 var shift_down_rpm := 2000
+var total_race_time: int = 0
+
+
 
 var acceleration_calc := 0.0
 var steering := 0.0
@@ -154,6 +157,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y = -0.01
 		return
 
+	# --- UPDATE WAYPOINT FIRST ---
+	_update_player_waypoint()
+
 	if is_ai:
 		_update_ai_inputs(delta)
 		throttle_input = ai_throttle
@@ -165,6 +171,10 @@ func _physics_process(delta: float) -> void:
 		steer_input = Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
 
 	_drive(delta, throttle_input, brake_input, steer_input)
+	total_race_time += int(delta * 1000)
+
+
+
 
 func _drive(delta: float, accel: float, brake: float, steer: float) -> void:
 	var drift_input := false
@@ -417,13 +427,13 @@ func _update_ai_inputs(delta: float) -> void:
 	var wp_forward := -wp.transform.basis.z
 	wp_forward.y = 0.0
 	wp_forward = wp_forward.normalized()
-	var target := wp.global_position + wp_forward * 8.0
+	var target := wp.global_position
 
 	var to_wp := target - global_position
 	to_wp.y = 0.0
 
 	var dist := to_wp.length()
-	if dist < 3.0:
+	if dist < 6.0:
 		current_wp = (current_wp + 1) % waypoints.size()
 		return
 
@@ -480,3 +490,27 @@ func _find_nearest_car() -> CarController:
 			nearest = cc
 
 	return nearest
+
+
+func _find_closest_waypoint() -> int:
+	var best := 0
+	var best_dist := 999999.0
+	for i in range(waypoints.size()):
+		var d :int= waypoints[i].global_position.distance_to(global_position)
+		if d < best_dist:
+			best_dist = d
+			best = i
+	return best
+	
+func _update_player_waypoint():
+	if is_ai:
+		return
+
+	if waypoints.is_empty():
+		return
+
+	var wp := waypoints[current_wp] as Node3D
+	var dist := global_position.distance_to(wp.global_position)
+
+	if dist < 6.0:
+		current_wp = (current_wp + 1) % waypoints.size()
