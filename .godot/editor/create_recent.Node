@@ -1,7 +1,7 @@
 Label
 Control
-Button
 CanvasLayer
+Button
 CollisionShape3D
 StaticBody3D
 Node3D

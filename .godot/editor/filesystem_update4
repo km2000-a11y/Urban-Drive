@@ -43,3 +43,7 @@ res://Scenes/lexus_is250.tscn
 res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
+res://duel_manager.gd
+res://main.gd
+res://Scenes/start.tscn
+res://Scripts/start.gd

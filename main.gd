@@ -3,6 +3,8 @@ extends Node
 var mode: String
 var win_screen_radar
 var player_car: CarController
+@onready var finish_flash := $FinishFlash
+
 
 var best_radar_speed := 0
 
@@ -69,6 +71,8 @@ func _setup_duel():
 		DuelManager.ai_car_path = Cars.selected_car
 
 	DuelManager.spawn_duel(self)
+	DuelManager.main_scene = self
+
 
 
 func _apply_color_to_car(car: CarController, color: Color):
@@ -118,3 +122,10 @@ func disable_all_ai():
 		if node is CarController:
 			node.is_ai = false
 			
+func show_finish(player_won: bool):
+	finish_flash.flash()
+
+	if player_won:
+		print("YOU WIN!")
+	else:
+		print("YOU LOSE!")
