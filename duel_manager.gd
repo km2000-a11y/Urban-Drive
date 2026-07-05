@@ -182,11 +182,17 @@ func _end_duel(who_won: String) -> void:
 	winner = who_won
 	print("DuelManager: Winner =", winner)
 
+	# Disable controls
 	if player_car != null:
 		player_car.controls_enabled = false
 	if ai_car != null:
 		ai_car.controls_enabled = false
-		
+
+	# ⭐ LOG RESULTS HERE
+	RaceResults.add_result(player_car.driver_name, Cars.selected_car_name, player_car.total_race_time)
+	RaceResults.add_result(ai_car.driver_name, Cars.selected_ai_car_name, ai_car.total_race_time)
+
+	# Show finish screen
 	main_scene.show_finish(who_won == "Player")
 
 

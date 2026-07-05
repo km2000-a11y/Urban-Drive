@@ -4,6 +4,8 @@ var mode: String
 var win_screen_radar
 var player_car: CarController
 @onready var finish_flash := $FinishFlash
+@onready var start_countdown := $Start
+
 
 
 var best_radar_speed := 0
@@ -24,6 +26,12 @@ func _ready():
 		win_screen_radar = ws_scene.instantiate()
 		add_child(win_screen_radar)
 		win_screen_radar.visible = false
+	start_countdown.start_countdown()
+	if has_node("Leaderboard"):
+		$Leaderboard.visible = false
+	
+	finish_flash.visible=false
+
 
 
 func _process(delta):
@@ -72,6 +80,10 @@ func _setup_duel():
 
 	DuelManager.spawn_duel(self)
 	DuelManager.main_scene = self
+
+	# 🔥 Start countdown
+	start_countdown.start_countdown()
+
 
 
 
@@ -124,6 +136,11 @@ func disable_all_ai():
 			
 func show_finish(player_won: bool):
 	finish_flash.flash()
+	finish_flash.visible=true
+
+	if has_node("Leaderboard"):
+		$Leaderboard.visible = true
+		$Leaderboard.show_results(player_won)
 
 	if player_won:
 		print("YOU WIN!")

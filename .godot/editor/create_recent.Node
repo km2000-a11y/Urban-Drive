@@ -1,7 +1,8 @@
+Button
+VBoxContainer
 Label
 Control
 CanvasLayer
-Button
 CollisionShape3D
 StaticBody3D
 Node3D
@@ -10,5 +11,4 @@ MeshInstance3D
 Panel
 CollisionShape2D
 Area3D
-VBoxContainer
 Timer

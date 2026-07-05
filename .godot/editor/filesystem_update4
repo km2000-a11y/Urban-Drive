@@ -1,4 +1,5 @@
 res://main.tscn
+res://main.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -43,7 +44,6 @@ res://Scenes/lexus_is250.tscn
 res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
-res://duel_manager.gd
-res://main.gd
 res://Scenes/start.tscn
-res://Scripts/start.gd
+res://Scripts/leaderboard.gd
+res://duel_manager.gd
