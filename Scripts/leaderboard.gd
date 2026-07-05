@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var title_label := $Panel/TitleLabel
+@onready var title_label := $Control/Panel/TitleLabel
 @onready var entries := $Control/VBoxContainer
 @onready var retry_button := $Control/RetryBtn
 @onready var quit_button := $Control/QuitBtn
