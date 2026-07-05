@@ -297,7 +297,7 @@ mesh = SubResource("BoxMesh_po0v3")
 shape = SubResource("BoxShape3D_xyydk")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="MeshInstance3D/MeshInstance3D/MeshInstance3D/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69051, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69051, 0, -5.70508)
 shape = SubResource("BoxShape3D_xyydk")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D"]
@@ -4167,7 +4167,7 @@ transform = Transform3D(-0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, -0.173648
 transform = Transform3D(0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, 0.173648, 19.7785, 0, 1227.34)
 
 [node name="WP22" type="Node3D" parent="Waypoints"]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 3.01756, 0, 1231.97)
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 1.51027, 0, 1227.52)
 
 [node name="WP23" type="Node3D" parent="Waypoints"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.2252, 0, 1225.06)
