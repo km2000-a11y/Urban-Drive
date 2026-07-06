@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Zenith Horizon"
+var def_car_name := "Zenith Horizon"
 var country := "Japan"
 var engine := "V6 3.5L"
 var weight_kg := 1460
@@ -23,4 +23,4 @@ func _ready():
 
 	apply_stats()
 	
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)

@@ -37,6 +37,8 @@ var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
 var driver_name: String = "Unknown"
+var car_name: String = ""
+
 
 
 var transmission := "Front wheel drive" # "Front wheel drive", "Rear wheel drive", "Four wheel drive"

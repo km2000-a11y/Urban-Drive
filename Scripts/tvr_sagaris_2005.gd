@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Kestrel Battleaxe"
+var def_car_name := "Kestrel Battleaxe"
 var country := "UK"
 var engine := "V6 4.0L"
 var weight_kg := 1078
@@ -35,5 +35,5 @@ func _ready():
 	shift_down_rpm = 3000
 
 	apply_stats()
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)
 	

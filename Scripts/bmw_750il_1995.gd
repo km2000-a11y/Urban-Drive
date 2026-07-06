@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Eisenach Monarch"
+var def_car_name := "Eisenach Monarch"
 var country := "Germany"
 var engine := "V12 5.4L"
 var weight_kg := 2050

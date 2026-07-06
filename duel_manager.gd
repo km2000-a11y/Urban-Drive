@@ -57,6 +57,7 @@ func spawn_duel(main_scene: Node) -> void:
 	player_laps = 0
 	ai_laps = 0
 	await get_tree().process_frame   # WAIT FOR CHILD READY
+	await get_tree().process_frame   # WAIT FOR CHILD READY
 	player_car.driver_name = "Player"
 	player_car.car_name = Cars.selected_car_name
 
@@ -204,15 +205,16 @@ func _start_lap_cooldown() -> void:
 
 
 func _check_finish() -> void:
-	# Player finishes first → end immediately
-	if player_laps == total_laps:
+	# Player finishes → end immediately
+	if player_finished:
 		_end_duel("Player")
 		return
 
-	# AI finishes first (rare, but safe)
-	if ai_laps == total_laps:
-		_end_duel("AI")
+	# AI finishes → DO NOT end duel
+	if ai_finished:
+		# Just mark AI finished, do nothing else
 		return
+
 
 
 func _end_duel(who_won: String) -> void:
@@ -223,6 +225,7 @@ func _end_duel(who_won: String) -> void:
 
 	var player_time := player_car.total_race_time
 	var ai_time := _estimate_ai_finish_time()
+
 
 	RaceResults.add_result(player_car.driver_name, player_car.car_name, player_time)
 	RaceResults.add_result(ai_car.driver_name, ai_car.car_name, ai_time)

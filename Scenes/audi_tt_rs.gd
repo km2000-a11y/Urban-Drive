@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Schroder Atrix Sport"
+var def_car_name := "Schroder Atrix Sport"
 var country := "Germany"
 var engine := "L5 2.5L"
 var weight_kg := 1470
@@ -22,4 +22,4 @@ func _ready():
 	# AWD turbo coupe handling (sharp, planted, punchy)
 	
 	apply_stats()
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)

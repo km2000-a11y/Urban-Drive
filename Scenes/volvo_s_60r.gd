@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Strandberg Turbo"
+var def_car_name := "Strandberg Turbo"
 var country := "Sweden"
 var engine := "L5 2.5L Turbo"
 var weight_kg := 1667
@@ -33,4 +33,4 @@ func _ready():
 	shift_down_rpm = 2800
 
 	apply_stats()
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)

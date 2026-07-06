@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Schroder Atrix Q32"
+var def_car_name := "Schroder Atrix Q32"
 var country := "Germany"
 var engine := "V6 3.2L"
 var weight_kg := 1470
@@ -22,4 +22,4 @@ func _ready():
 	
 
 	apply_stats()
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)

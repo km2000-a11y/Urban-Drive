@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Bartoli Interceptor"
+var def_car_name := "Bartoli Interceptor"
 var country := "Italy"
 var engine := "V8 4.7L"
 var weight_kg := 1880
@@ -13,7 +13,7 @@ func _ready():
 	horsepower = 433
 	max_rpm = 7200.0
 	zero_to_hundred = 4.9
-	top_speed_kmh = 295
+	top_speed_kmh = 287
 	turn_speed = 2.75
 	brake_strength = 13.4
 	lateral_friction = 1.08
@@ -36,4 +36,4 @@ func _ready():
 	shift_down_rpm = 2200
 
 	apply_stats()
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)

@@ -1,7 +1,7 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var car_name := "Kestrel Seabird"
+var def_car_name := "Kestrel Seabird"
 var country := "UK"
 var engine := "L4 1.8L"
 var weight_kg := 935
@@ -23,4 +23,4 @@ func _ready():
 
 	apply_stats()
 	
-	print("Child READY loaded:", car_name)
+	print("Child READY loaded:", def_car_name)
