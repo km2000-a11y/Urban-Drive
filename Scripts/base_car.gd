@@ -443,26 +443,39 @@ func _update_ai_inputs(delta: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-
+	
 	# --- AI SEAM IGNORE + UNSTICK ---
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
+		var other := col.get_collider()
+
+		# Ignore props (CharacterBody3D)
+		if other is CharacterBody3D and not (other is CarController):
+			   	 		
+						continue
+
+
 		var n := col.get_normal()
 		n.y = 0.0
 		n = n.normalized()
 
+		# Ignore micro seams
 		if n.length() < 0.35:
 			continue
 
 		var side_dot := transform.basis.x.normalized().dot(n)
 		var front_dot := forward.dot(n)
 
+		# Ignore soft angled normals
 		if abs(side_dot) < 0.35 and front_dot > -0.45:
 			continue
 
+		# Unstick: remove inward velocity
 		var push_in := velocity.dot(n)
 		if push_in > 0.0:
 			velocity -= n * push_in
+
+
 
 	var angle := forward.signed_angle_to(dir, Vector3.UP)
 	ai_steer = clamp(angle * 2.0, -1.0, 1.0)
@@ -515,3 +528,6 @@ func _update_player_waypoint():
 
 	if dist < 6.0:
 		current_wp = (current_wp + 1) % waypoints.size()
+
+func distance_to_finish_line(lapline: Node3D) -> float:
+	return global_position.distance_to(lapline.global_position)
