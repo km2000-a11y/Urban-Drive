@@ -16,7 +16,7 @@ size = Vector3(7, 6, 1)
 size = Vector3(1, 6, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
-size = Vector3(9, 20, 1)
+size = Vector3(9, 20, 0.5)
 
 [node name="Node" type="Node"]
 script = ExtResource("1_h2yge")

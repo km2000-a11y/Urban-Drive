@@ -20,7 +20,7 @@ var ai_steer: float = 0.0
 var ai_names := [
 	"David", "Takashi", "Ricco", "Chris", "Petar", "Nina",
 	"Steve", "Linus", "Chris", "Jesse", "Dimitri", "Mirko",
-	"Abdullah", "Will", "Jimmy M.", "Tiffany", "Hoff", "Jake", "Britney","Laura","Francesca","Looping"
+	"Abdullah", "Will", "Jimmy M.", "Tiffany", "Hoff", "Jake", "Britney","Laura","Francesca","Looping","Alex","Math","Sam","Gordon"
 ]
 
 # --- PLAYER INPUT ---
@@ -37,6 +37,7 @@ var turn_speed := 2.5
 var brake_strength := 20.0
 var lateral_friction := 1.2
 var driver_name: String = "Unknown"
+
 
 var transmission := "Front wheel drive" # "Front wheel drive", "Rear wheel drive", "Four wheel drive"
 var is_diesel := false

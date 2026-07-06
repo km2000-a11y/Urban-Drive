@@ -1,4 +1,5 @@
 res://main.tscn
+res://main.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -44,4 +45,8 @@ res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
 res://Scenes/start.tscn
+res://duel_manager.gd
 res://Scripts/leaderboard.gd
+res://Scripts/base_car.gd
+res://Scripts/barrier_1.gd
+res://Tracks/barrier_2.gd

@@ -1,14 +1,15 @@
 extends Node
 
 var mode: String
-var win_screen_radar
+var win_screen_radar: Node
 var player_car: CarController
+
 @onready var finish_flash := $FinishFlash
 @onready var start_countdown := $Start
-
-
+@onready var leaderboard := $Leaderboard if has_node("Leaderboard") else null
 
 var best_radar_speed := 0
+
 
 func _ready():
 	mode = Modes.mode
@@ -16,27 +17,29 @@ func _ready():
 	Cars.load_color()
 	disable_all_ai()
 
+	# Spawn depending on mode
 	if mode == "Duel":
 		_setup_duel()
 	else:
 		spawn_player_car()
 
+	# Radar race win screen
 	if mode == "Radar Race":
 		var ws_scene = load("res://Scenes/win_screen_radar.tscn")
 		win_screen_radar = ws_scene.instantiate()
 		add_child(win_screen_radar)
 		win_screen_radar.visible = false
-	start_countdown.start_countdown()
-	if has_node("Leaderboard"):
-		$Leaderboard.visible = false
-	
-	finish_flash.visible=false
 
+	# Hide UI at start
+	finish_flash.visible = false
+	if leaderboard:
+		leaderboard.visible = false
+
+	# Start countdown
+	start_countdown.start_countdown()
 
 
 func _process(delta):
-	# DuelManager now handles its own _process and HUD updates.
-	# No duel logic here.
 	pass
 
 
@@ -54,16 +57,19 @@ func spawn_player_car():
 	player_car = scene.instantiate()
 	add_child(player_car)
 
+	# Speedometer hookup
 	if has_node("Speedometer"):
-		var speedo = get_node("Speedometer")
-		speedo.target_car = player_car
+		get_node("Speedometer").target_car = player_car
 
+	# Apply color
 	if mode != "Duel":
 		_apply_color_to_car(player_car, Cars.selected_color)
 
+	# Spawn position
 	if has_node("SpawnPoint"):
 		player_car.global_transform = $SpawnPoint.global_transform
 
+	# Camera activation
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
@@ -81,10 +87,7 @@ func _setup_duel():
 	DuelManager.spawn_duel(self)
 	DuelManager.main_scene = self
 
-	# 🔥 Start countdown
 	start_countdown.start_countdown()
-
-
 
 
 func _apply_color_to_car(car: CarController, color: Color):
@@ -133,15 +136,22 @@ func disable_all_ai():
 	for node in get_tree().get_nodes_in_group("cars"):
 		if node is CarController:
 			node.is_ai = false
-			
+
+
+# ---------------------------------------------------------
+# FINISH + LEADERBOARD FIXED
+# ---------------------------------------------------------
 func show_finish(player_won: bool):
+	# Show flash
+	finish_flash.visible = true
 	finish_flash.flash()
-	finish_flash.visible=true
 
-	if has_node("Leaderboard"):
-		$Leaderboard.visible = true
-		$Leaderboard.show_results(player_won)
+	# Show leaderboard
+	if leaderboard:
+		leaderboard.visible = true
+		leaderboard.show_results(player_won)
 
+	# Debug print
 	if player_won:
 		print("YOU WIN!")
 	else:

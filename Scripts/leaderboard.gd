@@ -25,16 +25,20 @@ func show_results(player_won: bool):
 	# Add each entry to the UI
 	for i in range(results.size()):
 		var r = results[i]
-		var line = Label.new()
-		line.text = str(i + 1) + ". " + r.driver + " — " + r.car + " — " + _format_time(r.time_ms)
+
+		var line := Label.new()
+		line.text = str(i + 1) + ". " \
+			+ r["name"] + " — " \
+			+ r["car"] + " — " \
+			+ _format_time(r["time"])
+
 		entries.add_child(line)
 
 	visible = true
 
 
 func _sort_by_time(a, b):
-	return a.time_ms < b.time_ms
-
+	return a["time"] < b["time"]
 
 func _format_time(ms: int) -> String:
 	var total_seconds := ms / 1000.0
@@ -44,9 +48,7 @@ func _format_time(ms: int) -> String:
 
 
 func _on_retry_btn_pressed() -> void:
-		get_tree().change_scene_to_file("res://Scenes/car_select.tscn")
-		
-
+	get_tree().change_scene_to_file("res://Scenes/car_select.tscn")
 
 
 func _on_quit_btn_pressed() -> void:
