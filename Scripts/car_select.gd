@@ -107,7 +107,6 @@ var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Kuro
 var muscle_list = ["Brutus Viper", "Brutus Mauler"]
 var urban_list = [
 	"Kestrel Seabird",
-	"Eisenach Roadstar",
 	"Brutus Stingray",
 	"Kuro Zephyr V6",
 	"Kestrel Speedster",
@@ -115,7 +114,7 @@ var urban_list = [
 	"Strandberg Turbo"   # ⭐ NEW
 ]
 var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
-var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", "Berkshire Tempest", "Schroder Atrix Sport"]
+var sport_list = ["Eisenach Roadstar","Bartoli Cruiser", "Berkshire V12-S", "Berkshire Tempest", "Schroder Atrix Sport"]
 var sport_racing_list = ["Eisenach Goliath", "Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine", "Brutus Predator"]
 
@@ -203,11 +202,6 @@ var urban_racers = {
 		"0-100 KM/H: 5.6s", "TOP SPEED: 250 KM/H",
 		"ENGINE: V6 3.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Eisenach Roadstar":[
-		"", "Country: Germany", "HP: 335", "WEIGHT: 1600 KG",
-		"0-100 KM/H: 4.8s", "TOP SPEED: 250 KM/H",
-		"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	],
 	"Berkshire Blunt":[
 		"", "Country: UK", "HP: 396", "WEIGHT: 1832 KG",
 		"0-100 KM/H: 5.2s", "TOP SPEED: 257 KM/H",
@@ -249,7 +243,6 @@ var sport = {
 	"0-100 KM/H: 4.6s", "TOP SPEED: 266 KM/H",
 	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 ],
-
 	"Bartoli Cruiser":[
 		"", "Country: Italy", "HP: 433", "WEIGHT: 1880 KG",
 		"0-100 KM/H: 4.9s", "TOP SPEED: 287 KM/H",
@@ -264,6 +257,11 @@ var sport = {
 		"", "Country: UK", "HP: 460", "WEIGHT: 1875 KG",
 		"0-100 KM/H: 5.4s", "TOP SPEED: 303 KM/H",
 		"ENGINE: V12 5.9L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	],
+	"Eisenach Roadstar":[
+		"", "Country: Germany", "HP: 335", "WEIGHT: 1600 KG",
+		"0-100 KM/H: 4.8s", "TOP SPEED: 271 KM/H",
+		"ENGINE: V6 3.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
 
