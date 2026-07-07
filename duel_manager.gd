@@ -46,24 +46,29 @@ func spawn_duel(main_scene: Node) -> void:
 	hud.update_position(2, 2)
 
 	# PLAYER
+	# PLAYER
+		# PLAYER
 	var player_scene := load(player_car_path)
 	player_car = player_scene.instantiate() as CarController
 	player_car.global_position = player_spawn
 	player_car.is_ai = false
 	player_car.controls_enabled = true
-	main_scene.add_child(player_car)
-	_apply_player_color(player_car)
-		# START
-	player_laps = 0
-	ai_laps = 0
-	await get_tree().process_frame   # WAIT FOR CHILD READY
-	await get_tree().process_frame   # WAIT FOR CHILD READY
+
 	player_car.driver_name = "Player"
 	player_car.car_name = Cars.selected_car_name
 
+	main_scene.add_child(player_car)
+	_apply_player_color(player_car)
+
+	player_laps = 0
+	ai_laps = 0
+
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
+
 
 	# AI
 	var ai_scene := load(ai_car_path)
@@ -232,7 +237,17 @@ func _end_duel(who_won: String) -> void:
 
 	main_scene.show_finish(who_won == "Player")
 	hud.visible = false
-
+	
+	print("DEBUG PLAYER:",
+		"driver=", player_car.driver_name,
+		"car=", player_car.car_name,
+		"time=", player_time
+	)
+	print("DEBUG AI:",
+		"driver=", ai_car.driver_name,
+		"car=", ai_car.car_name,
+		"time=", ai_time
+	)
 
 
 func _calculate_position() -> int:
