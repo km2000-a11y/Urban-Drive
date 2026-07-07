@@ -1,6 +1,11 @@
-res://main.tscn
-res://Scripts/bmw_z4_sdrive35is_2011.gd
+res://default_bus_layout.tres
+res://Scenes/start.tscn
 res://Scripts/car_select.gd
+res://duel_manager.gd
+res://Scenes/main_menu.gd
+res://Scripts/mode_select.gd
+res://music_manager.gd
+res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -45,6 +50,3 @@ res://Scenes/lexus_is250.tscn
 res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
-res://Scenes/start.tscn
-res://Scripts/bmw_z4_M_2006.gd
-res://Traffic Cars/nissan_micra.tscn

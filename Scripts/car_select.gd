@@ -316,6 +316,7 @@ var supercars = {
 # -------------------------
 
 func _ready():
+	MusicManager.play_menu_music()
 	$Control/ColorSelector.visible = false
 
 var car_scene_paths = {

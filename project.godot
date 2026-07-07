@@ -27,6 +27,7 @@ Modes="*res://modes.gd"
 RaceResults="*res://race_results.gd"
 DuelManager="*res://duel_manager.gd"
 GameMode="*res://game_mode.gd"
+MusicManager="*res://music_manager.gd"
 
 [display]
 

@@ -106,6 +106,8 @@ func spawn_duel(main_scene: Node) -> void:
 
 
 	print("DuelManager: Duel started.")
+	MusicManager.stop_music()
+	MusicManager.play_race_music()
 
 
 func _pick_unique_ai_car() -> String:
@@ -248,6 +250,8 @@ func _end_duel(who_won: String) -> void:
 		"car=", ai_car.car_name,
 		"time=", ai_time
 	)
+	MusicManager.stop_music()
+
 
 
 func _calculate_position() -> int:
