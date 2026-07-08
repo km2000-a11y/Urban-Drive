@@ -232,7 +232,7 @@ var sedans = {
 	],
 	"Kronstadt Blade":[
 		"", "Country: Germany", "HP: 266", "WEIGHT: 1810 KG",
-		"0-100 KM/H: 5.9s", "TOP SPEED: 250 KM/H",
+		"0-100 KM/H: 5.7s", "TOP SPEED: 242 KM/H",
 		"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }

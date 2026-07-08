@@ -5,15 +5,15 @@ var def_car_name := "Kronstadt Blade"
 var country := "Germany"
 var engine := "V6 3.0L"
 var weight_kg := 1810
-var zero_to_hundred_display := 5.9
+var zero_to_hundred_display := 5.7
 
 func _ready():
 	# GAMEPLAY STATS
 	mass = 1810.0
 	horsepower = 266
 	max_rpm = 4500.0
-	zero_to_hundred = 5.9
-	top_speed_kmh = 250
+	zero_to_hundred = 5.7
+	top_speed_kmh = 242
 	turn_speed = 2.45
 	brake_strength = 11.0
 	lateral_friction = 1.06

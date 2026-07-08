@@ -67,8 +67,8 @@ func spawn_player_car():
 		_apply_color_to_car(player_car, Cars.selected_color)
 
 	# Spawn position
-	if has_node("SpawnPoint"):
-		player_car.global_transform = $SpawnPoint.global_transform
+	if has_node("BogotaAirport/SpawnPoint"):
+		player_car.global_transform = $BogotaAirport/SpawnPoint.global_transform
 
 	# Camera activation
 	if player_car.has_node("Camera3D"):

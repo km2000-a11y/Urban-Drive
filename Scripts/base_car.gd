@@ -41,6 +41,8 @@ var car_name: String = ""
 
 
 
+
+
 var transmission := "Front wheel drive" # "Front wheel drive", "Rear wheel drive", "Four wheel drive"
 var is_diesel := false
 
@@ -153,6 +155,7 @@ func update_gears(speed_kmh: float) -> void:
 	current_gear = clamp(current_gear, 1, gear_count)
 
 func _physics_process(delta: float) -> void:
+	
 	if not controls_enabled:
 		if not is_on_floor():
 			velocity.y -= GRAVITY * delta
@@ -533,3 +536,4 @@ func _update_player_waypoint():
 
 func distance_to_finish_line(lapline: Node3D) -> float:
 	return global_position.distance_to(lapline.global_position)
+	
