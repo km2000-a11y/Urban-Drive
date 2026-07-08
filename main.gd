@@ -16,6 +16,7 @@ func _ready():
 	load_radar_best()
 	Cars.load_color()
 	disable_all_ai()
+	MusicManager.play_race_music()
 
 	# Spawn depending on mode
 	if mode == "Duel":
@@ -75,8 +76,8 @@ func spawn_player_car():
 
 
 func _setup_duel():
-	DuelManager.player_spawn = $SpawnPoint.global_position
-	DuelManager.ai_spawn = $AISpawnPoint.global_position
+	DuelManager.player_spawn = $BogotaAirport/SpawnPoint.global_position
+	DuelManager.ai_spawn = $BogotaAirport/AISpawnPoint.global_position
 
 	DuelManager.player_car_path = Cars.selected_car
 	DuelManager.ai_car_path = Cars.selected_ai_car

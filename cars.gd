@@ -31,7 +31,6 @@ var class_lists := {
 		"Kestrel Speedster",
 		"Kestrel Seabird",
 		"Kuro Zephyr V6",
-		"Eisenach Roadstar",
 		"Berkshire Blunt",
 		"Strandberg Turbo"
 	],
@@ -45,7 +44,8 @@ var class_lists := {
 		"Bartoli Cruiser",
 		"Berkshire V12-S",
 		"Berkshire Tempest",
-		"Schroder Atrix Sport"
+		"Schroder Atrix Sport",
+		"Eisenach Roadstar",
 	],
 	"sport_racing": [
 		"Eisenach Goliath",
@@ -174,3 +174,17 @@ func load_color():
 			if parts.size() == 4:
 				selected_color = Color(parts[0].to_float(), parts[1].to_float(), parts[2].to_float(), parts[3].to_float())
 			f.close()
+
+func pick_ai_car_path() -> String:
+	if selected_class == "":
+		# fallback: same car as player
+		return selected_car
+
+	var list: Array = class_lists.get(selected_class, [])
+	if list.is_empty():
+		return selected_car
+
+	var chosen_name: String = list[randi() % list.size()]
+	selected_ai_car_name = chosen_name
+
+	return car_scene_paths.get(chosen_name, selected_car)

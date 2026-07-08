@@ -26,9 +26,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Speedometer" parent="." instance=ExtResource("3_h2yge")]
 
-[node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.372705, 0.133247, 2021.35)
-
 [node name="BogotaAirport" parent="." instance=ExtResource("3_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296989, 0, 1992.3)
 
@@ -45,9 +42,6 @@ shape = SubResource("BoxShape3D_h2yge")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RadarTrap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.74138, -0.134766)
 mesh = SubResource("BoxMesh_1bvp3")
-
-[node name="AISpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1969.18)
 
 [node name="LapLine" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2060.24)
