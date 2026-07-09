@@ -28,6 +28,8 @@ RaceResults="*res://race_results.gd"
 DuelManager="*res://duel_manager.gd"
 GameMode="*res://game_mode.gd"
 MusicManager="*res://music_manager.gd"
+NormalRaceManager="*res://normal_race_manager.gd"
+TrackName="*res://track_name.gd"
 
 [display]
 

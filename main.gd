@@ -21,8 +21,11 @@ func _ready():
 	# Spawn depending on mode
 	if mode == "Duel":
 		_setup_duel()
+	elif mode == "Normal Race":
+		_setup_normal_race()
 	else:
 		spawn_player_car()
+
 
 	# Radar race win screen
 	if mode == "Radar Race":
@@ -58,26 +61,27 @@ func spawn_player_car():
 	player_car = scene.instantiate()
 	add_child(player_car)
 
-	# Speedometer hookup
 	if has_node("Speedometer"):
 		get_node("Speedometer").target_car = player_car
 
-	# Apply color
 	if mode != "Duel":
 		_apply_color_to_car(player_car, Cars.selected_color)
 
-	# Spawn position
-	if has_node("BogotaAirport/SpawnPoint"):
-		player_car.global_transform = $BogotaAirport/SpawnPoint.global_transform
+	# ⭐ FIXED — no more has_node()
+	var root := get_node(TrackName.track_name)
+	player_car.global_transform = root.get_node("SpawnPoint").global_transform
 
-	# Camera activation
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
 
+
 func _setup_duel():
-	DuelManager.player_spawn = $BogotaAirport/SpawnPoint.global_position
-	DuelManager.ai_spawn = $BogotaAirport/AISpawnPoint.global_position
+	var root := get_node(TrackName.track_name)
+
+	# OPTION 1 — DuelManager uses Vector3
+	DuelManager.player_spawn = root.get_node("SpawnPoint").global_position
+	DuelManager.ai_spawn = root.get_node("AISpawnPoint").global_position
 
 	DuelManager.player_car_path = Cars.selected_car
 	DuelManager.ai_car_path = Cars.selected_ai_car
@@ -89,6 +93,7 @@ func _setup_duel():
 	DuelManager.main_scene = self
 
 	start_countdown.start_countdown()
+
 
 
 func _apply_color_to_car(car: CarController, color: Color):
@@ -132,6 +137,25 @@ func save_radar_best():
 	f.store_string(str(best_radar_speed))
 	f.close()
 
+func _setup_normal_race():
+	var root := get_node(TrackName.track_name)
+
+	# PLAYER SPAWN
+	NormalRaceManager.player_spawn = root.get_node("SpawnPoint").global_position
+	NormalRaceManager.player_car_path = Cars.selected_car
+
+	# AI SPAWNS
+	NormalRaceManager.ai_spawns = []
+	for i in range(1, 8):
+		NormalRaceManager.ai_spawns.append(
+			root.get_node("AISpawnPoint" + str(i)).global_position
+		)
+
+	# AI CAR PATHS (same class as player)
+	NormalRaceManager.ai_car_paths = Cars.get_ai_paths_for_class(Cars.selected_class)
+
+	# START RACE
+	NormalRaceManager.spawn_race(self)
 
 func disable_all_ai():
 	for node in get_tree().get_nodes_in_group("cars"):

@@ -1,3 +1,4 @@
+
 extends Node
 
 var selected_car: String = ""          # scene path
@@ -31,21 +32,20 @@ var class_lists := {
 		"Kestrel Speedster",
 		"Kestrel Seabird",
 		"Kuro Zephyr V6",
-		"Berkshire Blunt",
-		"Strandberg Turbo"
+		"Eisenach Roadstar",
 	],
 	"sedans": [
 		"Eisenach Monarch",
 		"Schroder Kaiser",
 		"Kuro Vault",
-		"Kronstadt Blade"
+		"Strandberg Turbo"
 	],
 	"sport": [
 		"Bartoli Cruiser",
 		"Berkshire V12-S",
 		"Berkshire Tempest",
 		"Schroder Atrix Sport",
-		"Eisenach Roadstar",
+		"Berkshire Blunt"
 	],
 	"sport_racing": [
 		"Eisenach Goliath",
@@ -105,7 +105,7 @@ var car_scene_paths := {
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Brutus Predator":"res://Scenes/saleen_s7.tscn",
-
+	"Bartoli Cruiser Interceptor": "res://Scenes/granturismo_police.tscn"
 }
 
 var car_colors := {
@@ -138,7 +138,6 @@ var car_colors := {
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
 	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
-	"Kronstadt Blade":[Color8(85,85,85), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
@@ -188,3 +187,4 @@ func pick_ai_car_path() -> String:
 	selected_ai_car_name = chosen_name
 
 	return car_scene_paths.get(chosen_name, selected_car)
+	

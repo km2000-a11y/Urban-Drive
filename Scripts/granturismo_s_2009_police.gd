@@ -21,6 +21,10 @@ func _ready():
 
 	# Maserati GranTurismo-style handling (smooth GT, slightly softer than DB9/Vanquish)
 	
+# ============================
+# EMP SYSTEM (NO GROUPS NEEDED)
+# ============================
+
 
 	# ZF 6-speed automatic (GT gearing, longer than Vanquish)
 	gear_count = 6

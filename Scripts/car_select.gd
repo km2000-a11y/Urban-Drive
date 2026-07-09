@@ -26,7 +26,6 @@ var car_colors := {
 
 	"Zenith Horizon":[Color8(255,116,49), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
 	"Schroder Atrix Q32":[Color8(192,192,192), Color8(255,255,255), Color8(140,0,255), Color8(0,120,160)],
-	"Straeda G25":[Color8(133,82,141), Color8(255,0,0), Color8(255,255,255), Color8(180,180,180)],
 	"Straeda B32":[Color8(132,132,132), Color8(255,255,255), Color8(255,140,0), Color8(0,120,200)],
 	"Strandberg Turbo":[
 	Color8(133,82,141),   # ⭐ Purple Metallic (default)
@@ -44,18 +43,11 @@ var car_colors := {
 	"Berkshire Blunt":[Color8(0,66,37), Color8(255,255,255), Color8(180,180,180), Color8(0,120,80)],
 	"Kestrel Seabird":[Color8(50,205,50), Color8(255,255,255), Color8(255,200,0), Color8(0,120,200)],
 	"Kuro Zephyr V6":[Color8(255,255,255), Color8(64,64,64), Color8(0,90,180), Color8(180,180,180)],
-	"Eisenach Compaque":[
-	Color8(192,192,192), # ⭐ Default — Silver
-	Color8(255,255,255), # White
-	Color8(60,60,60),    # Dark Grey
-	Color8(0,80,160)     # Deep Blue
-],
-
+	
 
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
 	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
-	"Kronstadt Blade":[Color8(85,85,85), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
@@ -110,11 +102,10 @@ var urban_list = [
 	"Brutus Stingray",
 	"Kuro Zephyr V6",
 	"Kestrel Speedster",
-	"Berkshire Blunt",
-	"Strandberg Turbo"   # ⭐ NEW
+	"Eisenach Roadstar",
 ]
-var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", "Kronstadt Blade"]
-var sport_list = ["Eisenach Roadstar","Bartoli Cruiser", "Berkshire V12-S", "Berkshire Tempest", "Schroder Atrix Sport"]
+var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", 	"Strandberg Turbo" ]
+var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", 	"Berkshire Blunt", "Berkshire Tempest", "Schroder Atrix Sport"]
 var sport_racing_list = ["Eisenach Goliath", "Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine", "Brutus Predator"]
 
@@ -202,16 +193,11 @@ var urban_racers = {
 		"0-100 KM/H: 5.6s", "TOP SPEED: 250 KM/H",
 		"ENGINE: V6 3.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Berkshire Blunt":[
-		"", "Country: UK", "HP: 396", "WEIGHT: 1832 KG",
-		"0-100 KM/H: 5.2s", "TOP SPEED: 257 KM/H",
-		"ENGINE: V8 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	],
-	"Strandberg Turbo":[
-	"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
-	"0-100 KM/H: 5.4s", "TOP SPEED: 248 KM/H",
-	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-]
+	"Eisenach Roadstar":[
+		"", "Country: Germany", "HP: 335", "WEIGHT: 1600 KG",
+		"0-100 KM/H: 4.8s", "TOP SPEED: 250 KM/H",
+		"ENGINE: V6 3.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	]
 }
 
 var sedans = {
@@ -230,11 +216,11 @@ var sedans = {
 		"0-100 KM/H: 6.3s", "TOP SPEED: 248 KM/H",
 		"ENGINE: V8 4.3L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Kronstadt Blade":[
-		"", "Country: Germany", "HP: 266", "WEIGHT: 1810 KG",
-		"0-100 KM/H: 5.7s", "TOP SPEED: 242 KM/H",
-		"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	]
+	"Strandberg Turbo":[
+	"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
+	"0-100 KM/H: 5.4s", "TOP SPEED: 248 KM/H",
+	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+]
 }
 
 var sport = {
@@ -258,10 +244,10 @@ var sport = {
 		"0-100 KM/H: 5.4s", "TOP SPEED: 303 KM/H",
 		"ENGINE: V12 5.9L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Eisenach Roadstar":[
-		"", "Country: Germany", "HP: 335", "WEIGHT: 1600 KG",
-		"0-100 KM/H: 4.8s", "TOP SPEED: 271 KM/H",
-		"ENGINE: V6 3.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	"Berkshire Blunt":[
+		"", "Country: UK", "HP: 406", "WEIGHT: 1832 KG",
+		"0-100 KM/H: 5.2s", "TOP SPEED: 286 KM/H",
+		"ENGINE: V8 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
 
@@ -343,7 +329,6 @@ var car_scene_paths = {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
-	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn",
 
 	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",

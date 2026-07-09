@@ -11,11 +11,14 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="FreeRaceMenu" type="Button" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_right = 1252.0
+offset_right = 1276.0
 offset_bottom = 77.0
+
+[node name="FreeRaceMenu" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "FREE RACE"
 
-[connection signal="pressed" from="Control/FreeRaceMenu" to="." method="_on_free_race_menu_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/FreeRaceMenu" to="." method="_on_free_race_menu_pressed"]
