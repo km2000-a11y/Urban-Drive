@@ -15,13 +15,12 @@ func _ready():
 	mode = Modes.mode
 	load_radar_best()
 	Cars.load_color()
-	disable_all_ai()
 	MusicManager.play_race_music()
 
 	# Spawn depending on mode
 	if mode == "Duel":
 		_setup_duel()
-	elif mode == "Normal Race":
+	elif mode.to_lower() == "normal race":
 		_setup_normal_race()
 	else:
 		spawn_player_car()
@@ -42,9 +41,10 @@ func _ready():
 	# Start countdown
 	start_countdown.start_countdown()
 
-
 func _process(delta):
-	pass
+	if mode == "Normal Race":
+		NormalRaceManager.update_race()
+
 
 
 func spawn_player_car():

@@ -188,14 +188,20 @@ func pick_ai_car_path() -> String:
 
 	return car_scene_paths.get(chosen_name, selected_car)
 
-func get_ai_paths_for_class(_unused = null) -> Array:
+
+func get_ai_paths_for_class(_unused):
 	var result = []
 
 	var list = class_lists.get(selected_class, [])
 
-	for car_name in list:
-		var path = car_scene_paths.get(car_name, "")
-		if path != "":
-			result.append(path)
+	if list.is_empty():
+		for i in range(7):
+			result.append(selected_car)
+		return result
+
+	for i in range(7):
+		var car_name = list[randi() % list.size()]
+		var path = car_scene_paths.get(car_name, selected_car)
+		result.append(path)
 
 	return result

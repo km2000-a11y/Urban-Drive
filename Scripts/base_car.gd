@@ -537,3 +537,9 @@ func _update_player_waypoint():
 func distance_to_finish_line(lapline: Node3D) -> float:
 	return global_position.distance_to(lapline.global_position)
 	
+func distance_to_next_wp() -> float:
+	if waypoints.is_empty():
+		return 0.0
+
+	var wp := waypoints[current_wp] as Node3D
+	return global_position.distance_to(wp.global_position)

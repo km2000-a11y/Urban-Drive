@@ -43,4 +43,6 @@ res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
 res://Scenes/start.tscn
-res://cars.gd
+res://main.gd
+res://Scripts/base_car.gd
+res://normal_race_manager.gd

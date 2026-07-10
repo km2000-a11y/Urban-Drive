@@ -21,64 +21,78 @@ var main_scene: Node = null
 
 
 func spawn_race(scene: Node) -> void:
+	var root := scene.get_node(TrackName.track_name)
+
+	player_spawn = root.get_node("SpawnPoint").global_transform.origin
+
+	ai_spawns.clear()
+	for i in range(7):
+		ai_spawns.append(root.get_node("AISpawnPoint" + str(i+1)).global_transform.origin)
+
 	RaceResults.clear()
 	main_scene = scene
 
-	# HUD
 	hud = scene.get_node("HUD")
-	hud.update_lap(1, total_laps)
-	hud.update_position(1, 8)
 
-	# PLAYER (DuelManager style)
+	# PLAYER (same as DuelManager)
 	var player_scene := load(player_car_path)
 	player_car = player_scene.instantiate() as CarController
-
+	player_car.is_ai = false        # 🔥 ADD / MOVE THIS LINE HERE
 	player_car.global_position = player_spawn
-	player_car.is_ai = false
 	player_car.controls_enabled = true
 	player_car.driver_name = "Player"
 	player_car.car_name = Cars.selected_car_name
 
 	scene.add_child(player_car)
+
+
 	_apply_player_color(player_car)
+
+	await get_tree().process_frame
+	await get_tree().process_frame
+	force_player_camera()
 
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
-	# AI CARS (DuelManager style)
+	# AI CARS (DuelManager logic × 7)
 	ai_cars.clear()
 	ai_laps.clear()
 
 	for i in range(ai_spawns.size()):
 		var ai_scene := load(ai_car_paths[i])
 		var ai_car := ai_scene.instantiate() as CarController
-
+		scene.add_child(ai_car)
 		ai_car.global_position = ai_spawns[i]
 		ai_car.is_ai = true
 		ai_car.controls_enabled = true
+	
 
 		ai_car.driver_name = ai_car.ai_names[randi() % ai_car.ai_names.size()]
-		ai_car.car_name = Cars.selected_ai_car_name
+		ai_car.car_name = ai_car_paths[i].get_file().get_basename()
 
-		scene.add_child(ai_car)
+
 		_apply_random_ai_color(ai_car)
 
 		ai_cars.append(ai_car)
 		ai_laps.append(0)
 
-	# WAYPOINTS
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	# WAYPOINTS (same as DuelManager)
 	var wp_root := scene.find_child("Waypoints", true, false)
 	player_car.set_waypoints(wp_root)
 
 	for ai in ai_cars:
 		ai.set_waypoints(wp_root)
 
-	# START
+	# START (same logic)
 	player_laps = 0
 	race_active = true
 
 	hud.update_lap(1, total_laps)
-	hud.update_position(1, ai_cars.size() + 1)
+	hud.update_position(8, 8)   # player starts 8th
 
 	print("NormalRaceManager: Race started.")
 	MusicManager.stop_music()
@@ -203,7 +217,7 @@ func _apply_player_color(car: CarController) -> void:
 
 
 func _apply_random_ai_color(car: CarController) -> void:
-	var name := Cars.selected_ai_car_name
+	var name := car.car_name
 	if Cars.car_colors.has(name):
 		var palette: Array = Cars.car_colors[name]
 		var random_color: Color = palette[randi() % palette.size()]
@@ -217,3 +231,7 @@ func _apply_random_ai_color(car: CarController) -> void:
 						mat = mat.duplicate()
 						child.set_surface_override_material(0, mat)
 						mat.albedo_color = random_color
+
+func force_player_camera():
+	if player_car and player_car.has_node("Camera3D"):
+		player_car.get_node("Camera3D").current = true
