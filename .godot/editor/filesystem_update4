@@ -43,6 +43,4 @@ res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
 res://Scenes/start.tscn
-res://nissan_micra.tscn
 res://cars.gd
-res://normal_race_manager.gd

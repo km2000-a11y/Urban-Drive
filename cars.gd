@@ -187,4 +187,15 @@ func pick_ai_car_path() -> String:
 	selected_ai_car_name = chosen_name
 
 	return car_scene_paths.get(chosen_name, selected_car)
-	
+
+func get_ai_paths_for_class(_unused = null) -> Array:
+	var result = []
+
+	var list = class_lists.get(selected_class, [])
+
+	for car_name in list:
+		var path = car_scene_paths.get(car_name, "")
+		if path != "":
+			result.append(path)
+
+	return result
