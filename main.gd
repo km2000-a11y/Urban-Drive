@@ -138,24 +138,33 @@ func save_radar_best():
 	f.close()
 
 func _setup_normal_race():
+	if player_car:
+		player_car.queue_free()
+	player_car = null
+
 	var root := get_node(TrackName.track_name)
 
-	# PLAYER SPAWN
 	NormalRaceManager.player_spawn = root.get_node("SpawnPoint").global_position
 	NormalRaceManager.player_car_path = Cars.selected_car
 
-	# AI SPAWNS
 	NormalRaceManager.ai_spawns = []
 	for i in range(1, 8):
 		NormalRaceManager.ai_spawns.append(
 			root.get_node("AISpawnPoint" + str(i)).global_position
 		)
 
-	# AI CAR PATHS (same class as player)
 	NormalRaceManager.ai_car_paths = Cars.get_ai_paths_for_class(Cars.selected_class)
 
-	# START RACE
 	NormalRaceManager.spawn_race(self)
+
+	# ⭐ FIX: main scene must know the actual player car
+	player_car = NormalRaceManager.player_car
+
+	# ⭐ FIX: now assign camera safely
+	if player_car and player_car.has_node("Camera3D"):
+		var cam = player_car.get_node("Camera3D")
+		player_car.get_node("Camera3D").current = true
+		cam.current = true
 
 func disable_all_ai():
 	for node in get_tree().get_nodes_in_group("cars"):

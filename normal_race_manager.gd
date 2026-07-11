@@ -42,7 +42,7 @@ func spawn_race(scene: Node) -> void:
 	player_car.controls_enabled = true
 	player_car.driver_name = "Player"
 	player_car.car_name = Cars.selected_car_name
-
+	force_player_camera()
 	scene.add_child(player_car)
 
 
@@ -50,7 +50,6 @@ func spawn_race(scene: Node) -> void:
 
 	await get_tree().process_frame
 	await get_tree().process_frame
-	force_player_camera()
 
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true

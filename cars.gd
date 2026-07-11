@@ -38,7 +38,8 @@ var class_lists := {
 		"Eisenach Monarch",
 		"Schroder Kaiser",
 		"Kuro Vault",
-		"Strandberg Turbo"
+		"Strandberg Turbo",
+		"Eisenach Suppressor"
 	],
 	"sport": [
 		"Bartoli Cruiser",
@@ -89,7 +90,7 @@ var car_scene_paths := {
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
 	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
-	"Kronstadt Blade":"res://Scenes/cls_350_cdi.tscn",
+	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn",
 
 	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
@@ -138,6 +139,13 @@ var car_colors := {
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
 	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
+	"Eisenach Suppressor":[
+	Color8(75,78,71),     # ⭐ Default — Graphite (boring executive)
+	Color8(180,180,180),  # Silver
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,70,120)      # Deep Blue
+],
+
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],

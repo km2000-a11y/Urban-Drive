@@ -33,6 +33,13 @@ var car_colors := {
 	Color8(60,60,60),     # Dark Grey
 	Color8(0,80,160)      # Deep Blue
 ],
+"Eisenach Suppressor":[
+	Color8(75,78,71),     # ⭐ Default — Graphite (boring executive)
+	Color8(180,180,180),  # Silver
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,70,120)      # Deep Blue
+],
+
 
 
 	"Brutus Mauler":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
@@ -104,7 +111,13 @@ var urban_list = [
 	"Kestrel Speedster",
 	"Eisenach Roadstar",
 ]
-var sedans_list = ["Eisenach Monarch", "Schroder Kaiser", "Kuro Vault", 	"Strandberg Turbo" ]
+var sedans_list = [
+	"Eisenach Monarch",
+	"Schroder Kaiser",
+	"Kuro Vault",
+	"Strandberg Turbo",
+	"Eisenach Suppressor"
+]
 var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", 	"Berkshire Blunt", "Berkshire Tempest", "Schroder Atrix Sport"]
 var sport_racing_list = ["Eisenach Goliath", "Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
 var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine", "Brutus Predator"]
@@ -217,11 +230,18 @@ var sedans = {
 		"ENGINE: V8 4.3L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Strandberg Turbo":[
-	"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
-	"0-100 KM/H: 5.4s", "TOP SPEED: 248 KM/H",
-	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-]
+		"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
+		"0-100 KM/H: 5.9s", "TOP SPEED: 250 KM/H",
+		"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	],   # ⭐ COMMA HERE
+
+	"Eisenach Suppressor":[
+		"", "Country: Germany", "HP: 272", "WEIGHT: 1660 KG",
+		"0-100 KM/H: 5.7s", "TOP SPEED: 245 KM/H",
+		"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	]
 }
+
 
 var sport = {
 	"Schroder Atrix Sport":[
@@ -345,7 +365,8 @@ var car_scene_paths = {
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Brutus Predator":"res://Scenes/saleen_s7.tscn",
-	"Kuro Zephyr":"res://Scenes/lexus_is250.tscn"
+	"Kuro Zephyr":"res://Scenes/lexus_is250.tscn",
+	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn"
 }
 
 # -------------------------

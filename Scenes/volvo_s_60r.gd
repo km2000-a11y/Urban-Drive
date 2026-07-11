@@ -3,17 +3,17 @@ extends CarController
 # COSMETIC INFO (UI only)
 var def_car_name := "Strandberg Turbo"
 var country := "Sweden"
-var engine := "L5 2.5L Turbo"
+var engine := "L5 2.5L"
 var weight_kg := 1667
-var zero_to_hundred_display := 5.4
+var zero_to_hundred_display := 5.9
 
 func _ready():
 	# GAMEPLAY STATS
 	mass = 1667.0
 	horsepower = 300
 	max_rpm = 6500.0
-	zero_to_hundred = 5.4
-	top_speed_kmh = 248
+	zero_to_hundred = 5.9
+	top_speed_kmh = 250
 	turn_speed = 2.75
 	brake_strength = 12.2
 	lateral_friction = 1.11
