@@ -257,12 +257,12 @@ material_override = SubResource("StandardMaterial3D_tvwnf")
 mesh = SubResource("BoxMesh_h734q")
 
 [node name="MeshInstance3D18" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.349542, 0.361758, -0.153231)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.349542, 0.267372, -0.153231)
 material_override = SubResource("StandardMaterial3D_qhjap")
 mesh = SubResource("CylinderMesh_vxxa2")
 
 [node name="MeshInstance3D19" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.326533, 0.361758, -0.153231)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.326533, 0.226555, -0.153231)
 material_override = SubResource("StandardMaterial3D_qhjap")
 mesh = SubResource("CylinderMesh_vxxa2")
 

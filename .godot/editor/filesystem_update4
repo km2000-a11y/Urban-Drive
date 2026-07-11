@@ -1,5 +1,9 @@
+res://Scenes/saleen_s7.tscn
+res://Scripts/bmw_m_5_e_60.gd
+res://cars.gd
+res://Scripts/car_select.gd
+res://Scripts/saleen_s_7.gd
 res://main.tscn
-res://normal_race_manager.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -35,8 +39,7 @@ res://Scenes/win_screen_radar.tscn
 res://Scenes/leaderboard.tscn
 res://Scenes/win_screen_duel.tscn
 res://Scenes/morgan_aero_8.tscn
-res://Scenes/saleen_s7.tscn
-res://Scenes/bmw_m5_e60.tscn
+res://Scenes/bmw_m6.tscn
 res://Scenes/audi_tt_rs.tscn
 res://Scenes/volvo_s60r.tscn
 res://Scenes/lexus_is250.tscn
@@ -46,8 +49,3 @@ res://Scenes/HUD.tscn
 res://Scenes/start.tscn
 res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
-res://Scripts/audi_a8_42_2004.gd
-res://cars.gd
-res://Scripts/chevelle_ss_454_1970.gd
-res://Scenes/lexus_lx_470_2004.gd
-res://Scenes/bmw_m6.tscn

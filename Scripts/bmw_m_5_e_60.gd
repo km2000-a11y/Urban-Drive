@@ -1,40 +1,43 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var def_car_name := "Eisenach Goliath"
-var country := "Germany"
+var def_car_name := "Mir Cars Precision"
+var country := "UAE"
 var engine := "V10 5.0L"
-var weight_kg := 1720
-var zero_to_hundred_display := 4.40
+var weight_kg := 1590
+var zero_to_hundred_display := 4.50
 
 func _ready():
-	# GAMEPLAY STATS
-	mass = 1720.0
-	horsepower = 500
-	max_rpm = 8250.0
-	zero_to_hundred = 4.4
+	# GAMEPLAY STATS — UAE-built high-revving track machine
+	mass = 1590.0
+	horsepower = 488
+	max_rpm = 8250.0               # Screaming V10 tuned for track dominance
+	zero_to_hundred = 4.5
 	top_speed_kmh = 307
-	turn_speed = 3.05
-	brake_strength = 14.2
-	lateral_friction = 1.12
+	turn_speed = 3.20              # Sharper than any sedan; precision-focused steering
+	brake_strength = 14.5          # Strong brakes for repeated high-speed stops
+	lateral_friction = 1.14        # High grip RWD setup for track stability
 	transmission = "Rear wheel drive"
 
-	# E60 M5-style handling (aggressive, high-r
-	# SMG III 7-speed single-clutch (violent shifts, short mid gears)
+	# Mir Cars 7-Speed Track Gearbox
+	# Short mid gears for acceleration, long 7th for top speed
 	gear_count = 7
 	gear_ratios = [
-		4.00,  # 1st - brutal launch, traction struggles
-		2.60,  # 2nd - early V10 scream
-		1.90,  # 3rd - main acceleration gear
-		1.44,  # 4th - highway pull begins
-		1.17,  # 5th - mid-high speed
-		0.94,  # 6th - long gear for 250–290 km/h
-		0.79   # 7th - overdrive for 307 km/h
+		4.05,  # 1st - explosive launch, traction-limited
+		2.65,  # 2nd - early V10 scream
+		1.92,  # 3rd - main acceleration gear
+		1.46,  # 4th - high-speed pull begins
+		1.18,  # 5th - mid-high speed
+		0.96,  # 6th - long gear for 240–290 km/h
+		0.80   # 7th - overdrive for 307 km/h
 	]
 
-	# SHIFT LOGIC (high-rev V10 insanity)
+	# SHIFT LOGIC — high-rev V10 aggression
 	shift_up_rpm = 8000
 	shift_down_rpm = 3000
+
+	# DISTINCT HANDLING PROFILE — razor-sharp track coupe
+	handling_type = "track_precision"
 
 	apply_stats()
 	print("Child READY loaded:", def_car_name)

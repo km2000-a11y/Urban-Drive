@@ -1,4 +1,3 @@
-
 extends Node
 
 var selected_car: String = ""          # scene path
@@ -14,7 +13,7 @@ var class_lists := {
 	"suv": [
 		"Straeda Pitbull",
 		"Colossus Behemoth",
-		"Kuro Fortress",
+		"Mir Cars Nightwolf",
 		"Colossus Titan Max"
 	],
 	"compact": [
@@ -24,7 +23,7 @@ var class_lists := {
 		"Straeda B32"
 	],
 	"muscle": [
-		"Brutus Mauler",
+		"Mir Cars Hutch",
 		"Brutus Viper"
 	],
 	"urban": [
@@ -36,7 +35,7 @@ var class_lists := {
 	],
 	"sedans": [
 		"Eisenach Monarch",
-		"Schroder Kaiser",
+		"Mir Cars Transporter",
 		"Kuro Vault",
 		"Strandberg Turbo",
 		"Eisenach Suppressor"
@@ -49,7 +48,7 @@ var class_lists := {
 		"Berkshire Blunt"
 	],
 	"sport_racing": [
-		"Eisenach Goliath",
+		"Mir Cars Precision",
 		"Kestrel Battleaxe",
 		"Linetti Shepherd",
 		"Brutus Venom"
@@ -58,7 +57,7 @@ var class_lists := {
 		"Linetti Terror",
 		"Linetti Firestorm",
 		"Kestrel Guillotine",
-		"Brutus Predator"
+		"Mir Cars Raptor"
 	],
 	"special": [
 		"Bartoli Cruiser Interceptor"
@@ -68,7 +67,7 @@ var class_lists := {
 var car_scene_paths := {
 	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
 	"Colossus Behemoth":"res://Scenes/hummer_h2.tscn",
-	"Kuro Fortress":"res://Scenes/lexus_lx470.tscn",
+	"Mir Cars Nightwolf":"res://Scenes/lexus_lx470.tscn",
 	"Straeda Pitbull":"res://Scenes/vw_touareg_v10.tscn",
 
 	"Schroder Atrix Q32":"res://Scenes/audi_tt.tscn",
@@ -85,10 +84,10 @@ var car_scene_paths := {
 	"Strandberg Turbo":"res://Scenes/volvo_s60r.tscn",
 
 	"Brutus Viper":"res://Scenes/gt500.tscn",
-	"Brutus Mauler":"res://Scenes/chevelle_ss.tscn",
+	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
 
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
-	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
+	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn",
 
@@ -97,7 +96,7 @@ var car_scene_paths := {
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 
-	"Eisenach Goliath":"res://Scenes/bmw_m6.tscn",
+	"Mir Cars Precision":"res://Scenes/bmw_m6.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
@@ -105,14 +104,15 @@ var car_scene_paths := {
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
-	"Brutus Predator":"res://Scenes/saleen_s7.tscn",
+	"Mir Cars Raptor":"res://Scenes/saleen_s7.tscn",
+
 	"Bartoli Cruiser Interceptor": "res://Scenes/granturismo_police.tscn"
 }
 
 var car_colors := {
 	"Straeda Pitbull":[Color8(128,128,0), Color8(90,90,90), Color8(180,150,80), Color8(0,70,40)],
 	"Colossus Behemoth":[Color8(215,255,1), Color8(255,255,255), Color8(200,180,120), Color8(160,0,0)],
-	"Kuro Fortress":[Color8(0,0,192), Color8(255,255,255), Color8(64,64,64), Color8(0,80,160)],
+	"Mir Cars Nightwolf":[Color8(40,40,40), Color8(200,180,120), Color8(0,60,120), Color8(160,0,0)],
 	"Colossus Titan Max":[Color8(255,0,0), Color8(180,180,180), Color8(210,180,90), Color8(120,40,40)],
 
 	"Zenith Horizon":[Color8(255,116,49), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
@@ -120,13 +120,13 @@ var car_colors := {
 	"Straeda B32":[Color8(132,132,132), Color8(255,255,255), Color8(255,140,0), Color8(0,120,200)],
 
 	"Kuro Zephyr":[
-		Color8(240,240,240),   # Pearl Cream
-		Color8(120,20,20),     # Crimson Garnet
-		Color8(0,110,130),     # Teal Mist
-		Color8(70,70,70)       # Graphite Shadow
+		Color8(240,240,240),
+		Color8(120,20,20),
+		Color8(0,110,130),
+		Color8(70,70,70)
 	],
 
-	"Brutus Mauler":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
+	"Mir Cars Hutch":[Color8(180,20,20), Color8(255,255,255), Color8(60,60,60), Color8(0,40,80)],
 	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
 
 	"Brutus Stingray":[Color8(255,255,0), Color8(255,255,255), Color8(255,0,0), Color8(160,160,160)],
@@ -137,15 +137,9 @@ var car_colors := {
 	"Strandberg Turbo":[Color8(133,82,141), Color8(255,255,255), Color8(60,60,60), Color8(0,80,160)],
 
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
-	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
+	"Mir Cars Transporter":[Color8(0,90,160), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
-	"Eisenach Suppressor":[
-	Color8(75,78,71),     # ⭐ Default — Graphite (boring executive)
-	Color8(180,180,180),  # Silver
-	Color8(60,60,60),     # Dark Grey
-	Color8(0,70,120)      # Deep Blue
-],
-
+	"Eisenach Suppressor":[Color8(75,78,71), Color8(180,180,180), Color8(60,60,60), Color8(0,70,120)],
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
@@ -153,7 +147,7 @@ var car_colors := {
 	"Schroder Atrix Sport":[Color8(0,192,192), Color8(255,255,255), Color8(60,60,60), Color8(0,120,160)],
 	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
 
-	"Eisenach Goliath":[Color8(255,99,71), Color8(255,255,255), Color8(60,60,60), Color8(0,0,0)],
+	"Mir Cars Precision":[Color8(255,80,0), Color8(255,255,255), Color8(60,60,60), Color8(0,120,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],
 	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)],
 	"Brutus Venom":[Color8(255,0,0), Color8(255,255,255), Color8(180,180,180), Color8(0,0,0)],
@@ -161,9 +155,7 @@ var car_colors := {
 	"Linetti Terror":[Color8(65,66,76), Color8(255,255,255), Color8(255,200,0), Color8(160,160,160)],
 	"Linetti Firestorm":[Color8(225,220,40), Color8(255,255,255), Color8(255,80,0), Color8(200,160,0)],
 	"Kestrel Guillotine":[Color8(120,0,180), Color8(255,255,255), Color8(200,160,255), Color8(60,0,90)],
-	"Brutus Predator":[Color8(225,20,40), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
-
-   
+	"Mir Cars Raptor":[Color8(225,20,40), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)]
 }
 
 func save_color():
@@ -184,7 +176,6 @@ func load_color():
 
 func pick_ai_car_path() -> String:
 	if selected_class == "":
-		# fallback: same car as player
 		return selected_car
 
 	var list: Array = class_lists.get(selected_class, [])
@@ -195,7 +186,6 @@ func pick_ai_car_path() -> String:
 	selected_ai_car_name = chosen_name
 
 	return car_scene_paths.get(chosen_name, selected_car)
-
 
 func get_ai_paths_for_class(_unused):
 	var result = []

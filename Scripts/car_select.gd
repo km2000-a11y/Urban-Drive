@@ -21,7 +21,7 @@ var rotation_speed := 1.0
 var car_colors := {
 	"Straeda Pitbull":[Color8(128,128,0), Color8(90,90,90), Color8(180,150,80), Color8(0,70,40)],
 	"Colossus Behemoth":[Color8(215,255,1), Color8(255,255,255), Color8(200,180,120), Color8(160,0,0)],
-	"Kuro Fortress":[Color8(0,0,192), Color8(255,255,255), Color8(64,64,64), Color8(0,80,160)],
+	"Mir Cars Nightwolf":[Color8(0,0,192), Color8(255,255,255), Color8(64,64,64), Color8(0,80,160)],
 	"Colossus Titan Max":[Color8(255,0,0), Color8(180,180,180), Color8(210,180,90), Color8(120,40,40)],
 
 	"Zenith Horizon":[Color8(255,116,49), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
@@ -42,7 +42,7 @@ var car_colors := {
 
 
 
-	"Brutus Mauler":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
+	"Mir Cars Hutch":[Color8(228,31,36), Color8(255,255,255), Color8(160,160,160), Color8(0,40,120)],
 	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
 
 	"Brutus Stingray":[Color8(255,255,0), Color8(255,255,255), Color8(255,0,0), Color8(160,160,160)],
@@ -53,7 +53,7 @@ var car_colors := {
 	
 
 	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
-	"Schroder Kaiser":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
+	"Mir Cars Transporter":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
@@ -69,7 +69,7 @@ var car_colors := {
 ],
 
 
-	"Eisenach Goliath":[
+	"Mir Cars Precision":[
 		Color8(255,99,71),    # ⭐ Default — tomato red
 		Color8(255,255,255),  # White
 		Color8(60,60,60),     # Dark grey
@@ -89,7 +89,7 @@ var car_colors := {
 	"Linetti Shepherd":[Color8(50,220,40), Color8(255,255,255), Color8(255,200,0), Color8(0,160,80)],
 	"Brutus Venom":[Color8(255,0,0), Color8(255,255,255), Color8(180,180,180), Color8(0,0,0)],
 	"Kestrel Guillotine":[Color8(120,0,180), Color8(255,255,255), Color8(200,160,255), Color8(60,0,90)],
-	"Brutus Predator":[
+	"Mir Cars Raptor":[
 		Color8(225,20,40),   # Deep red
 		Color8(255,255,255), # White
 		Color8(160,160,160), # Silver
@@ -101,9 +101,19 @@ var car_colors := {
 # CAR LISTS
 # -------------------------
 
-var suv_list = ["Colossus Titan Max", "Colossus Behemoth", "Kuro Fortress", "Straeda Pitbull"]
+var suv_list = [
+	"Colossus Titan Max",
+	"Colossus Behemoth",
+	"Mir Cars Nightwolf",
+	"Straeda Pitbull"
+]
+
 var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Kuro Zephyr"]
-var muscle_list = ["Brutus Viper", "Brutus Mauler"]
+var muscle_list = [
+	"Brutus Viper",
+	"Mir Cars Hutch"
+]
+
 var urban_list = [
 	"Kestrel Seabird",
 	"Brutus Stingray",
@@ -113,14 +123,27 @@ var urban_list = [
 ]
 var sedans_list = [
 	"Eisenach Monarch",
-	"Schroder Kaiser",
+	"Mir Cars Transporter",
 	"Kuro Vault",
 	"Strandberg Turbo",
 	"Eisenach Suppressor"
 ]
+
 var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", 	"Berkshire Blunt", "Berkshire Tempest", "Schroder Atrix Sport"]
-var sport_racing_list = ["Eisenach Goliath", "Kestrel Battleaxe", "Linetti Shepherd", "Brutus Venom"]
-var supercars_list = ["Linetti Terror", "Linetti Firestorm", "Kestrel Guillotine", "Brutus Predator"]
+var sport_racing_list = [
+	"Mir Cars Precision",
+	"Kestrel Battleaxe",
+	"Linetti Shepherd",
+	"Brutus Venom"
+]
+
+var supercars_list = [
+	"Linetti Terror",
+	"Linetti Firestorm",
+	"Kestrel Guillotine",
+	"Mir Cars Raptor"
+]
+
 
 # -------------------------
 # CAR STATS (PP omitted)
@@ -137,11 +160,11 @@ var suv = {
 		"0-100 KM/H: 10.2s", "TOP SPEED: 208 KM/H",
 		"ENGINE: V8 6.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 	],
-	"Kuro Fortress":[
-		"", "Country: Japan", "HP: 235", "WEIGHT: 2560 KG",
-		"0-100 KM/H: 8.9s", "TOP SPEED: 203 KM/H",
-		"ENGINE: V8 4.7L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-	],
+	"Mir Cars Nightwolf":[
+	"", "Country: UAE", "HP: 247", "WEIGHT: 2668 KG",
+	"0-100 KM/H: 8.9s", "TOP SPEED: 203 KM/H",
+	"ENGINE: V8 6.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+],
 	"Straeda Pitbull":[
 		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
 		"0-100 KM/H: 7.8s", "TOP SPEED: 225 KM/H",
@@ -178,11 +201,11 @@ var muscle = {
 		"0-100 KM/H: 5.8s", "TOP SPEED: 225 KM/H",
 		"ENGINE: V8 7.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Brutus Mauler":[
-		"", "Country: USA", "HP: 360", "WEIGHT: 1780 KG",
-		"0-100 KM/H: 5.6s", "TOP SPEED: 232 KM/H",
-		"ENGINE: V8 7.4L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	]
+	"Mir Cars Hutch":[
+	"", "Country: UAE", "HP: 372", "WEIGHT: 1780 KG",
+	"0-100 KM/H: 5.6s", "TOP SPEED: 232 KM/H",
+	"ENGINE: V8 7.1L", "TRANSMISSION: REAR-WHEEL DRIVE"
+],
 }
 
 var urban_racers = {
@@ -219,11 +242,11 @@ var sedans = {
 		"0-100 KM/H: 6.6s", "TOP SPEED: 265 KM/H",
 		"ENGINE: V12 5.4L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Schroder Kaiser":[
-		"", "Country: Germany", "HP: 330", "WEIGHT: 1780 KG",
-		"0-100 KM/H: 6.2s", "TOP SPEED: 257 KM/H",
-		"ENGINE: V8 4.2L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-	],
+	"Mir Cars Transporter":[
+	"", "Country: UAE", "HP: 343", "WEIGHT: 1780 KG",
+	"0-100 KM/H: 6.2s", "TOP SPEED: 257 KM/H",
+	"ENGINE: V8 5.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+],
 	"Kuro Vault":[
 		"", "Country: Japan", "HP: 290", "WEIGHT: 1760 KG",
 		"0-100 KM/H: 6.3s", "TOP SPEED: 248 KM/H",
@@ -272,11 +295,11 @@ var sport = {
 }
 
 var sport_racing = {
-	"Eisenach Goliath":[
-		"", "Country: Germany", "HP: 500", "WEIGHT: 1720 KG",
-		"0-100 KM/H: 4.4s", "TOP SPEED: 307 KM/H",
-		"ENGINE: V10 5.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	],
+	"Mir Cars Precision":[
+	"", "Country: UAE", "HP: 488", "WEIGHT: 1590 KG",
+	"0-100 KM/H: 4.5s", "TOP SPEED: 307 KM/H",
+	"ENGINE: V10 5.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+],
 	"Kestrel Battleaxe":[
 		"", "Country: UK", "HP: 406", "WEIGHT: 1078 KG",
 		"0-100 KM/H: 3.8s", "TOP SPEED: 287 KM/H",
@@ -310,11 +333,11 @@ var supercars = {
 		"0-100 KM/H: 3.6s", "TOP SPEED: 315 KM/H",
 		"ENGINE: V6 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Brutus Predator":[
-		"", "Country: USA", "HP: 550", "WEIGHT: 1250 KG",
-		"0-100 KM/H: 3.7s", "TOP SPEED: 325 KM/H",
-		"ENGINE: V8 7.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	]
+	"Mir Cars Raptor":[
+	"", "Country: UAE", "HP: 532", "WEIGHT: 1378 KG",
+	"0-100 KM/H: 3.8s", "TOP SPEED: 327 KM/H",
+	"ENGINE: V8 7.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+]
 }
 
 # -------------------------
@@ -328,7 +351,7 @@ func _ready():
 var car_scene_paths = {
 	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
 	"Colossus Behemoth":"res://Scenes/hummer_h2.tscn",
-	"Kuro Fortress":"res://Scenes/lexus_lx470.tscn",
+	"Mir Cars Nightwolf":"res://Scenes/lexus_lx470.tscn",
 	"Straeda Pitbull":"res://Scenes/vw_touareg_v10.tscn",
 
 	"Schroder Atrix Q32":"res://Scenes/audi_tt.tscn",
@@ -344,10 +367,10 @@ var car_scene_paths = {
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
 	"Eisenach Compaque":"res://Scenes/bmw_120d.tscn",
 	"Brutus Viper":"res://Scenes/gt500.tscn",
-	"Brutus Mauler":"res://Scenes/chevelle_ss.tscn",
+	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
 
 	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
-	"Schroder Kaiser":"res://Scenes/audi_a8.tscn",
+	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 
 	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
@@ -356,7 +379,7 @@ var car_scene_paths = {
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 	"Strandberg Turbo":"res://Scenes/volvo_s60r.tscn",
 
-	"Eisenach Goliath":"res://Scenes/bmw_m5_e60.tscn",
+	"Mir Cars Precision":"res://Scenes/bmw_m6.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
@@ -364,7 +387,7 @@ var car_scene_paths = {
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
-	"Brutus Predator":"res://Scenes/saleen_s7.tscn",
+	"Mir Cars Raptor":"res://Scenes/saleen_s7.tscn",
 	"Kuro Zephyr":"res://Scenes/lexus_is250.tscn",
 	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn"
 }

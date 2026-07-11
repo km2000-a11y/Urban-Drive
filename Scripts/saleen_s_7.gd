@@ -1,40 +1,42 @@
 extends CarController
 
 # COSMETIC INFO (UI only)
-var def_car_name := "Brutus Predator"
-var country := "USA"
+var def_car_name := "Mir Cars Raptor"
+var country := "UAE"
 var engine := "V8 7.0L"
-var weight_kg := 1250
-var zero_to_hundred_display := 3.70
+var weight_kg := 1378
+var zero_to_hundred_display := 3.80
 
 func _ready():
-	# GAMEPLAY STATS
-	mass = 1250.0
-	horsepower = 550
-	max_rpm = 6800.0
-	zero_to_hundred = 3.7
-	top_speed_kmh = 325
-	turn_speed = 3.05
-	brake_strength = 14.2
-	lateral_friction = 1.18
+	# GAMEPLAY STATS — UAE-built analog supercar, lightweight & brutal
+	mass = 1378.0
+	horsepower = 532
+	max_rpm = 6800.0               # High-revving big V8 with explosive mid-range torque
+	zero_to_hundred = 3.8
+	top_speed_kmh = 327
+	turn_speed = 3.15              # Razor-sharp front end, lightweight rear behavior
+	brake_strength = 14.4          # Strong brakes for repeated high-speed runs
+	lateral_friction = 1.18        # High grip RWD setup for aggressive cornering
 	transmission = "Rear wheel drive"
 
-	# Saleen S7 handling (analog American supercar, razor sharp front, light rear)
-	# High downforce feel, very responsive steering, low weight behavior
-
-	# 6‑speed manual (race‑car gearing, strong acceleration, high top speed)
+	# Mir Cars 6-Speed Supercar Gearbox
+	# Short lower gears for acceleration, long 6th for top speed
 	gear_count = 6
 	gear_ratios = [
-		2.97,  # 1st - brutal V8 launch
-		2.07,  # 2nd - strong pull
-		1.43,  # 3rd
-		1.14,  # 4th
-		0.97,  # 5th
-		0.79   # 6th - long overdrive for 325 km/h
+		2.95,  # 1st - violent V8 launch, traction-limited
+		2.05,  # 2nd - strong pull into mid-range
+		1.42,  # 3rd - main acceleration gear
+		1.13,  # 4th - high-speed sweepers
+		0.96,  # 5th - mid-high speed
+		0.78   # 6th - long overdrive for 327 km/h
 	]
 
+	# SHIFT LOGIC — analog supercar aggression
 	shift_up_rpm = 6500
 	shift_down_rpm = 3000
+
+	# DISTINCT HANDLING PROFILE — lightweight, sharp, desert-born supercar
+	handling_type = "analog_supercar"
 
 	apply_stats()
 	print("Child READY loaded:", def_car_name)
