@@ -429,16 +429,14 @@ func _update_ai_inputs(delta: float) -> void:
 		return
 
 	var wp := waypoints[current_wp] as Node3D
-
-	var wp_forward := -wp.transform.basis.z
-	wp_forward.y = 0.0
-	wp_forward = wp_forward.normalized()
 	var target := wp.global_position
 
 	var to_wp := target - global_position
 	to_wp.y = 0.0
 
 	var dist := to_wp.length()
+
+	# skip waypoint if too close
 	if dist < 6.0:
 		current_wp = (current_wp + 1) % waypoints.size()
 		return
@@ -448,45 +446,42 @@ func _update_ai_inputs(delta: float) -> void:
 	var forward := -transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-	
-	# --- AI SEAM IGNORE + UNSTICK ---
+
+	# --- NEVER REVERSE ---
+	var dot := forward.dot(dir)
+
+	# waypoint behind the car
+	if dot < 0.0:
+		current_wp = (current_wp + 1) % waypoints.size()
+		return
+
+	# --- UNSTICK FROM WALLS ---
 	for i in range(get_slide_collision_count()):
 		var col := get_slide_collision(i)
 		var other := col.get_collider()
 
-		# Ignore props (CharacterBody3D)
 		if other is CharacterBody3D and not (other is CarController):
-			   	 		
-						continue
-
+			continue
 
 		var n := col.get_normal()
 		n.y = 0.0
 		n = n.normalized()
 
-		# Ignore micro seams
 		if n.length() < 0.35:
 			continue
 
-		var side_dot := transform.basis.x.normalized().dot(n)
-		var front_dot := forward.dot(n)
+		var push := velocity.dot(n)
+		if push > 0.0:
+			velocity -= n * push
 
-		# Ignore soft angled normals
-		if abs(side_dot) < 0.35 and front_dot > -0.45:
-			continue
-
-		# Unstick: remove inward velocity
-		var push_in := velocity.dot(n)
-		if push_in > 0.0:
-			velocity -= n * push_in
-
-
-
+	# --- STEERING ---
 	var angle := forward.signed_angle_to(dir, Vector3.UP)
 	ai_steer = clamp(angle * 2.0, -1.0, 1.0)
 
+	# --- THROTTLE ---
 	ai_throttle = 1.0
 
+	# --- CORNER BRAKING ---
 	if abs(angle) > 0.6:
 		ai_brake = 0.3
 	else:

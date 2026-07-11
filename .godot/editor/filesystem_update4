@@ -1,8 +1,3 @@
-res://Scenes/bmw_535d.tscn
-res://Scenes/bmw_535d.gd
-res://Scripts/car_select.gd
-res://cars.gd
-res://Scenes/volvo_s_60r.gd
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -48,6 +43,8 @@ res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
 res://Scenes/HUD.tscn
 res://Scenes/start.tscn
-res://main.gd
+res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
+res://main.gd
 res://normal_race_manager.gd
+res://Scripts/base_car.gd

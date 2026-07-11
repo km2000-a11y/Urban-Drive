@@ -34,17 +34,16 @@ func spawn_race(scene: Node) -> void:
 
 	hud = scene.get_node("HUD")
 
-	# PLAYER (same as DuelManager)
+	# PLAYER
 	var player_scene := load(player_car_path)
 	player_car = player_scene.instantiate() as CarController
-	player_car.is_ai = false        # 🔥 ADD / MOVE THIS LINE HERE
+	player_car.is_ai = false
 	player_car.global_position = player_spawn
 	player_car.controls_enabled = true
 	player_car.driver_name = "Player"
 	player_car.car_name = Cars.selected_car_name
 	force_player_camera()
 	scene.add_child(player_car)
-
 
 	_apply_player_color(player_car)
 
@@ -54,7 +53,7 @@ func spawn_race(scene: Node) -> void:
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
-	# AI CARS (DuelManager logic × 7)
+	# AI CARS
 	ai_cars.clear()
 	ai_laps.clear()
 
@@ -62,14 +61,17 @@ func spawn_race(scene: Node) -> void:
 		var ai_scene := load(ai_car_paths[i])
 		var ai_car := ai_scene.instantiate() as CarController
 		scene.add_child(ai_car)
+
+		if ai_car.has_node("Camera3D"):
+			var cam := ai_car.get_node("Camera3D")
+			cam.current = false
+
 		ai_car.global_position = ai_spawns[i]
 		ai_car.is_ai = true
 		ai_car.controls_enabled = true
-	
 
 		ai_car.driver_name = ai_car.ai_names[randi() % ai_car.ai_names.size()]
 		ai_car.car_name = ai_car_paths[i].get_file().get_basename()
-
 
 		_apply_random_ai_color(ai_car)
 
@@ -79,19 +81,19 @@ func spawn_race(scene: Node) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
-	# WAYPOINTS (same as DuelManager)
+	# WAYPOINTS
 	var wp_root := scene.find_child("Waypoints", true, false)
 	player_car.set_waypoints(wp_root)
 
 	for ai in ai_cars:
 		ai.set_waypoints(wp_root)
 
-	# START (same logic)
+	# START
 	player_laps = 0
 	race_active = true
 
 	hud.update_lap(1, total_laps)
-	hud.update_position(8, 8)   # player starts 8th
+	hud.update_position(8, 8)
 
 	print("NormalRaceManager: Race started.")
 	MusicManager.stop_music()
@@ -109,10 +111,28 @@ func register_lap(body: Node) -> void:
 	if car == null:
 		return
 
-	lap_cooldown = true
-	_start_lap_cooldown()
-
 	if car == player_car:
+		# only count lap if approaching WP0 from correct side and after last waypoint
+		if player_car.waypoints.size() > 0:
+			var wp0 := player_car.waypoints[0] as Node3D
+
+			var forward := -player_car.transform.basis.z
+			forward.y = 0.0
+			forward = forward.normalized()
+
+			var to_wp0 := wp0.global_position - player_car.global_position
+			to_wp0.y = 0.0
+			var dir := to_wp0.normalized()
+
+			var dot := forward.dot(dir)
+
+			# waypoint behind or not at last wp before lap line → ignore
+			if dot < 0.0:
+				return
+
+			if player_car.current_wp != player_car.waypoints.size() - 1:
+				return
+
 		player_laps += 1
 		print("Player lap:", player_laps)
 	else:
@@ -121,6 +141,8 @@ func register_lap(body: Node) -> void:
 			ai_laps[idx] += 1
 			print("AI", idx, "lap:", ai_laps[idx])
 
+	lap_cooldown = true
+	_start_lap_cooldown()
 	_check_finish()
 
 
@@ -210,7 +232,7 @@ func _apply_player_color(car: CarController) -> void:
 		var body := car.get_node("ModelRoot/Body")
 		for child in body.get_children():
 			if child is MeshInstance3D:
-				var mat :Material= child.get_active_material(0)
+				var mat :Material = child.get_active_material(0)
 				if mat is BaseMaterial3D:
 					mat.albedo_color = color
 
@@ -225,11 +247,12 @@ func _apply_random_ai_color(car: CarController) -> void:
 			var body := car.get_node("ModelRoot/Body")
 			for child in body.get_children():
 				if child is MeshInstance3D:
-					var mat :Material= child.get_active_material(0)
+					var mat :Material = child.get_active_material(0)
 					if mat is BaseMaterial3D:
 						mat = mat.duplicate()
 						child.set_surface_override_material(0, mat)
 						mat.albedo_color = random_color
+
 
 func force_player_camera():
 	if player_car and player_car.has_node("Camera3D"):
