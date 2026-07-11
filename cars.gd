@@ -97,7 +97,7 @@ var car_scene_paths := {
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 
-	"Eisenach Goliath":"res://Scenes/bmw_m5_e60.tscn",
+	"Eisenach Goliath":"res://Scenes/bmw_m6.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",

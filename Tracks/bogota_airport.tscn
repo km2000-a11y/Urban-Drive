@@ -312,7 +312,7 @@ material_override = SubResource("StandardMaterial3D_tarm0")
 mesh = SubResource("BoxMesh_x3vxy")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26446, 1.02666, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.026, 1.02666, 0)
 material_override = SubResource("StandardMaterial3D_tarm0")
 mesh = SubResource("BoxMesh_x3vxy")
 
@@ -1011,7 +1011,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_hcfb2")
 
 [node name="MeshInstance3D26" type="MeshInstance3D" parent="Rails"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.56133, 0.385639, -232.218)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.73843, 0.385639, -232.218)
 mesh = SubResource("BoxMesh_ntg2k")
 skeleton = NodePath("../..")
 
@@ -1021,7 +1021,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_hcfb2")
 
 [node name="MeshInstance3D27" type="MeshInstance3D" parent="Rails"]
-transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 4.90068, 0.291775, -236.48)
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 5.04237, 0.291775, -236.455)
 mesh = SubResource("BoxMesh_ntg2k")
 skeleton = NodePath("../..")
 
@@ -1031,7 +1031,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_hcfb2")
 
 [node name="MeshInstance3D28" type="MeshInstance3D" parent="Rails"]
-transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 5.58393, 0, -239.608)
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 5.80735, 0, -239.527)
 mesh = SubResource("BoxMesh_ntg2k")
 skeleton = NodePath("../..")
 
@@ -1041,7 +1041,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_hcfb2")
 
 [node name="MeshInstance3D29" type="MeshInstance3D" parent="Rails"]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 6.7976, 0, -241.587)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 6.86346, 0, -241.549)
 mesh = SubResource("BoxMesh_ntg2k")
 skeleton = NodePath("../..")
 

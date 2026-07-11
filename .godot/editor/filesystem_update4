@@ -1,4 +1,5 @@
 res://main.tscn
+res://normal_race_manager.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -45,6 +46,8 @@ res://Scenes/HUD.tscn
 res://Scenes/start.tscn
 res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
-res://main.gd
-res://normal_race_manager.gd
-res://Scripts/base_car.gd
+res://Scripts/audi_a8_42_2004.gd
+res://cars.gd
+res://Scripts/chevelle_ss_454_1970.gd
+res://Scenes/lexus_lx_470_2004.gd
+res://Scenes/bmw_m6.tscn

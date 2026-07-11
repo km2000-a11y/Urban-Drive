@@ -38,7 +38,7 @@ func spawn_race(scene: Node) -> void:
 	var player_scene := load(player_car_path)
 	player_car = player_scene.instantiate() as CarController
 	player_car.is_ai = false
-	player_car.global_position = player_spawn
+	player_car.global_transform = root.get_node("SpawnPoint").global_transform
 	player_car.controls_enabled = true
 	player_car.driver_name = "Player"
 	player_car.car_name = Cars.selected_car_name
@@ -65,8 +65,9 @@ func spawn_race(scene: Node) -> void:
 		if ai_car.has_node("Camera3D"):
 			var cam := ai_car.get_node("Camera3D")
 			cam.current = false
-
-		ai_car.global_position = ai_spawns[i]
+			
+		var spawn_node := root.get_node("AISpawnPoint" + str(i+1))
+		ai_car.global_transform = spawn_node.global_transform
 		ai_car.is_ai = true
 		ai_car.controls_enabled = true
 
@@ -111,39 +112,52 @@ func register_lap(body: Node) -> void:
 	if car == null:
 		return
 
+	# PLAYER LAP LOGIC FIX
 	if car == player_car:
-		# only count lap if approaching WP0 from correct side and after last waypoint
-		if player_car.waypoints.size() > 0:
-			var wp0 := player_car.waypoints[0] as Node3D
 
-			var forward := -player_car.transform.basis.z
-			forward.y = 0.0
-			forward = forward.normalized()
+		# must have waypoints
+		if player_car.waypoints.size() == 0:
+			return
 
-			var to_wp0 := wp0.global_position - player_car.global_position
-			to_wp0.y = 0.0
-			var dir := to_wp0.normalized()
+		var wp0 := player_car.waypoints[0] as Node3D
 
-			var dot := forward.dot(dir)
+		# forward direction
+		var forward := -player_car.transform.basis.z
+		forward.y = 0.0
+		forward = forward.normalized()
 
-			# waypoint behind or not at last wp before lap line → ignore
-			if dot < 0.0:
-				return
+		# direction to WP0
+		var to_wp0 := wp0.global_position - player_car.global_position
+		to_wp0.y = 0.0
+		var dir := to_wp0.normalized()
 
-			if player_car.current_wp != player_car.waypoints.size() - 1:
-				return
+		var dot := forward.dot(dir)
 
+		# waypoint behind the car → ignore lap
+		if dot < 0.0:
+			return
+
+		# must be at last waypoint before WP0
+		if player_car.current_wp != player_car.waypoints.size() - 1:
+			return
+
+		# now count lap
 		player_laps += 1
 		print("Player lap:", player_laps)
+
 	else:
+		# AI lap logic unchanged
 		var idx := ai_cars.find(car)
 		if idx != -1:
 			ai_laps[idx] += 1
 			print("AI", idx, "lap:", ai_laps[idx])
 
+	# cooldown only after valid lap
 	lap_cooldown = true
 	_start_lap_cooldown()
+
 	_check_finish()
+
 
 
 func _start_lap_cooldown() -> void:
