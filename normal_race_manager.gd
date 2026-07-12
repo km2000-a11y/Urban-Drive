@@ -261,15 +261,15 @@ func _apply_random_ai_color(car: CarController) -> void:
 func force_player_camera():
 	if player_car and player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
-		
-func _estimate_ai_finish_time(ai: CarController) -> int:
-	var lapline := main_scene.get_node("LapLine")
 
-	var remaining_dist: float = ai.distance_to_finish_line(lapline)
-	var ai_speed: float = ai.current_speed
+func _estimate_ai_finish_time(ai: CarController, ai_laps_done: int) -> int:
+	# Average lap time so far
+	var avg_lap_time :float= ai.total_race_time / max(ai_laps_done, 1)
 
-	if ai_speed < 1.0:
-		ai_speed = 1.0
+	# How many laps left
+	var laps_left := total_laps - ai_laps_done
 
-	var remaining_time_ms: int = int((remaining_dist / ai_speed) * 1000)
+	# Estimated remaining time
+	var remaining_time_ms := int(avg_lap_time * laps_left)
+
 	return ai.total_race_time + remaining_time_ms

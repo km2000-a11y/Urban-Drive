@@ -46,5 +46,3 @@ res://Scenes/start.tscn
 res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
 res://normal_race_manager.gd
-res://Scripts/base_car.gd
-res://lap_line.gd
