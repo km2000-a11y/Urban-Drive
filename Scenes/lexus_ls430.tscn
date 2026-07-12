@@ -42,7 +42,7 @@ subdivide_width = 1
 albedo_color = Color(0.752941, 0, 0.2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0cpdq"]
-size = Vector3(0.15, 0.1, 0.1)
+size = Vector3(0.15, 0.15, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrhpf"]
 albedo_color = Color(0.482353, 0.0117647, 0.137255, 1)
@@ -201,7 +201,7 @@ material_override = SubResource("StandardMaterial3D_7avg5")
 mesh = SubResource("BoxMesh_0cpdq")
 
 [node name="MeshInstance3D17" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319009, 0.504025, -0.681116)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.349627, 0.504025, -0.681116)
 material_override = SubResource("StandardMaterial3D_7avg5")
 mesh = SubResource("BoxMesh_0cpdq")
 
