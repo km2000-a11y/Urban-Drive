@@ -150,15 +150,20 @@ func _end_race(winner: String) -> void:
 	for ai in ai_cars:
 		ai.controls_enabled = false
 
+	# PLAYER TIME
 	RaceResults.add_result(player_car.driver_name, player_car.car_name, player_car.total_race_time)
 
+	# AI TIMES (ESTIMATED)
 	for i in range(ai_cars.size()):
-		RaceResults.add_result(ai_cars[i].driver_name, ai_cars[i].car_name, ai_cars[i].total_race_time)
+		var ai := ai_cars[i]
+		var ai_time := _estimate_ai_finish_time(ai, ai_laps[i])
+		RaceResults.add_result(ai.driver_name, ai.car_name, ai_time)
 
 	main_scene.show_finish(winner == "Player")
 	hud.visible = false
 
 	MusicManager.stop_music()
+
 
 
 

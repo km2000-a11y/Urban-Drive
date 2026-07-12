@@ -15,6 +15,7 @@ func _ready():
 	mode = Modes.mode
 	load_radar_best()
 	Cars.load_color()
+	MusicManager.play_race_music()
 
 	if mode == "Duel":
 		_setup_duel()

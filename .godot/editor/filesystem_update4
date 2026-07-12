@@ -45,3 +45,5 @@ res://Scenes/HUD.tscn
 res://Scenes/start.tscn
 res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
+res://main.gd
+res://normal_race_manager.gd
