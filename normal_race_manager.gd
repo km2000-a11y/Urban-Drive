@@ -173,7 +173,10 @@ func update_race() -> void:
 
 	hud.update_stopwatch(player_car.total_race_time)
 	hud.update_lap(player_laps + 1, total_laps)
-	hud.update_position(_calculate_position(), ai_cars.size() + 1)
+
+	if not lap_cooldown:
+		hud.update_position(_calculate_position(), ai_cars.size() + 1)
+
 
 func _distance_to_next_wp(car: CarController) -> float:
 	if car.waypoints.is_empty():
