@@ -140,31 +140,81 @@ func _check_finish() -> void:
 			_end_race("AI")
 			return
 
-
-
-
 func _end_race(winner: String) -> void:
 	race_active = false
-
 	player_car.controls_enabled = false
 	for ai in ai_cars:
 		ai.controls_enabled = false
 
-	# PLAYER TIME
-	RaceResults.add_result(player_car.driver_name, player_car.car_name, player_car.total_race_time)
+	# 1. Собираем данные всех участников
+	var participants = []
+	
+	# Считаем общий прогресс в вейпоинтах для точной сортировки
+	# (Кол-во кругов * общее кол-во WP + текущий WP)
+	var total_waypoints = player_car.waypoints.size()
 
-	# AI TIMES (ESTIMATED)
+	var p_progress = (player_laps * total_waypoints) + player_car.current_wp
+	participants.append({
+		"car_obj": player_car,
+		"name": player_car.driver_name,
+		"car_name": player_car.car_name,
+		"progress": p_progress,
+		"dist": _distance_to_next_wp(player_car),
+		"real_time": player_car.total_race_time,
+		"finished": player_laps >= total_laps
+	})
+
 	for i in range(ai_cars.size()):
-		var ai := ai_cars[i]
-		var ai_time := _estimate_ai_finish_time(ai, ai_laps[i])
-		RaceResults.add_result(ai.driver_name, ai.car_name, ai_time)
+		var ai = ai_cars[i]
+		var ai_progress = (ai_laps[i] * total_waypoints) + ai.current_wp
+		participants.append({
+			"car_obj": ai,
+			"name": ai.driver_name,
+			"car_name": ai.car_name,
+			"progress": ai_progress,
+			"dist": _distance_to_next_wp(ai),
+			"real_time": ai.total_race_time,
+			"finished": ai_laps[i] >= total_laps
+		})
+
+	# 2. Сортируем участников по реальному первенству
+	participants.sort_custom(func(a, b):
+		if a["progress"] != b["progress"]:
+			return a["progress"] > b["progress"]
+		return a["dist"] < b["dist"]
+	)
+
+	# 3. Генерируем времена на основе позиций
+	RaceResults.clear()
+	
+	var winner_time = participants[0]["real_time"]
+	
+	for i in range(participants.size()):
+		var p = participants[i]
+		var final_time : int
+		
+		if i == 0:
+			# Первый всегда получает свое реальное время
+			final_time = p["real_time"]
+		else:
+			if p["finished"]:
+				# Если этот AI тоже успел финишировать, пишем его реальное время
+				final_time = p["real_time"]
+			else:
+				# Если не финишировал, генерируем время:
+				# Время лидера + (разница в прогрессе * среднее время на 1 вейпоинт) + рандомный разброс
+				var progress_diff = participants[0]["progress"] - p["progress"]
+				var avg_time_per_wp = winner_time / max(participants[0]["progress"], 1)
+				
+				# Добавляем небольшую случайность (0.5 - 1.5 сек), чтобы не было слишком "математически"
+				var penalty = int(progress_diff * avg_time_per_wp) + (randi() % 2000 + 500)
+				final_time = winner_time + penalty
+		
+		RaceResults.add_result(p["name"], p["car_name"], final_time)
 
 	main_scene.show_finish(winner == "Player")
 	hud.visible = false
-
 	MusicManager.stop_music()
-
-
 
 
 func update_race() -> void:
@@ -173,10 +223,7 @@ func update_race() -> void:
 
 	hud.update_stopwatch(player_car.total_race_time)
 	hud.update_lap(player_laps + 1, total_laps)
-
-	if not lap_cooldown:
-		hud.update_position(_calculate_position(), ai_cars.size() + 1)
-
+	hud.update_position(_calculate_position(), ai_cars.size() + 1)
 
 func _distance_to_next_wp(car: CarController) -> float:
 	if car.waypoints.is_empty():
@@ -271,13 +318,25 @@ func force_player_camera():
 		player_car.get_node("Camera3D").current = true
 
 func _estimate_ai_finish_time(ai: CarController, ai_laps_done: int) -> int:
-	# Average lap time so far
+	# Base average lap time
 	var avg_lap_time :float= ai.total_race_time / max(ai_laps_done, 1)
-
-	# How many laps left
 	var laps_left := total_laps - ai_laps_done
 
-	# Estimated remaining time
-	var remaining_time_ms := int(avg_lap_time * laps_left)
+	# Progress inside current lap (0.0 to 1.0)
+	var wp_count := ai.waypoints.size()
+	var wp_progress := float(ai.current_wp) / float(max(wp_count - 1, 1))
+
+	# Distance factor (closer to next waypoint = more progress)
+	var dist := _distance_to_next_wp(ai)
+	var dist_factor :float= clamp(1.0 - (dist / 200.0), 0.0, 1.0)
+
+	# Combined progress (waypoint + distance)
+	var lap_progress :float= clamp((wp_progress * 0.7) + (dist_factor * 0.3), 0.0, 1.0)
+
+	# Remaining lap time reduced by progress
+	var remaining_lap_time := int(avg_lap_time * (1.0 - lap_progress))
+
+	# Total remaining time
+	var remaining_time_ms := remaining_lap_time + int(avg_lap_time * (laps_left - 1))
 
 	return ai.total_race_time + remaining_time_ms

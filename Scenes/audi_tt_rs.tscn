@@ -21,7 +21,7 @@ albedo_color = Color(0, 0, 0, 1)
 size = Vector3(0.7, 0.2, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dtqb8"]
-size = Vector3(0.8, 0.1, 0.2)
+size = Vector3(0.8, 0.1, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q3ki"]
 albedo_color = Color(1, 0.729412, 0, 1)
@@ -292,19 +292,19 @@ mesh = SubResource("PrismMesh_2nb3u")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, -4.9989e-08, 0.540767, 0.661094)
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, -4.9989e-08, 0.541702, 0.650409)
 material_override = SubResource("StandardMaterial3D_o383y")
 mesh = SubResource("BoxMesh_dtqb8")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, -4.9989e-08, 0.557472, 0.470155)
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, -4.9989e-08, 0.559264, 0.449675)
 material_override = SubResource("StandardMaterial3D_o383y")
 mesh = SubResource("BoxMesh_dtqb8")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -4.9989e-08, 0.528404, 0.248213)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -4.9989e-08, 0.54417, 0.250652)
 material_override = SubResource("StandardMaterial3D_o383y")
 mesh = SubResource("BoxMesh_dtqb8")
 skeleton = NodePath("../..")
