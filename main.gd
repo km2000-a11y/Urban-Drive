@@ -171,7 +171,8 @@ func _on_radar_trap_body_entered(body):
 
 		player_car.controls_enabled = false
 		win_screen_radar.show_win(speed, best_radar_speed)
-
+	finish_flash.flash()
+	_screech_to_halt()
 
 func load_radar_best():
 	if FileAccess.file_exists("user://radar_best.save"):
@@ -194,6 +195,13 @@ func disable_all_ai():
 		if node is CarController:
 			node.is_ai = false
 
+func _screech_to_halt():
+	for node in get_tree().get_nodes_in_group("cars"):
+		if node is CarController:
+			node.controls_enabled = false
+			node.hard_frozen = true
+			node.velocity = Vector3.ZERO
+
 
 # ---------------------------------------------------------
 # FINISH + LEADERBOARD
@@ -201,6 +209,8 @@ func disable_all_ai():
 func show_finish(player_won: bool):
 	finish_flash.visible = true
 	finish_flash.flash()
+	
+	_screech_to_halt()  
 
 	if leaderboard:
 		leaderboard.visible = true

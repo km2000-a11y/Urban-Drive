@@ -1,4 +1,5 @@
 res://main.tscn
+res://main.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -33,7 +34,6 @@ res://Scenes/mode_select.tscn
 res://Scenes/win_screen_radar.tscn
 res://Scenes/leaderboard.tscn
 res://Scenes/win_screen_duel.tscn
-res://Scenes/morgan_aero_8.tscn
 res://Scenes/saleen_s7.tscn
 res://Scenes/bmw_m6.tscn
 res://Scenes/audi_tt_rs.tscn
@@ -45,5 +45,5 @@ res://Scenes/HUD.tscn
 res://Scenes/start.tscn
 res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
-res://main.gd
-res://normal_race_manager.gd
+res://Scenes/morgan_aero_8.tscn
+res://Scripts/base_car.gd

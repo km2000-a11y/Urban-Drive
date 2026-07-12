@@ -12,6 +12,8 @@ var is_ai: bool = false
 var waypoint_root: Node3D = null
 var waypoints: Array[Node] = []
 var current_wp: int = 0
+var hard_frozen := false
+
 
 # --- AI INPUT ---
 var ai_throttle: float = 0.0
@@ -178,6 +180,11 @@ func _physics_process(delta: float) -> void:
 
 	_drive(delta, throttle_input, brake_input, steer_input)
 	total_race_time += int(delta * 1000)
+	
+	if hard_frozen:
+		velocity = Vector3.ZERO
+		return
+
 
 
 
