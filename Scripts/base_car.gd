@@ -515,7 +515,6 @@ func _find_closest_waypoint() -> int:
 			best_dist = d
 			best = i
 	return best
-	
 func _update_player_waypoint():
 	if is_ai:
 		return
@@ -526,8 +525,13 @@ func _update_player_waypoint():
 	var wp := waypoints[current_wp] as Node3D
 	var dist := global_position.distance_to(wp.global_position)
 
+	# DO NOT wrap at last waypoint (LapLine)
+	if current_wp == waypoints.size() - 1:
+		# Let NormalRaceManager handle lap + wrap
+		return
+
 	if dist < 6.0:
-		current_wp = (current_wp + 1) % waypoints.size()
+		current_wp = current_wp + 1
 
 func distance_to_finish_line(lapline: Node3D) -> float:
 	return global_position.distance_to(lapline.global_position)
