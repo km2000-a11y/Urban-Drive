@@ -265,6 +265,7 @@ func _calculate_position() -> int:
 		"dist": _distance_to_next_wp(player_car)
 	})
 
+
 	# AI
 	for i in range(ai_cars.size()):
 		var ai := ai_cars[i]
@@ -292,6 +293,7 @@ func _calculate_position() -> int:
 			return i + 1
 
 	return 1
+	
 
 
 
