@@ -131,14 +131,30 @@ func _start_lap_cooldown() -> void:
 
 
 func _check_finish() -> void:
-	if player_laps >= total_laps:
-		_end_race("Player")
+	if not race_active:
 		return
+
+	var player_finished := player_laps >= total_laps
+	var any_ai_finished := false
 
 	for i in range(ai_cars.size()):
 		if ai_laps[i] >= total_laps:
-			_end_race("AI")
-			return
+			any_ai_finished = true
+			break
+
+	if not player_finished and not any_ai_finished:
+		return
+
+	# Use your position logic to decide who is actually leading
+	var player_position := _calculate_position()
+	var winner_is_player := (player_position == 1)
+
+	if winner_is_player:
+		_end_race("Player")
+	else:
+		_end_race("AI")
+
+
 
 func _end_race(winner: String) -> void:
 	race_active = false

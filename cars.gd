@@ -20,7 +20,8 @@ var class_lists := {
 		"Kuro Zephyr",
 		"Zenith Horizon",
 		"Schroder Atrix Q32",
-		"Straeda B32"
+		"Straeda B32",
+		"Eisenach Compaque"
 	],
 	"muscle": [
 		"Mir Cars Hutch",
@@ -86,10 +87,11 @@ var car_scene_paths := {
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
 
-	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
+	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn",
+	"Eisenach Compaque":"res://Scenes/bmw_125.tscn",
 
 	"Schroder Atrix Sport":"res://Scenes/audi_tt_rs.tscn",
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
@@ -125,6 +127,12 @@ var car_colors := {
 		Color8(0,110,130),
 		Color8(70,70,70)
 	],
+	"Eisenach Suppressor":[
+	Color8(75,78,71),     # ⭐ Default — Graphite (boring executive)
+	Color8(180,180,180),  # Silver
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,70,120)      # Deep Blue
+],
 
 	"Mir Cars Hutch":[Color8(180,20,20), Color8(255,255,255), Color8(60,60,60), Color8(0,40,80)],
 	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
@@ -136,10 +144,21 @@ var car_colors := {
 	"Kuro Zephyr V6":[Color8(255,255,255), Color8(64,64,64), Color8(0,90,180), Color8(180,180,180)],
 	"Strandberg Turbo":[Color8(133,82,141), Color8(255,255,255), Color8(60,60,60), Color8(0,80,160)],
 
-	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
+		"Eisenach Monarch":[
+	Color8(0,40,80),     # Deep Executive Blue (default)
+	Color8(255,255,255), # White
+	Color8(180,180,180), # Silver
+	Color8(60,60,60)     # Graphite Grey
+],
 	"Mir Cars Transporter":[Color8(0,90,160), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
-	"Eisenach Suppressor":[Color8(75,78,71), Color8(180,180,180), Color8(60,60,60), Color8(0,70,120)],
+	"Eisenach Compaque":[
+	Color8(240,240,240),
+	Color8(0,60,120),
+	Color8(180,180,180),
+	Color8(120,0,0)
+],
+
 
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],

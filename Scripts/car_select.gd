@@ -39,6 +39,13 @@ var car_colors := {
 	Color8(60,60,60),     # Dark Grey
 	Color8(0,70,120)      # Deep Blue
 ],
+"Eisenach Compaque":[
+	Color8(240,240,240),
+	Color8(0,60,120),
+	Color8(180,180,180),
+	Color8(120,0,0)
+],
+
 
 
 
@@ -52,7 +59,12 @@ var car_colors := {
 	"Kuro Zephyr V6":[Color8(255,255,255), Color8(64,64,64), Color8(0,90,180), Color8(180,180,180)],
 	
 
-	"Eisenach Monarch":[Color8(0,0,128), Color8(255,255,255), Color8(180,180,180), Color8(0,60,120)],
+	"Eisenach Monarch":[
+	Color8(0,40,80),     # Deep Executive Blue (default)
+	Color8(255,255,255), # White
+	Color8(180,180,180), # Silver
+	Color8(60,60,60)     # Graphite Grey
+],
 	"Mir Cars Transporter":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
 
@@ -107,8 +119,14 @@ var suv_list = [
 	"Mir Cars Nightwolf",
 	"Straeda Pitbull"
 ]
+var compact_list = [
+	"Schroder Atrix Q32",
+	"Straeda B32",
+	"Zenith Horizon",
+	"Kuro Zephyr",
+	"Eisenach Compaque"
+]
 
-var compact_list = ["Schroder Atrix Q32", "Straeda B32", "Zenith Horizon", "Kuro Zephyr"]
 var muscle_list = [
 	"Brutus Viper",
 	"Mir Cars Hutch"
@@ -153,7 +171,7 @@ var suv = {
 	"Colossus Titan Max":[
 		"", "Country: USA", "HP: 195", "WEIGHT: 3500 KG",
 		"0-100 KM/H: 13.5s", "TOP SPEED: 170 KM/H",
-		"ENGINE: V8 6.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+		"ENGINE: V8 6.5L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
 	],
 	"Colossus Behemoth":[
 		"", "Country: USA", "HP: 316", "WEIGHT: 2900 KG",
@@ -163,12 +181,12 @@ var suv = {
 	"Mir Cars Nightwolf":[
 	"", "Country: UAE", "HP: 247", "WEIGHT: 2668 KG",
 	"0-100 KM/H: 8.9s", "TOP SPEED: 203 KM/H",
-	"ENGINE: V8 6.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	"ENGINE: V8 6.6L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 ],
 	"Straeda Pitbull":[
 		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
 		"0-100 KM/H: 7.8s", "TOP SPEED: 225 KM/H",
-		"ENGINE: V10 5.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+		"ENGINE: V10 5.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
 	]
 }
 
@@ -192,6 +210,11 @@ var compact = {
 	"", "Country: Japan", "HP: 204", "WEIGHT: 1600 KG",
 	"0-100 KM/H: 7.3s", "TOP SPEED: 234 KM/H",
 	"ENGINE: V6 2.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
+],
+"Eisenach Compaque":[
+	"", "Country: Germany", "HP: 215", "WEIGHT: 1450 KG",
+	"0-100 KM/H: 6.9s", "TOP SPEED: 238 KM/H",
+	"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 ]
 }
 
@@ -238,10 +261,10 @@ var urban_racers = {
 
 var sedans = {
 	"Eisenach Monarch":[
-		"", "Country: Germany", "HP: 322", "WEIGHT: 2050 KG",
-		"0-100 KM/H: 6.6s", "TOP SPEED: 265 KM/H",
-		"ENGINE: V12 5.4L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	],
+	"", "Country: Germany", "HP: 325", "WEIGHT: 1985 KG",
+	"0-100 KM/H: 6.4s", "TOP SPEED: 265 KM/H",
+	"ENGINE: V8 4.4L", "TRANSMISSION: REAR-WHEEL DRIVE"
+],
 	"Mir Cars Transporter":[
 	"", "Country: UAE", "HP: 343", "WEIGHT: 1780 KG",
 	"0-100 KM/H: 6.2s", "TOP SPEED: 257 KM/H",
@@ -261,7 +284,7 @@ var sedans = {
 	"Eisenach Suppressor":[
 		"", "Country: Germany", "HP: 272", "WEIGHT: 1660 KG",
 		"0-100 KM/H: 5.7s", "TOP SPEED: 245 KM/H",
-		"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+		"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
 
@@ -358,6 +381,8 @@ var car_scene_paths = {
 	"Straeda B32":"res://Scenes/new_beetle.tscn",
 	"Zenith Horizon":"res://Scenes/nissan_350z.tscn",
 	"Straeda G25":"res://Scenes/golf_v_gti.tscn",
+	"Eisenach Compaque":"res://Scenes/bmw_125.tscn",
+
 
 	"Kestrel Seabird":"res://Scenes/lotus_exige_s.tscn",
 	"Eisenach Roadstar":"res://Scenes/bmw_z4.tscn",
@@ -365,11 +390,10 @@ var car_scene_paths = {
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Kestrel Speedster":"res://Scenes/morgan_aero_8.tscn",
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
-	"Eisenach Compaque":"res://Scenes/bmw_120d.tscn",
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
 
-	"Eisenach Monarch":"res://Scenes/bmw_750il.tscn",
+	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
 	"Kuro Vault":"res://Scenes/lexus_ls430.tscn",
 

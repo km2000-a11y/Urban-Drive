@@ -1,5 +1,4 @@
 res://main.tscn
-res://main.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -47,3 +46,11 @@ res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scripts/base_car.gd
+res://Scripts/car_select.gd
+res://normal_race_manager.gd
+res://Scenes/bmw_125.tscn
+res://Scripts/bmw_125.gd
+res://cars.gd
+res://Scenes/bmw_745.tscn
+res://Scripts/bmw_745li.gd
+res://main.gd
