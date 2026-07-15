@@ -13,6 +13,7 @@ var waypoint_root: Node3D = null
 var waypoints: Array[Node] = []
 var current_wp: int = 0
 var hard_frozen := false
+static var used_ai_names := []
 
 
 # --- AI INPUT ---
@@ -141,9 +142,19 @@ func _ready() -> void:
 	nitro.hide()
 
 	if is_ai:
-		driver_name = ai_names[randi() % ai_names.size()]
+		# Build a fresh pool if empty
+		if used_ai_names.is_empty():
+			used_ai_names = ai_names.duplicate()
+
+		# Pick a unique name
+		var idx := randi() % used_ai_names.size()
+		driver_name = used_ai_names[idx]
+
+		# Remove it so no other AI can use it
+		used_ai_names.remove_at(idx)
 	else:
 		driver_name = "Player"
+
 
 func update_gears(speed_kmh: float) -> void:
 	if rpm > shift_up_rpm and current_gear < gear_count:

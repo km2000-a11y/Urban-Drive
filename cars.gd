@@ -14,7 +14,8 @@ var class_lists := {
 		"Straeda Pitbull",
 		"Colossus Behemoth",
 		"Mir Cars Nightwolf",
-		"Colossus Titan Max"
+		"Colossus Titan Max",
+		"Schroder Colosso"
 	],
 	"compact": [
 		"Kuro Zephyr",
@@ -46,7 +47,8 @@ var class_lists := {
 		"Berkshire V12-S",
 		"Berkshire Tempest",
 		"Schroder Atrix Sport",
-		"Berkshire Blunt"
+		"Berkshire Blunt",
+		"Schroder Fastback"
 	],
 	"sport_racing": [
 		"Mir Cars Precision",
@@ -70,6 +72,7 @@ var car_scene_paths := {
 	"Colossus Behemoth":"res://Scenes/hummer_h2.tscn",
 	"Mir Cars Nightwolf":"res://Scenes/lexus_lx470.tscn",
 	"Straeda Pitbull":"res://Scenes/vw_touareg_v10.tscn",
+	"Schroder Colosso":"res://Scenes/audi_q7.tscn",
 
 	"Schroder Atrix Q32":"res://Scenes/audi_tt.tscn",
 	"Straeda B32":"res://Scenes/new_beetle.tscn",
@@ -107,6 +110,7 @@ var car_scene_paths := {
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Mir Cars Raptor":"res://Scenes/saleen_s7.tscn",
+	"Schroder Fastback":"res://Scenes/audi_a5_tdi.tscn",
 
 	"Bartoli Cruiser Interceptor": "res://Scenes/granturismo_police.tscn"
 }
@@ -157,6 +161,18 @@ var car_colors := {
 	Color8(0,60,120),
 	Color8(180,180,180),
 	Color8(120,0,0)
+],
+"Schroder Fastback":[
+	Color8(180,180,180),   # Silver (default, executive)
+	Color8(0,120,200),     # ⭐ Sepang Blue (bright Audi sport color)
+	Color8(200,40,40),     # ⭐ Misano Red (deep sporty red)
+	Color8(255,140,0)      # ⭐ Samoa Orange (rare Audi exclusive)
+],
+"Schroder Colosso":[
+	Color8(180,180,180),   # Silver (default Audi SUV vibe)
+	Color8(255,255,255),   # White
+	Color8(60,60,60),      # Executive Graphite
+	Color8(0,70,120)       # Deep Blue (Audi signature)
 ],
 
 

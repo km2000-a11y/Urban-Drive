@@ -33,6 +33,13 @@ var car_colors := {
 	Color8(60,60,60),     # Dark Grey
 	Color8(0,80,160)      # Deep Blue
 ],
+"Schroder Fastback":[
+	Color8(180,180,180),   # Silver (default, executive)
+	Color8(0,120,200),     # ⭐ Sepang Blue (bright Audi sport color)
+	Color8(200,40,40),     # ⭐ Misano Red (deep sporty red)
+	Color8(255,140,0)      # ⭐ Samoa Orange (rare Audi exclusive)
+],
+
 "Eisenach Suppressor":[
 	Color8(75,78,71),     # ⭐ Default — Graphite (boring executive)
 	Color8(180,180,180),  # Silver
@@ -80,6 +87,12 @@ var car_colors := {
 	Color8(0,120,160)    # Deep Blue
 ],
 
+"Schroder Colosso":[
+	Color8(180,180,180),   # Silver (default Audi SUV vibe)
+	Color8(255,255,255),   # White
+	Color8(60,60,60),      # Executive Graphite
+	Color8(0,70,120)       # Deep Blue (Audi signature)
+],
 
 	"Mir Cars Precision":[
 		Color8(255,99,71),    # ⭐ Default — tomato red
@@ -117,8 +130,10 @@ var suv_list = [
 	"Colossus Titan Max",
 	"Colossus Behemoth",
 	"Mir Cars Nightwolf",
-	"Straeda Pitbull"
+	"Straeda Pitbull",
+	"Schroder Colosso"
 ]
+
 var compact_list = [
 	"Schroder Atrix Q32",
 	"Straeda B32",
@@ -147,7 +162,15 @@ var sedans_list = [
 	"Eisenach Suppressor"
 ]
 
-var sport_list = ["Bartoli Cruiser", "Berkshire V12-S", 	"Berkshire Blunt", "Berkshire Tempest", "Schroder Atrix Sport"]
+var sport_list = [
+	"Bartoli Cruiser",
+	"Berkshire V12-S",
+	"Berkshire Blunt",
+	"Berkshire Tempest",
+	"Schroder Atrix Sport",
+	"Schroder Fastback"
+]
+
 var sport_racing_list = [
 	"Mir Cars Precision",
 	"Kestrel Battleaxe",
@@ -179,15 +202,20 @@ var suv = {
 		"ENGINE: V8 6.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 	],
 	"Mir Cars Nightwolf":[
-	"", "Country: UAE", "HP: 247", "WEIGHT: 2668 KG",
+	"", "Country: UAE", "HP: 220", "WEIGHT: 2668 KG",
 	"0-100 KM/H: 8.9s", "TOP SPEED: 203 KM/H",
 	"ENGINE: V8 6.6L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 ],
 	"Straeda Pitbull":[
 		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
-		"0-100 KM/H: 7.8s", "TOP SPEED: 225 KM/H",
+		"0-100 KM/H: 7.3s", "TOP SPEED: 232 KM/H",
 		"ENGINE: V10 5.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
-	]
+	],
+	"Schroder Colosso":[
+	"", "Country: Germany", "HP: 237", "WEIGHT: 2340 KG",
+	"0-100 KM/H: 7.8s", "TOP SPEED: 217 KM/H",
+	"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
+]
 }
 
 var compact = {
@@ -314,7 +342,13 @@ var sport = {
 		"", "Country: UK", "HP: 406", "WEIGHT: 1832 KG",
 		"0-100 KM/H: 5.2s", "TOP SPEED: 286 KM/H",
 		"ENGINE: V8 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	]
+	],
+	"Schroder Fastback":[
+	"", "Country: Germany", "HP: 265", "WEIGHT: 1695 KG",
+	"0-100 KM/H: 5.6s", "TOP SPEED: 265 KM/H",
+	"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
+],
+
 }
 
 var sport_racing = {
@@ -392,6 +426,7 @@ var car_scene_paths = {
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
+	"Schroder Colosso":"res://Scenes/audi_q7.tscn",
 
 	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
@@ -413,7 +448,8 @@ var car_scene_paths = {
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Mir Cars Raptor":"res://Scenes/saleen_s7.tscn",
 	"Kuro Zephyr":"res://Scenes/lexus_is250.tscn",
-	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn"
+	"Eisenach Suppressor":"res://Scenes/bmw_535d.tscn",
+	"Schroder Fastback":"res://Scenes/audi_a5_tdi.tscn",
 }
 
 # -------------------------
