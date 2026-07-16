@@ -120,7 +120,9 @@ func register_lap(body: Node) -> void:
 		player_laps += 1
 
 		# Reset waypoint to WP0 for next lap
-		player_car.current_wp = 0
+		if player_car.current_wp >= player_car.waypoints.size() - 2:
+					player_car.current_wp = 0
+
 
 		# Optional: snap to nearest waypoint if needed
 		# player_car.current_wp = player_car._find_closest_waypoint()
@@ -149,25 +151,32 @@ func _check_finish() -> void:
 	if not race_active:
 		return
 
+	# Did player finish?
 	var player_finished := player_laps >= total_laps
-	var any_ai_finished := false
 
+	# Track AI finish status (but do NOT end race)
+	var ai_finished := false
 	for i in range(ai_cars.size()):
 		if ai_laps[i] >= total_laps:
-			any_ai_finished = true
+			ai_finished = true
+			# DO NOT end race here
 			break
 
-	if not player_finished and not any_ai_finished:
+	# If player has NOT finished → keep racing
+	if not player_finished:
 		return
 
-	# Use your position logic to decide who is actually leading
+	# Player finished → now determine final position
 	var player_position := _calculate_position()
-	var winner_is_player := (player_position == 1)
 
-	if winner_is_player:
+	# Win if player is 1st, 2nd, or 3rd
+	var player_won := (player_position <= 3)
+
+	if player_won:
 		_end_race("Player")
 	else:
 		_end_race("AI")
+
 
 
 
