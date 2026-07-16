@@ -277,54 +277,39 @@ func _distance_to_next_wp(car: CarController) -> float:
 	return car.global_position.distance_to(wp.global_position)
 
 
-
 func _calculate_position() -> int:
-	player_car.update_waypoint()
-	for ai in ai_cars:
-		ai.update_waypoint()
+	var total_wp := player_car.waypoints.size()
+	var cars := []
 
-	var positions := []
-
-	# PLAYER
-	positions.append({
+	# Player
+	cars.append({
 		"car": player_car,
-		"laps": player_laps,
-		"wp": player_car.current_wp,
+		"progress": player_laps * total_wp + player_car.current_wp,
 		"dist": _distance_to_next_wp(player_car)
 	})
-
 
 	# AI
 	for i in range(ai_cars.size()):
 		var ai := ai_cars[i]
-		positions.append({
+		cars.append({
 			"car": ai,
-			"laps": ai_laps[i],
-			"wp": ai.current_wp,
+			"progress": ai_laps[i] * total_wp + ai.current_wp,
 			"dist": _distance_to_next_wp(ai)
 		})
 
-	# SORT
-	positions.sort_custom(func(a, b):
-		if a["laps"] != b["laps"]:
-			return a["laps"] > b["laps"]
-
-		if a["wp"] != b["wp"]:
-			return a["wp"] > b["wp"]
-
+	# Sort by progress first, then distance
+	cars.sort_custom(func(a, b):
+		if a["progress"] != b["progress"]:
+			return a["progress"] > b["progress"]
 		return a["dist"] < b["dist"]
 	)
 
-	# FIND PLAYER
-	for i in range(positions.size()):
-		if positions[i]["car"] == player_car:
+	# Find player position
+	for i in range(cars.size()):
+		if cars[i]["car"] == player_car:
 			return i + 1
 
 	return 1
-	
-
-
-
 
 
 
