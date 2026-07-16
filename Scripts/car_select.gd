@@ -344,8 +344,8 @@ var sport = {
 		"ENGINE: V8 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Schroder Fastback":[
-	"", "Country: Germany", "HP: 265", "WEIGHT: 1695 KG",
-	"0-100 KM/H: 5.6s", "TOP SPEED: 265 KM/H",
+	"", "Country: Germany", "HP: 313", "WEIGHT: 1695 KG",
+	"0-100 KM/H: 5.2s", "TOP SPEED: 265 KM/H",
 	"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
 ],
 

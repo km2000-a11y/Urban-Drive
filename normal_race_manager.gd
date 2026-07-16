@@ -103,6 +103,7 @@ func register_lap(body: Node) -> void:
 	if not race_active or lap_cooldown:
 		return
 
+	# Find the CarController
 	var car := body
 	while car != null and not (car is CarController):
 		car = car.get_parent()
@@ -110,16 +111,30 @@ func register_lap(body: Node) -> void:
 	if car == null:
 		return
 
+	# Prevent double-trigger
 	lap_cooldown = true
 	_start_lap_cooldown()
 
+	# --- PLAYER LAP ---
 	if car == player_car:
 		player_laps += 1
+
+		# Reset waypoint to WP0 for next lap
+		player_car.current_wp = 0
+
+		# Optional: snap to nearest waypoint if needed
+		# player_car.current_wp = player_car._find_closest_waypoint()
+
+		print("Player lap:", player_laps)
+
+	# --- AI LAP ---
 	else:
 		var idx := ai_cars.find(car)
 		if idx != -1:
 			ai_laps[idx] += 1
+			ai_cars[idx].current_wp = 0   # reset AI waypoint too
 
+	# Check finish
 	_check_finish()
 
 
@@ -255,6 +270,10 @@ func _distance_to_next_wp(car: CarController) -> float:
 
 
 func _calculate_position() -> int:
+	player_car.update_waypoint()
+	for ai in ai_cars:
+		ai.update_waypoint()
+
 	var positions := []
 
 	# PLAYER

@@ -504,6 +504,11 @@ func _update_ai_inputs(delta: float) -> void:
 		ai_brake = 0.3
 	else:
 		ai_brake = 0.0
+func update_waypoint():
+	if is_ai:
+		_update_ai_waypoint()
+	else:
+		_update_player_waypoint()
 
 func _find_nearest_car() -> CarController:
 	var nearest: CarController = null
@@ -550,6 +555,34 @@ func _update_player_waypoint():
 
 	if dist < 6.0:
 		current_wp = current_wp + 1
+func _update_ai_waypoint():
+	if waypoints.is_empty():
+		return
+
+	var wp := waypoints[current_wp] as Node3D
+	var target := wp.global_position
+
+	var to_wp := target - global_position
+	to_wp.y = 0.0
+
+	var dist := to_wp.length()
+
+	# skip waypoint if too close
+	if dist < 6.0:
+		current_wp = (current_wp + 1) % waypoints.size()
+		return
+
+	var dir := to_wp.normalized()
+
+	var forward := -transform.basis.z
+	forward.y = 0.0
+	forward = forward.normalized()
+
+	# waypoint behind the car
+	var dot := forward.dot(dir)
+	if dot < 0.0:
+		current_wp = (current_wp + 1) % waypoints.size()
+		return
 
 func distance_to_finish_line(lapline: Node3D) -> float:
 	return global_position.distance_to(lapline.global_position)

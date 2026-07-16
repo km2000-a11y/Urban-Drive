@@ -1,9 +1,6 @@
-res://Scenes/audi_a5_tdi.tscn
 res://Scripts/audi_a_5_tdi.gd
-res://Scenes/audi_tt_rs.gd
-res://cars.gd
-res://Scripts/car_select.gd
 res://main.tscn
+res://Scripts/car_select.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -51,8 +48,7 @@ res://Scenes/bmw_535d.tscn
 res://Tracks/chernobyl.tscn
 res://Scenes/morgan_aero_8.tscn
 res://Scenes/bmw_125.tscn
-res://Scripts/base_car.gd
-res://normal_race_manager.gd
-res://Scripts/vw_touareg_v10_tdi_2007.gd
+res://Scenes/audi_a5_tdi.tscn
 res://Scenes/audi_q7.tscn
-res://Scripts/audi_q_7.gd
+res://normal_race_manager.gd
+res://Scripts/base_car.gd
