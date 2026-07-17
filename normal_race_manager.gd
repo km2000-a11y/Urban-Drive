@@ -118,10 +118,9 @@ func register_lap(body: Node) -> void:
 	# --- PLAYER LAP ---
 	if car == player_car:
 		player_laps += 1
+		# Do NOT reset current_wp here
 
-		# Reset waypoint to WP0 for next lap
-		if player_car.current_wp >= player_car.waypoints.size() - 2:
-					player_car.current_wp = 0
+
 
 
 		# Optional: snap to nearest waypoint if needed
@@ -327,21 +326,36 @@ func _apply_player_color(car: CarController) -> void:
 
 
 func _apply_random_ai_color(car: CarController) -> void:
-	var name := car.car_name
-	if Cars.car_colors.has(name):
-		var palette: Array = Cars.car_colors[name]
-		var random_color: Color = palette[randi() % palette.size()]
+	var name: String = car.car_name
 
-		if car.has_node("ModelRoot/Body"):
-			var body := car.get_node("ModelRoot/Body")
-			for child in body.get_children():
-				if child is MeshInstance3D:
-					var mat :Material= child.get_active_material(0)
-					if mat is BaseMaterial3D:
-						mat = mat.duplicate()
-						child.set_surface_override_material(0, mat)
-						mat.albedo_color = random_color
+	# AI must ONLY use Cars.car_colors
+	if not Cars.car_colors.has(name):
+		return
 
+	var palette: Array = Cars.car_colors[name]
+	if palette.is_empty():
+		return
+
+	var random_color: Color = palette[randi() % palette.size()]
+
+	if car.has_node("ModelRoot/Body"):
+		var body := car.get_node("ModelRoot/Body")
+
+		for child in body.get_children():
+			if child is MeshInstance3D:
+				var mesh_instance: MeshInstance3D = child
+				var mesh: Mesh = mesh_instance.mesh
+				if mesh == null:
+					return
+
+				var surface_count: int = mesh.get_surface_count()
+
+				# Create a brand-new material that ignores the original
+				var new_mat: StandardMaterial3D = StandardMaterial3D.new()
+				new_mat.albedo_color = random_color
+
+				for s in range(surface_count):
+					mesh_instance.set_surface_override_material(s, new_mat)
 
 
 func force_player_camera():

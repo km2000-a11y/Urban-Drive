@@ -11,61 +11,74 @@ var selected_class: String = ""
 
 var class_lists := {
 	"suv": [
-		"Straeda Pitbull",
+		"Schroder Colosso",
 		"Colossus Behemoth",
 		"Mir Cars Nightwolf",
-		"Colossus Titan Max",
-		"Schroder Colosso"
+		"Colossus Titan Max"
 	],
+
 	"compact": [
-		"Kuro Zephyr",
 		"Zenith Horizon",
 		"Schroder Atrix Q32",
 		"Straeda B32",
+		"Kuro Zephyr",
 		"Eisenach Compaque"
 	],
+
 	"muscle": [
 		"Mir Cars Hutch",
 		"Brutus Viper"
 	],
+
 	"urban": [
 		"Brutus Stingray",
 		"Kestrel Speedster",
 		"Kestrel Seabird",
 		"Kuro Zephyr V6",
-		"Eisenach Roadstar",
+		"Eisenach Roadstar"
 	],
+
 	"sedans": [
 		"Eisenach Monarch",
 		"Mir Cars Transporter",
 		"Kuro Vault",
-		"Strandberg Turbo",
-		"Eisenach Suppressor"
+		"Strandberg Turbo"
 	],
+
 	"sport": [
 		"Bartoli Cruiser",
 		"Berkshire V12-S",
 		"Berkshire Tempest",
 		"Schroder Atrix Sport",
-		"Berkshire Blunt",
-		"Schroder Fastback"
+		"Berkshire Blunt"
 	],
+
 	"sport_racing": [
 		"Mir Cars Precision",
 		"Kestrel Battleaxe",
 		"Linetti Shepherd",
 		"Brutus Venom"
 	],
+
 	"supercars": [
 		"Linetti Terror",
 		"Linetti Firestorm",
 		"Kestrel Guillotine",
 		"Mir Cars Raptor"
 	],
+
+	"torque_monsters": [
+		"Straeda Pitbull",
+		"Eisenach Suppressor",
+		"Eisenach Black Panda",
+		"Schroder Fastback"
+	],
+
 	"special": [
 		"Bartoli Cruiser Interceptor"
 	]
 }
+
 
 var car_scene_paths := {
 	"Colossus Titan Max":"res://Scenes/hummer_h1.tscn",
@@ -100,6 +113,7 @@ var car_scene_paths := {
 	"Bartoli Cruiser":"res://Scenes/granturismo.tscn",
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
+	"Eisenach Black Panda":"res://Scenes/bmw_330d.tscn",
 
 	"Mir Cars Precision":"res://Scenes/bmw_m6.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",

@@ -140,26 +140,39 @@ func _apply_player_color(car: CarController) -> void:
 					mat.albedo_color = color
 
 
+
 func _apply_random_ai_color(car: CarController) -> void:
-	var name := Cars.selected_ai_car_name
-	if name == Cars.selected_car_name:
+	var name: String = car.car_name
+
+	# AI must ONLY use Cars.car_colors
+	if not Cars.car_colors.has(name):
 		return
 
-	if Cars.car_colors.has(name):
-		var palette: Array = Cars.car_colors[name]
-		var random_color: Color = palette[randi() % palette.size()]
+	var palette: Array = Cars.car_colors[name]
+	if palette.is_empty():
+		return
 
-		if car.has_node("ModelRoot/Body"):
-			var body := car.get_node("ModelRoot/Body")
-			for child in body.get_children():
-				if child is MeshInstance3D:
-					var mat :Material= child.get_active_material(0)
-					if mat is BaseMaterial3D:
-						mat = mat.duplicate()
-						child.set_surface_override_material(0, mat)
-						mat.albedo_color = random_color
+	var random_color: Color = palette[randi() % palette.size()]
 
+	if car.has_node("ModelRoot/Body"):
+		var body := car.get_node("ModelRoot/Body")
 
+		for child in body.get_children():
+			if child is MeshInstance3D:
+				var mesh_instance: MeshInstance3D = child
+				var mesh: Mesh = mesh_instance.mesh
+				if mesh == null:
+					return
+
+				var surface_count: int = mesh.get_surface_count()
+
+				# Create a brand-new material that ignores the original
+				var new_mat: StandardMaterial3D = StandardMaterial3D.new()
+				new_mat.albedo_color = random_color
+
+				for s in range(surface_count):
+					mesh_instance.set_surface_override_material(s, new_mat)
+					
 func update_duel() -> void:
 	if not duel_active:
 		return

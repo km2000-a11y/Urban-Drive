@@ -33,6 +33,13 @@ var car_colors := {
 	Color8(60,60,60),     # Dark Grey
 	Color8(0,80,160)      # Deep Blue
 ],
+"Eisenach Black Panda":[
+	Color8(40,40,40),     # ⭐ Default — Panda Graphite
+	Color8(255,255,255),  # White
+	Color8(0,70,120),     # Deep Blue
+	Color8(180,180,180)   # Silver
+],
+
 "Schroder Fastback":[
 	Color8(180,180,180),   # Silver (default, executive)
 	Color8(0,120,200),     # ⭐ Sepang Blue (bright Audi sport color)
@@ -127,48 +134,46 @@ var car_colors := {
 # -------------------------
 
 var suv_list = [
-	"Colossus Titan Max",
+	"Schroder Colosso",
 	"Colossus Behemoth",
 	"Mir Cars Nightwolf",
-	"Straeda Pitbull",
-	"Schroder Colosso"
+	"Colossus Titan Max"
 ]
 
 var compact_list = [
+	"Zenith Horizon",
 	"Schroder Atrix Q32",
 	"Straeda B32",
-	"Zenith Horizon",
 	"Kuro Zephyr",
 	"Eisenach Compaque"
 ]
 
 var muscle_list = [
-	"Brutus Viper",
-	"Mir Cars Hutch"
+	"Mir Cars Hutch",
+	"Brutus Viper"
 ]
 
 var urban_list = [
-	"Kestrel Seabird",
 	"Brutus Stingray",
-	"Kuro Zephyr V6",
 	"Kestrel Speedster",
-	"Eisenach Roadstar",
+	"Kestrel Seabird",
+	"Kuro Zephyr V6",
+	"Eisenach Roadstar"
 ]
+
 var sedans_list = [
 	"Eisenach Monarch",
 	"Mir Cars Transporter",
 	"Kuro Vault",
-	"Strandberg Turbo",
-	"Eisenach Suppressor"
+	"Strandberg Turbo"
 ]
 
 var sport_list = [
 	"Bartoli Cruiser",
 	"Berkshire V12-S",
-	"Berkshire Blunt",
 	"Berkshire Tempest",
 	"Schroder Atrix Sport",
-	"Schroder Fastback"
+	"Berkshire Blunt"
 ]
 
 var sport_racing_list = [
@@ -185,11 +190,17 @@ var supercars_list = [
 	"Mir Cars Raptor"
 ]
 
+var torque_monsters_list = [
+	"Straeda Pitbull",
+	"Eisenach Suppressor",
+	"Eisenach Black Panda",
+	"Schroder Fastback"
+]
+
 
 # -------------------------
 # CAR STATS (PP omitted)
 # -------------------------
-
 var suv = {
 	"Colossus Titan Max":[
 		"", "Country: USA", "HP: 195", "WEIGHT: 3500 KG",
@@ -202,22 +213,16 @@ var suv = {
 		"ENGINE: V8 6.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 	],
 	"Mir Cars Nightwolf":[
-	"", "Country: UAE", "HP: 220", "WEIGHT: 2668 KG",
-	"0-100 KM/H: 8.9s", "TOP SPEED: 203 KM/H",
-	"ENGINE: V8 6.6L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-],
-	"Straeda Pitbull":[
-		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
-		"0-100 KM/H: 7.3s", "TOP SPEED: 232 KM/H",
-		"ENGINE: V10 5.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
+		"", "Country: UAE", "HP: 220", "WEIGHT: 2668 KG",
+		"0-100 KM/H: 8.9s", "TOP SPEED: 203 KM/H",
+		"ENGINE: V8 6.6L", "TRANSMISSION: FOUR-WHEEL DRIVE"
 	],
 	"Schroder Colosso":[
-	"", "Country: Germany", "HP: 237", "WEIGHT: 2340 KG",
-	"0-100 KM/H: 7.8s", "TOP SPEED: 217 KM/H",
-	"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
-]
+		"", "Country: Germany", "HP: 237", "WEIGHT: 2340 KG",
+		"0-100 KM/H: 7.8s", "TOP SPEED: 217 KM/H",
+		"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	]
 }
-
 var compact = {
 	"Schroder Atrix Q32":[
 		"", "Country: Germany", "HP: 247", "WEIGHT: 1470 KG",
@@ -235,17 +240,16 @@ var compact = {
 		"ENGINE: V6 3.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Kuro Zephyr":[
-	"", "Country: Japan", "HP: 204", "WEIGHT: 1600 KG",
-	"0-100 KM/H: 7.3s", "TOP SPEED: 234 KM/H",
-	"ENGINE: V6 2.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
-],
-"Eisenach Compaque":[
-	"", "Country: Germany", "HP: 215", "WEIGHT: 1450 KG",
-	"0-100 KM/H: 6.9s", "TOP SPEED: 238 KM/H",
-	"ENGINE: V6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-]
+		"", "Country: Japan", "HP: 204", "WEIGHT: 1600 KG",
+		"0-100 KM/H: 7.3s", "TOP SPEED: 234 KM/H",
+		"ENGINE: V6 2.5L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	],
+	"Eisenach Compaque":[
+		"", "Country: Germany", "HP: 215", "WEIGHT: 1450 KG",
+		"0-100 KM/H: 6.9s", "TOP SPEED: 238 KM/H",
+		"ENGINE: L6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	]
 }
-
 var muscle = {
 	"Brutus Viper":[
 		"", "Country: USA", "HP: 355", "WEIGHT: 1650 KG",
@@ -253,12 +257,11 @@ var muscle = {
 		"ENGINE: V8 7.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Mir Cars Hutch":[
-	"", "Country: UAE", "HP: 372", "WEIGHT: 1780 KG",
-	"0-100 KM/H: 5.6s", "TOP SPEED: 232 KM/H",
-	"ENGINE: V8 7.1L", "TRANSMISSION: REAR-WHEEL DRIVE"
-],
+		"", "Country: UAE", "HP: 372", "WEIGHT: 1780 KG",
+		"0-100 KM/H: 5.6s", "TOP SPEED: 232 KM/H",
+		"ENGINE: V8 7.1L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	]
 }
-
 var urban_racers = {
 	"Brutus Stingray":[
 		"", "Country: USA", "HP: 345", "WEIGHT: 1460 KG",
@@ -283,21 +286,20 @@ var urban_racers = {
 	"Eisenach Roadstar":[
 		"", "Country: Germany", "HP: 335", "WEIGHT: 1600 KG",
 		"0-100 KM/H: 4.8s", "TOP SPEED: 250 KM/H",
-		"ENGINE: V6 3.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
+		"ENGINE: L6 3.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
-
 var sedans = {
 	"Eisenach Monarch":[
-	"", "Country: Germany", "HP: 325", "WEIGHT: 1985 KG",
-	"0-100 KM/H: 6.4s", "TOP SPEED: 265 KM/H",
-	"ENGINE: V8 4.4L", "TRANSMISSION: REAR-WHEEL DRIVE"
-],
+		"", "Country: Germany", "HP: 325", "WEIGHT: 1985 KG",
+		"0-100 KM/H: 6.4s", "TOP SPEED: 265 KM/H",
+		"ENGINE: V8 4.4L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	],
 	"Mir Cars Transporter":[
-	"", "Country: UAE", "HP: 343", "WEIGHT: 1780 KG",
-	"0-100 KM/H: 6.2s", "TOP SPEED: 257 KM/H",
-	"ENGINE: V8 5.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-],
+		"", "Country: UAE", "HP: 343", "WEIGHT: 1780 KG",
+		"0-100 KM/H: 6.2s", "TOP SPEED: 257 KM/H",
+		"ENGINE: V8 5.0L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	],
 	"Kuro Vault":[
 		"", "Country: Japan", "HP: 290", "WEIGHT: 1760 KG",
 		"0-100 KM/H: 6.3s", "TOP SPEED: 248 KM/H",
@@ -307,22 +309,14 @@ var sedans = {
 		"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
 		"0-100 KM/H: 5.9s", "TOP SPEED: 250 KM/H",
 		"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-	],   # ⭐ COMMA HERE
-
-	"Eisenach Suppressor":[
-		"", "Country: Germany", "HP: 272", "WEIGHT: 1660 KG",
-		"0-100 KM/H: 5.7s", "TOP SPEED: 245 KM/H",
-		"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
-
-
 var sport = {
 	"Schroder Atrix Sport":[
-	"", "Country: Germany", "HP: 340", "WEIGHT: 1470 KG",
-	"0-100 KM/H: 4.6s", "TOP SPEED: 266 KM/H",
-	"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
-],
+		"", "Country: Germany", "HP: 340", "WEIGHT: 1470 KG",
+		"0-100 KM/H: 4.6s", "TOP SPEED: 266 KM/H",
+		"ENGINE: L5 2.5L", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	],
 	"Bartoli Cruiser":[
 		"", "Country: Italy", "HP: 433", "WEIGHT: 1880 KG",
 		"0-100 KM/H: 4.9s", "TOP SPEED: 287 KM/H",
@@ -342,25 +336,18 @@ var sport = {
 		"", "Country: UK", "HP: 406", "WEIGHT: 1832 KG",
 		"0-100 KM/H: 5.2s", "TOP SPEED: 286 KM/H",
 		"ENGINE: V8 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
-	],
-	"Schroder Fastback":[
-	"", "Country: Germany", "HP: 313", "WEIGHT: 1695 KG",
-	"0-100 KM/H: 5.2s", "TOP SPEED: 265 KM/H",
-	"ENGINE: V6 3.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
-],
-
+	]
 }
-
 var sport_racing = {
 	"Mir Cars Precision":[
-	"", "Country: UAE", "HP: 488", "WEIGHT: 1590 KG",
-	"0-100 KM/H: 4.5s", "TOP SPEED: 307 KM/H",
-	"ENGINE: V10 5.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-],
+		"", "Country: UAE", "HP: 488", "WEIGHT: 1590 KG",
+		"0-100 KM/H: 4.5s", "TOP SPEED: 307 KM/H",
+		"ENGINE: V10 5.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	],
 	"Kestrel Battleaxe":[
 		"", "Country: UK", "HP: 406", "WEIGHT: 1078 KG",
 		"0-100 KM/H: 3.8s", "TOP SPEED: 287 KM/H",
-		"ENGINE: V6 4.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+		"ENGINE: L6 4.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Linetti Shepherd":[
 		"", "Country: Italy", "HP: 500", "WEIGHT: 1430 KG",
@@ -373,7 +360,6 @@ var sport_racing = {
 		"ENGINE: V10 8.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
-
 var supercars = {
 	"Linetti Terror":[
 		"", "Country: Italy", "HP: 572", "WEIGHT: 1630 KG",
@@ -391,11 +377,38 @@ var supercars = {
 		"ENGINE: V6 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Mir Cars Raptor":[
-	"", "Country: UAE", "HP: 532", "WEIGHT: 1378 KG",
-	"0-100 KM/H: 3.8s", "TOP SPEED: 327 KM/H",
-	"ENGINE: V8 7.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
-]
+		"", "Country: USA", "HP: 532", "WEIGHT: 1378 KG",
+		"0-100 KM/H: 3.8s", "TOP SPEED: 327 KM/H",
+		"ENGINE: V8 7.0L", "TRANSMISSION: REAR-WHEEL DRIVE"
+	]
 }
+
+var torque_monsters = {
+	"Straeda Pitbull":[
+		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
+		"0-100 KM/H: 7.3s", "TOP SPEED: 232 KM/H",
+		"ENGINE: V10 5.0L DIESEL", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	],
+
+	"Eisenach Suppressor":[
+		"", "Country: Germany", "HP: 272", "WEIGHT: 1660 KG",
+		"0-100 KM/H: 5.7s", "TOP SPEED: 245 KM/H",
+		"ENGINE: L6 3.0L DIESEL", "TRANSMISSION: REAR-WHEEL DRIVE"
+	],
+
+	"Eisenach Black Panda":[
+		"", "Country: Germany", "HP: 231", "WEIGHT: 1600 KG",
+		"0-100 KM/H: 6.1s", "TOP SPEED: 252 KM/H",
+		"ENGINE: L6 3.0L DIESEL", "TRANSMISSION: REAR-WHEEL DRIVE"
+	],
+
+	"Schroder Fastback":[
+		"", "Country: Germany", "HP: 313", "WEIGHT: 1695 KG",
+		"0-100 KM/H: 5.2s", "TOP SPEED: 265 KM/H",
+		"ENGINE: V6 3.0L BITDI", "TRANSMISSION: FOUR-WHEEL DRIVE"
+	]
+}
+
 
 # -------------------------
 # SCENE PATHS
@@ -427,6 +440,8 @@ var car_scene_paths = {
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
 	"Schroder Colosso":"res://Scenes/audi_q7.tscn",
+	"Eisenach Black Panda":"res://Scenes/bmw_330d.tscn",
+
 
 	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
@@ -624,6 +639,9 @@ func switch_car(direction):
 		"sport_racing":
 			list = sport_racing_list
 			dict = sport_racing
+		"torque_monsters":
+			list=torque_monsters_list
+			dict=torque_monsters
 
 	car_index = (car_index + direction) % list.size()
 	if car_index < 0:
@@ -688,3 +706,12 @@ func _on_select_pressed():
 	Cars.save_color()
 	Cars.selected_class = car_class
 	get_tree().change_scene_to_file("res://main.tscn")
+
+
+func _on_torque_monsters_pressed() -> void:
+	car_class = "torque_monsters"
+	car_index = 0
+	car_name = torque_monsters_list[car_index]
+	update_car_ui(torque_monsters[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
+	_reset_color()

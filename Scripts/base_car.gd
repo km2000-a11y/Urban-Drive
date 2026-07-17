@@ -457,7 +457,7 @@ func _update_ai_inputs(delta: float) -> void:
 	# skip waypoint if too close
 	if dist < 6.0:
 		current_wp = (current_wp + 1) % waypoints.size()
-		return
+
 
 	var dir := to_wp.normalized()
 

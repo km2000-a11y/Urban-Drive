@@ -22,15 +22,20 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "4x4 SUV"
 
+[node name="MuscleCars" type="Button" parent="Control/ClassList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Muscle Cars"
+
 [node name="CompactCars" type="Button" parent="Control/ClassList"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Compact Cars"
 
-[node name="MuscleCars" type="Button" parent="Control/ClassList"]
+[node name="TorqueMonsters" type="Button" parent="Control/ClassList"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Muscle Cars"
+text = "Torque Monsters"
 
 [node name="Sedans" type="Button" parent="Control/ClassList"]
 layout_mode = 2
@@ -47,15 +52,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Sport Coupe"
 
-[node name="Supercars" type="Button" parent="Control/ClassList"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Supercars"
-
 [node name="SportRacing" type="Button" parent="Control/ClassList"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Sports Racing Cars"
+
+[node name="Supercars" type="Button" parent="Control/ClassList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Supercars"
 
 [node name="Cars" type="VBoxContainer" parent="Control"]
 layout_mode = 0
@@ -156,11 +161,12 @@ script = ExtResource("2_2dip6")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [connection signal="pressed" from="Control/ClassList/4x4SUV" to="." method="_on_4x4suv_pressed"]
-[connection signal="pressed" from="Control/ClassList/CompactCars" to="." method="_on_compact_cars_pressed"]
 [connection signal="pressed" from="Control/ClassList/MuscleCars" to="." method="_on_muscle_cars_pressed"]
+[connection signal="pressed" from="Control/ClassList/CompactCars" to="." method="_on_compact_cars_pressed"]
+[connection signal="pressed" from="Control/ClassList/TorqueMonsters" to="." method="_on_torque_monsters_pressed"]
 [connection signal="pressed" from="Control/ClassList/Sedans" to="." method="_on_sedans_pressed"]
 [connection signal="pressed" from="Control/ClassList/UrbanRacers" to="." method="_on_urban_racers_pressed"]
 [connection signal="pressed" from="Control/ClassList/SportCoupe" to="." method="_on_sport_coupe_pressed"]
-[connection signal="pressed" from="Control/ClassList/Supercars" to="." method="_on_supercars_pressed"]
 [connection signal="pressed" from="Control/ClassList/SportRacing" to="." method="_on_sport_racing_pressed"]
+[connection signal="pressed" from="Control/ClassList/Supercars" to="." method="_on_supercars_pressed"]
 [connection signal="pressed" from="Control/CarStats/Select" to="." method="_on_select_pressed"]
