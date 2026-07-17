@@ -1,5 +1,4 @@
 res://main.tscn
-res://Scripts/car_select.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -50,5 +49,6 @@ res://Scenes/bmw_125.tscn
 res://Scenes/audi_a5_tdi.tscn
 res://Scenes/audi_q7.tscn
 res://Scenes/bmw_330d.tscn
-res://Scripts/base_car.gd
+res://Scripts/car_select.gd
 res://normal_race_manager.gd
+res://Scripts/base_car.gd

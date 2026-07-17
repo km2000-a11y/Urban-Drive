@@ -115,11 +115,9 @@ func register_lap(body: Node) -> void:
 	_start_lap_cooldown()
 
 	# --- PLAYER LAP ---
+	# --- PLAYER LAP ---
 	if car == player_car:
 		player_laps += 1
-		player_car.current_wp = 0
-
-
 		print("Player lap:", player_laps)
 
 	# --- AI LAP ---
@@ -127,8 +125,13 @@ func register_lap(body: Node) -> void:
 		var idx := ai_cars.find(car)
 		if idx != -1:
 			ai_laps[idx] += 1
-			ai_cars[idx].current_wp = 0
 
+
+
+		print("Player lap:", player_laps)
+
+	# --- AI LAP ---
+	
 	# Check finish
 	_check_finish()
 
@@ -269,7 +272,6 @@ func _distance_to_next_wp(car: CarController) -> float:
 	var wp := car.waypoints[next_wp] as Node3D
 	return car.global_position.distance_to(wp.global_position)
 
-
 func _calculate_position() -> int:
 	var total_wp := player_car.waypoints.size()
 	var cars := []
@@ -277,6 +279,7 @@ func _calculate_position() -> int:
 	# Player
 	cars.append({
 		"car": player_car,
+		"index": -1,
 		"progress": player_laps * total_wp + player_car.current_wp,
 		"dist": _distance_to_next_wp(player_car)
 	})
@@ -286,18 +289,38 @@ func _calculate_position() -> int:
 		var ai := ai_cars[i]
 		cars.append({
 			"car": ai,
+			"index": i,
 			"progress": ai_laps[i] * total_wp + ai.current_wp,
 			"dist": _distance_to_next_wp(ai)
 		})
 
-	# Sort by progress first, then distance
+	# Sort
 	cars.sort_custom(func(a, b):
+		# 1. Progress (laps * wp + current_wp)
 		if a["progress"] != b["progress"]:
 			return a["progress"] > b["progress"]
+
+		# 2. Laps (NO ternary, NO find)
+		var a_laps := 0
+		if a["car"] == player_car:
+			a_laps = player_laps
+		else:
+			a_laps = ai_laps[a["index"]]
+
+		var b_laps := 0
+		if b["car"] == player_car:
+			b_laps = player_laps
+		else:
+			b_laps = ai_laps[b["index"]]
+
+		if a_laps != b_laps:
+			return a_laps > b_laps
+
+		# 3. Distance to next waypoint
 		return a["dist"] < b["dist"]
 	)
 
-	# Find player position
+	# Return player position
 	for i in range(cars.size()):
 		if cars[i]["car"] == player_car:
 			return i + 1
