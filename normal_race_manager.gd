@@ -98,7 +98,6 @@ func spawn_race(scene: Node) -> void:
 	MusicManager.stop_music()
 	MusicManager.play_race_music()
 
-
 func register_lap(body: Node) -> void:
 	if not race_active or lap_cooldown:
 		return
@@ -118,13 +117,8 @@ func register_lap(body: Node) -> void:
 	# --- PLAYER LAP ---
 	if car == player_car:
 		player_laps += 1
-		# Do NOT reset current_wp here
+		player_car.current_wp = 0
 
-
-
-
-		# Optional: snap to nearest waypoint if needed
-		# player_car.current_wp = player_car._find_closest_waypoint()
 
 		print("Player lap:", player_laps)
 
@@ -133,7 +127,7 @@ func register_lap(body: Node) -> void:
 		var idx := ai_cars.find(car)
 		if idx != -1:
 			ai_laps[idx] += 1
-			ai_cars[idx].current_wp = 0   # reset AI waypoint too
+			ai_cars[idx].current_wp = 0
 
 	# Check finish
 	_check_finish()

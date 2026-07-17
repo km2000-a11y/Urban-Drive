@@ -374,7 +374,7 @@ var supercars = {
 	"Kestrel Guillotine":[
 		"", "Country: UK", "HP: 440", "WEIGHT: 1100 KG",
 		"0-100 KM/H: 3.6s", "TOP SPEED: 315 KM/H",
-		"ENGINE: V6 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
+		"ENGINE: L6 4.2L", "TRANSMISSION: REAR-WHEEL DRIVE"
 	],
 	"Mir Cars Raptor":[
 		"", "Country: USA", "HP: 532", "WEIGHT: 1378 KG",
