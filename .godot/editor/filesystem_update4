@@ -49,6 +49,11 @@ res://Scenes/bmw_125.tscn
 res://Scenes/audi_a5_tdi.tscn
 res://Scenes/audi_q7.tscn
 res://Scenes/bmw_330d.tscn
+res://Scripts/leaderboard.gd
+res://Scripts/win_screen_radar.gd
+res://Scripts/mode_select.gd
 res://Scripts/car_select.gd
-res://normal_race_manager.gd
-res://Scripts/base_car.gd
+res://main.gd
+res://Scenes/dodge_charger.tscn
+res://cars.gd
+res://Scripts/dodge_charger.gd

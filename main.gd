@@ -172,6 +172,7 @@ func _on_radar_trap_body_entered(body):
 		player_car.controls_enabled = false
 		win_screen_radar.show_win(speed, best_radar_speed)
 	finish_flash.flash()
+	MusicManager.stop_music()	
 	_screech_to_halt()
 
 func load_radar_best():

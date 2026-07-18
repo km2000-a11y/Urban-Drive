@@ -42,7 +42,8 @@ var class_lists := {
 		"Eisenach Monarch",
 		"Mir Cars Transporter",
 		"Kuro Vault",
-		"Strandberg Turbo"
+		"Strandberg Turbo",
+		"Brutus Mammoth"
 	],
 
 	"sport": [
@@ -114,6 +115,7 @@ var car_scene_paths := {
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 	"Eisenach Black Panda":"res://Scenes/bmw_330d.tscn",
+	"Brutus Mammoth":"res://Scenes/dodge_charger.tscn",
 
 	"Mir Cars Precision":"res://Scenes/bmw_m6.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
@@ -167,6 +169,12 @@ var car_colors := {
 	Color8(255,255,255), # White
 	Color8(180,180,180), # Silver
 	Color8(60,60,60)     # Graphite Grey
+],
+"Brutus Mammoth":[
+	Color8(0,110,130),   # ⭐ Teal Torque (default — muscle sedan but modern)
+	Color8(255,255,255), # White
+	Color8(60,60,60),    # Dark Grey
+	Color8(180,20,20)    # Deep Muscle Red
 ],
 	"Mir Cars Transporter":[Color8(0,90,160), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],

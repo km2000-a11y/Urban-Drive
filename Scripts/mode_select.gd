@@ -14,3 +14,7 @@ func _on_duel_btn_pressed() -> void:
 func _on_normal_race_btn_pressed() -> void:
 	Modes.mode="Normal Race"
 	get_tree().change_scene_to_file("res://Scenes/car_select.tscn")
+
+
+func _on_back_btn_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

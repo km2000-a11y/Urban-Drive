@@ -59,6 +59,12 @@ var car_colors := {
 	Color8(180,180,180),
 	Color8(120,0,0)
 ],
+"Brutus Mammoth":[
+	Color8(0,110,130),   # ⭐ Teal Torque (default — muscle sedan but modern)
+	Color8(255,255,255), # White
+	Color8(60,60,60),    # Dark Grey
+	Color8(180,20,20)    # Deep Muscle Red
+],
 
 
 
@@ -165,7 +171,8 @@ var sedans_list = [
 	"Eisenach Monarch",
 	"Mir Cars Transporter",
 	"Kuro Vault",
-	"Strandberg Turbo"
+	"Strandberg Turbo",
+	"Brutus Mammoth"
 ]
 
 var sport_list = [
@@ -328,10 +335,16 @@ var sedans = {
 	],
 	"Strandberg Turbo":[
 		"", "Country: Sweden", "HP: 300", "WEIGHT: 1667 KG",
-		"0-100 KM/H: 5.9s", "TOP SPEED: 250 KM/H",
+		"0-100 KM/H: 5.8s", "TOP SPEED: 250 KM/H",
 		"ENGINE: L5 2.5L", "ASPIRATION: Turbo", "TORQUE: 350 NM",
 		"TRANSMISSION: FOUR-WHEEL DRIVE"
-	]
+	],
+	"Brutus Mammoth":[
+	"", "Country: USA", "HP: 340", "WEIGHT: 1828 KG",
+	"0-100 KM/H: 5.9s", "TOP SPEED: 253 KM/H",
+	"ENGINE: V8 5.7L", "ASPIRATION: NA", "TORQUE: 480 NM",
+	"TRANSMISSION: REAR-WHEEL DRIVE"
+]
 }
 
 var sport = {
@@ -498,6 +511,7 @@ var car_scene_paths = {
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
+	"Brutus Mammoth":"res://Scenes/dodge_charger.tscn",
 
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
@@ -759,3 +773,7 @@ func _on_torque_monsters_pressed() -> void:
 	update_car_ui(torque_monsters[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
 	_reset_color()
+
+
+func _on_back_btn_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/mode_select.tscn")
