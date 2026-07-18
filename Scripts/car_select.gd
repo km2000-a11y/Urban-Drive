@@ -91,7 +91,13 @@ var car_colors := {
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
-	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
+	"Eisenach Bengal":[
+	Color8(217,90,43),   # Same default as Roadstar
+	Color8(255,255,255),
+	Color8(0,90,180),
+	Color8(180,180,180)
+],
+
    
 	"Schroder Atrix Sport":[
 	Color8(0,192,192),   # ⭐ Default — Urban Drive Cyan
@@ -164,8 +170,9 @@ var urban_list = [
 	"Kestrel Speedster",
 	"Kestrel Seabird",
 	"Kuro Zephyr V6",
-	"Eisenach Roadstar"
+	"Eisenach Bengal"
 ]
+
 
 var sedans_list = [
 	"Eisenach Monarch",
@@ -307,12 +314,12 @@ var urban_racers = {
 		"ENGINE: V6 3.5L", "ASPIRATION: NA", "TORQUE: 370 NM",
 		"TRANSMISSION: REAR-WHEEL DRIVE"
 	],
-	"Eisenach Roadstar":[
-		"", "Country: Germany", "HP: 335", "WEIGHT: 1600 KG",
-		"0-100 KM/H: 4.8s", "TOP SPEED: 250 KM/H",
-		"ENGINE: L6 3.0L", "ASPIRATION: NA", "TORQUE: 365 NM",
-		"TRANSMISSION: REAR-WHEEL DRIVE"
-	]
+	"Eisenach Bengal":[
+	"", "Country: Germany", "HP: 306", "WEIGHT: 1650 KG",
+	"0-100 KM/H: 5.5s", "TOP SPEED: 260 KM/H",
+	"ENGINE: L6 3.0L", "ASPIRATION: Turbo", "TORQUE: 400 NM",
+	"TRANSMISSION: REAR-WHEEL DRIVE"
+],
 }
 var sedans = {
 	"Eisenach Monarch":[
