@@ -1,5 +1,5 @@
-res://Scenes/pause_menu.tscn
-res://Scenes/pause_menu.gd
+res://Scenes/bmw_135.tscn
+res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -15,7 +15,6 @@ res://Scenes/chevrolet_corvette_c5.tscn
 res://Scenes/aston_db9.tscn
 res://Scenes/vanquish.tscn
 res://Scenes/granturismo.tscn
-res://Scenes/bmw_135.tscn
 res://Scenes/gt500.tscn
 res://Scenes/diablo_road.tscn
 res://Scenes/sagaris.tscn
@@ -33,12 +32,15 @@ res://Scenes/granturismo_police.tscn
 res://Scenes/mode_select.tscn
 res://Scenes/win_screen_radar.tscn
 res://Scenes/leaderboard.tscn
+res://Scenes/win_screen_duel.tscn
 res://Scenes/saleen_s7.tscn
 res://Scenes/bmw_m6.tscn
 res://Scenes/audi_tt_rs.tscn
 res://Scenes/volvo_s60r.tscn
 res://Scenes/lexus_is250.tscn
+res://Scenes/main_menu.tscn
 res://Scenes/FinishFlash.tscn
+res://Scenes/HUD.tscn
 res://Scenes/start.tscn
 res://Scenes/bmw_535d.tscn
 res://Scenes/morgan_aero_8.tscn
@@ -47,4 +49,5 @@ res://Scenes/audi_a5_tdi.tscn
 res://Scenes/audi_q7.tscn
 res://Scenes/bmw_330d.tscn
 res://Scenes/dodge_charger.tscn
-res://main.tscn
+res://Scenes/pause_menu.tscn
+res://normal_race_manager.gd

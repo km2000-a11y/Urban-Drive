@@ -4,10 +4,13 @@ var is_paused:=false
 var volume:=80
 var main_menu_path:="res://Scenes/mode_select.tscn"
 
+
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 	update_volume_label()
 	apply_volume()
+
 	
 func toggle_pause():
 	is_paused=!is_paused
@@ -38,3 +41,7 @@ func _on_vol_down_btn_pressed() -> void:
 	
 func update_volume_label():
 	$Control/Panel/VolumeLabel.text="Volume: %d%%"%volume
+	
+func apply_volume():
+	var linear=float(volume)/100.0
+	AudioServer.set_bus_volume_db(0, linear_to_db(linear))

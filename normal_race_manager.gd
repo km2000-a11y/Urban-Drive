@@ -22,6 +22,30 @@ var main_scene: Node = null
 
 
 func spawn_race(scene: Node) -> void:
+	# FULL RESET
+	race_active = false
+	lap_cooldown = false
+
+	player_laps = 0
+	ai_laps.clear()
+
+	# Remove old cars
+	# Remove old cars safely
+	if player_car and player_car.is_inside_tree():
+		player_car.queue_free()
+
+	for ai in ai_cars:
+		if ai and ai.is_inside_tree():
+			ai.queue_free()
+
+	ai_cars.clear()
+
+
+
+	ai_cars.clear()
+
+	await get_tree().process_frame
+
 	var root := scene.get_node(TrackName.track_name)
 
 	player_spawn = root.get_node("SpawnPoint").global_transform.origin

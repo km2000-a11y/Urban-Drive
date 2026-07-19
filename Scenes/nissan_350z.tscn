@@ -238,7 +238,7 @@ material_override = SubResource("StandardMaterial3D_aa2tk")
 mesh = SubResource("PrismMesh_3e5qo")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(-1, 2.99003e-08, 8.21505e-08, 0, 0.939693, -0.34202, -8.74228e-08, -0.34202, -0.939693, 0.202068, 0.152673, 1.18309)
+transform = Transform3D(-1, 2.99003e-08, 8.21505e-08, 0, 0.939693, -0.34202, -8.74228e-08, -0.34202, -0.939693, 0.202068, 0.161894, 1.18309)
 material_override = SubResource("StandardMaterial3D_aa2tk")
 mesh = SubResource("PrismMesh_3e5qo")
 
@@ -280,7 +280,7 @@ mesh = SubResource("PrismMesh_gwe6s")
 [node name="Body" type="Node3D" parent="ModelRoot"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0713897, 0, 1.15553)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0713897, 0.0438482, 1.15553)
 material_override = SubResource("StandardMaterial3D_4unwo")
 mesh = SubResource("BoxMesh_ayexn")
 skeleton = NodePath("../..")

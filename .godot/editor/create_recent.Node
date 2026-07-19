@@ -1,3 +1,4 @@
+MeshInstance3D
 Label
 Button
 MenuButton
@@ -7,7 +8,6 @@ Panel
 Control
 CanvasLayer
 CarController
-MeshInstance3D
 CharacterBody3D
 Node2D
 Node3D

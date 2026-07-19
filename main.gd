@@ -41,6 +41,10 @@ func _process(delta):
 	if mode.to_lower() == "normal race":
 		NormalRaceManager.update_race()
 
+func _input(event):
+	if event.is_action_pressed("pause_menu"):
+		if has_node("PauseMenu"):
+			$PauseMenu.toggle_pause()
 
 # ---------------------------------------------------------
 # FREE DRIVE / NON-MODE PLAYER SPAWN
