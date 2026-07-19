@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://dpre26mkueaby"]
 
-[ext_resource type="Script" uid="uid://j8t5avk4bus1" path="res://Scripts/bmw_125.gd" id="1_56vir"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_188ho"]
+[ext_resource type="Script" uid="uid://j8t5avk4bus1" path="res://Scenes/Scripts/bmw_125.gd" id="1_56vir"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_188ho"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_syjsv"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_g8ofw"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_suab8"]

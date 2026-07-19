@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=4 uid="uid://cfm7jcsshwba6"]
 
-[ext_resource type="Script" uid="uid://6dd5tko82okh" path="res://Scripts/lexus_ls_430_2003.gd" id="1_a8qu4"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_7x6qs"]
+[ext_resource type="Script" uid="uid://6dd5tko82okh" path="res://Scenes/Scripts/lexus_ls_430_2003.gd" id="1_a8qu4"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_7x6qs"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_7x6qs"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_3b2v4"]
 

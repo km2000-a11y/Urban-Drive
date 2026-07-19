@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://bpj1syhf3cpl2"]
 
-[ext_resource type="Script" uid="uid://c37hkfhnenfnh" path="res://Scenes/lexus_lx_470_2004_ai.gd" id="1_f1gla"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_aakim"]
+[ext_resource type="Script" path="res://Scenes/lexus_lx_470_2004_ai.gd" id="1_f1gla"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_aakim"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_f1gla"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_3r5v4"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="5_73x6e"]

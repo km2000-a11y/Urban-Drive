@@ -1,7 +1,7 @@
 [gd_scene load_steps=50 format=3 uid="uid://72uh2jduq10m"]
 
-[ext_resource type="Script" uid="uid://b0isf7hyx4jdo" path="res://Scripts/audi_tt_roadster_32_2004.gd" id="1_j8p6p"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_epe3n"]
+[ext_resource type="Script" uid="uid://b0isf7hyx4jdo" path="res://Scenes/Scripts/audi_tt_roadster_32_2004.gd" id="1_j8p6p"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_epe3n"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_epe3n"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_s0kkr"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_6d3fy"]

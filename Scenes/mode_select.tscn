@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cehe780myc8ed"]
 
-[ext_resource type="Script" uid="uid://cj2cjcg724xul" path="res://Scripts/mode_select.gd" id="1_qw3jj"]
+[ext_resource type="Script" uid="uid://cj2cjcg724xul" path="res://Scenes/Scripts/mode_select.gd" id="1_qw3jj"]
 
 [node name="ModeSelect" type="CanvasLayer"]
 script = ExtResource("1_qw3jj")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://bpgo5tshq0k51"]
 
-[ext_resource type="Script" uid="uid://bvduopof30vx4" path="res://Scripts/audi_q_7.gd" id="1_jow4p"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_rle36"]
+[ext_resource type="Script" uid="uid://bvduopof30vx4" path="res://Scenes/Scripts/audi_q_7.gd" id="1_jow4p"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_rle36"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_g33bd"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_hi5oi"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="5_t6xsc"]

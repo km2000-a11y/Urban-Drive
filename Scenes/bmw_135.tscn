@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://cxpc10drwpn5d"]
 
-[ext_resource type="Script" uid="uid://cs7cdg04ml8s" path="res://Scripts/bmw_135i.gd" id="1_v7ldy"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_1vobb"]
+[ext_resource type="Script" uid="uid://cs7cdg04ml8s" path="res://Scenes/Scripts/bmw_135i.gd" id="1_v7ldy"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_1vobb"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_ajxe3"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_sowlc"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_kohbc"]
@@ -108,7 +108,7 @@ albedo_color = Color(0.85098, 0.352941, 0.168627, 1)
 albedo_color = Color(0.85098, 0.352941, 0.168627, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6d3fy"]
-size = Vector3(0.8, 0.35, 0.25)
+size = Vector3(0.8, 0.35, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_08euy"]
 size = Vector3(1, 1, 1.7)
@@ -244,7 +244,7 @@ material_override = SubResource("StandardMaterial3D_08euy")
 mesh = SubResource("CylinderMesh_nfu50")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0458452, 0.465855, 0.772302)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0458452, 0.465855, 0.736315)
 material_override = SubResource("StandardMaterial3D_3n017")
 mesh = SubResource("BoxMesh_i0x3i")
 
@@ -255,7 +255,7 @@ mesh = SubResource("BoxMesh_dtqb8")
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="ModelRoot"]
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.193205, 0.336892, 0.308773)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.193205, 0.336892, 0.33196)
 material_override = SubResource("StandardMaterial3D_g7iob")
 mesh = SubResource("BoxMesh_yso3f")
 
@@ -265,12 +265,12 @@ material_override = SubResource("StandardMaterial3D_g7iob")
 mesh = SubResource("BoxMesh_yso3f")
 
 [node name="MeshInstance3D26" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.255784, 0.336892, 0.0684224)
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.255784, 0.336892, 0.116686)
 material_override = SubResource("StandardMaterial3D_g7iob")
 mesh = SubResource("BoxMesh_yso3f")
 
 [node name="MeshInstance3D29" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.145087, 0.336892, 0.0684223)
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.145087, 0.336892, 0.0984894)
 material_override = SubResource("StandardMaterial3D_g7iob")
 mesh = SubResource("BoxMesh_yso3f")
 
@@ -285,12 +285,12 @@ material_override = SubResource("StandardMaterial3D_j83nq")
 mesh = SubResource("BoxMesh_fhe8l")
 
 [node name="MeshInstance3D27" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261625, 0.220861, 0.15785)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261625, 0.220861, 0.197335)
 material_override = SubResource("StandardMaterial3D_j83nq")
 mesh = SubResource("BoxMesh_fhe8l")
 
 [node name="MeshInstance3D28" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.158208, 0.220861, 0.15785)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.158208, 0.220861, 0.180157)
 material_override = SubResource("StandardMaterial3D_j83nq")
 mesh = SubResource("BoxMesh_fhe8l")
 
@@ -305,7 +305,7 @@ material_override = SubResource("StandardMaterial3D_jlic8")
 mesh = SubResource("BoxMesh_yav2k")
 
 [node name="MeshInstance3D17" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.278712, 0.294345, 1.13956)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.278712, 0.294345, 1.10877)
 material_override = SubResource("StandardMaterial3D_8q3ki")
 mesh = SubResource("BoxMesh_4f12l")
 
@@ -381,7 +381,7 @@ mesh = SubResource("BoxMesh_epe3n")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="ModelRoot/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19922e-08, 0.16155, -0.0794203)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06212e-09, 0.16155, -0.0533926)
 material_override = SubResource("StandardMaterial3D_s0kkr")
 mesh = SubResource("BoxMesh_6d3fy")
 skeleton = NodePath("../..")

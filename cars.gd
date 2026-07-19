@@ -35,7 +35,7 @@ var class_lists := {
 		"Kestrel Speedster",
 		"Kestrel Seabird",
 		"Kuro Zephyr V6",
-		"Eisenach Roadstar"
+		"Eisenach Bengal"
 	],
 
 	"sedans": [
@@ -98,7 +98,7 @@ var car_scene_paths := {
 	"Berkshire Blunt":"res://Scenes/jaguar_xkr.tscn",
 	"Brutus Stingray":"res://Scenes/chevrolet_corvette_c5.tscn",
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
-	"Eisenach Roadstar":"res://Scenes/bmw_z4.tscn",
+	"Eisenach Bengal":"res://Scenes/bmw_135.tscn",
 	"Strandberg Turbo":"res://Scenes/volvo_s60r.tscn",
 
 	"Brutus Viper":"res://Scenes/gt500.tscn",
@@ -202,7 +202,7 @@ var car_colors := {
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],
 	"Schroder Atrix Sport":[Color8(0,192,192), Color8(255,255,255), Color8(60,60,60), Color8(0,120,160)],
-	"Eisenach Roadstar":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
+	"Eisenach Bengal":[Color8(217,90,43), Color8(255,255,255), Color8(0,90,180), Color8(180,180,180)],
 
 	"Mir Cars Precision":[Color8(255,80,0), Color8(255,255,255), Color8(60,60,60), Color8(0,120,160)],
 	"Kestrel Battleaxe":[Color8(180,20,35), Color8(255,255,255), Color8(255,140,0), Color8(200,40,80)],

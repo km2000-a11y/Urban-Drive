@@ -1,6 +1,6 @@
 [gd_scene load_steps=95 format=3 uid="uid://b4drvxor1nx4s"]
 
-[ext_resource type="Script" uid="uid://frkq58mu2pgw" path="res://Scripts/barrier_1.gd" id="1_tmphu"]
+[ext_resource type="Script" uid="uid://frkq58mu2pgw" path="res://Scenes/Scripts/barrier_1.gd" id="1_tmphu"]
 [ext_resource type="Script" uid="uid://drhq0bksc715t" path="res://Tracks/barrier_2.gd" id="2_x3vxy"]
 [ext_resource type="Script" uid="uid://b5tj0bpuxvh85" path="res://Tracks/barrier_3.gd" id="3_xyydk"]
 [ext_resource type="Script" uid="uid://b2kju75u5owy3" path="res://Tracks/crates.gd" id="4_y0lmt"]

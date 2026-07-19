@@ -502,7 +502,7 @@ var car_scene_paths = {
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
 	"Schroder Colosso":"res://Scenes/audi_q7.tscn",
 	"Eisenach Black Panda":"res://Scenes/bmw_330d.tscn",
-
+	"Eisenach Bengal":"res://Scenes/bmw_135.tscn",
 
 	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
@@ -661,6 +661,14 @@ func _on_sport_racing_pressed() -> void:
 # -------------------------
 
 func _input(event):
+	# Ignore color inputs when no car class is selected (main menu)
+	if car_class == "":
+		if event.is_action_pressed("car_select_left") or event.is_action_pressed("car_select_right"):
+			return
+		if event.is_action_pressed("color_select_up") or event.is_action_pressed("color_select_down"):
+			return
+
+	# Normal behavior inside car select
 	if event.is_action_pressed("car_select_left"):
 		switch_car(-1)
 	if event.is_action_pressed("car_select_right"):
@@ -720,6 +728,7 @@ func switch_car(direction):
 # -------------------------
 # COLOR SYSTEM
 # -------------------------
+
 
 func _reset_color():
 	color_index = 0
