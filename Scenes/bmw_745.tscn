@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://83wvm5gp5s5m"]
 
-[ext_resource type="Script" uid="uid://bi0llg6bqivjm" path="res://Scenes/Scripts/bmw_745li.gd" id="1_pb4o8"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_rdt4v"]
+[ext_resource type="Script" uid="uid://bi0llg6bqivjm" path="res://Scripts/bmw_745li.gd" id="1_pb4o8"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_rdt4v"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_i3xnm"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_q6slx"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_n1tdw"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://d3eg13a0vaj4p"]
 
 [ext_resource type="Script" uid="uid://dc2n0tjilt6d" path="res://Scenes/volvo_s_60r.gd" id="1_638uq"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_qr4ia"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_qr4ia"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_md6ma"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_7gl72"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="5_4bd7x"]

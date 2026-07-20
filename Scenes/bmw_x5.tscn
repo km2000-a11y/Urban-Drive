@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://cbkoo0kkg0grf"]
 
 [ext_resource type="Script" uid="uid://bgrdc7lpqwhyp" path="res://Scenes/bmw_x_5.gd" id="1_i212o"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_wa6y2"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_wa6y2"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_5mab8"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="4_vwsi1"]
 [ext_resource type="AudioStream" uid="uid://cpontoff1o0wi" path="res://SFX/crash.mp3" id="5_mrt5t"]

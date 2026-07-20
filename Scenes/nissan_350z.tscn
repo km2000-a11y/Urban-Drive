@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=3 uid="uid://cl3tdjoybhwnw"]
 
-[ext_resource type="Script" uid="uid://c78vxo6ksjklv" path="res://Scenes/Scripts/nissan_350z_2005.gd" id="1_ayexn"]
-[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scenes/Scripts/camera.gd" id="2_ayexn"]
+[ext_resource type="Script" uid="uid://c78vxo6ksjklv" path="res://Scripts/nissan_350z_2005.gd" id="1_ayexn"]
+[ext_resource type="Script" uid="uid://ffvs8ga7wgmd" path="res://Scripts/camera.gd" id="2_ayexn"]
 [ext_resource type="AudioStream" uid="uid://bq4u8syx73uiv" path="res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav" id="3_ayexn"]
 [ext_resource type="AudioStream" uid="uid://cbyhxjdmmxqg3" path="res://SFX/brake.mp3" id="3_jqp17"]
 [ext_resource type="AudioStream" uid="uid://dkqrbnoypkxrd" path="res://SFX/skid.mp3" id="4_cmkhj"]

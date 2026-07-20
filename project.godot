@@ -30,6 +30,7 @@ GameMode="*res://game_mode.gd"
 MusicManager="*res://music_manager.gd"
 NormalRaceManager="*res://normal_race_manager.gd"
 TrackName="*res://track_name.gd"
+EliminationManager="*res://elimination_manager.gd"
 
 [display]
 

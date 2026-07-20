@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cehe780myc8ed"]
 
-[ext_resource type="Script" uid="uid://cj2cjcg724xul" path="res://Scenes/Scripts/mode_select.gd" id="1_qw3jj"]
+[ext_resource type="Script" uid="uid://cj2cjcg724xul" path="res://Scripts/mode_select.gd" id="1_qw3jj"]
 
 [node name="ModeSelect" type="CanvasLayer"]
 script = ExtResource("1_qw3jj")
@@ -43,7 +43,16 @@ offset_bottom = 699.0
 theme_override_font_sizes/font_size = 40
 text = "BACK"
 
+[node name="EliminationBtn" type="Button" parent="Control"]
+layout_mode = 0
+offset_top = 230.0
+offset_right = 1247.0
+offset_bottom = 293.0
+theme_override_font_sizes/font_size = 40
+text = "ELIMINATION"
+
 [connection signal="pressed" from="Control/RadarRaceBtn" to="." method="_on_radar_race_btn_pressed"]
 [connection signal="pressed" from="Control/DuelBtn" to="." method="_on_duel_btn_pressed"]
 [connection signal="pressed" from="Control/NormalRaceBtn" to="." method="_on_normal_race_btn_pressed"]
 [connection signal="pressed" from="Control/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="Control/EliminationBtn" to="." method="_on_elimination_btn_pressed"]

@@ -21,8 +21,11 @@ func _ready():
 		_setup_duel()
 	elif mode.to_lower() == "normal race":
 		_setup_normal_race()
+	elif mode == "Elimination":
+		_setup_elimination()
 	else:
 		_spawn_player_free_drive()
+
 
 	if mode == "Radar Race":
 		var ws_scene = load("res://Scenes/win_screen_radar.tscn")
@@ -40,6 +43,9 @@ func _ready():
 func _process(delta):
 	if mode.to_lower() == "normal race":
 		NormalRaceManager.update_race()
+	elif mode == "Elimination":
+		EliminationManager.update_race()
+
 
 func _input(event):
 	if event.is_action_pressed("pause_menu"):
@@ -122,6 +128,43 @@ func _setup_normal_race():
 	player_car = NormalRaceManager.player_car
 	_force_player_camera()
 
+func _setup_elimination():
+	if player_car:
+		player_car.queue_free()
+	player_car = null
+	# Hide normal HUD if it exists
+	if has_node("HUD"):
+		get_node("HUD").visible = false
+
+
+	var root := get_node(TrackName.track_name)
+
+	# Assign spawns
+	EliminationManager.player_spawn = root.get_node("SpawnPoint").global_position
+
+	EliminationManager.ai_spawns = []
+	for i in range(1, 8):
+		EliminationManager.ai_spawns.append(
+			root.get_node("AISpawnPoint" + str(i)).global_position
+		)
+
+	# Assign car paths
+	EliminationManager.player_car_path = Cars.selected_car
+	EliminationManager.ai_car_paths = Cars.get_ai_paths_for_class(Cars.selected_class)
+
+	# Load HUD_Elimination
+	var hud_scene := load("res://Scenes/elimination_hud.tscn")
+	var hud :Node= hud_scene.instantiate()
+	add_child(hud)
+
+	EliminationManager.hud = hud
+	EliminationManager.main_scene = self
+
+	# Spawn race
+	EliminationManager.spawn_race(self)
+
+	player_car = EliminationManager.player_car
+	_force_player_camera()
 
 # ---------------------------------------------------------
 # FORCE PLAYER CAMERA

@@ -1,13 +1,13 @@
+Panel
 Button
+Label
+Control
+CanvasLayer
 CarController
 MeshInstance3D
-Label
 MenuButton
 VBoxContainer
 HSlider
-Panel
-Control
-CanvasLayer
 CharacterBody3D
 Node2D
 Node3D
