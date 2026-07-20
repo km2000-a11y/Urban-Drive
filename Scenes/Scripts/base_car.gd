@@ -177,7 +177,8 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# --- UPDATE WAYPOINT FIRST ---
-	_update_player_waypoint()
+	# --- UPDATE WAYPOINT FIRST ---
+	update_waypoint()
 
 	if is_ai:
 		_update_ai_inputs(delta)

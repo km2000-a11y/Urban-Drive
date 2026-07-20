@@ -199,7 +199,6 @@ func _check_finish() -> void:
 
 
 
-
 func _end_race(winner: String) -> void:
 	race_active = false
 	player_car.controls_enabled = false
@@ -210,7 +209,6 @@ func _end_race(winner: String) -> void:
 	var participants = []
 	
 	# Считаем общий прогресс в вейпоинтах для точной сортировки
-	# (Кол-во кругов * общее кол-во WP + текущий WP)
 	var total_waypoints = player_car.waypoints.size()
 
 	var p_progress = (player_laps * total_waypoints) + player_car.current_wp
@@ -252,29 +250,32 @@ func _end_race(winner: String) -> void:
 	for i in range(participants.size()):
 		var p = participants[i]
 		var final_time : int
-		
-		if i == 0:
-			# Первый всегда получает свое реальное время
+
+		if p["car_obj"] == player_car:
+			# Player always gets real time
 			final_time = p["real_time"]
+
 		else:
 			if p["finished"]:
-				# Если этот AI тоже успел финишировать, пишем его реальное время
+				# AI finished before or same time as player → real time
 				final_time = p["real_time"]
 			else:
-				# Если не финишировал, генерируем время:
-				# Время лидера + (разница в прогрессе * среднее время на 1 вейпоинт) + рандомный разброс
-				var progress_diff = participants[0]["progress"] - p["progress"]
-				var avg_time_per_wp = winner_time / max(participants[0]["progress"], 1)
-				
-				# Добавляем небольшую случайность (0.5 - 1.5 сек), чтобы не было слишком "математически"
-				var penalty = int(progress_diff * avg_time_per_wp) + (randi() % 2000 + 500)
-				final_time = winner_time + penalty
-		
+				# AI did NOT finish → estimate
+				var leader_progress = participants[0]["progress"]
+				var leader_time = participants[0]["real_time"]
+
+				var progress_diff = leader_progress - p["progress"]
+				var avg_time_per_wp = leader_time / max(leader_progress, 1)
+
+				var penalty = int(progress_diff * avg_time_per_wp) + (randi() % 1500 + 500)
+				final_time = leader_time + penalty
+
 		RaceResults.add_result(p["name"], p["car_name"], final_time)
 
 	main_scene.show_finish(winner == "Player")
 	hud.visible = false
 	MusicManager.stop_music()
+
 
 
 func update_race() -> void:

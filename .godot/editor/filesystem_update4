@@ -1,4 +1,11 @@
-res://Scenes/bmw_135.tscn
+res://Scenes/bmw_x5.tscn
+res://Scenes/bmw_x_5.gd
+res://Scenes/volvo_xc90.tscn
+res://Scenes/volvo_xc_90.gd
+res://Scenes/Scripts/car_select.gd
+res://Scenes/car_select.tscn
+res://cars.gd
+res://Scenes/Scripts/vw_touareg_v10_tdi_2007.gd
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -21,7 +28,6 @@ res://Scenes/sagaris.tscn
 res://Scenes/gallardo.tscn
 res://Scenes/murcielago.tscn
 res://Scenes/chevelle_ss.tscn
-res://Scenes/car_select.tscn
 res://Scenes/audi_a8.tscn
 res://Scenes/lexus_is350.tscn
 res://Scenes/lexus_lx470.tscn
@@ -50,4 +56,6 @@ res://Scenes/audi_q7.tscn
 res://Scenes/bmw_330d.tscn
 res://Scenes/dodge_charger.tscn
 res://Scenes/pause_menu.tscn
+res://Scenes/bmw_135.tscn
 res://normal_race_manager.gd
+res://Scenes/Scripts/base_car.gd

@@ -27,6 +27,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Muscle Cars"
 
+[node name="SportsCrossovers" type="Button" parent="Control/ClassList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sports Crossovers"
+
 [node name="CompactCars" type="Button" parent="Control/ClassList"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -179,6 +184,7 @@ text = "SELECT CAR
 
 [connection signal="pressed" from="Control/ClassList/4x4SUV" to="." method="_on_4x4suv_pressed"]
 [connection signal="pressed" from="Control/ClassList/MuscleCars" to="." method="_on_muscle_cars_pressed"]
+[connection signal="pressed" from="Control/ClassList/SportsCrossovers" to="." method="_on_sports_crossovers_pressed"]
 [connection signal="pressed" from="Control/ClassList/CompactCars" to="." method="_on_compact_cars_pressed"]
 [connection signal="pressed" from="Control/ClassList/TorqueMonsters" to="." method="_on_torque_monsters_pressed"]
 [connection signal="pressed" from="Control/ClassList/Sedans" to="." method="_on_sedans_pressed"]

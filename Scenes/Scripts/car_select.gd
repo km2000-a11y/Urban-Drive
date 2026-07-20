@@ -20,6 +20,18 @@ var rotation_speed := 1.0
 
 var car_colors := {
 	"Straeda Pitbull":[Color8(128,128,0), Color8(90,90,90), Color8(180,150,80), Color8(0,70,40)],
+	"Mir Cars Crawler":[
+		Color8(200,40,40),   # Deep Red (default)
+		Color8(255,255,255), # White
+		Color8(60,60,60),    # Graphite
+		Color8(0,80,160)     # Deep Blue
+	],
+	"Eisenach Escorter":[
+		Color8(180,180,180), # Silver (default BMW SUV vibe)
+		Color8(255,255,255), # White
+		Color8(60,60,60),    # Dark Grey
+		Color8(0,70,120)     # Deep Blue
+	],
 	"Colossus Behemoth":[Color8(215,255,1), Color8(255,255,255), Color8(200,180,120), Color8(160,0,0)],
 	"Mir Cars Nightwolf":[Color8(0,0,192), Color8(255,255,255), Color8(64,64,64), Color8(0,80,160)],
 	"Colossus Titan Max":[Color8(255,0,0), Color8(180,180,180), Color8(210,180,90), Color8(120,40,40)],
@@ -203,9 +215,13 @@ var supercars_list = [
 	"Kestrel Guillotine",
 	"Mir Cars Raptor"
 ]
+var sports_crossovers_list = [
+	"Straeda Pitbull",
+	"Mir Cars Crawler",
+	"Eisenach Escorter"
+]
 
 var torque_monsters_list = [
-	"Straeda Pitbull",
 	"Eisenach Suppressor",
 	"Eisenach Black Panda",
 	"Schroder Fastback"
@@ -413,6 +429,28 @@ var sport_racing = {
 		"TRANSMISSION: REAR-WHEEL DRIVE"
 	]
 }
+var sports_crossovers = {
+	"Straeda Pitbull":[
+		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
+		"0-100 KM/H: 7.1s", "TOP SPEED: 235 KM/H",
+		"ENGINE: V10 5.0L DIESEL", "ASPIRATION: Turbo", "TORQUE: 750 NM",
+		"TRANSMISSION: FOUR-WHEEL DRIVE"
+	],
+
+	"Mir Cars Crawler":[
+		"", "Country: UAE", "HP: 320", "WEIGHT: 2289 KG",
+		"0-100 KM/H: 6.9s", "TOP SPEED: 232 KM/H",
+		"ENGINE: V8 4.9L", "ASPIRATION: NA", "TORQUE: 480 NM",
+		"TRANSMISSION: FOUR-WHEEL DRIVE"
+	],
+
+	"Eisenach Escorter":[
+		"", "Country: Germany", "HP: 315", "WEIGHT: 2250 KG",
+		"0-100 KM/H: 6.9s", "TOP SPEED: 232 KM/H",
+		"ENGINE: V8 4.4L", "ASPIRATION: NA", "TORQUE: 440 NM",
+		"TRANSMISSION: FOUR-WHEEL DRIVE"
+	]
+}
 
 var supercars = {
 	"Linetti Terror":[
@@ -441,12 +479,6 @@ var supercars = {
 	]
 }
 var torque_monsters = {
-	"Straeda Pitbull":[
-		"", "Country: Germany", "HP: 309", "WEIGHT: 2520 KG",
-		"0-100 KM/H: 7.3s", "TOP SPEED: 232 KM/H",
-		"ENGINE: V10 5.0L DIESEL", "ASPIRATION: Turbo", "TORQUE: 750 NM",
-		"TRANSMISSION: FOUR-WHEEL DRIVE"
-	],
 
 	"Eisenach Suppressor":[
 		"", "Country: Germany", "HP: 272", "WEIGHT: 1660 KG",
@@ -490,6 +522,8 @@ var car_scene_paths = {
 	"Zenith Horizon":"res://Scenes/nissan_350z.tscn",
 	"Straeda G25":"res://Scenes/golf_v_gti.tscn",
 	"Eisenach Compaque":"res://Scenes/bmw_125.tscn",
+	"Mir Cars Crawler":"res://Scenes/volvo_xc90.tscn",
+	"Eisenach Escorter":"res://Scenes/bmw_x5.tscn",
 
 
 	"Kestrel Seabird":"res://Scenes/lotus_exige_s.tscn",
@@ -715,6 +749,10 @@ func switch_car(direction):
 		"torque_monsters":
 			list=torque_monsters_list
 			dict=torque_monsters
+		"sports_crossovers":
+			list = sports_crossovers_list
+			dict = sports_crossovers
+
 
 	car_index = (car_index + direction) % list.size()
 	if car_index < 0:
@@ -793,3 +831,12 @@ func _on_torque_monsters_pressed() -> void:
 
 func _on_back_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/mode_select.tscn")
+
+
+func _on_sports_crossovers_pressed() -> void:
+	car_class = "sports_crossovers"
+	car_index = 0
+	car_name = sports_crossovers_list[car_index]
+	update_car_ui(sports_crossovers[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
+	_reset_color()

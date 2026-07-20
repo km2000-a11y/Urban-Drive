@@ -69,11 +69,15 @@ var class_lists := {
 	],
 
 	"torque_monsters": [
-		"Straeda Pitbull",
 		"Eisenach Suppressor",
 		"Eisenach Black Panda",
 		"Schroder Fastback"
 	],
+	"sports_crossovers": [
+	"Straeda Pitbull",
+	"Mir Cars Crawler",
+	"Eisenach Escorter"
+],
 
 	"special": [
 		"Bartoli Cruiser Interceptor"
@@ -103,6 +107,8 @@ var car_scene_paths := {
 
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
+	"Mir Cars Crawler":"res://Scenes/volvo_xc90.tscn",
+	"Eisenach Escorter":"res://Scenes/bmw_x5.tscn",
 
 	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
@@ -153,6 +159,18 @@ var car_colors := {
 	Color8(60,60,60),     # Dark Grey
 	Color8(0,70,120)      # Deep Blue
 ],
+	"Mir Cars Crawler":[
+		Color8(200,40,40),   # Deep Red (default)
+		Color8(255,255,255), # White
+		Color8(60,60,60),    # Graphite
+		Color8(0,80,160)     # Deep Blue
+	],
+	"Eisenach Escorter":[
+		Color8(180,180,180), # Silver (default BMW SUV vibe)
+		Color8(255,255,255), # White
+		Color8(60,60,60),    # Dark Grey
+		Color8(0,70,120)     # Deep Blue
+	],
 
 	"Mir Cars Hutch":[Color8(180,20,20), Color8(255,255,255), Color8(60,60,60), Color8(0,40,80)],
 	"Brutus Viper":[Color8(0,0,128), Color8(255,255,255), Color8(200,200,200), Color8(160,0,0)],
