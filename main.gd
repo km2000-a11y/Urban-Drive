@@ -7,9 +7,9 @@ var player_car: CarController
 @onready var finish_flash := $FinishFlash
 @onready var start_countdown := $Start
 @onready var leaderboard := $Leaderboard if has_node("Leaderboard") else null
+@onready var normal_hud:=$HUD
 
 var best_radar_speed := 0
-
 
 func _ready():
 	mode = Modes.mode
@@ -26,7 +26,7 @@ func _ready():
 	else:
 		_spawn_player_free_drive()
 
-
+	# Radar race win screen
 	if mode == "Radar Race":
 		var ws_scene = load("res://Scenes/win_screen_radar.tscn")
 		win_screen_radar = ws_scene.instantiate()
@@ -39,13 +39,11 @@ func _ready():
 
 	start_countdown.start_countdown()
 
-
 func _process(delta):
 	if mode.to_lower() == "normal race":
 		NormalRaceManager.update_race()
 	elif mode == "Elimination":
 		EliminationManager.update_race()
-
 
 func _input(event):
 	if event.is_action_pressed("pause_menu"):
@@ -53,7 +51,7 @@ func _input(event):
 			$PauseMenu.toggle_pause()
 
 # ---------------------------------------------------------
-# FREE DRIVE / NON-MODE PLAYER SPAWN
+# FREE DRIVE
 # ---------------------------------------------------------
 func _spawn_player_free_drive():
 	var path := Cars.selected_car
@@ -79,9 +77,8 @@ func _spawn_player_free_drive():
 
 	_force_player_camera()
 
-
 # ---------------------------------------------------------
-# DUEL SETUP
+# DUEL
 # ---------------------------------------------------------
 func _setup_duel():
 	var root := get_node(TrackName.track_name)
@@ -101,9 +98,8 @@ func _setup_duel():
 	player_car = DuelManager.player_car
 	_force_player_camera()
 
-
 # ---------------------------------------------------------
-# NORMAL RACE SETUP
+# NORMAL RACE
 # ---------------------------------------------------------
 func _setup_normal_race():
 	if player_car:
@@ -128,18 +124,19 @@ func _setup_normal_race():
 	player_car = NormalRaceManager.player_car
 	_force_player_camera()
 
+# ---------------------------------------------------------
+# ELIMINATION
+# ---------------------------------------------------------
 func _setup_elimination():
 	if player_car:
 		player_car.queue_free()
 	player_car = null
-	# Hide normal HUD if it exists
-	if has_node("HUD"):
-		get_node("HUD").visible = false
 
+	# Hide normal HUD
+	normal_hud.visible=false
 
 	var root := get_node(TrackName.track_name)
 
-	# Assign spawns
 	EliminationManager.player_spawn = root.get_node("SpawnPoint").global_position
 
 	EliminationManager.ai_spawns = []
@@ -148,17 +145,21 @@ func _setup_elimination():
 			root.get_node("AISpawnPoint" + str(i)).global_position
 		)
 
-	# Assign car paths
 	EliminationManager.player_car_path = Cars.selected_car
 	EliminationManager.ai_car_paths = Cars.get_ai_paths_for_class(Cars.selected_class)
 
-	# Load HUD_Elimination
+	# Load elimination HUD
 	var hud_scene := load("res://Scenes/elimination_hud.tscn")
-	var hud :Node= hud_scene.instantiate()
+	var hud :CanvasLayer= hud_scene.instantiate()
+	hud.visible = false
 	add_child(hud)
 
 	EliminationManager.hud = hud
 	EliminationManager.main_scene = self
+
+	# Connect elimination signals
+	EliminationManager.connect("player_eliminated", _on_player_eliminated)
+	EliminationManager.connect("elimination_win", _on_elimination_win)
 
 	# Spawn race
 	EliminationManager.spawn_race(self)
@@ -166,8 +167,24 @@ func _setup_elimination():
 	player_car = EliminationManager.player_car
 	_force_player_camera()
 
+	# Show HUD after countdown
+	start_countdown.connect("countdown_finished", _on_elimination_countdown_finished)
+
+func _on_elimination_countdown_finished():
+	if EliminationManager.hud:
+		EliminationManager.hud.visible = true
+
 # ---------------------------------------------------------
-# FORCE PLAYER CAMERA
+# ELIMINATION SIGNAL HANDLERS
+# ---------------------------------------------------------
+func _on_player_eliminated():
+	show_finish(false)
+
+func _on_elimination_win(car):
+	show_finish(true)
+
+# ---------------------------------------------------------
+# CAMERA
 # ---------------------------------------------------------
 func _force_player_camera():
 	if not player_car:
@@ -176,14 +193,10 @@ func _force_player_camera():
 	for node in get_tree().get_nodes_in_group("cars"):
 		if node is CarController and node != player_car:
 			if node.has_node("Camera3D"):
-				var cam = node.get_node("Camera3D")
-				cam.current = false
+				node.get_node("Camera3D").current = false
 
 	if player_car.has_node("Camera3D"):
-		var cam = player_car.get_node("Camera3D")
-		cam.current = true
-
-
+		player_car.get_node("Camera3D").current = true
 
 # ---------------------------------------------------------
 # COLOR
@@ -196,7 +209,6 @@ func _apply_color_to_car(car: CarController, color: Color):
 				var mat = child.get_active_material(0)
 				if mat:
 					mat.albedo_color = color
-
 
 # ---------------------------------------------------------
 # RADAR RACE
@@ -218,8 +230,9 @@ func _on_radar_trap_body_entered(body):
 
 		player_car.controls_enabled = false
 		win_screen_radar.show_win(speed, best_radar_speed)
+
 	finish_flash.flash()
-	MusicManager.stop_music()	
+	MusicManager.stop_music()
 	_screech_to_halt()
 
 func load_radar_best():
@@ -228,15 +241,13 @@ func load_radar_best():
 		best_radar_speed = int(f.get_as_text())
 		f.close()
 
-
 func save_radar_best():
 	var f := FileAccess.open("user://radar_best.save", FileAccess.WRITE)
 	f.store_string(str(best_radar_speed))
 	f.close()
 
-
 # ---------------------------------------------------------
-# GLOBAL AI DISABLE (if you ever need it)
+# GLOBAL AI DISABLE
 # ---------------------------------------------------------
 func disable_all_ai():
 	for node in get_tree().get_nodes_in_group("cars"):
@@ -250,15 +261,14 @@ func _screech_to_halt():
 			node.hard_frozen = true
 			node.velocity = Vector3.ZERO
 
-
 # ---------------------------------------------------------
-# FINISH + LEADERBOARD
+# FINISH SCREEN
 # ---------------------------------------------------------
 func show_finish(player_won: bool):
 	finish_flash.visible = true
 	finish_flash.flash()
-	
-	_screech_to_halt()  
+
+	_screech_to_halt()
 
 	if leaderboard:
 		leaderboard.visible = true

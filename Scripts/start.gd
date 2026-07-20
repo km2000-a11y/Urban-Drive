@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal countdown_finished   # 🔥 ADD THIS
+
 @onready var label := $Control/CountdownLabel
 
 var cars := []
@@ -30,3 +32,5 @@ func start_countdown():
 			c.controls_enabled = true
 
 	visible = false
+
+	emit_signal("countdown_finished")   # 🔥 FIRE THE SIGNAL

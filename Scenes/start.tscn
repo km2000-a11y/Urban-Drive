@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://62iyhpkxrkb" path="res://Scripts/start.gd" id="1_3bxa3"]
 
 [node name="Start" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_3bxa3")
 
 [node name="Control" type="Control" parent="."]

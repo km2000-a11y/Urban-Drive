@@ -52,12 +52,7 @@ res://Scenes/pause_menu.tscn
 res://Scenes/bmw_135.tscn
 res://Scenes/bmw_x5.tscn
 res://Scenes/volvo_xc90.tscn
-res://Scenes/Scripts/mode_select.gd
-res://elimination_manager.gd
-res://normal_race_manager.gd
 res://Scenes/elimination_hud.tscn
-res://Scenes/hud.gd
 res://Scenes/elimination_win_screen.tscn
-res://Scenes/elimination_hud.gd
-res://Scenes/elimination_win_screen.gd
 res://main.gd
+res://Scripts/start.gd
