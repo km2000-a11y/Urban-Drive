@@ -24,6 +24,12 @@ var class_lists := {
 		"Kuro Zephyr",
 		"Eisenach Compaque"
 	],
+	"track_cars": [
+	"Mir Cars Athletic C70",
+	"Bartoli Track Cruiser",
+	"Brutus Thunderbolt"
+],
+
 
 	"muscle": [
 		"Mir Cars Hutch",
@@ -35,7 +41,8 @@ var class_lists := {
 		"Kestrel Speedster",
 		"Kestrel Seabird",
 		"Kuro Zephyr V6",
-		"Eisenach Bengal"
+		"Eisenach Bengal",
+		"Eisenach Prince"
 	],
 
 	"sedans": [
@@ -43,7 +50,7 @@ var class_lists := {
 		"Mir Cars Transporter",
 		"Kuro Vault",
 		"Strandberg Turbo",
-		"Brutus Mammoth"
+		"Kuro Persian"
 	],
 
 	"sport": [
@@ -104,6 +111,7 @@ var car_scene_paths := {
 	"Kuro Zephyr V6":"res://Scenes/lexus_is350.tscn",
 	"Eisenach Bengal":"res://Scenes/bmw_135.tscn",
 	"Strandberg Turbo":"res://Scenes/volvo_s60r.tscn",
+	"Eisenach Prince":"res://Scenes/bmw_m5_e39.tscn",
 
 	"Brutus Viper":"res://Scenes/gt500.tscn",
 	"Mir Cars Hutch":"res://Scenes/chevelle_ss.tscn",
@@ -121,7 +129,8 @@ var car_scene_paths := {
 	"Berkshire V12-S":"res://Scenes/aston_db9.tscn",
 	"Berkshire Tempest":"res://Scenes/vanquish.tscn",
 	"Eisenach Black Panda":"res://Scenes/bmw_330d.tscn",
-	"Brutus Mammoth":"res://Scenes/dodge_charger.tscn",
+	"Kuro Persian":"res://Scenes/lexus_gs430.tscn",
+
 
 	"Mir Cars Precision":"res://Scenes/bmw_m6.tscn",
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
@@ -133,6 +142,10 @@ var car_scene_paths := {
 	"Kestrel Guillotine":"res://Scenes/tvr t 440r.tscn",
 	"Mir Cars Raptor":"res://Scenes/saleen_s7.tscn",
 	"Schroder Fastback":"res://Scenes/audi_a5_tdi.tscn",
+	"Mir Cars Athletic C70":"res://Scenes/zonda.tscn",
+	"Bartoli Track Cruiser":"res://Scenes/mc12.tscn",
+	"Brutus Thunderbolt":"res://Scenes/ford_cobra.tscn",
+
 
 	"Bartoli Cruiser Interceptor": "res://Scenes/granturismo_police.tscn"
 }
@@ -188,12 +201,13 @@ var car_colors := {
 	Color8(180,180,180), # Silver
 	Color8(60,60,60)     # Graphite Grey
 ],
-"Brutus Mammoth":[
-	Color8(0,110,130),   # ⭐ Teal Torque (default — muscle sedan but modern)
+"Kuro Persian":[
+	Color8(0,110,130),   # Teal Torque (same as Mammoth)
 	Color8(255,255,255), # White
 	Color8(60,60,60),    # Dark Grey
 	Color8(180,20,20)    # Deep Muscle Red
 ],
+
 	"Mir Cars Transporter":[Color8(0,90,160), Color8(255,255,255), Color8(160,160,160), Color8(0,40,80)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
 	"Eisenach Compaque":[
@@ -215,7 +229,12 @@ var car_colors := {
 	Color8(0,70,120)       # Deep Blue (Audi signature)
 ],
 
-
+"Eisenach Prince":[
+	Color8(255,99,71),    # ⭐ Tomato Red (default)
+	Color8(185,155,185),  # White
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,0,0)         # Black
+],
 	"Berkshire Tempest":[Color8(192,192,192), Color8(255,255,255), Color8(0,80,120), Color8(160,160,160)],
 	"Berkshire V12-S":[Color8(46,54,64), Color8(255,255,255), Color8(80,120,160), Color8(160,160,160)],
 	"Bartoli Cruiser":[Color8(0,157,192), Color8(255,255,255), Color8(180,180,180), Color8(0,90,160)],

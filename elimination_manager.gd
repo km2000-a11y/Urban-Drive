@@ -16,6 +16,13 @@ var elimination_timer: float = 20.0
 
 var hud: Node = null
 var main_scene: Node = null
+var last_sorted: Array = []
+var last_last_car: CarController = null
+var last_last_confirm_count: int = 0
+var required_last_confirm: int = 2   # must be last for 2 eliminations in a row
+var car_laps: Dictionary = {}
+var last_wp: Dictionary = {}
+
 
 signal player_eliminated()
 signal ai_eliminated(car)
@@ -100,6 +107,18 @@ func spawn_race(scene: Node) -> void:
 		ai.set_waypoints(wp_root)
 
 	# START
+		# INIT LAPS
+	car_laps.clear()
+	car_laps[player_car] = 0
+	for ai in ai_cars:
+		car_laps[ai] = 0
+	
+	last_wp.clear()
+	last_wp[player_car] = 0
+	for ai in ai_cars:
+		last_wp[ai] = 0
+
+
 	elimination_timer = elimination_interval
 	race_active = true
 
@@ -108,33 +127,38 @@ func spawn_race(scene: Node) -> void:
 
 	MusicManager.stop_music()
 	MusicManager.play_race_music()
+
 func update_race() -> void:
 	if not race_active:
 		return
 
-	hud.update_position(_calculate_position(), ai_cars.size() + 1)
+	# Take ONE stable snapshot for this frame
+	var sorted := _sorted_cars()
+	var player_pos := _position_from_sorted(sorted)
+
+	hud.update_position(player_pos, ai_cars.size() + 1)
 
 	elimination_timer -= get_process_delta_time()
 	hud.update_elimination_timer(elimination_timer)
 
-	if elimination_timer <= 0:
-		_do_elimination()
+	if elimination_timer <= 0.0:
+		_do_elimination(sorted)  # use SAME snapshot
 		elimination_timer = elimination_interval
 
-
-func _do_elimination() -> void:
+func _do_elimination(sorted: Array) -> void:
 	if ai_cars.size() + 1 <= 1:
 		return
 
-	var sorted := _sorted_cars()
-	var last :CarController= sorted[-1]
+	if sorted.is_empty():
+		return
+
+	var last: CarController = sorted[-1]
 
 	# PLAYER eliminated
 	if last == player_car:
 		race_active = false
 		player_car.controls_enabled = false
 		player_car.current_speed = 0
-
 		emit_signal("player_eliminated")
 		return
 
@@ -149,6 +173,13 @@ func _do_elimination() -> void:
 	if ai_cars.size() == 0:
 		race_active = false
 		emit_signal("elimination_win", player_car)
+
+func _position_from_sorted(sorted: Array) -> int:
+	for i in range(sorted.size()):
+		if sorted[i] == player_car:
+			return i + 1
+	return 1
+
 func _calculate_position() -> int:
 	var sorted := _sorted_cars()
 
@@ -162,29 +193,46 @@ func _sorted_cars() -> Array:
 	var total_wp := player_car.waypoints.size()
 	var cars := []
 
+		# Detect wrap-around (WP_last → WP_0)
+	if player_car.current_wp == 0 and last_wp[player_car] == total_wp - 1:
+		car_laps[player_car] += 1
+
+	for ai in ai_cars:
+		if ai.current_wp == 0 and last_wp[ai] == total_wp - 1:
+			car_laps[ai] += 1
+
+
+	# BUILD DATA
 	cars.append({
 		"car": player_car,
-		"progress": player_car.current_wp,
+		"progress": car_laps[player_car] * total_wp + player_car.current_wp,
 		"dist": _distance_to_next_wp(player_car)
 	})
 
 	for ai in ai_cars:
 		cars.append({
 			"car": ai,
-			"progress": ai.current_wp,
+			"progress": car_laps[ai] * total_wp + ai.current_wp,
 			"dist": _distance_to_next_wp(ai)
 		})
 
+	# SORT: higher progress first, then closer to next WP
 	cars.sort_custom(func(a, b):
 		if a["progress"] != b["progress"]:
 			return a["progress"] > b["progress"]
 		return a["dist"] < b["dist"]
 	)
 
-	var result := []
+	var result: Array = []
 	for c in cars:
 		result.append(c["car"])
+	# Update last waypoint snapshot
+	last_wp[player_car] = player_car.current_wp
+	for ai in ai_cars:
+		last_wp[ai] = ai.current_wp
+
 	return result
+
 	
 func _distance_to_next_wp(car: CarController) -> float:
 	if car.waypoints.is_empty():

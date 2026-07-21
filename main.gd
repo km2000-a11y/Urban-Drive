@@ -8,6 +8,7 @@ var player_car: CarController
 @onready var start_countdown := $Start
 @onready var leaderboard := $Leaderboard if has_node("Leaderboard") else null
 @onready var normal_hud:=$HUD
+@onready var elimination_hud:=$EliminationHud
 
 var best_radar_speed := 0
 
@@ -16,11 +17,13 @@ func _ready():
 	load_radar_best()
 	Cars.load_color()
 	MusicManager.play_race_music()
+	$EliminationWinScreen.visible=false
 
 	if mode == "Duel":
 		_setup_duel()
 	elif mode.to_lower() == "normal race":
 		_setup_normal_race()
+		
 	elif mode == "Elimination":
 		_setup_elimination()
 	else:

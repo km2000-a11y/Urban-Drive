@@ -71,13 +71,34 @@ var car_colors := {
 	Color8(180,180,180),
 	Color8(120,0,0)
 ],
-"Brutus Mammoth":[
-	Color8(0,110,130),   # ⭐ Teal Torque (default — muscle sedan but modern)
+"Kuro Persian":[
+	Color8(0,110,130),   # Teal Torque (same as Mammoth)
 	Color8(255,255,255), # White
 	Color8(60,60,60),    # Dark Grey
 	Color8(180,20,20)    # Deep Muscle Red
 ],
 
+
+"Mir Cars Athletic C70":[
+	Color8(255,80,20),   # Default — American Hyper Orange
+	Color8(255,255,255), # White
+	Color8(60,60,60),    # Graphite
+	Color8(0,90,160)     # Deep Blue
+],
+
+"Bartoli Track Cruiser":[
+	Color8(0,157,192),   # Default — MC12 Blue
+	Color8(255,255,255), # White
+	Color8(180,180,180), # Silver
+	Color8(0,90,160)     # Deep Blue
+],
+
+"Brutus Thunderbolt":[
+	Color8(255,0,0),     # Default — Cobra Red
+	Color8(255,255,255), # White
+	Color8(60,60,60),    # Graphite
+	Color8(0,40,120)     # Deep Blue
+],
 
 
 
@@ -97,6 +118,13 @@ var car_colors := {
 	Color8(180,180,180), # Silver
 	Color8(60,60,60)     # Graphite Grey
 ],
+"Eisenach Prince":[
+	Color8(255,99,71),    # ⭐ Tomato Red (default)
+	Color8(185,155,185),  # White
+	Color8(60,60,60),     # Dark Grey
+	Color8(0,0,0)         # Black
+],
+
 	"Mir Cars Transporter":[Color8(192,192,192), Color8(255,255,255), Color8(0,40,80), Color8(160,160,160)],
 	"Kuro Vault":[Color8(123,3,35), Color8(255,255,255), Color8(60,60,60), Color8(0,70,120)],
 
@@ -158,26 +186,27 @@ var car_colors := {
 # -------------------------
 
 var suv_list = [
+	"Colossus Titan Max",
 	"Schroder Colosso",
 	"Colossus Behemoth",
 	"Mir Cars Nightwolf",
-	"Colossus Titan Max"
 ]
 
 var compact_list = [
-	"Zenith Horizon",
 	"Schroder Atrix Q32",
+	"Zenith Horizon",
 	"Straeda B32",
 	"Kuro Zephyr",
 	"Eisenach Compaque"
 ]
 
 var muscle_list = [
-	"Mir Cars Hutch",
-	"Brutus Viper"
+	"Brutus Viper",
+	"Mir Cars Hutch"
 ]
 
 var urban_list = [
+	"Eisenach Prince",   # ⭐ NEW — E39 M5
 	"Brutus Stingray",
 	"Kestrel Speedster",
 	"Kestrel Seabird",
@@ -187,25 +216,26 @@ var urban_list = [
 
 
 var sedans_list = [
+	"Kuro Persian",
 	"Eisenach Monarch",
 	"Mir Cars Transporter",
 	"Kuro Vault",
-	"Strandberg Turbo",
-	"Brutus Mammoth"
+	"Strandberg Turbo"
 ]
 
+
 var sport_list = [
-	"Bartoli Cruiser",
-	"Berkshire V12-S",
-	"Berkshire Tempest",
 	"Schroder Atrix Sport",
+	"Berkshire V12-S",
+	"Bartoli Cruiser",
+	"Berkshire Tempest",
 	"Berkshire Blunt"
 ]
 
 var sport_racing_list = [
+	"Linetti Shepherd",
 	"Mir Cars Precision",
 	"Kestrel Battleaxe",
-	"Linetti Shepherd",
 	"Brutus Venom"
 ]
 
@@ -225,6 +255,11 @@ var torque_monsters_list = [
 	"Eisenach Suppressor",
 	"Eisenach Black Panda",
 	"Schroder Fastback"
+]
+var track_cars_list = [
+	"Mir Cars Athletic C70",
+	"Bartoli Track Cruiser",
+	"Brutus Thunderbolt"
 ]
 
 
@@ -306,6 +341,12 @@ var muscle = {
 	]
 }
 var urban_racers = {
+	"Eisenach Prince":[
+	"", "Country: Germany", "HP: 390", "WEIGHT: 1740 KG",
+	"0-100 KM/H: 4.6s", "TOP SPEED: 250 KM/H",
+	"ENGINE: V8 4.9L", "ASPIRATION: NA", "TORQUE: 500 NM",
+	"TRANSMISSION: REAR-WHEEL DRIVE"
+],
 	"Brutus Stingray":[
 		"", "Country: USA", "HP: 345", "WEIGHT: 1460 KG",
 		"0-100 KM/H: 5.0s", "TOP SPEED: 253 KM/H",
@@ -362,10 +403,10 @@ var sedans = {
 		"ENGINE: L5 2.5L", "ASPIRATION: Turbo", "TORQUE: 350 NM",
 		"TRANSMISSION: FOUR-WHEEL DRIVE"
 	],
-	"Brutus Mammoth":[
-	"", "Country: USA", "HP: 340", "WEIGHT: 1828 KG",
-	"0-100 KM/H: 5.9s", "TOP SPEED: 253 KM/H",
-	"ENGINE: V8 5.7L", "ASPIRATION: NA", "TORQUE: 480 NM",
+	"Kuro Persian":[
+	"", "Country: Japan", "HP: 300", "WEIGHT: 1660 KG",
+	"0-100 KM/H: 5.7s", "TOP SPEED: 258 KM/H",
+	"ENGINE: V8 4.3L", "ASPIRATION: NA", "TORQUE: 430 NM",
 	"TRANSMISSION: REAR-WHEEL DRIVE"
 ]
 }
@@ -502,6 +543,28 @@ var torque_monsters = {
 	]
 }
 
+var track_cars = {
+	"Mir Cars Athletic C70":[
+		"", "Country: UAE", "HP: 600", "WEIGHT: 1378 KG",
+		"0-100 KM/H: 3.65s", "TOP SPEED: 342 KM/H",
+		"ENGINE: V12 7.0L", "ASPIRATION: NA", "TORQUE: 650 NM",
+		"TRANSMISSION: REAR-WHEEL DRIVE"
+	],
+
+	"Bartoli Track Cruiser":[
+		"", "Country: Italy", "HP: 621", "WEIGHT: 1335 KG",
+		"0-100 KM/H: 3.4s", "TOP SPEED: 335 KM/H",
+		"ENGINE: V12 6.0L", "ASPIRATION: NA", "TORQUE: 652 NM",
+		"TRANSMISSION: REAR-WHEEL DRIVE"
+	],
+
+	"Brutus Thunderbolt":[
+		"", "Country: USA", "HP: 605", "WEIGHT: 1390 KG",
+		"0-100 KM/H: 3.6s", "TOP SPEED: 338 KM/H",
+		"ENGINE: V10 6.4L", "ASPIRATION: NA", "TORQUE: 640 NM",
+		"TRANSMISSION: REAR-WHEEL DRIVE"
+	]
+}
 
 # -------------------------
 # SCENE PATHS
@@ -537,6 +600,12 @@ var car_scene_paths = {
 	"Schroder Colosso":"res://Scenes/audi_q7.tscn",
 	"Eisenach Black Panda":"res://Scenes/bmw_330d.tscn",
 	"Eisenach Bengal":"res://Scenes/bmw_135.tscn",
+	"Eisenach Prince":"res://Scenes/bmw_m5_e39.tscn",
+	"Mir Cars Athletic C70":"res://Scenes/zonda.tscn",
+	"Bartoli Track Cruiser":"res://Scenes/mc12.tscn",
+	"Brutus Thunderbolt":"res://Scenes/ford_cobra.tscn",
+
+
 
 	"Eisenach Monarch":"res://Scenes/bmw_745.tscn",
 	"Mir Cars Transporter":"res://Scenes/audi_a8.tscn",
@@ -552,7 +621,7 @@ var car_scene_paths = {
 	"Kestrel Battleaxe":"res://Scenes/sagaris.tscn",
 	"Linetti Shepherd":"res://Scenes/gallardo.tscn",
 	"Brutus Venom":"res://Scenes/dodge_viper.tscn",
-	"Brutus Mammoth":"res://Scenes/dodge_charger.tscn",
+	"Kuro Persian":"res://Scenes/lexus_gs430.tscn",
 
 	"Linetti Terror":"res://Scenes/murcielago.tscn",
 	"Linetti Firestorm":"res://Scenes/diablo_road.tscn",
@@ -752,6 +821,10 @@ func switch_car(direction):
 		"sports_crossovers":
 			list = sports_crossovers_list
 			dict = sports_crossovers
+		"track_cars":
+				list = track_cars_list
+				dict = track_cars
+
 
 
 	car_index = (car_index + direction) % list.size()
@@ -838,5 +911,13 @@ func _on_sports_crossovers_pressed() -> void:
 	car_index = 0
 	car_name = sports_crossovers_list[car_index]
 	update_car_ui(sports_crossovers[car_name], car_name)
+	load_preview_car(car_scene_paths[car_name])
+	_reset_color()
+
+func _on_track_cars_pressed() -> void:
+	car_class = "track_cars"
+	car_index = 0
+	car_name = track_cars_list[car_index]
+	update_car_ui(track_cars[car_name], car_name)
 	load_preview_car(car_scene_paths[car_name])
 	_reset_color()

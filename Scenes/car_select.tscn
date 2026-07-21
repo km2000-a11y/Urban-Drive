@@ -67,6 +67,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Supercars"
 
+[node name="TrackCars" type="Button" parent="Control/ClassList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Track Cars"
+
 [node name="Cars" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 269.0
@@ -192,5 +197,6 @@ text = "SELECT CAR
 [connection signal="pressed" from="Control/ClassList/SportCoupe" to="." method="_on_sport_coupe_pressed"]
 [connection signal="pressed" from="Control/ClassList/SportRacing" to="." method="_on_sport_racing_pressed"]
 [connection signal="pressed" from="Control/ClassList/Supercars" to="." method="_on_supercars_pressed"]
+[connection signal="pressed" from="Control/ClassList/TrackCars" to="." method="_on_track_cars_pressed"]
 [connection signal="pressed" from="Control/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="Select" to="." method="_on_select_pressed"]

@@ -47,12 +47,14 @@ res://Scenes/bmw_125.tscn
 res://Scenes/audi_a5_tdi.tscn
 res://Scenes/audi_q7.tscn
 res://Scenes/bmw_330d.tscn
-res://Scenes/dodge_charger.tscn
+res://Scenes/lexus_gs430.tscn
 res://Scenes/pause_menu.tscn
 res://Scenes/bmw_135.tscn
 res://Scenes/bmw_x5.tscn
 res://Scenes/volvo_xc90.tscn
 res://Scenes/elimination_hud.tscn
 res://Scenes/elimination_win_screen.tscn
-res://main.gd
-res://Scripts/start.gd
+res://Scenes/bmw_m5_e39.tscn
+res://Scenes/mc12.tscn
+res://Scenes/ford_cobra.tscn
+res://Scenes/zonda.tscn
