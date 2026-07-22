@@ -3,7 +3,6 @@ extends Camera3D
 @export var target: Node3D
 @onready var forward_ref: Node3D = target.get_node("ForwardRef")
 
-
 # --- Chase cam settings ---
 @export var chase_distance := 8.0
 @export var chase_height := 2.0
@@ -16,6 +15,9 @@ extends Camera3D
 
 # --- Camera mode toggle ---
 var alt_cam_mode := false
+
+# --- Rear view toggle ---
+var rear_view := false
 
 # --- Nitro shake ---
 var shake_strength := 0.0
@@ -30,6 +32,12 @@ func _physics_process(delta):
 	# ---------------------------------------------------------
 	if Input.is_action_just_pressed("change_cam"):
 		alt_cam_mode = not alt_cam_mode
+
+	# ---------------------------------------------------------
+	# REAR VIEW TOGGLE
+	# ---------------------------------------------------------
+	if Input.is_action_just_pressed("rear_view"):
+		rear_view = not rear_view
 
 	# ---------------------------------------------------------
 	# NITRO SHAKE (smooth sinusoidal)
@@ -55,27 +63,29 @@ func _physics_process(delta):
 	# ---------------------------------------------------------
 	var car_pos := target.global_transform.origin
 	var forward := -target.global_transform.basis.z.normalized()
-	var car_forward :Vector3= (forward_ref.global_transform.origin - car_pos).normalized()
+	var car_forward :Vector3 = (forward_ref.global_transform.origin - car_pos).normalized()
 
 	# ---------------------------------------------------------
 	# ALT CAMERA (windshield cam IN FRONT of car)
 	# ---------------------------------------------------------
-# ALT CAMERA (windshield cam IN FRONT of car)
-# ---------------------------------------------------------
 	if alt_cam_mode:
 		var forward_dist := car_pos.distance_to(forward_ref.global_transform.origin)
 
 		var base := car_pos
 		base += target.global_transform.basis.x * windshield_offset.x
 		base.y += windshield_offset.y
-
-		# Dynamic forward offset for SUVs / trucks / sedans
 		base += car_forward * (forward_dist * 0.35)
 
 		global_transform.origin = global_transform.origin.lerp(base + shake_offset, delta * smooth_speed)
-		look_at(car_pos + car_forward * 3.0, Vector3.UP)
-		return
 
+		# Look forward normally
+		look_at(car_pos + car_forward * 3.0, Vector3.UP)
+
+		# Apply rear-view rotation if toggled
+		if rear_view:
+			rotate_y(deg_to_rad(180))
+
+		return
 
 	# ---------------------------------------------------------
 	# NORMAL CHASE CAMERA
@@ -83,7 +93,6 @@ func _physics_process(delta):
 	var ideal_pos := car_pos - forward * chase_distance
 	ideal_pos.y += chase_height
 
-	# Raycast for collision avoidance
 	var space := get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(car_pos, ideal_pos)
 	query.exclude = [target]
@@ -92,7 +101,7 @@ func _physics_process(delta):
 	var final_pos := ideal_pos
 
 	if hit:
-		var wall_pos :Vector3= hit.position + hit.normal * collision_offset
+		var wall_pos :Vector3 = hit.position + hit.normal * collision_offset
 		var wall_dist := car_pos.distance_to(wall_pos)
 
 		if wall_dist < min_distance:
@@ -101,8 +110,11 @@ func _physics_process(delta):
 		else:
 			final_pos = wall_pos
 
-	# Smooth movement + shake
 	global_transform.origin = global_transform.origin.lerp(final_pos + shake_offset, delta * smooth_speed)
 
-	# Look at car
+	# Look forward normally
 	look_at(car_pos, Vector3.UP)
+
+	# Apply rear-view rotation if toggled
+	if rear_view:
+		rotate_y(deg_to_rad(180))
