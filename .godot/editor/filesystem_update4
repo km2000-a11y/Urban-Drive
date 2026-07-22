@@ -58,3 +58,13 @@ res://Scenes/bmw_m5_e39.tscn
 res://Scenes/mc12.tscn
 res://Scenes/ford_cobra.tscn
 res://Scenes/zonda.tscn
+res://Scripts/win_screen_radar.gd
+res://cars.gd
+res://main.gd
+res://Scenes/cop_chase_hud.tscn
+res://normal_race_manager.gd
+res://Scripts/mode_select.gd
+res://Scenes/cop_chase_hud.gd
+res://cop_chase_manager.gd
+res://Scenes/crosshair_draw.gd
+res://Scripts/granturismo_s_2009_police.gd

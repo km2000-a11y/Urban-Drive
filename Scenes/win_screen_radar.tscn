@@ -27,10 +27,6 @@ offset_bottom = 391.0
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 
-[node name="Label_Speed" type="Label" parent="Control/Panel/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-
 [node name="RetryButton" type="Button" parent="Control/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40

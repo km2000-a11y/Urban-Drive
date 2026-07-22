@@ -9,12 +9,13 @@ var player_car: CarController
 @onready var leaderboard := $Leaderboard if has_node("Leaderboard") else null
 @onready var normal_hud:=$HUD
 @onready var elimination_hud:=$EliminationHud
+@onready var cop_chase_hud := $CopChaseHud
+@onready var cop_chase_ui := $CopChaseHud/Control
 
-var best_radar_speed := 0
+
 
 func _ready():
 	mode = Modes.mode
-	load_radar_best()
 	Cars.load_color()
 	MusicManager.play_race_music()
 	$EliminationWinScreen.visible=false
@@ -26,8 +27,13 @@ func _ready():
 		
 	elif mode == "Elimination":
 		_setup_elimination()
+	elif mode == "Cop Chase":
+		_setup_cop_chase()
 	else:
 		_spawn_player_free_drive()
+	print("MAIN MODE:", Modes.mode)
+
+
 
 	# Radar race win screen
 	if mode == "Radar Race":
@@ -47,6 +53,9 @@ func _process(delta):
 		NormalRaceManager.update_race()
 	elif mode == "Elimination":
 		EliminationManager.update_race()
+	elif mode == "Cop Chase":
+		CopChaseManager.update_chase(delta)
+
 
 func _input(event):
 	if event.is_action_pressed("pause_menu"):
@@ -173,6 +182,7 @@ func _setup_elimination():
 	# Show HUD after countdown
 	start_countdown.connect("countdown_finished", _on_elimination_countdown_finished)
 
+
 func _on_elimination_countdown_finished():
 	if EliminationManager.hud:
 		EliminationManager.hud.visible = true
@@ -185,6 +195,59 @@ func _on_player_eliminated():
 
 func _on_elimination_win(car):
 	show_finish(true)
+
+func _on_chase_failed():
+	show_finish(false)
+
+func _on_chase_completed():
+	show_finish(true)
+
+func _on_chase_timer_updated(time_left):
+	if time_left < 10.0:
+		cop_chase_ui.modulate = Color(1, 0.3, 0.3)
+	else:
+		cop_chase_ui.modulate = Color(1, 1, 1)
+
+
+func _setup_cop_chase():
+	if player_car:
+		player_car.queue_free()
+	player_car = null
+
+	# Hide other HUDs
+	normal_hud.visible = false
+	elimination_hud.visible = false
+
+	# Show Cop Chase HUD only after countdown
+	cop_chase_hud.visible = false
+
+	var root := get_node(TrackName.track_name)
+
+	# Assign spawn points to manager
+	CopChaseManager.player_car_path = Cars.selected_car
+	CopChaseManager.ai_car_paths = Cars.get_ai_paths_for_class(Cars.selected_class)
+
+	CopChaseManager.main_scene = self
+	CopChaseManager.hud = cop_chase_hud
+
+	# Connect signals
+	CopChaseManager.connect("chase_failed", _on_chase_failed)
+	CopChaseManager.connect("chase_completed", _on_chase_completed)
+	CopChaseManager.connect("time_left_updated", _on_chase_timer_updated)
+
+	# Spawn chase
+	CopChaseManager.spawn_chase(self)
+
+	player_car = CopChaseManager.player_car
+	_force_player_camera()
+
+	# Show HUD after countdown
+	start_countdown.connect("countdown_finished", _on_cop_chase_countdown_finished)
+
+func _on_cop_chase_countdown_finished():
+	if cop_chase_hud:
+		cop_chase_hud.visible = true
+
 
 # ---------------------------------------------------------
 # CAMERA
@@ -216,6 +279,7 @@ func _apply_color_to_car(car: CarController, color: Color):
 # ---------------------------------------------------------
 # RADAR RACE
 # ---------------------------------------------------------
+# ---------------------------------------------------------
 func _on_radar_trap_body_entered(body):
 	if mode != "Radar Race":
 		return
@@ -226,28 +290,19 @@ func _on_radar_trap_body_entered(body):
 
 	if car is CarController:
 		var speed := int(round(car.velocity.length() * 3.6))
-
-		if speed > best_radar_speed:
-			best_radar_speed = speed
-			save_radar_best()
+		var target_speed :int = Cars.get_radar_target_speed()
+		var success := speed >= target_speed
 
 		player_car.controls_enabled = false
-		win_screen_radar.show_win(speed, best_radar_speed)
+		win_screen_radar.show_win(success)
+
+		# Stop music ONLY after result
+		MusicManager.stop_music()
 
 	finish_flash.flash()
-	MusicManager.stop_music()
 	_screech_to_halt()
 
-func load_radar_best():
-	if FileAccess.file_exists("user://radar_best.save"):
-		var f := FileAccess.open("user://radar_best.save", FileAccess.READ)
-		best_radar_speed = int(f.get_as_text())
-		f.close()
 
-func save_radar_best():
-	var f := FileAccess.open("user://radar_best.save", FileAccess.WRITE)
-	f.store_string(str(best_radar_speed))
-	f.close()
 
 # ---------------------------------------------------------
 # GLOBAL AI DISABLE

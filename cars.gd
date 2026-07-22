@@ -149,6 +149,20 @@ var car_scene_paths := {
 
 	"Bartoli Cruiser Interceptor": "res://Scenes/granturismo_police.tscn"
 }
+var radar_target_speeds := {
+	"suv": 170,
+	"compact": 185,
+	"track_cars": 300,
+	"muscle": 200,
+	"urban": 190,
+	"sedans": 195,
+	"sport": 210,
+	"sport_racing": 250,
+	"supercars": 270,
+	"torque_monsters": 200,
+	"sports_crossovers": 185,
+	"special": 230
+}
 
 var car_colors := {
 	"Straeda Pitbull":[Color8(128,128,0), Color8(90,90,90), Color8(180,150,80), Color8(0,70,40)],
@@ -297,3 +311,6 @@ func get_ai_paths_for_class(_unused):
 		result.append(path)
 
 	return result
+
+func get_radar_target_speed() -> int:
+	return radar_target_speeds.get(selected_class, 180)
