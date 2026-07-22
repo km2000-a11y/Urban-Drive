@@ -11,8 +11,8 @@ var ai_spawns: Array = []
 
 var chase_active: bool = false
 
-var total_time: float = 180.0       # 3 minutes
-var time_left: float = 180.0
+var total_time: float = 210.0       # 3 minutes
+var time_left: float = 210.0
 
 var captured_count: int = 0
 var captured_total: int = 7
@@ -26,6 +26,27 @@ signal racer_captured(car)
 signal time_left_updated(time_left)
 
 
+# ============================================================
+# BUILD AI LIST FROM 4 CLASSES (sport, sport_racing, urban, sedans)
+# ============================================================
+func build_chase_ai_paths() -> Array:
+	var chase_classes = ["sport", "sport_racing", "urban", "sedans"]
+	var paths: Array = []
+
+	for cls in chase_classes:
+		var list = Cars.class_lists.get(cls, [])
+		for name in list:
+			var path = Cars.car_scene_paths.get(name, "")
+			if path != "":
+				paths.append(path)
+
+	paths.shuffle()
+	return paths.slice(0, captured_total)
+
+
+# ============================================================
+# SPAWN CHASE
+# ============================================================
 func spawn_chase(scene: Node) -> void:
 	chase_active = false
 
@@ -70,7 +91,10 @@ func spawn_chase(scene: Node) -> void:
 	if player_car.has_node("Camera3D"):
 		player_car.get_node("Camera3D").current = true
 
-	# AI RACERS
+	# ============================================================
+	# AI RACERS — FROM sport, sport_racing, urban, sedans
+	# ============================================================
+	ai_car_paths = build_chase_ai_paths()
 	ai_cars.clear()
 
 	for i in range(ai_spawns.size()):
@@ -116,11 +140,13 @@ func spawn_chase(scene: Node) -> void:
 	MusicManager.play_race_music()
 
 
+# ============================================================
+# UPDATE CHASE
+# ============================================================
 func update_chase(delta: float) -> void:
 	if not chase_active:
 		return
 
-	# Countdown
 	time_left -= delta
 	hud.update_time_left(time_left)
 	emit_signal("time_left_updated", time_left)
@@ -131,6 +157,9 @@ func update_chase(delta: float) -> void:
 		return
 
 
+# ============================================================
+# CAPTURE RACER
+# ============================================================
 func capture_racer(car: CarController) -> void:
 	if not chase_active:
 		return
@@ -149,7 +178,13 @@ func capture_racer(car: CarController) -> void:
 			emit_signal("chase_completed")
 
 
+# ============================================================
+# COLOR APPLY
 func _apply_player_color(car: CarController) -> void:
+	# Do NOT recolor the police interceptor
+	if car.car_name == "Bartoli Cruiser Interceptor":
+		return
+
 	var color: Color = Cars.selected_color
 	if car.has_node("ModelRoot/Body"):
 		var body := car.get_node("ModelRoot/Body")
@@ -161,6 +196,10 @@ func _apply_player_color(car: CarController) -> void:
 
 
 func _apply_random_ai_color(car: CarController) -> void:
+	# Do NOT recolor the police interceptor
+	if car.car_name == "Bartoli Cruiser Interceptor":
+		return
+
 	var name: String = car.car_name
 
 	if not Cars.car_colors.has(name):
@@ -180,7 +219,7 @@ func _apply_random_ai_color(car: CarController) -> void:
 				var mesh_instance: MeshInstance3D = child
 				var mesh: Mesh = mesh_instance.mesh
 				if mesh == null:
-					return
+					continue
 
 				var surface_count: int = mesh.get_surface_count()
 

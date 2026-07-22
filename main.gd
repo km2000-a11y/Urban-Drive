@@ -327,6 +327,7 @@ func show_finish(player_won: bool):
 	finish_flash.flash()
 
 	_screech_to_halt()
+	MusicManager.stop_music()
 
 	if leaderboard:
 		leaderboard.visible = true

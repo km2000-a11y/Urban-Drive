@@ -44,8 +44,6 @@ func _ready():
 
 
 func _input(event):
-	# Keep CarController steering/throttle/brake input
-	super._input(event)
 
 	# Add EMP input on top
 	if event.is_action_pressed("emp"):
@@ -133,11 +131,9 @@ func _find_emp_target() -> CarController:
 
 	return nearest
 
-
 func _disable_target(target: CarController):
 	target.controls_enabled = false
-	target.engine_on = false
-	target.velocity = Vector3.ZERO
 	target.hard_frozen = true
+	target.velocity = Vector3.ZERO
 
 	print("EMP HIT:", target.car_name)
