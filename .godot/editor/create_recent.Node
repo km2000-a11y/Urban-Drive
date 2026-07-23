@@ -1,3 +1,9 @@
+MeshInstance3D
+CollisionShape3D
+StaticBody3D
+CharacterBody3D
+Area3D
+Node3D
 Label
 Node2D
 TextureProgressBar
@@ -5,10 +11,4 @@ Control
 Button
 CanvasLayer
 CarController
-MeshInstance3D
 Panel
-MenuButton
-VBoxContainer
-HSlider
-CharacterBody3D
-Node3D

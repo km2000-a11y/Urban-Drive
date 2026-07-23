@@ -1,5 +1,3 @@
-res://Scripts/camera.gd
-res://Scenes/bmw_x5.tscn
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -51,6 +49,7 @@ res://Scenes/bmw_330d.tscn
 res://Scenes/lexus_gs430.tscn
 res://Scenes/pause_menu.tscn
 res://Scenes/bmw_135.tscn
+res://Scenes/bmw_x5.tscn
 res://Scenes/volvo_xc90.tscn
 res://Scenes/elimination_hud.tscn
 res://Scenes/elimination_win_screen.tscn
@@ -59,3 +58,5 @@ res://Scenes/mc12.tscn
 res://Scenes/ford_cobra.tscn
 res://Scenes/zonda.tscn
 res://Scenes/cop_chase_hud.tscn
+res://Tracks/chernobyl.tscn
+res://Scripts/barrier_1.gd

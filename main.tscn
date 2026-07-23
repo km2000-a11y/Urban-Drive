@@ -1,26 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxi25dbhhlmu5"]
+[gd_scene load_steps=12 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="Script" uid="uid://cpx63o2nbliu2" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://isx58gnykafa" path="res://Scenes/elimination_win_screen.tscn" id="2_efxa6"]
 [ext_resource type="PackedScene" uid="uid://b4drvxor1nx4s" path="res://Tracks/bogota_airport.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bhj15vaqmgc72" path="res://Scenes/speedometer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bcyixis8g5mmn" path="res://Scenes/HUD.tscn" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://ctoruhqvvt26d" path="res://lap_line.gd" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dlqpj56x5stsh" path="res://Scenes/FinishFlash.tscn" id="5_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dqgnkspdapku1" path="res://Scenes/leaderboard.tscn" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://cxccrd6erx7dd" path="res://Scenes/start.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://i1qia1imspm7" path="res://Scenes/pause_menu.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://nros2y8elyhn" path="res://Scenes/elimination_hud.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://ckv60g7lnahi2" path="res://Scenes/cop_chase_hud.tscn" id="12_dg77c"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
-size = Vector3(7, 6, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
-size = Vector3(1, 6, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
-size = Vector3(9, 20, 0.5)
 
 [node name="Node" type="Node"]
 script = ExtResource("1_h2yge")
@@ -38,25 +28,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296989, 0, 1992.3)
 [node name="WP5" parent="BogotaAirport/Waypoints" index="5"]
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 5.17339, 0, -247.99)
 
-[node name="RadarTrap" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2851.77)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RadarTrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12945, 3.76264, 0.00878906)
-shape = SubResource("BoxShape3D_h2yge")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RadarTrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.74138, -0.134766)
-mesh = SubResource("BoxMesh_1bvp3")
-
-[node name="LapLine" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2050.59)
-script = ExtResource("4_lquwl")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LapLine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.90903, 160.216)
-shape = SubResource("BoxShape3D_1bvp3")
-
 [node name="RoadDirection" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
 
@@ -73,9 +44,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
 [node name="EliminationHud" parent="." instance=ExtResource("11_dg77c")]
 
 [node name="CopChaseHud" parent="." instance=ExtResource("12_dg77c")]
-
-[connection signal="body_entered" from="RadarTrap" to="." method="_on_radar_trap_body_entered"]
-[connection signal="body_entered" from="LapLine" to="." method="_on_lap_line_body_entered"]
-[connection signal="body_entered" from="LapLine" to="LapLine" method="_on_body_entered"]
 
 [editable path="BogotaAirport"]
