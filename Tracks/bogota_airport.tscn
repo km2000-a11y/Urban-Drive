@@ -4216,7 +4216,7 @@ transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 244.675, 0
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 416.637, 0, -485.683)
 
 [node name="RadarTrap" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2851.77)
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 491.025, 0, -455.246)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RadarTrap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12945, 3.76264, 0.00878906)
@@ -4227,7 +4227,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.74138, -0.134766)
 mesh = SubResource("BoxMesh_unmbs")
 
 [node name="LapLine" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2050.59)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64.6157)
 script = ExtResource("5_xyydk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LapLine"]

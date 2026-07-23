@@ -1,4 +1,5 @@
 res://main.tscn
+res://main.gd
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
 res://Scenes/audi_tt.tscn
@@ -59,4 +60,3 @@ res://Scenes/ford_cobra.tscn
 res://Scenes/zonda.tscn
 res://Scenes/cop_chase_hud.tscn
 res://Tracks/chernobyl.tscn
-res://Scripts/barrier_1.gd

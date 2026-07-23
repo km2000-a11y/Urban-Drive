@@ -11,6 +11,8 @@ var player_car: CarController
 @onready var elimination_hud:=$EliminationHud
 @onready var cop_chase_hud := $CopChaseHud
 @onready var cop_chase_ui := $CopChaseHud/Control
+@onready var radar_target_label := $HUD/Control/RadarTargetLabel
+
 
 
 
@@ -37,10 +39,14 @@ func _ready():
 
 	# Radar race win screen
 	if mode == "Radar Race":
+		radar_target_label.text = "Target: %d km/h" % Cars.get_radar_target_speed()
 		var ws_scene = load("res://Scenes/win_screen_radar.tscn")
 		win_screen_radar = ws_scene.instantiate()
 		add_child(win_screen_radar)
 		win_screen_radar.visible = false
+		radar_target_label.visible=true
+	else:
+		radar_target_label.visible=false
 
 	finish_flash.visible = false
 	if leaderboard:
@@ -86,6 +92,20 @@ func _spawn_player_free_drive():
 
 	var root := get_node(TrackName.track_name)
 	player_car.global_transform = root.get_node("SpawnPoint").global_transform
+	# --- Connect RadarTrap inside BogotaAirport (or any track) ---
+	if root.has_node("RadarTrap"):
+		var radar_trap = root.get_node("RadarTrap")
+
+		# Connect only if not already connected
+		if not radar_trap.is_connected("body_entered", Callable(self, "_on_radar_trap_body_entered")):
+			radar_trap.body_entered.connect(_on_radar_trap_body_entered)
+
+		print("RadarTrap connected from:", TrackName.track_name)
+	else:
+		print("No RadarTrap found in:", TrackName.track_name)
+
+
+
 
 	_force_player_camera()
 

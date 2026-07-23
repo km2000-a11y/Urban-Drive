@@ -1,5 +1,5 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1784803560
+::res://::1784803639
 aston_db9.tscn::PackedScene/PackedScene::7422556213708327541::1784540859::0::1::::<><><>0<>0<><>::uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_a8.tscn::PackedScene/PackedScene::4017700870543264684::1784540859::0::1::::<><><>0<>0<><>::uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_tt.tscn::PackedScene/PackedScene::601921826692948676::1784540859::0::1::::<><><>0<>0<><>::uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
@@ -33,7 +33,7 @@ nissan_micra.tscn::PackedScene/PackedScene::2661261399359491469::1784540859::0::
 normal_race_manager.gd::GDScript/GDScript::4575169681333060644::1784706733::0::1::::<>Node<><>0<>0<><>::
 race_results.gd::GDScript/GDScript::4521338802104354928::1782309627::0::1::::<>Node<><>0<>0<><>::
 track_name.gd::GDScript/GDScript::8757337582718622616::1783596208::0::1::::<>Node<><>0<>0<><>::
-WhatsApp Image 2026-07-23 at 14.45.46.jpeg::CompressedTexture2D::3741314663861296332::1784803560::1784803561::1::::<><><>0<>0<>c85981c212ea11ec682f62450135ba6d<>res://.godot/imported/WhatsApp Image 2026-07-23 at 14.45.46.jpeg-a04583eeb2688d8082061777b417703b.ctex::
+WhatsApp Image 2026-07-23 at 14.45.46.jpeg::CompressedTexture2D/CompressedTexture2D::3741314663861296332::1784803560::1784803561::1::::<><><>0<>0<>c85981c212ea11ec682f62450135ba6d<>res://.godot/imported/WhatsApp Image 2026-07-23 at 14.45.46.jpeg-a04583eeb2688d8082061777b417703b.ctex::
 ::res://Scenes/::1784803358
 aston_db9.tscn::PackedScene::2942269834879165477::1784803352::0::1::::<><><>0<>0<><>::uid://c7j4r626feeqh::::res://Scripts/aston_db9_2007.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
 audi_a5_tdi.tscn::PackedScene::1711376544093276218::1784803357::0::1::::<><><>0<>0<><>::uid://cb2jjs3ko7oqh::::res://Scripts/audi_a_5_tdi.gd<>uid://ffvs8ga7wgmd::::res://Scripts/camera.gd<>uid://bq4u8syx73uiv::::res://SFX/freesound_community-audi-v8-acceleration-sound-6067.wav<>uid://cbyhxjdmmxqg3::::res://SFX/brake.mp3<>uid://dkqrbnoypkxrd::::res://SFX/skid.mp3
@@ -165,7 +165,7 @@ freesound_community-audi-v8-acceleration-sound-6067.wav::AudioStreamWAV/AudioStr
 skid.mp3::AudioStreamMP3/AudioStreamMP3::7895215211737247329::1777570083::1777735652::1::::<><><>0<>0<>3ec0fbe6784b5d60e112e6aa2bed12de<>res://.godot/imported/skid.mp3-08baa1bcda1c3b735ef6bfc3c4a25c17.mp3str::
 ::res://Songs/::1784800392
 menu_track.mp3::AudioStreamMP3/AudioStreamMP3::6397107869108803633::1783423529::1783428960::1::::<><><>0<>0<>ab99ad7e191deeb583f889f6c8ffeb18<>res://.godot/imported/menu_track.mp3-647ed1a4f4fcf01e49aee23dc9433882.mp3str::
-race_track.mp3::AudioStreamMP3::932176500361512999::1784800306::1784800392::1::::<><><>0<>0<>2c5c72dfea0a291af7a84cfed5f1cc06<>res://.godot/imported/race_track.mp3-9b96d18e37ff2066066115d11ed6c890.mp3str::
+race_track.mp3::AudioStreamMP3/AudioStreamMP3::932176500361512999::1784800306::1784800392::1::::<><><>0<>0<>2c5c72dfea0a291af7a84cfed5f1cc06<>res://.godot/imported/race_track.mp3-9b96d18e37ff2066066115d11ed6c890.mp3str::
 ::res://Tracks/::1784803359
 barrier_2.gd::GDScript/GDScript::8367939222729351383::1783335723::0::1::::<>CharacterBody3D<><>0<>0<><>::
 barrier_3.gd::GDScript/GDScript::4531900344579424116::1783335723::0::1::::<>CharacterBody3D<><>0<>0<><>::
