@@ -1,5 +1,8 @@
-Label
 MeshInstance3D
+Button
+Label
+Control
+CanvasLayer
 CollisionShape3D
 StaticBody3D
 CharacterBody3D
@@ -7,8 +10,5 @@ Area3D
 Node3D
 Node2D
 TextureProgressBar
-Control
-Button
-CanvasLayer
 CarController
 Panel

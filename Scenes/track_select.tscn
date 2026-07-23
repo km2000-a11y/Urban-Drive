@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cod1v4tgvlmcv"]
+
+[ext_resource type="Script" uid="uid://cpjsl1xfvb5j1" path="res://Scenes/track_select.gd" id="1_4xh1s"]
+
+[node name="TrackSelect" type="CanvasLayer"]
+script = ExtResource("1_4xh1s")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BogotaAirport" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 1278.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 30
+text = "BOGOTA AIRPORT"
+
+[connection signal="pressed" from="Control/BogotaAirport" to="." method="_on_bogota_airport_pressed"]

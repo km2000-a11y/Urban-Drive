@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cpx63o2nbliu2" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://isx58gnykafa" path="res://Scenes/elimination_win_screen.tscn" id="2_efxa6"]
-[ext_resource type="PackedScene" uid="uid://b4drvxor1nx4s" path="res://Tracks/bogota_airport.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bhj15vaqmgc72" path="res://Scenes/speedometer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bcyixis8g5mmn" path="res://Scenes/HUD.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dlqpj56x5stsh" path="res://Scenes/FinishFlash.tscn" id="5_5vw27"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cxccrd6erx7dd" path="res://Scenes/start.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://i1qia1imspm7" path="res://Scenes/pause_menu.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://nros2y8elyhn" path="res://Scenes/elimination_hud.tscn" id="11_dg77c"]
+[ext_resource type="PackedScene" uid="uid://b4drvxor1nx4s" path="res://Tracks/bogota_airport.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://ckv60g7lnahi2" path="res://Scenes/cop_chase_hud.tscn" id="12_dg77c"]
 
 [node name="Node" type="Node"]
@@ -21,12 +21,6 @@ script = ExtResource("1_h2yge")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 1.94095)
 
 [node name="Speedometer" parent="." instance=ExtResource("3_h2yge")]
-
-[node name="BogotaAirport" parent="." instance=ExtResource("3_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296989, 0, 1992.3)
-
-[node name="WP5" parent="BogotaAirport/Waypoints" index="5"]
-transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 5.17339, 0, -247.99)
 
 [node name="RoadDirection" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
@@ -45,4 +39,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
 
 [node name="CopChaseHud" parent="." instance=ExtResource("12_dg77c")]
 
-[editable path="BogotaAirport"]
+[node name="BogotaAirport" parent="." instance=ExtResource("11_efxa6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3999, 20.6032, 2188.5)

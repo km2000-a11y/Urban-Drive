@@ -34,6 +34,7 @@ NormalRaceManager="*res://normal_race_manager.gd"
 TrackName="*res://track_name.gd"
 EliminationManager="*res://elimination_manager.gd"
 CopChaseManager="*res://cop_chase_manager.gd"
+TrackRegistry="*res://track_registry.gd"
 
 [display]
 

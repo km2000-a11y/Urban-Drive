@@ -123,17 +123,19 @@ func spawn_race(scene: Node) -> void:
 	MusicManager.stop_music()
 	MusicManager.play_race_music()
 
-
 func register_lap(body: Node) -> void:
 	if not race_active or lap_cooldown:
 		return
 
-	var car := body
+	var car: Node = body
 	while car != null and not (car is CarController):
 		car = car.get_parent()
 
 	if car == null:
 		return
+
+	if not car_laps.has(car):
+		return  # <- critical safety
 
 	lap_cooldown = true
 	_start_lap_cooldown()

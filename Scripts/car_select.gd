@@ -890,7 +890,7 @@ func _on_select_pressed():
 	Cars.selected_color = car_colors[car_name][color_index]
 	Cars.save_color()
 	Cars.selected_class = car_class
-	get_tree().change_scene_to_file("res://main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/track_select.tscn")
 
 
 func _on_torque_monsters_pressed() -> void:

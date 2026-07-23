@@ -28,5 +28,5 @@ func _physics_process(delta):
 		# Just manually move the prop
 		global_position += yeet_force * delta
 
-		if yeet_timer <= 0.0:
+		if yeet_timer <= 1.0:
 			queue_free()

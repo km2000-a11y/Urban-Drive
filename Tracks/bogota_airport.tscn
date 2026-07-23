@@ -1,7 +1,6 @@
-[gd_scene load_steps=99 format=3 uid="uid://b4drvxor1nx4s"]
+[gd_scene load_steps=98 format=3 uid="uid://b4drvxor1nx4s"]
 
 [ext_resource type="Script" uid="uid://frkq58mu2pgw" path="res://Scripts/barrier_1.gd" id="1_tmphu"]
-[ext_resource type="Script" uid="uid://drhq0bksc715t" path="res://Tracks/barrier_2.gd" id="2_x3vxy"]
 [ext_resource type="Script" uid="uid://b5tj0bpuxvh85" path="res://Tracks/barrier_3.gd" id="3_xyydk"]
 [ext_resource type="Script" uid="uid://b2kju75u5owy3" path="res://Tracks/crates.gd" id="4_y0lmt"]
 [ext_resource type="Script" uid="uid://ctoruhqvvt26d" path="res://lap_line.gd" id="5_xyydk"]
@@ -274,7 +273,7 @@ size = Vector3(10.5, 2, 13)
 size = Vector3(4, 2, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y0lmt"]
-size = Vector3(7, 6, 1)
+size = Vector3(12, 6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_unmbs"]
 size = Vector3(1, 6, 1)
@@ -445,7 +444,7 @@ material_override = SubResource("StandardMaterial3D_eep4o")
 mesh = SubResource("BoxMesh_q53sc")
 
 [node name="RigidBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.471917, -0.479861, 0)
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 10.446, -0.479861, -249.654)
 script = ExtResource("1_tmphu")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="RigidBody3D"]
@@ -464,28 +463,8 @@ mesh = SubResource("BoxMesh_wcwfe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16782, 1.47105, -0.0379639)
 shape = SubResource("BoxShape3D_4pfva")
 
-[node name="RigidBody3D2" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.07951, -0.460301, 0)
-script = ExtResource("2_x3vxy")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="RigidBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59961, 1.80217, 0)
-material_override = SubResource("StandardMaterial3D_hcfb2")
-mesh = SubResource("BoxMesh_oyvec")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11811, 1.93498, 0)
-mesh = SubResource("BoxMesh_wcwfe")
-
-[node name="Area3D" type="Area3D" parent="RigidBody3D2"]
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D2/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86327, 1.67201, 0)
-shape = SubResource("BoxShape3D_4pfva")
-
 [node name="RigidBody3D4" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 12.6063, -0.387479, -246.943)
+transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 13.0896, -0.387479, -245.871)
 script = ExtResource("3_xyydk")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="RigidBody3D4"]
@@ -4216,10 +4195,10 @@ transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 244.675, 0
 transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 416.637, 0, -485.683)
 
 [node name="RadarTrap" type="Area3D" parent="."]
-transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 491.025, 0, -455.246)
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 513.081, 0, -420.436)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RadarTrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12945, 3.76264, 0.00878906)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53693, 3.76264, 0.00878894)
 shape = SubResource("BoxShape3D_y0lmt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RadarTrap"]
@@ -4235,7 +4214,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.90903, 160.216)
 shape = SubResource("BoxShape3D_aurmn")
 
 [connection signal="body_entered" from="RigidBody3D/Area3D" to="RigidBody3D" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="RigidBody3D2/Area3D" to="RigidBody3D2" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="RigidBody3D4/Area3D" to="RigidBody3D" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="RigidBody3D4/Area3D" to="RigidBody3D4" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/RigidBody3D/Area3D" to="MeshInstance3D21/MeshInstance3D12/MeshInstance3D/MeshInstance3D7/MeshInstance3D/RigidBody3D" method="_on_area_3d_body_entered"]

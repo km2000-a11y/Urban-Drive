@@ -21,6 +21,30 @@ func _ready():
 	Cars.load_color()
 	MusicManager.play_race_music()
 	$EliminationWinScreen.visible=false
+	# ---------------------------------------------------------
+# LOAD TRACK SCENE
+# ---------------------------------------------------------
+		# ---------------------------------------------------------
+	# LOAD TRACK SCENE (SCALABLE)
+	# ---------------------------------------------------------
+	var track_name := TrackName.track_name
+
+	if not TrackRegistry.tracks.has(track_name):
+		push_error("Track not registered: " + track_name)
+		return
+
+	var track_file :String= TrackRegistry.tracks[track_name]
+	var track_scene := load(track_file)
+
+	if track_scene:
+		var track_instance = track_scene.instantiate()
+		add_child(track_instance)
+		await get_tree().process_frame
+		print("Loaded track:", track_file)
+	else:
+		push_error("Track file missing: " + track_file)
+
+
 
 	if mode == "Duel":
 		_setup_duel()
