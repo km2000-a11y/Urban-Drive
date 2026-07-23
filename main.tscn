@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxi25dbhhlmu5"]
+[gd_scene load_steps=11 format=3 uid="uid://cxi25dbhhlmu5"]
 
 [ext_resource type="Script" uid="uid://cpx63o2nbliu2" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://isx58gnykafa" path="res://Scenes/elimination_win_screen.tscn" id="2_efxa6"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cxccrd6erx7dd" path="res://Scenes/start.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://i1qia1imspm7" path="res://Scenes/pause_menu.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://nros2y8elyhn" path="res://Scenes/elimination_hud.tscn" id="11_dg77c"]
-[ext_resource type="PackedScene" uid="uid://b4drvxor1nx4s" path="res://Tracks/bogota_airport.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://ckv60g7lnahi2" path="res://Scenes/cop_chase_hud.tscn" id="12_dg77c"]
 
 [node name="Node" type="Node"]
@@ -38,6 +37,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1914.05)
 [node name="EliminationHud" parent="." instance=ExtResource("11_dg77c")]
 
 [node name="CopChaseHud" parent="." instance=ExtResource("12_dg77c")]
-
-[node name="BogotaAirport" parent="." instance=ExtResource("11_efxa6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3999, 20.6032, 2188.5)
