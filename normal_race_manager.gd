@@ -267,17 +267,21 @@ func _sorted_cars() -> Array:
 	var total_wp := player_car.waypoints.size()
 	var cars := []
 
-	# DO NOT increment laps here in Normal Race
-	# Only update last_wp so progress sorting works
-
+	# ---------------------------------------------------------
+	# LAP INCREMENT FOR POSITION (wrap-around detection)
+	# ---------------------------------------------------------
+	# Only increment when crossing from last WP → WP 0
+	# Lap line handles FINISH, not position.
 	if player_car.current_wp == 0 and last_wp[player_car] == total_wp - 1:
-		pass
+		car_laps[player_car] += 1
 
 	for ai in ai_cars:
 		if ai.current_wp == 0 and last_wp[ai] == total_wp - 1:
-			pass
+			car_laps[ai] += 1
 
-	# build sortable data
+	# ---------------------------------------------------------
+	# BUILD SORTABLE DATA
+	# ---------------------------------------------------------
 	cars.append({
 		"car": player_car,
 		"progress": car_laps[player_car] * total_wp + player_car.current_wp,
@@ -291,22 +295,31 @@ func _sorted_cars() -> Array:
 			"dist": _distance_to_next_wp(ai)
 		})
 
-	# sort
+	# ---------------------------------------------------------
+	# SORT (AAA racing logic)
+	# ---------------------------------------------------------
 	cars.sort_custom(func(a, b):
 		if a["progress"] != b["progress"]:
 			return a["progress"] > b["progress"]
 		return a["dist"] < b["dist"]
 	)
 
+	# ---------------------------------------------------------
+	# EXTRACT RESULT
+	# ---------------------------------------------------------
 	var result: Array = []
 	for c in cars:
 		result.append(c["car"])
 
+	# ---------------------------------------------------------
+	# UPDATE LAST WAYPOINT SNAPSHOT
+	# ---------------------------------------------------------
 	last_wp[player_car] = player_car.current_wp
 	for ai in ai_cars:
 		last_wp[ai] = ai.current_wp
 
 	return result
+
 
 
 func _apply_player_color(car: CarController) -> void:

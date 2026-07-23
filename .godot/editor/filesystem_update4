@@ -62,3 +62,4 @@ res://Scenes/cop_chase_hud.tscn
 res://Tracks/chernobyl.tscn
 res://Scenes/track_select.tscn
 res://normal_race_manager.gd
+res://Scripts/barrier_1.gd

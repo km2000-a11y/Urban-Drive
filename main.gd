@@ -33,13 +33,17 @@ func _ready():
 		push_error("Track not registered: " + track_name)
 		return
 
-	var track_file :String= TrackRegistry.tracks[track_name]
+	var track_file :String = TrackRegistry.tracks[track_name]
 	var track_scene := load(track_file)
 
 	if track_scene:
 		var track_instance = track_scene.instantiate()
+		track_instance.name = track_name        # REQUIRED FIX
 		add_child(track_instance)
-		await get_tree().process_frame
+
+		await get_tree().process_frame          # REQUIRED FIX
+		await get_tree().process_frame          # REQUIRED FIX
+
 		print("Loaded track:", track_file)
 	else:
 		push_error("Track file missing: " + track_file)

@@ -1,11 +1,11 @@
-Node3D
+CollisionShape3D
+StaticBody3D
 MeshInstance3D
+Node3D
 Button
 Label
 Control
 CanvasLayer
-CollisionShape3D
-StaticBody3D
 CharacterBody3D
 Area3D
 Node2D
