@@ -175,6 +175,7 @@ func capture_racer(car: CarController) -> void:
 
 		if captured_count >= captured_total:
 			chase_active = false
+			player_car.controls_enabled=false
 			emit_signal("chase_completed")
 
 

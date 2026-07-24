@@ -170,8 +170,11 @@ func _do_elimination(sorted: Array) -> void:
 	emit_signal("ai_eliminated", last)
 
 	# WIN
+	# WIN
 	if ai_cars.size() == 0:
 		race_active = false
+		player_car.controls_enabled = false
+		player_car.current_speed = 0
 		emit_signal("elimination_win", player_car)
 
 func _position_from_sorted(sorted: Array) -> int:
