@@ -1,13 +1,13 @@
-MeshInstance3D
 CollisionShape3D
-StaticBody3D
+MeshInstance3D
+Area3D
 Node3D
+StaticBody3D
 Button
 Label
 Control
 CanvasLayer
 CharacterBody3D
-Area3D
 Node2D
 TextureProgressBar
 CarController
