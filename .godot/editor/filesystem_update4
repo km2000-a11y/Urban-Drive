@@ -1,4 +1,7 @@
 res://Tracks/chernobyl.tscn
+res://Tracks/lap_line.gd
+res://Scenes/track_select.gd
+res://Scenes/track_select.tscn
 res://main.tscn
 res://Scenes/hummer_h1.tscn
 res://Scenes/new_beetle.tscn
@@ -59,5 +62,4 @@ res://Scenes/mc12.tscn
 res://Scenes/ford_cobra.tscn
 res://Scenes/zonda.tscn
 res://Scenes/cop_chase_hud.tscn
-res://Scenes/track_select.tscn
-res://normal_race_manager.gd
+res://main.gd
