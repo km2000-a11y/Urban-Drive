@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Urban Drive"
+config/name="Urban Drive v0.1"
 run/main_scene="uid://blwywdnqsnjx6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://btkk52hr7xowq"
